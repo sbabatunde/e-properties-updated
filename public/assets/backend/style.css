@@ -1,0 +1,320 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box ;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+    background-color: #eff0ff;
+}
+.user-img{
+    width: 4rem;
+    clip-path: circle();
+}
+
+/* Navbar Styles Begins */
+
+.user-link{
+    list-style: none;
+}
+
+.user-link li{
+    font-size: larger;
+    font-weight: 600;
+}
+.user-link li .signup{
+    font: bolder;
+    margin-right: -50px;
+}
+.user-link .logout{
+    border: 1px solid #394293;
+    padding: 4px 12px;
+    border-radius: 5px;
+}
+
+/* Navbar Styles Ends */
+
+/* Side Bar Styles Begins*/
+.sideBar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color:  #394293;
+    width: 80px;
+    padding: 0.4rem 0.8rem;
+    transition:  all 0.5s ease;
+}
+.sideBar.active ~ .main-content{
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+.sideBar.active{
+    width: 250px;
+}
+
+.sideBar #btn{
+    position: absolute;
+    color: #fff;
+    top: .4rem;
+    left: 50%;
+    font-size:1.2rem;
+    line-height: 50px;
+    transform:  translateX(-50%);
+    cursor: pointer;
+}
+
+.sideBar.active #btn{
+     left: 90%;
+}
+
+.sideBar .top .logo{
+    color: #fff;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+}
+.sideBar.active .top .logo{
+    opacity: 1;
+}
+.top .logo{
+    font-size: 1rem;
+    margin-right:  5px;
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.user p{
+    color: #fff;
+    opacity: 1;
+    margin-left: 1rem;
+}
+
+.bold{
+    font-weight: 600;
+}
+.sideBar p{
+    opacity: 0;
+}
+.sideBar.active p{
+    opacity: 1;
+}
+.sideBar ul li{
+    position: relative;
+    list-style-type: none;
+    height: 50px;
+    width: 90%;
+    line-height: 50px;
+}
+
+.sideBar ul li a {
+    color: white;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 15px;
+}
+
+.sideBar ul li a:hover{
+    background-color: #fff;
+    color: black;
+}
+ 
+.sideBar ul li a i{
+    min-width: 50px;
+    text-align: center;
+    height: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+}
+
+.sideBar .nav-item{
+    opacity: 0;
+}
+.sideBar.active .nav-item{
+    opacity: 1;
+}
+
+.sideBar ul li .tooltip{
+    position: absolute;
+    left: 125px;
+    top: 50%;
+    transform: translateX(-50%, -50%);
+    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2 );
+     border-radius: .6rem;
+     padding:  .4rem 1.2rem;
+     line-height: 1.8rem;
+     z-index: 20;
+     opacity: 0;
+}
+.sideBar ul li:hover .tooltip{
+    opacity: 1;
+}
+
+.sideBar.active ul li .tooltip{
+    display: none;
+}
+
+.main-content{
+    position: relative;
+    top: 0;
+    left: 80px;
+    transition: all 0.5s ease;
+    width: calc(100% - 80px);
+    padding: 1rem;
+}
+.navbar ul{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    text-decoration: none;
+}
+.navbar ul li{
+    text-decoration: none;
+}
+.nav-container{
+    position: relative;
+    width: 100%;
+    top: -12px;
+    background-color: #fff;
+    padding: 1rem;
+    margin: -1rem;
+}
+/* Side Bar Styles End */
+
+
+/* Post Property */
+main{
+width: auto;  
+}
+.content-header{
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin: auto;
+}
+input[type='checkbox']{
+   appearance: none;
+   width: 25px;
+   height: 25px;
+   background-color: transparent;
+   border: 1px solid #ddd;
+   /* border-radius: 50%; */
+   cursor: pointer;
+}
+input[type='checkbox']:checked{
+background-color: #007bff;
+border-color: #007bff;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border: 1px solid #c6ccfd;
+    border-radius: 7px;
+    box-shadow: 1px 3px 15px rgba(163, 159, 159, 0.2);
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    cursor: pointer;
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #394293;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+/* Media Styles */
+.media{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    margin-left: 50px;
+}
+.add{
+    background: #e1e3f0;
+    padding: 3px 50px 5px 50px; 
+    margin: 0 50px 0 50px;
+    box-shadow: 0 0 10px rgba(163, 159, 159, 0.8);
+}
+.add-text{
+    margin: 5px 50px;
+    text-align: center; 
+    font-weight: 600;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+.mind{
+    background: #e1e3f0;
+    padding: 20px 100px 25px 100px; 
+    text-align: center; 
+    box-shadow: 0 0 10px rgba(163, 159, 159, 0.8);
+    font-weight: 600;
+    font-size: x-large;
+    font-family:Arial, Helvetica, sans-serif;
+    color: black;
+}
+.media-files{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+}
+.post-media img{
+    min-width: 25vw;
+    max-width: 25vw;
+    min-height: 50vh;
+    max-height: 50vh;
+    margin-bottom: 30px;
+    flex-shrink: 6;
+}

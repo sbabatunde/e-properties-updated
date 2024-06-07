@@ -1,0 +1,74 @@
+@extends('admin.index')
+@section('content')
+@include('sweetalert::alert')
+
+	<!-- page content -->
+    <div class="right_col" style="background-color: #eff0ff" role="main">
+        {{-- @include('sweetalert::alert') --}}
+        <div class="">
+            <div class="ml-5 mr-5 mt-3 flex justify-between">
+                <div class="">
+                    <h3> 
+                        <strong style="color: black">
+                            Post A property
+                        </strong> 
+                     </h3>
+                </div>
+                <div class="">
+                   <img src="" alt="">
+                   <strong style="color: black">
+                        Michael Alele
+                    </strong> 
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="">
+                        <div class="">
+                            <br />
+                            <form class="form" action="{{route('admin.properties.store')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-11">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                {{-- Property details Highlight--}}
+                                                @include('admin.properties.create.details')
+                                                
+                                                {{-- Property Auction details --}}
+                                                @include('admin.properties.create.auction')
+                                                {{-- Pricing Details --}}
+                                                @include('admin.properties.create.pricing') 
+                                                {{-- Property Deal details --}}
+                                                @include('admin.properties.create.deals')
+                                                {{-- Property Address Details --}}
+                                                @include('admin.properties.create.address')
+                                                {{-- Payment Method --}}
+                                                @include('admin.properties.create.payment')
+                                                {{-- Property Info Checkboxes --}}
+                                                @include('admin.properties.create.checkboxes')
+                                                {{-- Property Description And Images --}}
+                                                @include('admin.properties.create.description-images')
+                                            </div>
+                                        </div>
+
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group col-md-12 d-flex justify-content-end" >
+                                            <button class="btn btn-outline btn-info" 
+                                            style="color:#394293;background-color:transparent;border: 2px solid #394293;font-size:10px bold"
+                                            type="button" >Save</button>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+@endsection
