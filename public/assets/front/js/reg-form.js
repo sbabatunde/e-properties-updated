@@ -60,49 +60,76 @@ const agentContainer = document.querySelector('#servProvForm');
 //End Maintenance Page Show/Hide
 
 //Begin Request Form Show/Hide
-const landReq = document.querySelector('#landRequest');
-const letsReq = document.querySelector('#letsRequest');
-const salesReq = document.querySelector('#salesRequest');
-const rentReq = document.querySelector('#rentRequest');
+    const landReq = document.querySelector('#landRequest');
+    const letsReq = document.querySelector('#letsRequest');
+    const salesReq = document.querySelector('#salesRequest');
+    const rentReq = document.querySelector('#rentRequest');
 
-let landRequest = function(){
-    landReq.style.display = "block";
-    letsReq.style.display = "none";
-    salesReq.style.display = "none";
-    rentReq.style.display = "none";
-}
+    let landRequest = function(){
+        landReq.style.display = "block";
+        letsReq.style.display = "none";
+        salesReq.style.display = "none";
+        
+    }
 
-let rentRequest = function(){
-    landReq.style.display = "none";
-    letsReq.style.display = "none";
-    salesReq.style.display = "none";
-    rentReq.style.display = "block";
-}
+    let rentRequest = function(){
+        landReq.style.display = "none";
+        letsReq.style.display = "none";
+        salesReq.style.display = "none";
+        rentReq.style.display = "block";
+    }
 
-let salesRequest = function(){
-    landReq.style.display = "none";
-    letsReq.style.display = "none";
-    salesReq.style.display = "block";
-    rentReq.style.display = "none";
-}
+    let salesRequest = function(){
+        landReq.style.display = "none";
+        letsReq.style.display = "none";
+        salesReq.style.display = "block";
+        rentReq.style.display = "none";
+    }
 
-let letsRequest = function(){
-    landReq.style.display = "none";
-    letsReq.style.display = "block";
-    salesReq.style.display = "none";
-    rentReq.style.display = "none";
-}
+    let letsRequest = function(){
+        landReq.style.display = "none";
+        letsReq.style.display = "block";
+        salesReq.style.display = "none";
+        rentReq.style.display = "none";
+    }
 //End Request Form Show/Hide
 
-// Begin keep button Group active on click
-const btnFocus = document.querySelectorAll('.active-btn-group');
 
-btnFocus.forEach(btnGroup => {
-    btnGroup.addEventListener('click', () => {
-        document.querySelector('.req-target')?.classList.remove('req-target');
-        btnGroup.classList.add('req-target');
+//Begin Group Post Show/Hide
+
+document.addEventListener('DOMContentLoaded', function() {
+    var toggleButtons = document.querySelectorAll('.toggleButton');
+    var containers = document.querySelectorAll('.group-content');
+  
+    toggleButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var targetId = button.getAttribute('data-target');
+        var targetDiv = document.getElementById(targetId);
+  
+        // Hide all divs
+        containers.forEach(function(container) {
+          container.classList.add('hidden');
+        });
+  
+        // Show the target div
+        targetDiv.classList.remove('hidden');
+      });
     });
-});
+  });
+    
+//End Group Post Show/Hide
+
+
+
+// Begin keep button Group active on click
+    const btnFocus = document.querySelectorAll('.active-btn-group');
+
+    btnFocus.forEach(btnGroup => {
+        btnGroup.addEventListener('click', () => {
+            document.querySelector('.req-target')?.classList.remove('req-target');
+            btnGroup.classList.add('req-target');
+        });
+    });
 // Begin keep button group active on click
 
 

@@ -2,7 +2,7 @@
 <div class="hero-category">
     <div class="hero-meet-expert">
         <a href=""><h5 style="color: black;font-weight:550">Groups you may like</h5></a>
-        <a href="" style="text-decoration: none"><h5 style="color: red;font-weight:550">See more</h5></a>
+        <a href="{{ route('group.index') }}" style="text-decoration: none"><h5 style="color: red;font-weight:550">See more</h5></a>
     </div>
     
     <div class="hero-sub-category">

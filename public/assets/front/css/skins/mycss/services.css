@@ -2116,7 +2116,7 @@ a.text-dark:hover, a.text-dark:focus {
  margin-bottom: 1rem;
 }
 .hero-cat-venue img{
-  max-width: 259px;
+  max-width: 45%;
   min-width: 259px;
   max-height: 184px;
   min-height: 184px;
@@ -4042,4 +4042,325 @@ a{
 }
 /* Property Request Page Begins */
 
+/* All Groups Begins */
 
+.group-btn{
+  width: 90%;
+}
+
+.group-btn a{
+  color: white;
+  cursor: pointer;
+  background-color: #394293;
+  padding: 0.5rem 6rem;
+  float: right;
+  font-size: medium;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.all-group{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 1%;
+  margin: auto;
+}
+
+.right-grp{
+  float: right;
+  display: block;
+  width: 38em;
+  margin-top: 5%;
+}
+.about-grp{
+  border: 1px solid #3d49f0;
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 200px;
+  margin-bottom:20px;
+}
+
+.share-grp{
+  color: white;
+  background: #394293;
+  padding: 0.6rem 4rem;
+  margin: 5px;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.left-grp{
+  width: 48rem;
+  display: block;
+  /* padding: 0 2%; */
+}
+
+.grp-members{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 4%;
+}
+.grp-members-card{
+ background: #ededee;
+ border-radius: 10px;
+ width:calc(46% - 10px);
+ box-shadow: 0 0 20px rgba(43, 42, 42, 0.1);
+ margin: 10px;
+}
+@media (max-width:760px) {
+  .grp-members{
+  padding: 1%;
+}
+.grp-members-card{
+  width: 90%;
+  margin:15px auto ;
+}
+}
+.grp-members:not(:has(.grp-members-card + .grp-members-card))
+ .grp-members-card{
+  margin: 10px auto 10px 0;
+ }
+.grp-members-card img{
+  max-width:100%;
+  min-width: 100%;
+  max-height: 184px;
+  min-height: 184px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.other-grp{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.other-grp .grp-members-card{
+  background: #ededee;
+  border-radius: 10px;
+  width:calc(46% - 10px);
+  box-shadow: 0 0 20px rgba(43, 42, 42, 0.1);
+  margin: 10px;
+ }
+
+ .other-grp .grp-members-card img{
+  max-width:100%;
+  min-width: 100%;
+  max-height: 184px;
+  min-height: 184px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.cat-text{
+  text-align: center;
+  color: black;
+}
+.all-group-btn button {
+  background-color: white; /* Green background */
+  border: 1px solid black; /* Green border */
+  border-left: none;
+  color: black; /* White text */
+  /* padding: 1% 1%; Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  border-top: none;
+  border-bottom: none;
+  width: 90%;
+  padding: 2% 5%;
+  margin: auto;
+  
+  /* border-radius: 5px; */
+  }
+
+  .all-group-btn button:hover {
+    background-color: #394293;
+    color: white
+    } 
+
+    .grp-anonymous{
+      display: block;
+      width: 90%;
+      margin: auto;
+      /* border: 1px solid red; */
+    }
+    .grp-anonymous .post-comment{
+      display: flex;
+      flex-shrink: 1;
+      width: 100%;
+      padding: 0.5%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .post-comment img{
+      clip-path: circle();
+      width: 10%;
+    }
+    .post-comment input{
+      width: 90%;
+      border: 1px solid #394293;
+      border-radius: 7px;
+      align-items: center;
+    }
+
+    .post-anonymous{
+      display: flex;
+      flex-wrap: nowrap;
+      width: 89%;
+      float: inline-end;
+      margin-bottom: 10px;
+    }
+    
+    .post-anonymous div{
+      border: 1px solid #cfd2f8;
+      border-radius: 7px 0 0 7px;
+      height: 40px;
+      display: flex;
+      padding-left: 5px;
+      justify-content: left;
+      align-items: center;
+      width:50%;
+      background: #cfd2f8;
+      margin-top: 0;
+    }
+
+    .post-anonymous .post-submit{
+      color: #fff;
+      background: #394293;
+      border-radius: 0 7px 7px 0;
+      width: 50%;
+      height: 40px;
+      font-weight: bold;
+    }
+
+    .grp-anonymous .comment-view{
+      display: block;
+      border: #f0f0f7;
+      width:89%;
+      float: inline-end;
+      background: #f0f0f7;
+      border: 1px solid #f0f0f7;
+      border-radius: 15px;
+      margin-top: 10px;
+    }
+
+    .comment-view{
+      margin-bottom: 20px;
+    } 
+
+    .comment-view .header{
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      padding:2% 4%;
+      margin-top: 10px;
+      justify-content: space-between;
+    }
+    
+    .header .poster-name{
+      display: flex;
+    }
+
+    .poster-name .comment-dot{
+      background: rgb(184, 180, 180);
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgb(184, 180, 180);
+      border-radius: 50%;
+    }
+
+    .poster-name .header-left,.poster-title h3
+    {
+      color: grey;
+      font-size: large;
+      font-weight: bolder;
+    }
+
+    .comment-view p{
+      padding: 10px 30px;
+      font-size: large;
+      color: black;
+      font-weight: 400;
+    }
+    
+    .comment-view .reaction-icons{
+      border-top: 1px solid rgb(184, 180, 180);
+      border-bottom: 1px solid rgb(184, 180, 180);
+      display: flex;
+      margin: auto;
+      justify-content: space-between;
+      padding: 2% 4%;
+      color: rgb(184, 180, 180);
+    }
+
+    .comment-view .reaction-icons i{
+      color: grey;
+      font-size: large;
+      font-weight: bold;
+    }
+
+    .header li{
+      list-style: none;
+      width: 100%;
+      float: left;
+      font-size: small;
+      font: bold;
+      font-weight: 600;
+      color: grey;
+    }
+    .header p{
+      width:100%;
+      margin-left: 8%;
+      padding: 2% 3%;
+      border:1px solid  #cfd2f8;
+      border-radius: 7px;
+      font-size:medium;
+      font-weight: normal;
+      background-color: #cfd2f8;
+      margin-bottom: 0;
+    }
+
+    .header .mini-reaction{
+      color: gray;
+      display: flex;
+      width: 100%;
+      padding-left: 9%;
+      justify-content: space-between;
+      margin-top: 0;
+    }
+
+    .post-something{
+      /* border: 1px solid red; */
+      width: 97%;
+      margin: auto;
+      display: flex;
+      flex-shrink: 1;
+      padding: 5px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .post-something .comment-dot{
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgb(175, 174, 174);
+      border-radius: 50%;
+      background: rgb(175, 174, 174);
+    }
+
+    .post-something  input{
+      background-color: #cfd2f8;
+      border: 1px solid #cfd2f8;
+      border-radius: 7px;
+      width: 90%;
+      margin-bottom: 2px;
+    }
+    .hidden {
+      display: none; /* Show div with the 'show' class */
+    }
+/* All Groups Begins */

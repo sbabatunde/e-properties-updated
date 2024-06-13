@@ -1,5 +1,6 @@
 @extends('layouts.front.login-site')
 @section('content')
+<!-- Sub banner end -->
 {{-- Page Banner Begins --}}
     <div class="page-hero bg-image mt-5" style="background-image: url(../assets/images/banners/tenant-banner.png);">
         {{-- <div class="hero-section ">

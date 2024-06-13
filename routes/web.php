@@ -26,6 +26,7 @@ use App\Http\Controllers\Site\BlacklistController;
 use App\Http\Controllers\Site\Admin\ListingController;
 use App\Http\Controllers\Site\Admin\PostMediaController;
 use App\Http\Controllers\Site\BuildingMaterialController;
+use App\Http\Controllers\Site\GroupController;
 use App\Http\Controllers\Site\PropertyProfessionalController;
 
 /*
@@ -101,6 +102,11 @@ Route::controller(CategoryController::class)->group(function () {
 //Blogs Routes
 Route::controller(BlogController::class)->group(function () {
     Route::get('/blog', 'allBlogPost')->name('blog.post.all');
+});
+
+//Groups Routes
+Route::controller(GroupController::class)->group(function () {
+    Route::get('/group', 'index')->name('group.index');
 });
 
 //Blacklist Routes
