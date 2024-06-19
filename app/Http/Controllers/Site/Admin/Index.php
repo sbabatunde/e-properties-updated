@@ -11,4 +11,9 @@ class Index extends Controller
     {
         return view('admin.index');
     }
+
+    public function adminDashboard()
+    {
+        return view('admin.dashboard.index');
+    }
 }

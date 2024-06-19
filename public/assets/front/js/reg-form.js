@@ -96,27 +96,25 @@ const agentContainer = document.querySelector('#servProvForm');
 
 
 //Begin Group Post Show/Hide
-
-document.addEventListener('DOMContentLoaded', function() {
-    var toggleButtons = document.querySelectorAll('.toggleButton');
-    var containers = document.querySelectorAll('.group-content');
-  
-    toggleButtons.forEach(function(button) {
-      button.addEventListener('click', function() {
-        var targetId = button.getAttribute('data-target');
-        var targetDiv = document.getElementById(targetId);
-  
-        // Hide all divs
-        containers.forEach(function(container) {
-          container.classList.add('hidden');
-        });
-  
-        // Show the target div
-        targetDiv.classList.remove('hidden');
-      });
-    });
-  });
+    document.addEventListener('DOMContentLoaded', function() {
+        var toggleButtons = document.querySelectorAll('.toggleButton');
+        var containers = document.querySelectorAll('.group-content');
     
+        toggleButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var targetId = button.getAttribute('data-target');
+            var targetDiv = document.getElementById(targetId);
+    
+            // Hide all divs
+            containers.forEach(function(container) {
+            container.classList.add('hidden');
+            });
+    
+            // Show the target div
+            targetDiv.classList.remove('hidden');
+        });
+        });
+    });
 //End Group Post Show/Hide
 
 
@@ -163,3 +161,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });    
 //Tenant Comment Slide Ends
+

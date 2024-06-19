@@ -40,6 +40,11 @@ use App\Http\Controllers\Site\PropertyProfessionalController;
 | 
 */
 
+Route::get('/admin/test', function () {
+    return view('admin.test');
+});
+
+
 Auth::routes();
 //Home Controller
 Route::controller(HomeController::class)->group(function () {
@@ -163,6 +168,7 @@ Route::controller(UserController::class)->group(function () {
 //Index Route
 Route::controller(Index::class)->group(function () {
     Route::get('admin/index',  'adminIndex')->name('admin.index.page');
+    Route::get('admin/dashboard',  'adminDashboard')->name('admin.dashboard');
 });
 //Profile Route
 Route::controller(Profile::class)->group(function () {

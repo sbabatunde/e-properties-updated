@@ -15,37 +15,37 @@ let editProfile = function(){
 
 //End Profile Form
 
-//Custom Listings Search
-const salesListingsContainer = document.querySelector('#salesListings');
-const shortletsListingsContainer = document.querySelector('#shortletsListings');
-const rentsListingsContainer = document.querySelector('#rentsListings');
-const landListingsContainer = document.querySelector('#landListings');
+    //Custom Listings Search
+    const salesListingsContainer = document.querySelector('#salesListings');
+    const shortletsListingsContainer = document.querySelector('#shortletsListings');
+    const rentsListingsContainer = document.querySelector('#rentsListings');
+    const landListingsContainer = document.querySelector('#landListings');
 
-let salesL = function(){
-    salesListingsContainer.style.display = "block";
-    shortletsListingsContainer.style.display = "none";
-    rentsListingsContainer.style.display = "none";
-    landListingsContainer.style.display = "none";
-}
+    let salesL = function(){
+        salesListingsContainer.style.display = "block";
+        shortletsListingsContainer.style.display = "none";
+        rentsListingsContainer.style.display = "none";
+        landListingsContainer.style.display = "none";
+    }
 
-let shortletsL = function(){
-    salesListingsContainer.style.display = "none";
-    shortletsListingsContainer.style.display = "block";
-    rentsListingsContainer.style.display = "none";
-    landListingsContainer.style.display = "none";
-}
-let rentsL = function(){
-    salesListingsContainer.style.display = "none";
-    shortletsListingsContainer.style.display = "none";
-    rentsListingsContainer.style.display = "block";
-    landListingsContainer.style.display = "none";
-}
-let landL = function(){
-    salesListingsContainer.style.display = "none";
-    shortletsListingsContainer.style.display = "none";
-    rentsListingsContainer.style.display = "none";s
-    landListingsContainer.style.display = "block";
-}
+    let shortletsL = function(){
+        salesListingsContainer.style.display = "none";
+        shortletsListingsContainer.style.display = "block";
+        rentsListingsContainer.style.display = "none";
+        landListingsContainer.style.display = "none";
+    }
+    let rentsL = function(){
+        salesListingsContainer.style.display = "none";
+        shortletsListingsContainer.style.display = "none";
+        rentsListingsContainer.style.display = "block";
+        landListingsContainer.style.display = "none";
+    }
+    let landL = function(){
+        salesListingsContainer.style.display = "none";
+        shortletsListingsContainer.style.display = "none";
+        rentsListingsContainer.style.display = "none";s
+        landListingsContainer.style.display = "block";
+    }
 
 //End Listings Search
 
@@ -82,3 +82,15 @@ let propertyDeal = function(){
         dealDetails.style.display = "none";
     }
 }
+
+
+// Begin keep button Group active on click
+const btnFocus = document.querySelectorAll('.active-btn-group');
+
+btnFocus.forEach(btnGroup => {
+    btnGroup.addEventListener('click', () => {
+        document.querySelector('.req-target')?.classList.remove('req-target');
+        btnGroup.classList.add('req-target');
+    });
+});
+// Begin keep button group active on click

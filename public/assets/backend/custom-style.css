@@ -1,0 +1,141 @@
+
+/* Dashboard styles Begins*/
+.card-wrapper{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 2% 0;
+}
+
+.left-card{
+    width: 50%;
+    display: block;
+    margin-left: 2rem;
+}
+
+.left-card .row{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+@media (max-width: 992px) {
+    .left-card{
+        width:0%;
+        display: block;
+        margin-left: 2rem;
+    }
+}
+
+.dashboard-card{
+    background: hsl(236, 62%, 85%);
+    border: 1px solid hsl(236, 62%, 85%);
+    border-radius: 15px;
+    color: #232ca8;
+    padding: 10px 15px;
+    width: 23%;
+    min-width: 250px;
+}
+
+.dashboard-card .fa-star{
+    color: #fff;
+    border: 1px solid rgba(218, 20, 20, 0.774);
+    background-color: rgba(218, 20, 20, 0.774);
+    width: max-content;
+    padding: 10px;
+    margin-right: 3px;
+    border-radius: 50%;
+}
+
+.dashboard-card .alt-star{
+    background: rgb(68, 204, 68);
+    border:1px solid rgb(68, 204, 68)
+}
+
+.dashboard-card p{
+    font-size: 12px;
+}
+
+.chart_div .card{
+    border: 1px solid #fff;
+    border-radius: 15px;
+    min-height: 350px;
+}
+
+.right-card {
+    width: 36%;
+    margin-right: 3%;
+}
+
+.right-card .chart_div_2{
+    width: 100%;
+    margin: auto;
+    height: 100%;
+}
+
+.audience-card{
+    width: 95%;
+    margin-left: 3%;
+}
+
+.audience-card .row span{
+    display: flex;
+    gap: 20px;
+    width: 75%;
+    justify-content: space-between;
+}
+
+.audience-card .row span .chart_div_3 .card,
+.audience-card .row span .chart_div_4 .card{
+    background: red;
+    min-width:8rem;
+}
+
+/* Bashboard styles Ends */
+
+/* Post Property Form styles Begins */
+
+.post-prop-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.prop-form-header{
+    width: 90%;
+    margin: auto;
+    display: flex; 
+    flex-wrap:wrap ;
+    justify-content: space-between;
+}
+
+.user-details{
+    display: flex;
+    flex-wrap: wrap;
+    gap:15px;
+}
+
+.user-pic{
+    width: 4rem;
+    height: 4rem;
+    clip-path: circle();
+}
+
+.user-details h6{
+    color: black;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.user-details i {
+    color: black;
+    font-size: 3rem;
+}
+
+/* Post Property Form styles Ends */
+
+
+ 

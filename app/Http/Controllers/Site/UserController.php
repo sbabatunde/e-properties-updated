@@ -105,6 +105,7 @@ class UserController extends Controller
 
     public function redirect(Request $request)
     {
+        // dd(Hash::make($request->password));
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -129,45 +130,5 @@ class UserController extends Controller
         return redirect()->route('user.login')->withSuccess('You have logged out successfully');
     }
 
-    public function updateProfile(Request $request)
-    {
-        $profile = User::where('id', Auth::id())->update([
-            'password' => $request->password,
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'username' => $request->username,
-            'country_code' => $request->country_code,
-            'phone' => $request->phone,
-            'whatApp' => $request->whatApp,
-            'state' => $request->state,
-            'axis' => $request->axis,
-            'about_org' => $request->about_org,
-            'org_service' => $request->org_service,
-            'org_state' => $request->org_state,
-            'org_axis' => $request->org_axis,
-            'business_cat' => $request->business_cat,
-            'fb' => $request->fb,
-            'twitter' => $request->twitter,
-            'linkedIn' => $request->linkedIn,
-            'Instagram' => $request->Instagram,
-        ]);
-
-        Alert::success('message', 'Congratulations Your Profile has been updated successfully.');
-
-        return back();
-    }
-
-    public function editProfile(Request $request)
-    {
-        $data = User::find(Auth::id());
-
-        if ($request->file('photo')) {
-            $file = $request->file('photo');
-            @unlink(public_path('profile/image/' . $data->photo));
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('profile/image'), $filename);
-            $data['photo'] = $filename;
-        }
-        $data->save();
-    }
+   
 }

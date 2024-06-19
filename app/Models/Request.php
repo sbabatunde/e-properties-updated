@@ -9,5 +9,6 @@ class Request extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['location', 'area', 'budget', 'further_info', 'name', 'country', 'email', 'phone_no', 'property_type'];
+    protected $guarded = [];
+
 }

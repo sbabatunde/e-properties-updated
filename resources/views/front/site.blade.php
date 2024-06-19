@@ -1,40 +1,137 @@
-
 @extends('layouts.front.site')
 @section('content')
+    <style>
+        .form-container {
+            position: absolute;
+            left: 169px;
+            top: 524px;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 2.5rem;
+        }
 
-@include('front.hero-sections.circular-properties')
-@include('front.hero-sections.brands')
+        .form-image {
+            width: 200px;
+            /* Adjust as per your design */
+            height: 200px;
+            /* Adjust as per your design */
+            background-color: #E5E7EB;
+            /* Use your actual background color */
+            border-radius: 50%;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            /* Example shadow */
+        }
 
-{{--Commercial And Residential Properties Link Begins --}}
+        .form-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #FFFFFF;
+            /* Use your actual background color */
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            /* Example shadow */
+        }
+
+        .form-header {
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+            color: #1F2937;
+            /* Use your text color */
+        }
+
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-field {
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 40px;
+            /* Adjust height as needed */
+            padding: 0.5rem;
+            border: 1px solid #D1D5DB;
+            /* Example border color */
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .field-info {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0.5rem;
+            font-size: 0.875rem;
+            color: #4B5563;
+            /* Example color */
+        }
+
+        .search-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #4C51BF;
+            /* Example background color */
+            color: #FFFFFF;
+            /* Example text color */
+            border: none;
+            border-radius: 4px;
+            font-size: 1.125rem;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #4338CA;
+            /* Example hover background color */
+        }
+    </style>
+
+    @include('front.hero-sections.circular-properties')
+    @include('front.hero-sections.brands')
+
+    {{-- Commercial And Residential Properties Link Begins --}}
     <div class="container mt-4">
         <div class="row hero-prop-type">
             <div class="hero-commmerce-prop mt-3">
-            <a href="{{ route('all.commercial') }}" style="text-decoration: none">
+                <a href="{{ route('all.commercial') }}" style="text-decoration: none">
                     Commercial Properties
                 </a>
             </div>
             <div class="hero-resident-prop mt-3">
-            <a href="{{ route('all.residential') }}" style="text-decoration: none">
+                <a href="{{ route('all.residential') }}" style="text-decoration: none">
                     Residential Properties
                 </a>
             </div>
         </div>
     </div>
-{{--Commercial And Residential Properties Link Ends --}}
+    {{-- Commercial And Residential Properties Link Ends --}}
 
 
-{{--Meet Agents Link Begins --}}
+    {{-- Meet Agents Link Begins --}}
     <div class="container mt-4">
         <div class="hero-meet-agent mt-5">
             <div class="row">
                 <div class="mt-3 col-lg-3 col-md-6 col-sm-6 ">
-                <a href="{{ route('agent.all') }}" class="btn mt-3 hero-agent">
-                    Agents
+                    <a href="{{ route('agent.all') }}" class="btn mt-3 hero-agent">
+                        Agents
                     </a>
                 </div>
                 <div class="mt-3 meet-info col-lg-5 col-md-6 col-sm-6">
                     <p class="mt-3">
-                        Meet With Different Property Agents,who 
+                        Meet With Different Property Agents,who
                         wil help you get your desired property with
                         little to no agent fee added.
                     </p>
@@ -45,9 +142,9 @@
             </div>
         </div>
     </div>
-{{--Meet Agents Link Ends --}}
+    {{-- Meet Agents Link Ends --}}
 
-{{--Post Your Properties and Make Request Begins --}}
+    {{-- Post Your Properties and Make Request Begins --}}
     <div class="container wrapper mt-5">
         <div class="columns">
             <div class="col col-50">
@@ -55,14 +152,15 @@
                     <div class="col mt-2 col-50 hero-post">
                         <h5>Post Your Property</h5>
                         <p>
-                            Meet With Different Property Agents,who 
+                            Meet With Different Property Agents,who
                             wil help you get your desired property with
                             little to no agent fee added.
                         </p>
                         <a href="{{ route('admin.add.listing') }}" class="btn btn-hero-post">Post your Property</a>
                     </div>
                     <div class="hero1-pic">
-                        <img class="hero-house-pic" src="{{ asset('../assets/images/hero-images/hero2.png') }}" alt="hero-house-pic">
+                        <img class="hero-house-pic" src="{{ asset('../assets/images/hero-images/hero2.png') }}"
+                            alt="hero-house-pic">
                     </div>
                 </div>
             </div>
@@ -70,19 +168,19 @@
                 <span class="hero-post ">
                     <h5 class="mt-1">Make a Request</h5>
                     <p class="hero-request">
-                        Meet With Different Property Agents,who 
+                        Meet With Different Property Agents,who
                         wil help you get your desired property with
                         little to no agent fee added.
                     </p>
-                        <a href="{{ route('make.request') }}" class="btn btn-hero-post mt-1">Request</a>
-                        <a href="{{ route('requests.all') }}" class="btn btn-hero-post view-request mt-1">View Request</a>
+                    <a href="{{ route('make.request') }}" class="btn btn-hero-post mt-1">Request</a>
+                    <a href="{{ route('requests.all') }}" class="btn btn-hero-post view-request mt-1">View Request</a>
                 </span>
             </div>
         </div>
     </div>
-{{--Post Your Properties Link and Make Request Ends --}}
+    {{-- Post Your Properties Link and Make Request Ends --}}
 
-{{-- Report A Scam Link Begins --}}
+    {{-- Report A Scam Link Begins --}}
     <div class="container">
         <div class="hero-scam">
             <h5>
@@ -94,12 +192,13 @@
                 laborum reiciendis veritatis rerum nobis. Earum,
                 iure iusto nesciunt tempora atque non maiores provident.
             </p>
-            <a href="{{ route('all.scam.report') }}" class="btn btn-hero-post" style="margin-top: 5px; padding:0.8% 7%" >Report</a>
+            <a href="{{ route('all.scam.report') }}" class="btn btn-hero-post"
+                style="margin-top: 5px; padding:0.8% 7%">Report</a>
         </div>
     </div>
-{{-- Report A Scam Link Ends --}}
+    {{-- Report A Scam Link Ends --}}
 
-{{-- Land Verification Link Begins --}}
+    {{-- Land Verification Link Begins --}}
     <div class="container">
         <div class="hero-land-verf">
             <span>
@@ -109,9 +208,9 @@
             <img src="{{ asset('../assets/images/hero-images/hero4.png') }}" alt="phone" class=>
         </div>
     </div>
-{{-- Land Verification Link Ends --}}
+    {{-- Land Verification Link Ends --}}
 
-{{-- E-properties Numbers Begins --}}
+    {{-- E-properties Numbers Begins --}}
     <div class="container">
         <div class="container mb-4 mt-5 d-flex justify-content-center">
             <h3><b>E-properties in Numbers</b></h3>
@@ -135,7 +234,7 @@
             </div>
             <div class="mb-2 text-center">
                 <h3 style="color: blue"><b>674,000</b></h3>
-                <a href="{{route('all.landlords')}}" style="color: black"><b>Registered Landlords</b></a>
+                <a href="{{ route('all.landlords') }}" style="color: black"><b>Registered Landlords</b></a>
             </div>
             <div class="mb-2 text-center">
                 <h3 style="color: red"><b>201,905</b></h3>
@@ -143,35 +242,34 @@
             </div>
         </div>
     </div>
-{{-- E-properties Numbers Ends --}}
+    {{-- E-properties Numbers Ends --}}
 
-{{-- Esssential Circular-Properties Pictures Begins --}}
+    {{-- Esssential Circular-Properties Pictures Begins --}}
     @include('front.hero-sections.experts')
-{{-- Esssential Circular-Properties Pictures Ends --}}
+    {{-- Esssential Circular-Properties Pictures Ends --}}
 
-{{-- Trending Properties Begins --}}
+    {{-- Trending Properties Begins --}}
     @include('front.hero-sections.trending')
-{{-- Trending Properties Ends --}}
+    {{-- Trending Properties Ends --}}
 
-{{-- Property Category Begins --}}
+    {{-- Property Category Begins --}}
     @include('front.hero-sections.category')
-{{-- Property Category Ends --}}
+    {{-- Property Category Ends --}}
 
-{{-- New Listings Begins --}}
+    {{-- New Listings Begins --}}
     @include('front.hero-sections.listing')
-{{-- New Listings Ends --}}
+    {{-- New Listings Ends --}}
 
-{{-- Deals Begins --}}
+    {{-- Deals Begins --}}
     @include('front.hero-sections.deals')
-{{-- Deals Ends --}}
+    {{-- Deals Ends --}}
 
-{{-- Property Service  And Management Begins --}}
+    {{-- Property Service  And Management Begins --}}
     @include('front.hero-sections.service-management')
-{{-- Property Service  And Management Ends --}}
+    {{-- Property Service  And Management Ends --}}
 
 
-{{--Join Groups Begins --}}
+    {{-- Join Groups Begins --}}
     @include('front.hero-sections.groups')
-{{-- Join Groups Ends --}}
-
+    {{-- Join Groups Ends --}}
 @endsection

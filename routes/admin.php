@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin;
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin',], function () {
 
-  Route::get('/', [Admin\AdminController::class, 'index'])->name('admin.dashboard');
+  // Route::get('/', [Admin\AdminController::class, 'index'])->name('admin.dashboard');
   Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.logout');
   // new route
   Route::get('/edit/profile', [Admin\ProfileController::class, 'editProfile'])->name('admin.edit.profile');
