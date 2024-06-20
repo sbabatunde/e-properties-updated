@@ -16,38 +16,45 @@
     <ul>
         <li>
             <a href="{{ route('admin.dashboard') }}">
-                <i class="fa fa-map"></i>
+                <i class="glyphicon glyphicon-th"></i>
                 <span class="nav-item">Dashboard</span>
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
             <a href="{{ route('admin.add.listing') }}">
-                <i class="fa fa-user"></i>
-                <span class="nav-item">Post Property</span>
+                <i class="glyphicon glyphicon-home"></i>
+                <span class="nav-item">Property</span>
             </a>
-            <span class="tooltip">Property</span>
+            <span class="tooltip">Post Property</span>
         </li>
         <li>
             <a href="{{ route('admin.listings.all') }}">
                 <i class="fa fa-archive "></i>
-                <span class="nav-item">My Listings</span>
+                <span class="nav-item">Listings</span>
             </a>
-            <span class="tooltip">Listing</span>
+            <span class="tooltip">My Listing</span>
         </li>
         <li>
             <a href="{{ route('admin.profile') }}">
-                <i class="fa fa-bell"></i>
+                <i class="glyphicon glyphicon-user"></i>
                 <span class="nav-item">Profiles</span>
             </a>
             <span class="tooltip">Profiles</span>
         </li>
         <li>
             <a href="{{ route('admin.media.page') }}">
-                <i class="fa fa-envelope"></i>
+                <i class="glyphicon glyphicon-film"></i>
                 <span class="nav-item">Media</span>
             </a>
             <span class="tooltip">Media</span>
+        </li>
+        <li>
+            <a href="{{ route('admin.building.material.form') }}">
+                <i class="fa fa-building"></i>
+                <span class="nav-item">Materials</span>
+            </a>
+            <span class="tooltip">Building Materials</span>
         </li>
         <li>
             <a href="{{ route('admin.sliders.create') }}">

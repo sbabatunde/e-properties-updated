@@ -32,6 +32,9 @@
     <link href="{{ asset('assets/admin/build/css/style.css') }}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/admin/build/css/mycss/custom-admin.css') }}">
 
+    {{-- Scripts for Google charts --}}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    {{-- End Scripts for Google charts --}}
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link type="text/css" rel="stylesheet"

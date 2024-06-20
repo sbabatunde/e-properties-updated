@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Site\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Admin\PostMedia;
 use Illuminate\Http\Request;
+use App\Models\Admin\PostMedia;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostMediaRequest;
 
 class PostMediaController extends Controller
 {
@@ -20,9 +22,13 @@ class PostMediaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(PostMediaRequest $request)
     {
-        //
+            $postMedia = PostMedia::create([
+                "user_id" => Auth::id(),
+                "media_file" => $mediaFile,
+                "file_type" => $fileType
+            ]);
     }
 
     /**

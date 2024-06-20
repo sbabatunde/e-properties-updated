@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('post_media', function (Blueprint $table) {
             $table->id();
+              $table->bigInteger('user_id');
+            $table->string('media_file')->nullable();
+            $table->string('file_type')->nullable();
+            // $table->string('msg_phone')->nullable();
             $table->timestamps();
         });
     }

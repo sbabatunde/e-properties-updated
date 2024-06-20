@@ -315,6 +315,7 @@ border-color: #007bff;
     cursor: pointer;
     height: 0;
     width: 0;
+    /* background: #727ff7; */
   }
   
   /* Create a custom checkbox */

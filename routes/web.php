@@ -4,6 +4,7 @@ use App\Http\Controllers\Site;
 use Admin\propertiesController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Site\Admin\BuildingMaterial;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Admin\Index;
@@ -186,7 +187,16 @@ Route::controller(ListingController::class)->group(function () {
 
 //Post Media Route
 Route::controller(PostMediaController::class)->group(function () {
-    Route::get('post-media-file',  'adminPostMedia')->name('admin.media.page');
+    Route::get('/post/media/file',  'adminPostMedia')->name('admin.media.page');
+    Route::post('/post/media/file/form',  'adminPostMediaForm')->name('admin.media.post');
+    
+});
+
+//Building Materials Route
+Route::controller(BuildingMaterial::class)->group(function () {
+    Route::get('/building/materials/form',  'buildingMaterialForm')->name('admin.building.material.form');
+    Route::post('/building/materials/store',  'buildingMaterialStore')->name('admin.building-material.store');
+    
 });
 //Admin Routes Ends
 //Admin Slider Image

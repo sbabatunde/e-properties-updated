@@ -264,6 +264,10 @@
     @include('front.hero-sections.deals')
     {{-- Deals Ends --}}
 
+    {{-- Video Files Begins --}}
+    @include('front.hero-sections.video-file')
+    {{-- Video Files Ends --}}
+
     {{-- Property Service  And Management Begins --}}
     @include('front.hero-sections.service-management')
     {{-- Property Service  And Management Ends --}}

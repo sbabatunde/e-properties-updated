@@ -7,7 +7,7 @@
                 <div class="post-prop">
                     <h3>
                         <strong style="color: black">
-                            Post A property
+                            Building Material
                         </strong>
                     </h3>
                 </div>
@@ -25,23 +25,9 @@
                                     <div class="col-md-11">
                                         <div class="form-body">
                                             <div class="row">
-                                                {{-- Property details Highlight --}}
-                                                @include('admin.properties.create.details')
 
-                                                {{-- Property Auction details --}}
-                                                @include('admin.properties.create.auction')
-                                                {{-- Pricing Details --}}
-                                                @include('admin.properties.create.pricing')
-                                                {{-- Property Deal details --}}
-                                                @include('admin.properties.create.deals')
-                                                {{-- Property Address Details --}}
-                                                @include('admin.properties.create.address')
-                                                {{-- Payment Method --}}
-                                                @include('admin.properties.create.payment')
-                                                {{-- Property Info Checkboxes --}}
-                                                @include('admin.properties.create.checkboxes')
-                                                {{-- Property Description And Images --}}
-                                                @include('admin.properties.create.description-images')
+                                                {{-- Material Details --}}
+                                                @include('admin.building-material.form.details')
                                             </div>
                                         </div>
 
