@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Site\PropertyType;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -90,5 +91,10 @@ class Property extends Model
     public function auction()
     {
         return $this->hasMany(Auction::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(PropertyType::class,'property_type_slug', 'type');
     }
 }

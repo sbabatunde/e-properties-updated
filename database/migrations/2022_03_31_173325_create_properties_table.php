@@ -17,7 +17,6 @@ class CreatePropertiesTable extends Migration
             $table->id();
             $table->integer('agent_id');
             $table->string('title')->nullable();
-            $table->string('category');
             $table->string('thumbnail');
             $table->string('furnishing');
             $table->string('type');

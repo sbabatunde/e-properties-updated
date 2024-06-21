@@ -26,7 +26,6 @@ class ListingController extends Controller
     public function adminAddPropertyListing()
     {
         if (Auth::id() && Auth::user()->user_type !== "tenant") {
-            // dd('TEst');
             return view('admin.properties.create');
         } else if (Auth::id() && Auth::user()->user_type == "tenant") {
             Alert::error('Unauthorized Access!!', 'You need to upgrade to your account to be able to go further');
