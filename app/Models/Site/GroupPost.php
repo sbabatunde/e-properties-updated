@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Models\site;
+namespace App\Models\Site;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Slider extends Model
+class GroupPost extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','photo', 'created_at', 'updated_at'];
-
 }

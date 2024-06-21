@@ -79,7 +79,7 @@
             <input type="text" name="price" id="currency-field"
                 class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 pattern="^\₦ \d{1,3}(,\d{3})*(\.\d+)?₦" required data-type="currency" placeholder="Price(₦)"
-                autocomplete="" value="{{ old('name') }}" style="border: 1px solid #2626ac">
+                autocomplete="" value="{{ old('price') }}" style="border: 1px solid #2626ac">
         </div>
 
         @error('price')

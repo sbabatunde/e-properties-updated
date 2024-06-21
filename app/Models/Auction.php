@@ -14,7 +14,7 @@ class Auction extends Model
 
     public function property()
     {
-        return  $this->belongsTo(Property::class, 'property_id', 'id');
+        return  $this->belongsTo(Property::class);
     }
 
     public function auctionBid()

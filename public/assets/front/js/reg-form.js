@@ -94,6 +94,32 @@ const agentContainer = document.querySelector('#servProvForm');
     }
 //End Request Form Show/Hide
 
+//Begin Custom Registration Form
+const resSales = document.querySelector('#residentialSales');
+const resRents = document.querySelector('#residentialRents');
+const resLets = document.querySelector('#residentialLets');
+
+    let showResSales = function(){
+        resSales.style.display = "block";
+        resRents.style.display = "none";
+        resLets.style.display = "none";
+    }
+
+    let showResRents= function(){
+        resSales.style.display = "none";
+        resRents.style.display = "block";
+        resLets.style.display = "none";
+
+    }
+
+    let showResLets = function(){
+        resSales.style.display = "none";
+        resRents.style.display = "none";
+        resLets.style.display = "block";
+    }
+//End Custom Registration Form
+
+
 
 //Begin Group Post Show/Hide
     document.addEventListener('DOMContentLoaded', function() {

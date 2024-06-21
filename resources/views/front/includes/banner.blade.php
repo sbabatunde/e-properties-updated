@@ -26,9 +26,11 @@
             <div class="carousel-item active item-bg">
                 {{-- <img class="d-block w-100 h-100" src="{{$sliders[3]->photo}}" alt="banner{{$sliders[3]->photo}}"> --}}
             </div>
+            {{-- @dd($sliders) --}}
+
             @foreach ($sliders as $key => $item)
                 <div class="slider_wrapper carousel-item item-bg">
-                    <img class="d-block w-100 h-100" src="{{ $sliders[$key]->photo }}"
+                    <img class="d-block w-100 h-100" src="{{ asset($item['photo']) }}"
                         alt="banner{{ $sliders[$key]->photo }}">
                 </div>
             @endforeach

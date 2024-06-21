@@ -86,14 +86,17 @@ class PropertyController extends Controller
 
     public function residentialProperty()
     {
-        $properties = Property::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();
-        return view('front.users.properties.residential.main-page', compact('properties'));
+        $salesProperties = Property::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();
+        // dd($properties);
+        return view('front.users.properties.residential.main-page', compact('salesProperties'));
     }
 
     public function commercialProperty()
     {
-        $properties = Property::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();
-
-        return view('front.users.properties.commercial.main-page');
+        $salesProperties = Property::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();
+        $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
+        ->whereDate('end_date','>=',Carbon::today())->get();
+        // dd($liveAuction);
+        return view('front.users.properties.commercial.main-page',compact('salesProperties','liveAuction'));
     }
 }

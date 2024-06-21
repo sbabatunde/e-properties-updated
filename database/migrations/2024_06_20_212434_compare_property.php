@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('compare_property', function (Blueprint $table) {
             $table->id();
-            $table->string('group_name');
-            // $table->string('group_name');
+            // No negative value integer type
+            $table->unsignedBigInteger('user_id'); 
+            $table->unsignedBigInteger('property_id'); 
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        //
     }
 };

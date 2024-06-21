@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="res-comp-button">
-        <a href="" class="btn res-compare" style="font-weight:550;">Compare</a>
+        <a href="{{ route('compare.property.page') }}" class="btn res-compare" style="font-weight:550;">Compare</a>
         <a href="" class="btn btn-danger res-cancel">Cancel</a>
     </div>
 </div>

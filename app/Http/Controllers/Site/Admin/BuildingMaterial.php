@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Site\Admin;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\BuildingMaterialRequest;
 use App\Models\Admin\BuildingMaterial as AdminBuildingMaterial;
-use Illuminate\Http\Request;
 
 class BuildingMaterial extends Controller
 {
@@ -16,9 +18,10 @@ class BuildingMaterial extends Controller
 
     public function buildingMaterialStore(BuildingMaterialRequest $request)
     {
-        dd($request->all());
         $material = AdminBuildingMaterial::create([
+            'user_id'=>Auth::id(),
             'title'=>$request->title,
+            'type'=>$request->type,
             'category'=>$request->category,
             'address'=>$request->address,
             'price'=>$request->price,
@@ -27,5 +30,9 @@ class BuildingMaterial extends Controller
             'description'=>$request->description,
             'thumbnail'=>$request->thumbnail,
         ]);
+
+        Alert::success('Success','Material uploaded successfully');
+
+        return back();
     }
 }

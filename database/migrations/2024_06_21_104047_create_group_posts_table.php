@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('group_posts', function (Blueprint $table) {
             $table->id();
-            $table->string('group_name');
-            // $table->string('group_name');
+            $table->bigInteger('user_id')->nullable();
+            $table->string('post');
+            $table->integer('likes')->nullable();
+            $table->integer('dislikes')->nullable();
+            $table->string('total_comments')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('group_posts');
     }
 };

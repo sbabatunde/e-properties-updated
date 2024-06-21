@@ -4366,4 +4366,63 @@ a{
 .hidden {
   display: none; /* Show div with the 'show' class */
 }
-/* All Groups Begins */
+/* All Groups Ends */
+
+
+/* Property Professionals Begins Ends */
+
+.proffesionals-body{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 3%;
+}
+
+.proffesionals-search{
+  width: 20%;
+  min-width: 340px;
+  margin: auto;
+}
+
+.proffesionals{
+  display: flex;
+  flex-wrap: wrap;
+  width:70%;
+  min-width: 340px;
+  margin: auto;
+}
+
+.proffesionals .pic{
+  margin: auto;
+}
+@media screen and (min-width:768px)  and (max-width:1320px){
+  .proffesionals-search{
+    width: 80%;
+    min-width: 340px;
+    margin: auto;
+  }
+  .proffesionals{
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+  min-width: 340px;
+  margin: auto;
+}
+
+  .proffesionals .material-items{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width:100%;
+    /* background: black; */
+    /* min-width: 340px; */
+    margin: auto;
+  }
+  
+}
+
+/* Property Professionals Begins Ends */
+

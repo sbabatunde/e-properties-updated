@@ -11,25 +11,33 @@
                 </div>
             </div>
             <div class="col-lg-6 agent-desc">
-                <h3>Michael Timothy</h3>
-                <h5>Real Estate Agent</h5>
+                <h3>{{ $propertyProfessional->firtname }} {{ $propertyProfessional->lastname }}</h3>
+                <h5 class="text-bold uppercase">Real Estate Agent</h5>
                 <div class="">
-                    <span class="" style="float: inline-start"><i class="fa fa-user mr-2"></i> Lagos, Nigeria</span>
+                    <span class="" style="float: inline-start">
+                        <i class="fa fa-map-marker mr-2" style="font-size:20px;color:black"></i>
+                        {{ $propertyProfessional->axis }}
+                    </span>
                     <span style="float: inline-end">Michaelhomes.com</span>
                 </div>
                 <div class="py-2">
                     <ul class="py-3">
-                        <li><i class="fa fa-envelope mr-2 mt-2"></i>michaeltimothy@essential.com</li>
-                        <li><i class="fa fa-phone mr-2 mt-2"></i>08123457689, 0178475298</li>
-                        <li class="mt-2"><span style="border: 1px solid black;padding:.2rem;font-weight:700">Experience</span> Over 12 years</li>
+                        <li><i class="fa fa-envelope mr-2 mt-2"
+                                style="font-size:20px;color:black"></i>{{ $propertyProfessional->email }}</li>
+                        <li><i class="fa fa-phone mr-2 mt-2" style="font-size:20px;color:black"></i>
+                            {{ $propertyProfessional->phone }} {{ $propertyProfessional->whatApp }}
+                        </li>
+                        <li class="mt-2"><span
+                                style="border: 1px solid black;padding:.2rem;font-weight:700">Experience</span> Over 12
+                            years</li>
                     </ul>
                 </div>
-               
-                <div class="py-2" >
+
+                <div class="py-2">
                     <h3>Bio</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
                         cum? Quos enim doloribus tempore, atque deleniti animi mollitia totam reprehender
-                    it tempora quaerat pariatur at ab unde distinctio saepe asperiores voluptate?
+                        it tempora quaerat pariatur at ab unde distinctio saepe asperiores voluptate?
                     </p>
                 </div>
             </div>
@@ -58,26 +66,26 @@
         <div class="row mb-5">
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit. 
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et. 
+                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
+                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
                 </p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit. 
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et. 
+                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
+                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
                 </p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit. 
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et. 
+                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
+                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
                 </p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit. 
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et. 
+                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
+                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
                 </p>
             </div>
         </div>
@@ -90,12 +98,13 @@
             <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
                 <div class="meet-card">
                     <div class="image">
-                        <img  src="../assets/images/services/service2.png" alt="Avatar" style="width:100%;" height="150" width="100" >
+                        <img src="../assets/images/services/service2.png" alt="Avatar" style="width:100%;" height="150"
+                            width="100">
                     </div>
                     <div class="meet-card-sub">
                         <div class="card-text mb-0">
                             <h5>Mally Cleff</h5>
-                            <p >12 Followers</p>
+                            <p>12 Followers</p>
                         </div>
                         <div class="card-footer   meet-footer">
                             <a href="services.html">
@@ -108,12 +117,13 @@
             <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
                 <div class="meet-card">
                     <div class="image">
-                        <img  src="../assets/images/services/service3.png" alt="Avatar" style="width:100%;" height="150" width="100" >
+                        <img src="../assets/images/services/service3.png" alt="Avatar" style="width:100%;" height="150"
+                            width="100">
                     </div>
                     <div class="meet-card-sub">
                         <div class="card-text mb-0">
                             <h5>Jentl Hsghe</h5>
-                            <p >16 Followers</p>
+                            <p>16 Followers</p>
                         </div>
                         <div class="card-footer   meet-footer">
                             <a href="services.html">
@@ -126,12 +136,13 @@
             <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
                 <div class="meet-card">
                     <div class="image">
-                        <img  src="../assets/images/services/service5.png" alt="Avatar" style="width:100%;" height="150" width="100" >
+                        <img src="../assets/images/services/service5.png" alt="Avatar" style="width:100%;" height="150"
+                            width="100">
                     </div>
                     <div class="meet-card-sub">
                         <div class="card-text mb-0">
                             <h5>Michael Alele</h5>
-                            <p >24 Followers</p>
+                            <p>24 Followers</p>
                         </div>
                         <div class="card-footer   meet-footer">
                             <a href="services.html">
@@ -144,12 +155,13 @@
             <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
                 <div class="meet-card">
                     <div class="image">
-                        <img  src="../assets/images/services/service4.png" alt="Avatar" style="width:100%;" height="150" width="100" >
+                        <img src="../assets/images/services/service4.png" alt="Avatar" style="width:100%;" height="150"
+                            width="100">
                     </div>
                     <div class="meet-card-sub">
                         <div class="card-text mb-0">
                             <h5>Emeka Davidson</h5>
-                            <p >20 Followers</p>
+                            <p>20 Followers</p>
                         </div>
                         <div class="card-footer   meet-footer">
                             <a href="services.html">
@@ -159,6 +171,6 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 @endsection

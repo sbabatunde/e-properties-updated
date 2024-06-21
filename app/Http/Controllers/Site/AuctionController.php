@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Site;
 
+use Carbon\Carbon;
+use App\Models\Auction;
 use Illuminate\Http\Request;
 use App\Models\site\AuctionBid;
 use App\Http\Controllers\Controller;
-use App\Models\Auction;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -13,21 +14,29 @@ class AuctionController extends Controller
 {
     public function allAuctions()
     {
-        $auctions = Auction::with('property')->orderBy('start_date', 'desc')->limit(6)->get();
-
-        return view('front.users.liveAuction.all-auctions', compact('auctions'));
+        $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
+        ->whereDate('end_date','>=',Carbon::today())->limit(6)->get();
+        $upcomingAuctions = Auction::with(['property'])->whereDate('start_date','>=',Carbon::today())
+        ->limit(6)->get();
+        return view('front.users.liveAuction.all-auctions', compact('liveAuction','upcomingAuctions'));
     }
 
     public function liveAuction()
     {
-        $auctions = Auction::with('property')->orderBy('start_date', 'desc')->limit(6)->get();
+        $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
+        ->whereDate('end_date','>=',Carbon::today())->limit(6)->orderBy('start_date','asc')->get();
 
-        return view('front.users.liveAuction.main-page', compact('auctions'));
+        $upcomingAuctions = Auction::with(['property'])->orderBy('start_date','asc')
+        ->whereDate('start_date','>=',Carbon::today())->limit(6)->get();
+// dd(Auction::all());
+        return view('front.users.liveAuction.main-page', compact('liveAuction','upcomingAuctions'));
     }
 
-    public function placeAuctionBid()
+    public function placeAuctionBid($id)
     {
-        return view('front.users.liveAuction.bid.place');
+        $bidProperty = Auction::with(['property'])->where('property_id',$id)->first();
+        // dd($bidProperty);
+        return view('front.users.liveAuction.bid.place',compact('bidProperty'));
     }
 
     public function placeAuctionBidAmount(Request $request)

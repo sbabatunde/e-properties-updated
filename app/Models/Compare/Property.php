@@ -10,10 +10,10 @@ class Property extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = 'compare_properties';
+    protected $table = 'compare_property';
 
     public function property()
     {
-        return $this->belongsTo(ModelsProperty::class, 'property_id', 'id');
+        return $this->belongsTo(ModelsProperty::class);
     }
 }

@@ -11,17 +11,14 @@ class PropertyProfessionalController extends Controller
 {
     public function allPropertyProfessionals()
     {
-        $propertyProfessionals = User::leftjoin('agents as a', 'a.user_id', '=', 'users.id')
-            ->leftjoin('landlords as l', 'l.user_id', '=', 'users.id')->where('users.user_type', 'agent')
-            ->orwhere('users.user_type', 'landlord')->get();
+        $propertyProfessionals = User::with(['agent','landlord','providers'])->where('user_type','!=','tenant')->orderBy('firstname','asc')->get();
 
         return view('front.users.property-professionals.all', compact('propertyProfessionals'));
     }
 
     public function viewPropertyProfessionals($id)
     {
-        $propertyProfessional = User::leftjoin('agents as a', 'a.user_id', '=', 'users.id')
-            ->leftjoin('landlords as l', 'l.user_id', '=', 'users.id')->where('users.id', $id)->get();
+        $propertyProfessional = User::with(['agent','landlord','providers'])->where('users.id', $id)->first();
 
         return view('front.users.agents.connect', compact('propertyProfessional'));
     }

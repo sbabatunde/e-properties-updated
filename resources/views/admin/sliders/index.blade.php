@@ -7,7 +7,7 @@
                 <div class="post-prop">
                     <h3>
                         <strong style="color: black">
-                            Sliders
+                            All Sliders
                         </strong>
                     </h3>
                 </div>
@@ -26,28 +26,8 @@
                                         <div class="form-body">
                                             <div class="row">
 
-                                                <div class="form-group col-md-6">
-                                                    <input type="text"
-                                                        style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
-                                                        class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                                                        focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                        placeholder="Slide title" autocomplete=""
-                                                        value="{{ old('title') }}" required name="title">
-                                                    @error('title')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <input type="file"
-                                                        style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
-                                                        class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                                                        focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                        name="photo[]" multiple>
-                                                    @error('photo')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
+                                                {{-- Material Details --}}
+                                                @include('admin.building-material.form.details')
                                             </div>
                                         </div>
 

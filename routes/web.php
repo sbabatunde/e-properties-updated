@@ -26,7 +26,9 @@ use App\Http\Controllers\Site\ServicesController;
 use App\Http\Controllers\Site\BlacklistController;
 use App\Http\Controllers\Site\Admin\ListingController;
 use App\Http\Controllers\Site\Admin\PostMediaController;
+use App\Http\Controllers\Site\Admin\Sliders;
 use App\Http\Controllers\Site\BuildingMaterialController;
+use App\Http\Controllers\Site\Compare\PropertyController as ComparePropertyController;
 use App\Http\Controllers\Site\GroupController;
 use App\Http\Controllers\Site\PropertyProfessionalController;
 
@@ -92,6 +94,7 @@ Route::controller(AgentController::class)->group(function () {
 Route::controller(PropertyProfessionalController::class)->group(function () {
     Route::get('/view/property/professional/{id}', 'viewPropertyProfessionals')->name('property.professional.view');
     Route::get('/all/property/professionals', 'allPropertyProfessionals')->name('property.professionals.all');
+    Route::get('/property/professional/connect', 'allPropertyProfessionals')->name('property.professionals.connect');
 });
 
 //Building Materials Routes
@@ -134,12 +137,12 @@ Route::controller(PropertyController::class)->group(function () {
 });
 
 // Compare Add Route
-Route::controller(PropertyController::class)->group(function () {
+Route::controller(ComparePropertyController::class)->group(function () {
     Route::post('/add-property-to-compare/{property_id}', 'addPropertyToCompare');
     Route::get('/user/compare', 'UserCompare')->name('user.compare');
     Route::get('/get-compare-property', 'GetCompareProperty');
     Route::get('/remove-property-compare/{id}', 'removePropertyCompare');
-    Route::get('/compare-properties-page', 'comparePropertyPage');
+    Route::get('/compare-properties-page', 'comparePropertyPage')->name('compare.property.page');
 });
 // All User Property Related Routes Ends
 
@@ -147,7 +150,7 @@ Route::controller(PropertyController::class)->group(function () {
 Route::controller(AuctionController::class)->group(function () {
     Route::get('/live/auctions', 'liveAuction')->name('user.live-auction');
     Route::get('/all/auctions/page', 'allAuctions')->name('user.all-auction');
-    Route::get('/live/auctions/bid', 'placeAuctionBid')->name('user.auction.place-bid');
+    Route::get('/live/auctions/bid/{id}', 'placeAuctionBid')->name('user.auction.place-bid');
     Route::post('/user/auctions/place-bid/amount', 'placeAuctionBidAmount')->name('user.auction.place-bid.amount');
 });
 
@@ -200,8 +203,18 @@ Route::controller(BuildingMaterial::class)->group(function () {
 });
 //Admin Routes Ends
 //Admin Slider Image
-Route::controller(SliderController::class)->group(function () {
-    Route::get('/add/slider/image',  'adminAddSliderImages')->name('admin.sliders.create');
-    Route::post('/save/slider/images',  'adminSaveSliderImages')->name('admin.sliders.images.store');
-    Route::post('/save/images/db',  'adminSaveSliderImagesDB')->name('admin.sliders.images.store.db');
+
+Route::controller(Sliders::class)->group(function(){
+        // Route to show form for creating a slider
+        Route::get('/admin/sliders/create', 'create')->name('admin.sliders.create');
+        // Route to handle form submission for creating a slider
+        Route::post('/admin/sliders/store', 'store')->name('admin.sliders.store');
+        // Route to display all sliders
+        Route::get('/admin/sliders/index', 'index')->name('admin.sliders.index');
 });
+
+// Route::controller(SliderController::class)->group(function () {
+//     Route::get('/add/slider/image',  'adminAddSliderImages')->name('admin.sliders.create');
+//     Route::post('/save/slider/images',  'adminSaveSliderImages')->name('admin.sliders.images.store');
+//     Route::post('/save/images/db',  'adminSaveSliderImagesDB')->name('admin.sliders.images.store.db');
+// });

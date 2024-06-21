@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('title');
             $table->string('category');
+            $table->string('type');
             $table->string('address');
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
-            $table->string('quantity');
             $table->string('installment');
             $table->string('description');
             $table->timestamps();

@@ -22,7 +22,16 @@ class BuildingMaterialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address'=>'required|string',
+            'address'=>'required|string|max:255',
+            'category'=>'required|string',
+            'type'=>'required|string',
+            'title'=>'required|string|max:255',
+            'price'=>'required|numeric',
+            'quantity'=>'required|numeric',
+            'installment'=>'required|string',
+            'description'=>'required|string',
+            // 'thumbnail'=>'required|string',
+            'thumbnail' => 'required|mimes:jpg,png|max:3072|required',
         ];
     }
 }
