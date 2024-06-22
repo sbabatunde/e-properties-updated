@@ -65,7 +65,7 @@ class SliderController extends Controller
 
                     // Store the file in storage/app/public directory
                     $path = 'public/assets/admin/images/sliders/' . $filename;
-                    $image->move(public_path('public/assets/admin/images/sliders/'), $path);
+                    $image->move(public_path('assets/admin/images/sliders/'), $path);
                     // Storage::put($path, $fileData);
                     // dd($image);
                     // $imageName = time() . '.' . $image->getClientOriginalExtension();

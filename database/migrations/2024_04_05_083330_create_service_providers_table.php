@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->string('business_ID');
             $table->string('business_name');
-            $table->string('service_type');
+            $table->bigInteger('service_type_id');
             $table->timestamps();
         });
     }

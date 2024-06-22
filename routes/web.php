@@ -157,6 +157,7 @@ Route::controller(AuctionController::class)->group(function () {
 //Services Route
 Route::controller(ServicesController::class)->group(function () {
     Route::get('/services-page', 'findServices')->name('services.find');
+    Route::get('/get/service/category/type/{slug}', 'getServiceType')->name('services.find.type');
 });
 
 //User Login Controller
@@ -183,6 +184,7 @@ Route::controller(Profile::class)->group(function () {
 
 //Listing Route
 Route::controller(ListingController::class)->group(function () {
+    Route::get('/get/listing/category/type/{slug}','getListingCategoryType')->name('get.listing.type');
     Route::post('store/property',  'storePropertyListing')->name('admin.properties.store');
     Route::get('add/listing',  'adminAddPropertyListing')->name('admin.add.listing');
     Route::get('my/listings',  'adminPropertyListing')->name('admin.listings.all');

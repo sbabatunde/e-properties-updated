@@ -57,7 +57,7 @@
             <span class="tooltip">Building Materials</span>
         </li>
         <li>
-            <a href="{{ route('admin.sliders.index') }}">
+            <a href="{{ route('admin.sliders.create') }}">
                 <i class="fa fa-image"></i>
                 <span class="nav-item">Slider</span>
             </a>

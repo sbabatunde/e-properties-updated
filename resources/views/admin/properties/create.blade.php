@@ -18,7 +18,7 @@
                     <div class="">
                         <div class="">
                             <br />
-                            <form class="form" action="{{ route('admin.building-material.store') }}" method="POST"
+                            <form class="form" action="{{ route('admin.properties.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row justify-content-md-center">

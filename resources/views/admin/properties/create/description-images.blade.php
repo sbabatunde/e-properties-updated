@@ -5,7 +5,7 @@
         background-color:transparent" rows="3"
         class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
     focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        name="description"> </textarea>
+        name="description" value="{{ old('description') }}"> </textarea>
     @error('description')
         <span class="text-danger">{{ $message }}</span>
     @enderror

@@ -20,10 +20,11 @@ class HomeController extends Controller
     public function home()
     {
         $data = [];
-        $data['sliders'] = Slider::get(['photo']);
+        $data['sliders'] = Slider::get(['photo','title']);
         // $data['cities'] = City::geProperty::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();t();
         $data['properties'] = Property::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();
-        $data['category'] = PropertyType::with(['']);
+        $data['category'] = PropertyType::with(['property','propertyCategory'])->whereHas('propertyCategory',function($q){
+            $q->where('category_name','Commercial'); })->take(5)->get();
 
         $sliders = $data['sliders'];
         // dd($data['properties']);

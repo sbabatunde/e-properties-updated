@@ -39,7 +39,7 @@ class Sliders extends Controller
   
             $img->toJpeg(80)->save(base_path('public/assets/admin/images/sliders/' .
                 $name_gen));
-            $uploadPath = 'public/assets/admin/images/sliders/' . $name_gen;
+            $uploadPath = 'assets/admin/images/sliders/' . $name_gen;
           }
        
           // Upload image file

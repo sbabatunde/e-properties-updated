@@ -24,7 +24,8 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active item-bg">
-                {{-- <img class="d-block w-100 h-100" src="{{$sliders[3]->photo}}" alt="banner{{$sliders[3]->photo}}"> --}}
+                <img class="d-block w-100 h-100" src="{{ asset('assets/admin/images/sliders/hero-bg.jpg') }}"
+                    alt="banner">
             </div>
             {{-- @dd($sliders) --}}
 
@@ -37,10 +38,12 @@
             <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                 <div class="carousel-content container b1-inner">
                     <div class="tab-search-section">
-                        <h1>Find Your Dream Properties</h1>
-                        <div id="typed-strings">
-                            <p>Find new & featured property located in your local city.</p>
+                        <h1>Locate Your Treasured Properties Through E-Properties</h1>
+                        {{-- <h1>{{ $sliders[$key]->title }}</h1> --}}
 
+                        <div id="typed-strings">
+                            <p>Get Exuisite Properties And Delightful Property Deals
+                                All Around You At Affordable Prices.</p>
                         </div>
                         <h1 class="typed-text tt2">&nbsp;
                             <span id="typed"></span>
@@ -188,6 +191,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

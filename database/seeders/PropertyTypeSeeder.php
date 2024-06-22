@@ -20,39 +20,39 @@ class PropertyTypeSeeder extends Seeder
         $resType = [
             [
                 'property_type' => 'Apartment',
-                'image_path' => 'public/assets/frontend/property/type/apartment.png',
+                'image_path' => 'assets/frontend/property/type/apartment.png',
                 'category_slug' => $residential->category_slug,
             ],
             [
                 'property_type' => 'Bungalow',
-                'image_path' => 'public/assets/frontend/property/type/bungalow.png',
+                'image_path' => 'assets/frontend/property/type/bungalow.png',
                 'category_slug' => $residential->category_slug,
             ],
             [
                 'property_type' => 'Detached',
-                'image_path' => 'public/assets/frontend/property/type/detached.png',
+                'image_path' => 'assets/frontend/property/type/detached.png',
                 'category_slug' => $residential->category_slug,
             ],
             [
                 'property_type' => 'Mini Duplex',
-                'image_path' => 'public/assets/frontend/property/type/mini_duplex.png',
+                'image_path' => 'assets/frontend/property/type/mini_duplex.png',
                 'category_slug' => $residential->category_slug,
             ],
 
             [
                 'property_type' => 'Single Rooms',
-                'image_path' => 'public/assets/frontend/property/type/single_rooms.png',
+                'image_path' => 'assets/frontend/property/type/single_rooms.png',
                 'category_slug' => $residential->category_slug,
             ],
 
             [
                 'property_type' => 'Penthouse',
-                'image_path' => 'public/assets/frontend/property/type/penthouse.png',
+                'image_path' => 'assets/frontend/property/type/penthouse.png',
                 'category_slug' => $residential->category_slug,
             ],
             [
                 'property_type' => 'Terraced',
-                'image_path' => 'public/assets/frontend/property/type/terraced.png',
+                'image_path' => 'assets/frontend/property/type/terraced.png',
                 'category_slug' => $residential->category_slug,
             ],
            
@@ -72,59 +72,59 @@ class PropertyTypeSeeder extends Seeder
         $commType = [
             [
                 'property_type' => 'Office Space',
-                'image_path' => 'public/assets/frontend/property/type/office_space.png',
+                'image_path' => 'assets/frontend/property/type/office_space.png',
                 'category_slug' => $commercial->category_slug,
             ],
             [
                 'property_type' => 'Church',
-                'image_path' => 'public/assets/frontend/property/type/church.png',
+                'image_path' => 'assets/frontend/property/type/church.png',
                 'category_slug' => $commercial->category_slug,
             ],
             [
                 'property_type' => 'Guest House',
-                'image_path' => 'public/assets/frontend/property/type/guest_house.png',
+                'image_path' => 'assets/frontend/property/type/guest_house.png',
                 'category_slug' => $commercial->category_slug,
             ],
             [
                 'property_type' => 'Farm Land',
-                'image_path' => 'public/assets/frontend/property/type/farm_land.png',
+                'image_path' => 'assets/frontend/property/type/farm_land.png',
                 'category_slug' => $commercial->category_slug,
             ],
 
             [
                 'property_type' => 'Malls',
-                'image_path' => 'public/assets/frontend/property/type/malls.png',
+                'image_path' => 'assets/frontend/property/type/malls.png',
                 'category_slug' => $commercial->category_slug,
             ],
 
             [
                 'property_type' => 'Hotels',
-                'image_path' => 'public/assets/frontend/property/type/hotels.png',
+                'image_path' => 'assets/frontend/property/type/hotels.png',
                 'category_slug' => $commercial->category_slug,
             ],
             [
                 'property_type' => 'Parking Space ',
-                'image_path' => 'public/assets/frontend/property/type/parking_space.png',
+                'image_path' => 'assets/frontend/property/type/parking_spaces.png',
                 'category_slug' => $commercial->category_slug,
             ],
             [
                 'property_type' => 'Shops',
-                'image_path' => 'public/assets/frontend/property/type/shops.png',
+                'image_path' => 'assets/frontend/property/type/shops.png',
                 'category_slug' => $commercial->category_slug,
             ],
             [
                 'property_type' => 'Event Halls',
-                'image_path' => 'public/assets/frontend/property/type/event_halls.png',
+                'image_path' => 'assets/frontend/property/type/event_halls.png',
                 'category_slug' => $commercial->category_slug,
             ],
             [
                 'property_type' => 'Town House',
-                'image_path' => 'public/assets/frontend/property/type/town_house.png',
+                'image_path' => 'assets/frontend/property/type/town_house.png',
                 'category_slug' => $commercial->category_slug,
             ],
             [
                 'property_type' => 'Ware House',
-                'image_path' => 'public/assets/frontend/property/type/ware_house.png',
+                'image_path' => 'assets/frontend/property/type/ware_house.png',
                 'category_slug' => $commercial->category_slug,
             ],
             // Add more records as needed

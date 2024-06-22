@@ -74,7 +74,7 @@ class UserController extends Controller
             $request->validate([
                 'bussiness_name' => 'required|string',
                 'bussiness_ID' => 'required|string',
-                'service_provided' => 'required|string',
+                'service_type' => 'required|string',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|confirmed',
                 'user_type' => 'required',
@@ -90,7 +90,7 @@ class UserController extends Controller
                     'business_name' => $request->bussiness_name,
                     'business_ID' => $request->bussiness_ID,
                     'user_id' => $user['id'],
-                    'service_type' => $request->service_type,
+                    'service_type_id' => $request->service_type,
                 ]);
             });
         }

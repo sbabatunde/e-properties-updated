@@ -100,7 +100,8 @@
                     focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 name="deal_append_to">
                 <option disabled selected value="">Append to</option>
-                <option>NA</option>
+                <option>Monthly</option>
+                <option>Annually</option>
             </select>
             @error('deal_append_to')
                 <span class="text-danger">{{ $message }}</span>

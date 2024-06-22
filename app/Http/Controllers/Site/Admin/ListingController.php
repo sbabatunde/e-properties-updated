@@ -7,16 +7,19 @@ use App\Models\City;
 use App\Models\Auction;
 use App\Models\Category;
 use App\Models\Property;
+use Illuminate\Support\Str;
 use App\Models\site\Message;
 use Illuminate\Http\Request;
+use App\Models\PropertyDeals;
 use App\Models\PropertyPayment;
 use App\Models\PropertyAmenities;
+use App\Models\Site\PropertyType;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Image as SliderImage;
-use App\Models\PropertyDeals;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
+use App\Models\Site\PropertyCategory;
 use RealRashid\SweetAlert\Facades\Alert;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Laravel\Facades\Image;
@@ -26,7 +29,8 @@ class ListingController extends Controller
     public function adminAddPropertyListing()
     {
         if (Auth::id() && Auth::user()->user_type !== "tenant") {
-            return view('admin.properties.create');
+            $category = PropertyCategory::get();
+            return view('admin.properties.create',compact('category'));
         } else if (Auth::id() && Auth::user()->user_type == "tenant") {
             Alert::error('Unauthorized Access!!', 'You need to upgrade to your account to be able to go further');
             return back();
@@ -36,15 +40,28 @@ class ListingController extends Controller
         }
     }
 
+    public function getListingCategoryType($slug)
+    {
+        try {
+            $getType = PropertyType::where('category_slug',$slug)->get();
+            return response()->json($getType);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+   
     public function storePropertyListing(Request $request)
     {
-        // dd($request->all());
+        
         if (Auth::id() && Auth::user()->user_type !== "tenant") {
             $request->validate([
                 'title' => 'required|string',
-                'category' => 'required|string',
-                'furnishing' => 'required',
                 'type' => 'required',
+                'furnishing' => 'required',
+                'status' => 'required',
+                'bedrooms' => 'required',
                 'bathrooms' => 'required',
                 'toilet' => 'required',
                 'start_date' => 'required_if:auction,Yes',
@@ -160,13 +177,19 @@ class ListingController extends Controller
                     $uploadPath = 'assets/frontend/property/thumbnail/' . $name_gen;
                 }
                 // dd(Auth::id());
+
+                $propertyID = "EP"."".(int) substr(Str::orderedUuid(),0,8)."";
+                // dd($propertyID);
+                // dd($request->all());
                 $property = Property::create([
                     'agent_id' => Auth::id(),
                     'title' => $request->title,
-                    'category' => $request->category,
+                    'property_code'=>$propertyID,
+                    'status' => $request->status,
                     'furnishing' => $request->furnishing,
-                    'type' => $request->type,
+                    'type_id' => $request->type,
                     'bathrooms' => $request->bathrooms,
+                    'bedrooms' => $request->bedrooms,
                     'toilets' => $request->toilet,
                     'auction' => $auction,
                     'deal' => $deal,
@@ -245,11 +268,10 @@ class ListingController extends Controller
                         'start_time' => $request->deal_start_time,
                         'end_time' => $request->deal_end_time,
                         'end_date' => $request->deal_end_date,
-                        'starting_price' => $request->deal_price,
+                        'deal_price' => $request->deal_price,
                         'denomination' => $request->deal_denomination,
                         'append' => $request->deal_append_to,
                     ]);
-                    dd($deal['property_id']);
                 }
             });
 

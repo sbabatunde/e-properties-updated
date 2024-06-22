@@ -28,7 +28,7 @@
         <input type="text" placeholder="Localty" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            name="localty" required>
+            name="localty" value="{{ old('localty') }}" required>
         @error('localty')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -38,7 +38,7 @@
         <input type="text" placeholder="Area" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            name="area" required>
+            name="area" value="{{ old('area') }}" required>
         @error('area')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -48,7 +48,7 @@
             style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            name="street" required>
+            name="street" value="{{ old('street') }}" required>
         @error('street')
             <span class="text-danger">{{ $message }}</span>
         @enderror

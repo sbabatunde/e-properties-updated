@@ -3402,6 +3402,16 @@ transform: rotate(45deg);
 
 
 /* Category Styles Begins */
+.category-card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap:20px;
+  /* background: red; */
+  width: 100%;
+  /* padding: 2%; */
+  margin: auto;
+}
 .category-card{
   display: block;
   text-align: center;

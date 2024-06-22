@@ -15,13 +15,15 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
+            $table->string('property_code');
             $table->integer('agent_id');
             $table->string('title')->nullable();
             $table->string('thumbnail');
             $table->string('furnishing');
-            $table->string('type');
+            $table->bigInteger('type_id');
             $table->integer('bathrooms');
             $table->integer('toilets');
+            $table->enum('status', ['Rent', 'Sale','Let','Lease','Land'])->default('Rent');
             $table->enum('auction', ['Yes', 'No'])->default('No');
             $table->enum('deal', ['Yes', 'No'])->default('No');
             $table->string('description');

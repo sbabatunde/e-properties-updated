@@ -21,5 +21,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PropertyCategorySeeder::class);
         $this->call(PropertyTypeSeeder::class);
+        // $this->call(BuildingCategorySeeder::class);
+        // $this->call(BuildingCategoryTypeSeeder::class);
+        // $this->call(ServiceCategorySeeder::class);
+        // $this->call(ServiceTypeSeeder::class);
     }
 }

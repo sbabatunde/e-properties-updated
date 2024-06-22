@@ -10,7 +10,7 @@
         <input type="number" placeholder="Starting price" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            name="starting_price">
+            name="starting_price" value="{{ old('starting_price') }}">
         @error('starting_price')
             <span class="text-danger">{{ $message }}</span>
         @enderror

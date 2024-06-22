@@ -51,7 +51,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5" style="color:red"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -70,7 +70,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5" style="color:red"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -89,7 +89,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5" style="color:red"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -108,7 +108,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5" style="color:red"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -132,7 +132,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -151,7 +151,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -170,7 +170,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -189,7 +189,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -208,7 +208,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>
@@ -227,7 +227,7 @@
                             <li class="live-auction-base">
                                 <span class="mr-5"><b>Starts:</b> 20-06-2024 </span>
                                 <span><a type="button" class="btn bid-btn "
-                                        href="{{ route('user.auction.place-bid') }}">Place a bid</a></span>
+                                        href="{{ route('user.auction.place-bid', 3) }}">Place a bid</a></span>
                             </li>
                         </ul>
                     </div>

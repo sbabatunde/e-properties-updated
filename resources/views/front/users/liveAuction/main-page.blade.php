@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-md-12 mt-3 d-flex justify-content-around align-content-center">
                         <span class="pt-2 pb-2"><a type="button" style="padding: .7vw 4vw"
-                                href="{{ route('user.all-auction') }}" class="btn bid-btn" href="">See All</a></span>
+                                href="{{ route('user.all-auction') }}" class="btn bid-btn">See All</a></span>
                     </div>
                 </div>
                 {{-- Current Live Auction Properties Begins --}}
@@ -125,7 +125,7 @@
         </div>
         <div class="col-md-12 mt-3 d-flex justify-content-around align-content-center">
             <span class="pt-2 pb-2"><a type="button" style="padding: .7vw 4vw" href="{{ route('user.all-auction') }}"
-                    class="btn bid-btn" href="">See All</a></span>
+                    class="btn bid-btn">See All</a></span>
         </div>
     </div>
     {{-- Upcoming Auction Properties Begins --}}

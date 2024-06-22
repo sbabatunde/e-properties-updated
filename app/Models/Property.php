@@ -23,32 +23,7 @@ class Property extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'agent_id',
-        'deal',
-        'title',
-        'category',
-        'furnishing',
-        'type',
-        'bathrooms',
-        'toilets',
-        'auction',
-        'description',
-        'state',
-        'localty',
-        'area',
-        'street',
-        'installment',
-        'C_of_O',
-        'survey_plan',
-        'deed_of_ass',
-        'grant_of_prob',
-        'deed_of_mort',
-        'deed_of_gift',
-        'property_doc',
-        'thumbnail',
-
-    ];
+    protected $guarded = [];
 
     /**
      * The model's default values for attributes.
@@ -93,8 +68,8 @@ class Property extends Model
         return $this->hasMany(Auction::class);
     }
 
-    public function category()
+    public function type()
     {
-        return $this->belongsTo(PropertyType::class,'property_type_slug', 'type');
+        return $this->belongsTo(PropertyType::class,'id','type_id');
     }
 }

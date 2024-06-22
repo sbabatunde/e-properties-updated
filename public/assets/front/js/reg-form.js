@@ -1,3 +1,43 @@
+//Service Providers Registration Form Categories Begins
+
+$(document).ready(function(){
+    $('#service_category').change(function (){
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        var slug = $(this).val();
+        var slug = $(this).val();
+        if(slug != '')
+        {
+            var _token = $('input[name="_token"]').val();
+        }
+        $.ajax({
+            type: "GET",
+            url:"/get/service/category/type/"+slug,
+            dataType:'json',
+            success:function(data)
+            { 
+                //to get current date
+                $('#service_type').html(''); //Clear existing data
+                $('#enclosure').attr('style','display:block');
+                //Get Client's data
+                console.log(data);
+                $('#service_type').append('<option value"' + ''+ '">' + '---Select Property Type ---' + '</option>');
+                $.each(data,function(index,value){
+                    $('#service_type').append('<option value ="' + value.id + '">' + value.service + '</option>');
+                });
+                // catType = data.
+
+            }
+
+        })
+    });
+});
+//
+
+
 //Begin Custom Registration Form
 const tenantContainer = document.querySelector('#tenantForm');
 const landlordContainer = document.querySelector('#landlordForm');
@@ -95,9 +135,9 @@ const agentContainer = document.querySelector('#servProvForm');
 //End Request Form Show/Hide
 
 //Begin Custom Registration Form
-const resSales = document.querySelector('#residentialSales');
-const resRents = document.querySelector('#residentialRents');
-const resLets = document.querySelector('#residentialLets');
+    const resSales = document.querySelector('#residentialSales');
+    const resRents = document.querySelector('#residentialRents');
+    const resLets = document.querySelector('#residentialLets');
 
     let showResSales = function(){
         resSales.style.display = "block";
@@ -118,8 +158,6 @@ const resLets = document.querySelector('#residentialLets');
         resLets.style.display = "block";
     }
 //End Custom Registration Form
-
-
 
 //Begin Group Post Show/Hide
     document.addEventListener('DOMContentLoaded', function() {
@@ -143,8 +181,6 @@ const resLets = document.querySelector('#residentialLets');
     });
 //End Group Post Show/Hide
 
-
-
 // Begin keep button Group active on click
     const btnFocus = document.querySelectorAll('.active-btn-group');
 
@@ -160,10 +196,8 @@ const resLets = document.querySelector('#residentialLets');
 //Tenant Comment Slide Begins
     //grab the comments wrapper
     const tenantComments = document.querySelector('.tenant-comment-cards');
-
     //grab the dots
     const tenantCommentDots = document.querySelectorAll('.tenant-dots');
-
     let activeDotNum = 0;
 
     tenantCommentDots.forEach((comDot,idx) =>{
@@ -187,4 +221,5 @@ const resLets = document.querySelector('#residentialLets');
         });
     });    
 //Tenant Comment Slide Ends
+
 
