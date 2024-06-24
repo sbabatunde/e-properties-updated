@@ -223,3 +223,30 @@ const agentContainer = document.querySelector('#servProvForm');
 //Tenant Comment Slide Ends
 
 
+//Show/Hide Property Type By Status Begins
+const TypeLet = document.querySelector('#TypeLet');
+const TypeSales = document.querySelector('#TypeSales');
+const TypeRent = document.querySelector('#TypeRent');
+
+    let showTypeSales = function(){
+        TypeLet.style.display = "none";
+        TypeSales.style.display = "block";
+        TypeRent.style.display = "none";
+    }
+
+    let showTypeRents= function(){
+        TypeLet.style.display = "none";
+        TypeSales.style.display = "none";
+        TypeRent.style.display = "block";
+
+    }
+
+    let showTypeLets = function(){
+        TypeLet.style.display = "block";
+        TypeSales.style.display = "none";
+        TypeRent.style.display = "none";
+    }
+
+//Show/Hide Property Type By Status Ends
+
+

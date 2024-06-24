@@ -10,7 +10,19 @@ class ServicesController extends Controller
 {
     public function findServices()
     {
-        return view('front.users.services.main-page');
+        $maintenance = ServiceType::with(['serviceCategory','providers'])->whereHas('serviceCategory',
+        function($q){$q->where('category','Maintenance');})->get();
+
+        $building_dev = ServiceType::with(['serviceCategory','providers'])->whereHas('serviceCategory',
+        function($q){$q->where('category','Building Development');})->get();
+
+        $legal = ServiceType::with(['serviceCategory','providers'])->whereHas('serviceCategory',
+        function($q){$q->where('category','Legal');})->get();
+
+        $property = ServiceType::with(['serviceCategory','providers'])->whereHas('serviceCategory',
+        function($q){$q->where('category','Property');})->get();
+
+        return view('front.users.services.main-page',compact('maintenance','building_dev','legal','property'));
     }
 
     public function getServiceType($slug)

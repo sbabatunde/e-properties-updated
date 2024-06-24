@@ -1,85 +1,34 @@
 <div id="maintenanceView" style="display: block">
-  <div class="hedin-mb-30 col-md-11">
-      <h3 class="heading-3 ml-3 mt-4"> 
-          <strong style="color: black;font-weight:700">
-              Maintenance
-          </strong> 
-      </h3>
-  </div>
-  <div class="col-lg-12">
-    <div class="row ml-3 service-content">
-      <div class="col-md-3 mt-5">
-        <div class="service-card">
-          <img  src="../assets/images/services/service1.png" alt="Avatar" style="width:100%;" height="150" width="100" >
-          <div class="container mt-3 card-text">
-            <h4><b>AC Repairs</b></h4>
-            <h5><b>Available:</b><b style="font-size: 25px" class="ml-2">5</b></h>
-          </div>
+    <!-- Service Category -->
+    <div class="container mt-2">
+        <div class="row col-12 d-flex justify-content-between">
+            <div class="meet-header">
+                <h5 style="font-weight: 700;font-size:x-large">
+                    Maintenance
+                </h5>
+            </div>
         </div>
-      </div>
-      <div class="col-md-3 mt-5">
-        <div class="service-card">
-          <img  src="../assets/images/services/service2.png" alt="Avatar" style="width:100%;" height="150" width="100" >
-          <div class="container mt-3 card-text">
-            <h4><b>Welders</b></h4>
-            <h5><b>Available:</b><b style="font-size: 25px" class="ml-2">5</b></h>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mt-5">
-        <div class="service-card">
-          <img  src="../assets/images/services/service3.png" alt="Avatar" style="width:100%;" height="150" width="100" >
-          <div class="container mt-3 card-text">
-            <h4><b>Cleaners</b></h4>
-            <h5><b>Available:</b><b style="font-size: 25px" class="ml-2">5</b></h>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mt-5">
-        <div class="service-card">
-          <img  src="../assets/images/services/service4.png" alt="Avatar" style="width:100%;" height="150" width="100" >
-          <div class="container mt-3 card-text">
-            <h4><b>Alluminium Repair</b></h4>
-            <h5><b>Available:</b><b style="font-size: 25px" class="ml-2">5</b></h>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mt-5">
-        <div class="service-card">
-          <img  src="../assets/images/services/service5.png" alt="Avatar" style="width:100%;" height="150" width="100" >
-          <div class="container mt-3 card-text">
-            <h4><b>Alluminium Repair</b></h4>
-            <h5><b>Available:</b><b style="font-size: 25px" class="ml-2">5</b></h>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mt-5">
-        <div class="service-card">
-          <img  src="../assets/images/services/service6.png" alt="Avatar" style="width:100%;" height="150" width="100" >
-          <div class="container mt-3 card-text">
-            <h4><b>Alluminium Repair</b></h4>
-            <h5><b>Available:</b><b style="font-size: 25px" class="ml-2">5</b></h>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mt-5">
-        <div class="service-card">
-          <img  src="../assets/images/services/service7.png" alt="Avatar" style="width:100%;" height="150" width="100" >
-          <div class="container mt-3 card-text">
-            <h4><b>Alluminium Repair</b></h4>
-            <h5><b>Available:</b><b style="font-size: 25px" class="ml-2">5</b></h>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mt-5">
-        <div class="service-card">
-          <img  src="../assets/images/services/service4.png" alt="Avatar" style="width:100%;" height="150" width="100" >
-          <div class="container mt-3 card-text">
-            <h4><b>Alluminium Repair</b></h4>
-            <h5><b>Available:</b><b style="font-size: 25px" class="ml-2">5</b></h>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+    {{-- Services Provided Pictures --}}
+    <div class="container">
+        <div class="category-card-container mt-3">
+            @foreach ($maintenance as $item)
+                <a href="">
+                    <div class="category-card category">
+                        <div class="image">
+                            <img src="{{ asset($item->image) }}" alt="{{ asset($item->service) }}" style="width:100%;"
+                                height="150" width="100">
+                            <div class="category-card-sub ">
+                                <div class="card-text mb-0">
+                                    <h5>{{ $item->service }}</h5>
+                                    <p>Available: <b>{{ count($item->providers) }}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </div>
+    {{-- End of Services Provided pictures --}}
 </div>

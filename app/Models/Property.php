@@ -47,6 +47,11 @@ class Property extends Model
         return $this->belongsTo(City::class)->withDefault();
     }
 
+    public function agent()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'property_categories');
@@ -70,6 +75,6 @@ class Property extends Model
 
     public function type()
     {
-        return $this->belongsTo(PropertyType::class,'id','type_id');
+        return $this->belongsTo(PropertyType::class,'type_id','id');
     }
 }

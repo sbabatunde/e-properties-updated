@@ -25,33 +25,14 @@ class PropertyController extends Controller
     public function propertyById($id)
     {
         $data = [];
-        $data['property'] = Property::with(['amenities', 'payment', 'auction'])
-            // leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')
-            // ->leftjoin('property_amenities as pa', 'pa.property_id', '=', 'properties.id')
-            ->where('properties.id', $id)->first(); //improve select only required fields
-        // dd($data['property']['payment'][0]['initial_pay']);
-
-        // $data['cities']  = City::where('id', $id)->get();
-        $data['images'] = SliderImage::where('id', $id)->get(); //improve select only required fields
-        $data['amenities'] = PropertyAmenities::where('property_id', $id)->get(); //improve select only required fields
-
-        // $data['property']->id;
-        // $data['property']->categories->pluck('id');
-        $data['agent'] = User::where('id', $data['property']['agent_id'])->first();
-        // dd($data['agent']);
-        $data['properties'] = Property::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();
-
-        $data['categories'] = Category::parent()->select('id', 'slug')->with(['childrens' => function ($q) {
-            $q->select('id', 'parent_id', 'slug');
-            $q->with(['childrens' => function ($qq) {
-                $qq->select('id', 'parent_id', 'slug');
-            }]);
-        }])->get();
-
-        // dd($data['property']);
-        if (!$data['property']) {
-            return redirect()->route('home');
-        }
+        $data['property'] = Property::with(['amenities','agent', 'payment', 'auction'])->where('properties.id', $id)->first(); 
+        $data['similarProperties']=Property::with(['amenities','agent', 'payment', 'auction'])
+        ->where('type_id', $data['property']->type_id)->take(4)->get();
+        
+        // dd($data['property']->type_id);
+        // if (!$data['property']) {
+        //     return redirect()->route('home');
+        // }
         // dd($data);
         return view('front.users.properties.home.properties-details', $data);
     }

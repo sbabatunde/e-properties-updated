@@ -22,34 +22,42 @@ class ServiceTypeSeeder extends Seeder
                 [
                     'service' => 'AC Repairs',
                     'service_category_slug' => $category->slug,
-                ],
+                    'image' => 'assets/images/services/category/ac.png',
+                ], 
                 [
                     'service' => 'Electricians',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/electricians.png',
                 ],
                 [
                     'service' => 'Painters',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/painters.png',
                 ],
                 [
                     'service' => 'Carpenters',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/carpenter.png',
                 ],
                 [
                     'service' => 'Plumbers',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/plumbers.png',
                 ],
                 [
                     'service' => 'Welders',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/welder.png',
                 ],
                 [
                     'service' => 'Cleaners',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/cleaners.png',
                 ],
                 [
                     'service' => 'Aluminium Repairs',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/alluminium.png',
                 ],
             ];
 
@@ -68,27 +76,33 @@ class ServiceTypeSeeder extends Seeder
                 [
                     'service' => 'Real Estate Developers',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/archi.png',
                 ],
                 [
                     'service' => 'Real Estate Investors',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/economist.png',
                 ],
                 [
                     'service' => 'Land Use Planners',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/archi.png',
                 ],
                 [
                     'service' => 'Real Estate Economists',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/economist.png',
                 ],
                 
                 [
                     'service' => 'Home Inspectors',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/surveyors.png',
                 ],
                 [
                     'service' => 'Environmental Consultants',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/surveyors.png',
                 ],
             ];
 
@@ -107,10 +121,12 @@ class ServiceTypeSeeder extends Seeder
                 [
                     'service' => 'Real Estate Attorneys',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/economist.png',
                 ],
                 [
                     'service' => 'Property Tax Consultants',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/archi.png',
                 ],
             ];
 
@@ -129,34 +145,42 @@ class ServiceTypeSeeder extends Seeder
                 [
                     'service' => 'Real Estate Agents',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/economist.png',
                 ],
                 [
                     'service' => 'Real Estate Brokers',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/archi.png',
                 ],
                 [
                     'service' => 'Property Managers',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/property.png',
                 ],
                 [
                     'service' => 'Real Estate Appraisers',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/surveyors.png',
                 ],
                 [
                     'service' => 'Mortgage Brokers',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/economist.png',
                 ],
                 [
                     'service' => 'Residential Estate Agents',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/archi.png',
                 ],
                 [
                     'service' => 'Commercial Estate Agents',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/property.png',
                 ],
                 [
                     'service' => 'Real Estate Investment Analyser',
                     'service_category_slug' => $category->slug,
+                    'image' => 'assets/images/services/category/economist.png',
                 ],
             ];
 

@@ -19,9 +19,12 @@ class CreatePropertiesTable extends Migration
             $table->integer('agent_id');
             $table->string('title')->nullable();
             $table->string('thumbnail');
-            $table->string('furnishing');
+            $table->string('landlord');
             $table->bigInteger('type_id');
+            $table->string('furnishing');
+            $table->integer('avg_room_size');
             $table->integer('bathrooms');
+            $table->integer('bedrooms');
             $table->integer('toilets');
             $table->enum('status', ['Rent', 'Sale','Let','Lease','Land'])->default('Rent');
             $table->enum('auction', ['Yes', 'No'])->default('No');

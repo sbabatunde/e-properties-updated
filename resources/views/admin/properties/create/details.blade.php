@@ -89,7 +89,7 @@
             name="status" required>
             <option disabled selected value="">--Select Propert Status---</option>
             <option>Let</option>
-            <option>Sales</option>
+            <option>Sale</option>
             <option>Rent</option>
         </select>
         @error('status')

@@ -106,6 +106,8 @@ Route::controller(BuildingMaterialController::class)->group(function () {
 //User Categories Routes
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/all-category', 'allCategory')->name('category.all');
+    Route::get('/property/by/type/{slug}', 'propertyByType')->name('property.by.type');
+    
 });
 
 //Blogs Routes

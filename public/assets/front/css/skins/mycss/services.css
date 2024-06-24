@@ -3431,17 +3431,18 @@ transform: rotate(45deg);
   min-width: 259px;
   min-height: 184px;
 }
+
 .category-card-sub{
   background-color: #e7e8f0;
   border: 2px solid #e7e8f0;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding: 1rem;
+  padding: 0 1rem;
   
 }
 .category-card h5{
   font-weight: 550;
-  font-size: x-large;
+  font-size: large;
   margin: .2rem .8rem;
 }
 .category-card p{

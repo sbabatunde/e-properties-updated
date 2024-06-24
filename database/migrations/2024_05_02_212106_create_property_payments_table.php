@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('sequence');
             $table->decimal('initial_pay', 15, 2);
             $table->decimal('subsequent_pay', 15, 2);
-            $table->text('initial_denomiation');
+            $table->text('initial_denomination');
             $table->text('initial_append');
             $table->text('subsequent_denomination');
             $table->text('subsequent_append');

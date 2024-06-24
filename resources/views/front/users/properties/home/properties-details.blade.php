@@ -28,7 +28,7 @@
                                             <ul class="clearfix mt-3">
                                                 <li><i class="fa fa-bed" aria-hidden="true"
                                                         style="color: #394293;font-weight:500;font-size:1.5vw"></i>
-                                                    {{ $property->bedroom }} <br>
+                                                    {{ $property->bedrooms }} <br>
                                                     bedroom
                                                 </li>
                                                 <li><i class="fa fa-bath"
@@ -63,7 +63,8 @@
                                             </span>
                                             <span style="color: #394293;font-weight:500;font-size:1.5vw">
                                                 <strong>
-                                                    ₦ {{ number_format($property['payment'][0]['initial_pay']) }}
+                                                    {{ $property['payment'][0]['initial_denomination'] }}
+                                                    {{ number_format($property['payment'][0]['initial_pay']) }}
                                                 </strong>
                                             </span>
 
@@ -103,12 +104,12 @@
                         <div class="search-contents ">
                             <div class=" col-lg-12 schedule-header">
                                 <img src="{{ asset('../assets/images/properties-1.png') }}" alt="">
-                                <h6>{{ $agent->business_name }}</h6>
+                                <h6>{{ $property->agent->business_name }}</h6>
                             </div>
                             <ul class="col-lg-12 mb-2">
                                 <li>
-                                    <i class="fa fa-phone mr-2" style="color: black"></i>{{ $agent->phone }} <br>
-                                    <i class="fa fa-envelope mr-2" style="color: black"></i>{{ $agent->email }}
+                                    <i class="fa fa-phone mr-2" style="color: black"></i>{{ $property->agent->phone }} <br>
+                                    <i class="fa fa-envelope mr-2" style="color: black"></i>{{ $property->agent->email }}
                                 </li>
                             </ul>
                             <form class="d-inline" method="POST" action="">
