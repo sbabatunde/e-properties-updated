@@ -65,12 +65,12 @@ class Property extends Model
 
     public function payment()
     {
-        return $this->hasMany(PropertyPayment::class);
+        return $this->belongsTo(PropertyPayment::class,'id','property_id');
     }
 
     public function auction()
     {
-        return $this->hasMany(Auction::class);
+        return $this->belongsTo(Auction::class,'id','property_id');
     }
 
     public function type()

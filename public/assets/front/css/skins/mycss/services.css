@@ -2429,26 +2429,59 @@ transform: rotate(45deg);
     border-radius: 3px;
   }
 
+
+
 /* Auction Styles Starts*/
 /* Place Bid styles */
 .bid-header{
   display: flex;
   flex-wrap: wrap;
-  gap:1px;
+  gap:10px;
   width: 90%;
   margin: auto;
   margin-top: 30px;
   flex-shrink: 1;
   justify-content: space-between;
 }
+
 .bid-image{
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: left;
+  justify-content: space-evenly;
+  margin-left: 0%;
+  gap: 3rem;
   flex-grow: 8;
   width: 30%;
+  /* background: red; */
 }
-@media (max-width:768px) {
+
+.bid-image .main{
+  float: inline-start;
+  max-width: 60%;
+  min-width: 60%;
+  max-height: 50vh;
+  min-height: 50vh;
+  margin-bottom: 10px;
+  margin-right: 30px;
+  border: 1px solid rgb(56, 55, 55);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  flex-grow: 6;
+  flex-shrink: 1;
+}
+
+.bid-sub-image img{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  max-width: 100px;
+  min-width: 100px;
+  max-height: 14.8vh;
+  min-height: 14.8vh;
+  flex-grow: 2;
+}
+
+@media (min-width:768px) and (max-width:1320px) {
   .bid-image{
     display: flex;
     justify-content: space-between;
@@ -2457,33 +2490,35 @@ transform: rotate(45deg);
     flex-grow: 8;
     width: 100%;
   }
+
+  .bid-sub-image img{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    max-width: 200px;
+    min-width: 200px;
+    max-height: 14.8vh;
+    min-height: 14.8vh;
+    flex-grow: 2;
+  }
 }
-.bid-image .main{
-  max-width: 60%;
-  min-width: 60%;
-  max-height: 50vh;
-  min-height: 50vh;
-  margin-bottom: 10px;
-  border: 1px solid rgb(56, 55, 55);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  flex-grow: 6;
-  flex-shrink: 1;
+
+@media (max-width:768px){
+  .bid-image{
+    display: flex;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    gap: 10px;
+    flex-grow: 8;
+    width: 100%;
+  } 
 }
-.bid-sub-image img{
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  max-width: 70%;
-  min-width: 70%;
-  max-height: 14.8vh;
-  min-height: 14.8vh;
-  flex-grow: 2;
-}
+
 .bid-description{
   width: 50%;
   flex-grow: 1;
 }
+
 .bid-amount-modal{
   display: flex;
   justify-content: space-between;
@@ -2498,6 +2533,7 @@ transform: rotate(45deg);
  color: black;
  font-weight: 600;
 }
+
 .bidtime{
   border: 2px solid #394293;
   padding: 7px 30px 7px 4px;
@@ -2505,17 +2541,29 @@ transform: rotate(45deg);
   color: black;
   font-size: larger;
 }
+
 .bidamnt{
   color: black;
   font-size: large;
   margin-bottom: 5px;
 }
+
 .cur-bid{
   color: white;
   border: 1px solid #394293;
   padding: 10px 10px 10px 3px;
   border-radius: 7px;
 }
+
+/* Truncate long title or words */
+.truncate {
+  white-space: nowrap;      /* Prevents the text from wrapping */
+  overflow: hidden;         /* Hides any content that overflows */
+  text-overflow: ellipsis;  /* Displays ellipsis (...) to represent overflow */
+  width: 300px;             /* Optional: Set a width for the container */
+  display: inline-block;    /* Optional: Allows the container to take only as much width as necessary */
+}
+
 .cur-bid span{
   background: rgb(86, 158, 86);
   font-size: medium;

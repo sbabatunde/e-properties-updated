@@ -27,6 +27,7 @@ class ProfileRequest extends FormRequest
             'bus_name' => 'required|string|max:255',
             // 'busi_img' => 'mimes:jpg,png|max:3072|required',
             "country_code" =>'required|max:4',
+            'experience'=>'required',
             "phone" => 'required|numeric',
             "whatsApp_no" => 'required|numeric',
             'password' => 'required',

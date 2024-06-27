@@ -128,6 +128,8 @@ Route::controller(BlacklistController::class)->group(function () {
 // All User Property Related Routes Begins
 Route::controller(PropertyController::class)->group(function () {
     Route::get('property/{id}', 'propertyById')->name('property.details');
+    Route::post('property/messge/{pID}/{aID}', 'propertyMessage')->name('user.property.message');
+    
 
     //Residential Properties Routes Begins
     Route::get('all-residential-properties', 'residentialProperty')->name('all.residential');

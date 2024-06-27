@@ -28,14 +28,14 @@ class AuctionController extends Controller
 
         $upcomingAuctions = Auction::with(['property'])->orderBy('start_date','asc')
         ->whereDate('start_date','>=',Carbon::today())->limit(6)->get();
-// dd(Auction::all());
+        // dd(Auction::all());
         return view('front.users.liveAuction.main-page', compact('liveAuction','upcomingAuctions'));
     }
 
     public function placeAuctionBid($id)
     {
-        $bidProperty = Auction::with(['property'])->where('property_id',$id)->first();
-        // dd($bidProperty);
+        $bidProperty = Auction::with(['property','amenities','auctionBid'])->where('property_id',$id)->first();
+        
         return view('front.users.liveAuction.bid.place',compact('bidProperty'));
     }
 

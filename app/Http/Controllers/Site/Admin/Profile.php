@@ -50,6 +50,7 @@ class Profile extends Controller
             'password' => Hash::make($request->password),
             'firstname' => $request->f_name,
             'lastname' => $request->l_name,
+            'experience' => $request->experience,
             'business_name' => $request->bus_name,
             'business_image' => $uploadPath,
             'country_code' => $request->country_code,

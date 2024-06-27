@@ -7,175 +7,74 @@
     <title>Sidebar Overlap Demo</title>
 
     <style>
-        .form-container {
-            position: absolute;
-            left: 169px;
-            top: 524px;
-            display: inline-flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 2.5rem;
-        }
-
-        .form-image {
-            width: 200px;
-            /* Adjust as per your design */
-            height: 200px;
-            /* Adjust as per your design */
-            background-color: #E5E7EB;
-            /* Use your actual background color */
-            border-radius: 50%;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            /* Example shadow */
-        }
-
-        .form-content {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
-            background-color: #FFFFFF;
-            /* Use your actual background color */
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            /* Example shadow */
-        }
-
-        .form-header {
-            font-size: 2rem;
-            font-weight: bold;
-            font-family: 'Inter', sans-serif;
-            color: #1F2937;
-            /* Use your text color */
-        }
-
-        .form-section {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .form-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .form-field {
-            position: relative;
-        }
-
-        .input-field {
-            width: 100%;
-            height: 40px;
-            /* Adjust height as needed */
-            padding: 0.5rem;
-            border: 1px solid #D1D5DB;
-            /* Example border color */
-            border-radius: 4px;
-            font-size: 0.875rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .field-info {
+        .slide-button {
             position: absolute;
             top: 50%;
+            left: 0;
             transform: translateY(-50%);
-            right: 0.5rem;
-            font-size: 0.875rem;
-            color: #4B5563;
-            /* Example color */
-        }
-
-        .search-button {
-            width: 100%;
-            padding: 1rem;
-            background-color: #4C51BF;
-            /* Example background color */
-            color: #FFFFFF;
-            /* Example text color */
+            background-color: #333;
+            color: #fff;
             border: none;
-            border-radius: 4px;
-            font-size: 1.125rem;
-            font-weight: bold;
-            font-family: 'Inter', sans-serif;
+            padding: 10px 15px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            z-index: 1;
+            transform: rotate(90deg);
+            /* Center and rotate 180 degrees */
+
         }
 
-        .search-button:hover {
-            background-color: #4338CA;
-            /* Example hover background color */
+        .content-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-item {
+            background-color: #f1f1f1;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 2s ease-in-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .content-item.hidden {
+            transform: translate(-150%, -50%);
+            visibility: hidden
         }
     </style>
 </head>
 
 <body>
-
-    <div class="sidebar">
-        <!-- Sidebar content here -->
-        <ul>
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-        </ul>
-    </div>
-
-    <div class="main-content">
-        <button id="sidebar-toggle">Toggle Sidebar</button>
-        <!-- Main content here -->
-        <p>
-
-
-        <div class="form-container">
-            <div class="form-image"></div>
-            <div class="form-content">
-                <div class="form-header">
-                    <h1>Search for properties across Nigeria</h1>
-                </div>
-                <div class="form-section">
-                    <div class="form-group">
-                        <div class="form-field">
-                            <input type="text" class="input-field" placeholder="Enter Location">
-                            <div class="field-info">Radius</div>
-                            <div class="field-info">0 Miles</div>
-                        </div>
-                        <div class="form-field">
-                            <input type="text" class="input-field" placeholder="Maximum price">
-                            <input type="text" class="input-field" placeholder="Minimum price">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-field">
-                            <input type="text" class="input-field" placeholder="Maximum bedroom">
-                            <input type="text" class="input-field" placeholder="Minimum bedroom">
-                        </div>
-                        <div class="form-field">
-                            <input type="text" class="input-field" placeholder="Property type(s)">
-                            <div class="field-info">0 selected</div>
-                            <div class="field-info">Any</div>
-                        </div>
-                    </div>
-                </div>
-                <button class="search-button">Search</button>
-            </div>
+    <button class="slide-button">
+        Compare
+    </button>
+    <div class="content-wrapper">
+        <div class="content-item">
+            <h2>Current Content</h2>
+            <p>This is the current content that will be replaced.</p>
         </div>
-
-        </p>
+        <div class="content-item hidden">
+            <h2>New Content</h2>
+            <p>This is the new content that will slide in.</p>
+        </div>
     </div>
 
     <script>
-        document.getElementById('sidebar-toggle').addEventListener('click', function() {
-            const sidebar = document.querySelector('.sidebar');
-            const mainContent = document.querySelector('.main-content');
+        const slideButton = document.querySelector('.slide-button');
+        const contentItems = document.querySelectorAll('.content-item');
 
-            // Toggle the 'active' class on both sidebar and main content
-            sidebar.classList.toggle('active');
-            mainContent.classList.toggle('active');
+        slideButton.addEventListener('click', () => {
+            contentItems.forEach((item) => {
+                item.classList.toggle('hidden');
+            });
         });
     </script>
 </body>

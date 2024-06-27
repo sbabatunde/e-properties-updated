@@ -63,8 +63,8 @@
                                             </span>
                                             <span style="color: #394293;font-weight:500;font-size:1.5vw">
                                                 <strong>
-                                                    {{ $property['payment'][0]['initial_denomination'] }}
-                                                    {{ number_format($property['payment'][0]['initial_pay']) }}
+                                                    {{ $property->payment->initial_denomination }}
+                                                    {{ number_format($property->payment->initial_pay) }}
                                                 </strong>
                                             </span>
 
@@ -112,7 +112,8 @@
                                     <i class="fa fa-envelope mr-2" style="color: black"></i>{{ $property->agent->email }}
                                 </li>
                             </ul>
-                            <form class="d-inline" method="POST" action="">
+                            <form class="d-inline" method="POST" enctype="multipart/form-data"
+                                action="{{ route('user.property.message', ['pID' => $property->id, 'aID' => $property->agent_id]) }}">
                                 @csrf
                                 <div class="row col-lg-12">
                                     <div class="col-lg-12 form-group">
@@ -127,26 +128,29 @@
                                         </span>
                                     </div>
                                     <div class="col-lg-12 mb-2 mt-2">
-                                        <input type="email" name="user_email" placeholder="Your name"
+                                        <input type="text" name="name" placeholder="Your name"
+                                            value="{{ $user->firstname }} {{ $user->lastname }}"
                                             class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     </div>
                                     <div class="col-lg-12 mb-2">
-                                        <input type="email" name="user_email" placeholder="Your Email"
+                                        <input type="email" name="email" value="{{ $user->email }}"
+                                            placeholder="Your Email"
                                             class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     </div>
                                     <div class="col-lg-12 mb-2">
-                                        <input type="email" name="user_email" placeholder="Your Phone number"
+                                        <input type="text" name="phone" value="{{ $user->phone }}"
+                                            placeholder="Your Phone number"
                                             class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     </div>
                                     <div class="col-lg-12 mb-4">
-                                        <textarea type="email" name="user_email" value="I am interested in buying..." rows="3"
+                                        <textarea type="text" name="message" value="I am interested in buying..." rows="3"
                                             class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                                 
                                             </textarea>
                                     </div>
                                     <div class="col-lg-12">
                                         <button type="submit" class="btn btn-success form-control "
-                                            style="background-color: #394293;">
+                                            style="background-color: #394293;cursor: pointer;">
                                             <strong>
                                                 {{ __('Send Email') }}
                                             </strong>

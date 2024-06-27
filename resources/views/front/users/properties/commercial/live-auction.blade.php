@@ -1,4 +1,4 @@
-    <div class="live-auction-left" style="display: block">
+    <div class="live-auction-left content-item">
         <h4 class="ml-4 mt-4 mb-3" style="font-weight: 550;color:#394293;text-align:center">Live Auction</h4>
         <div class="all-auction-card" style="display: block">
             <div class="commercial-auction-card">

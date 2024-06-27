@@ -1,8 +1,8 @@
-<div class="bid-table" >
+<div class="bid-table">
     <div class="p-table-header">
         <strong class="ml-3">
             Property Details
-        </strong> 
+        </strong>
     </div>
     <div class="p-table-elements">
         <div class="row col-md-10 col-md-12">
@@ -12,7 +12,7 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                Apartment
+                {{ $bidProperty->property->type->property_type }}
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                Rent
+                {{ $bidProperty->property->status }}
             </div>
         </div>
     </div>
@@ -48,7 +48,8 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                EP3456
+                {{ $bidProperty->property->property_code }}
+
             </div>
         </div>
     </div>
@@ -60,7 +61,8 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                No Landlord in buiding
+                {{ $bidProperty->property->landlord }}
+                Landlord in buiding
             </div>
         </div>
     </div>
@@ -73,10 +75,12 @@
             </div>
             <div class="col-md-6 auct-td-val">
                 <span>
-                    ₦ 1,9300,000
+                    {{ $bidProperty->property->payment->initial_denomination }}
+                    {{ number_format($bidProperty->property->payment->initial_pay) }}
                 </span>
                 <span>
-                    Annually
+                    {{ $bidProperty->property->payment->initial_append }}
+
                 </span>
             </div>
         </div>
@@ -90,10 +94,12 @@
             </div>
             <div class="col-md-6 auct-td-val">
                 <span class="mr-3">
-                    ₦ 61,300
+                    {{ $bidProperty->property->payment->subsequent_denomination }}
+                    {{ number_format($bidProperty->property->payment->subsequent_pay) }}
                 </span>
                 <span>
-                    Monthly
+                    {{ $bidProperty->property->payment->subsequent_append }}
+
                 </span>
             </div>
         </div>
@@ -106,7 +112,8 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                No
+                {{ $bidProperty->property->deed_of_ass }}
+
             </div>
         </div>
     </div>
@@ -118,7 +125,8 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                20/10/2023
+                {{ Carbon\Carbon::parse($bidProperty->property->updated_at)->format('d/m/y') }}
+
             </div>
         </div>
     </div>
@@ -130,7 +138,8 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                2100 sqm
+                {{ $bidProperty->property->avg_room_size }} m<sup>2</sup>
+
             </div>
         </div>
     </div>
@@ -142,7 +151,8 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                Ikeja, Lagos State
+                {{ $bidProperty->property->localty }}
+
             </div>
         </div>
     </div>
@@ -154,7 +164,8 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                Ikeja Shoprite
+                {{ $bidProperty->property->area }}
+
             </div>
         </div>
     </div>
@@ -166,7 +177,7 @@
                 </strong>
             </div>
             <div class="col-md-6 auct-td-val">
-                No 24, Iyalla street, Alausa Ikaja.
+                {{ $bidProperty->property->street }}
             </div>
         </div>
     </div>

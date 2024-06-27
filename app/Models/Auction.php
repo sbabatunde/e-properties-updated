@@ -21,4 +21,14 @@ class Auction extends Model
     {
         return $this->hasMany(AuctionBid::class);
     }
+
+    public function amenities()
+    {
+        return $this->hasMany(PropertyAmenities::class,'property_id','property_id');
+    }
+
+    // public function propertytype()
+    // {
+    //     return $this->hasMany(PropertyAmenities::class,'property_id','property_id');
+    // }
 }

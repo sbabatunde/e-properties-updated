@@ -9,15 +9,13 @@
                 </p>
                 <a href="{{ route('property.details', $item->id) }}" class="btn res-prop-view"> View</a><br>
                 <div class="res-price">
-                    @foreach ($item->payment as $item)
-                        <span style="color: black">Price:
-                            <b>
-                                {{ $item->initial_denomiation }}
-                                {{ number_format($item->initial_pay) }}
-                            </b>
-                        </span>
-                        <span style="color: #394293" class="mr-2">{{ $item->sequence }}</span>
-                    @endforeach
+                    <span style="color: black">Price:
+                        <b>
+                            {{ $item->payment->initial_denomination }}
+                            {{ number_format($item->payment->initial_pay) }}
+                        </b>
+                    </span>
+                    <span style="color: #394293" class="mr-2">{{ $item->payment->sequence }}</span>
                 </div>
                 <div class="comp-like-share">
                     <span style="font-weight:550">

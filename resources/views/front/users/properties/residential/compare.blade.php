@@ -1,4 +1,4 @@
-<div class="residential-left" style="display: block">
+<div class="residential-left content-item hidden">
     <h4 class="ml-4 mt-4" style="font-weight: 550">Compare Properties</h4>
     <div class="res-comp-prop mt-3">
         <img src="{{ asset('../assets/images/houses/house1.png') }}" alt="">

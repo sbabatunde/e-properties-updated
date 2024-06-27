@@ -250,3 +250,13 @@ const TypeRent = document.querySelector('#TypeRent');
 //Show/Hide Property Type By Status Ends
 
 
+//Compare Button Slide Begins
+const slideButton = document.querySelector('.slide-button');
+const contentItems = document.querySelectorAll('.content-item');
+
+slideButton.addEventListener('click', () => {
+    contentItems.forEach((item) => {
+        item.classList.toggle('hidden');
+    });
+});
+//Compare Button Slide Begins

@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('org_desc')->nullable();
             $table->string('org_axis')->nullable();
             $table->string('business_cat')->nullable();
+            $table->text('experience')->nullable();
             $table->string('fb')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedIn')->nullable();

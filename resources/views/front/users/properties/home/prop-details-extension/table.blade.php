@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-md-6">
                         <span>
-                            {{ $property['payment'][0]['sequence'] }}
+                            {{ $property->payment->sequence }}
                         </span>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="col-md-6">
                         <span class="mr-3">
-                            ₦ {{ number_format($property['payment'][0]['initial_pay']) }}
+                            ₦ {{ number_format($property->payment->initial_pay) }}
                         </span>
                         <span>
                             {{-- {{$property->subsequent_pay}} --}}

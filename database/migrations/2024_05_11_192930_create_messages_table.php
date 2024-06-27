@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('property_id')->nullable();
             $table->string('msg_name')->nullable();
             $table->string('msg_email')->nullable();
-            $table->string('msg_mobile')->nullable();
+            // $table->string('msg_mobile')->nullable();
             $table->string('msg_phone')->nullable();
             $table->string('message')->nullable();
             $table->enum('status', ['read', 'unread'])->default('unread');
