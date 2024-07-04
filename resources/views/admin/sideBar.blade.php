@@ -57,6 +57,13 @@
             <span class="tooltip">Building Materials</span>
         </li>
         <li>
+            <a href="{{ route('admin.property.messages') }}">
+                <i class="fa fa-envelope"></i>
+                <span class="nav-item">Messages</span>
+            </a>
+            <span class="tooltip">Messages</span>
+        </li>
+        <li>
             <a href="{{ route('admin.sliders.create') }}">
                 <i class="fa fa-image"></i>
                 <span class="nav-item">Slider</span>

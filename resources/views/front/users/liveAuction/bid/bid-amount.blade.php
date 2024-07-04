@@ -1,5 +1,5 @@
-<form id="bidPlacement" class="form-group" action="{{ route('user.auction.place-bid.amount') }}" method="POST"
-    enctype="multipart/form-data">
+<form id="bidPlacement" class="form-group" action="{{ route('user.auction.place-bid.amount', $bidProperty->id) }}"
+    method="POST" enctype="multipart/form-data">
     @csrf
     <div class="modal fade" id="placeBid" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="placeBidLabel" aria-hidden="true">
@@ -43,14 +43,16 @@
                     </div>
                     <label class="form-group name2 col-md-12 mt-0">
                         <div class="bid-amount-modal mb-1">
-                            <div>Min ₦ 301,000</div>
+                            <div>Min {{ $bidProperty->denomination }} {{ number_format($bidProperty->starting_price) }}
+                            </div>
                             <div>
                                 <span style="border: 1px solid black;border-radius:7px;padding:0.5rem 2rem">
                                     Current Bid
                                 </span>
-                                <span class="pl-1"> ₦ 301,568</span>
+                                <span class="pl-1"> {{ $bidProperty->denomination }}
+                                    {{ number_format($highestBid) }}</span>
                             </div>
-                            <div>91 Bids</div>
+                            <div>{{ $counts }} Bids</div>
                         </div>
                         <button type="submit" style="cursor: pointer" class="btn btn-place-bid mt-1">
                             Place a Bid

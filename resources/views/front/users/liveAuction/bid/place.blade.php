@@ -14,13 +14,15 @@
 
     <div class="page-hero bg-image " style="background:#394293;height:20vh;width:90%;margin:auto;position: relative">
         <div style="position:absolute;bottom:20px;left:10px;">
-            <a href="" class="btn btn-danger mr-5" style="color:#394293;background:#ececee;font-weight:550">
-                You have been outbid
-            </a>
-            <a href="#" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#placeBid"
-                style="color:#d5d7e2;outline: 1px solid #d5d7e2">
-                Place a new Bid
-            </a>
+            @if ($outBid == 'Yes')
+                <a href="#" class="btn btn-danger mr-5" style="color:#394293;background:#ececee;font-weight:550">
+                    You have been outbid
+                </a>
+                <a href="#" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#placeBid"
+                    style="color:#d5d7e2;outline: 1px solid #d5d7e2">
+                    Place a new Bid
+                </a>
+            @endif
         </div>
 
     </div>

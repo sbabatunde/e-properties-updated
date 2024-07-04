@@ -144,16 +144,21 @@
 
     <!-- /// Add to Compare Function Begins -->
     <script type="text/javascript">
+        //Script for adding Property to compare List
         function addToCompare(property_id) {
             $.ajax({
                 type: "POST",
                 dataType: 'json',
                 url: "/add-property-to-compare/" + property_id,
-
+                data: {
+                    _token: '{{ csrf_token() }}', // Add this line to include CSRF token
+                    // other data as needed
+                },
                 success: function(data) {
 
                     // Start Message 
                     console.log(data);
+                    fetchCompareList();
 
                     const Toast = Swal.mixin({
                         toast: true,
@@ -170,6 +175,7 @@
                             title: data.success,
                         })
 
+
                     } else {
 
                         Toast.fire({
@@ -185,8 +191,50 @@
             })
 
         }
+
+        //Script for Fetching all Property Compare List
+        function fetchCompareList() {
+            $.ajax({
+                url: "/get-compare-property/", // Endpoint to fetch compare list data
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    // Update UI to display compare list data
+                    console.log(response);
+
+                    var rows = ""
+                    $.each(response, function(key, value) {
+                        // Add The Div section for each compare properties
+                        rows += ` 
+                        <div class="res-comp-prop mt-3">
+                            <img src="/${value.property.thumbnail}" alt="">
+                            <div class="res-prop-details">
+                                <span>
+                                    <h6><b>${value.property.title}</b></h6>
+                                    <h6>${value.property.area}</h6>
+                                </span>
+                                <span class="comp-price">
+                                    Price: <b style="font-size: 20px">${value.payment.initial_denomination}
+                                        ${value.payment.initial_pay}</b>
+                                </span>
+                            </div> 
+                        </div> `
+                    });
+
+                    // $('#compare').html(rows);
+
+                    $('#compareList').html(rows);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching compare list:', error);
+                    // Display error message if fetch fails
+                    $('#compareList').html(
+                        '<p class="text-danger">Error fetching compare list. Please try again later.</p>');
+                }
+            });
+        }
     </script>
-    <!-- /// Add to Compare Function Ends  -->
+    <!-- /// Add to And Fetch Compare Function Ends  -->
 
     <!-- /// Remove from Compare Function Begins -->
     <script>

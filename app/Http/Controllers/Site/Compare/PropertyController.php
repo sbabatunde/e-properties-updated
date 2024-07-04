@@ -14,8 +14,8 @@ class PropertyController extends Controller
     public function comparePropertyPage()
     {
         if (Auth::id()) {
-            $compare = CompareProperty::with('property')->where('user_id', Auth::id())->latest()->get();
-            return view('front.users.compare.main-page', compact('compare'));
+            $compareList = CompareProperty::with(['property','payment'])->where('user_id', Auth::id())->latest()->get();
+            return view('front.users.compare.main-page', compact('compareList'));
         } else {
             Alert::error('Unauthorized Access!!!', 'You need to login first');
             return back();
@@ -24,30 +24,42 @@ class PropertyController extends Controller
 
     public function GetCompareProperty()
     {
-        $compare = CompareProperty::with('property')->where('user_id',Auth::id())->latest()->get(); 
+        $compare = CompareProperty::with(['property','payment'])->where('user_id',Auth::id())->latest()->get(); 
         return response()->json($compare);
     }
 
     public function addPropertyToCompare(Request $request, $property_id)
     {
         if (Auth::check()) {
-            return response()->json(['success' => 'Successfully Added On Your Compare']);
-
-            $exists = CompareProperty::where('user_id', Auth::id())->where('property_id', $property_id)->first();
-            if (!$exists) {
-                CompareProperty::insert([
+            // Check if the property is already in the user's compare list
+            $exists = CompareProperty::where('user_id', Auth::id())
+                                     ->where('property_id', $property_id)
+                                     ->first();
+            $total = CompareProperty::where('user_id', Auth::id())->count();
+            
+            if ($exists) {
+                // Property already exists in compare list
+                return response()->json(['error' => 'This Property is already in your Compare List']);
+            } else if ($total == 2){
+                 // Property Can't be more than two in compare list
+                 return response()->json(['error' => 'Cannot compare more than two properties at the same time.']);
+            }
+            else {
+                // Add property to compare list
+                $data = CompareProperty::create([
                     'user_id' => Auth::id(),
                     'property_id' => $property_id,
-                    'created_at' => Carbon::now()
+                    'created_at' => now()
                 ]);
-                return response()->json(['success' => 'Successfully Added On Your Compare']);
-            }else{
-                return response()->json(['error' => 'This Property Has Already in your CompareList']);
+                
+                return response()->json(['success' => 'Successfully Added to Your Compare List']);
             }
-        }else{
-            return response()->json(['error' => 'At First Login Your Account']);
+        } else {
+            // User is not authenticated
+            return response()->json(['error' => 'Unauthorized access, Login First']);
         }
     }
+    
 
     public function removePropertyCompare($id)
     {

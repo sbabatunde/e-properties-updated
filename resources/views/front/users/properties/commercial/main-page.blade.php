@@ -52,4 +52,5 @@
 
     {{-- Similar Properties List --}}
     @include('front.users.properties.commercial.similar')
+    {{-- @include('front.users.properties.commercial.add-to-compare-script') --}}
 @endsection

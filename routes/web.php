@@ -26,6 +26,7 @@ use App\Http\Controllers\Site\ServicesController;
 use App\Http\Controllers\Site\BlacklistController;
 use App\Http\Controllers\Site\Admin\ListingController;
 use App\Http\Controllers\Site\Admin\PostMediaController;
+use App\Http\Controllers\Site\Admin\PropertyMessage;
 use App\Http\Controllers\Site\Admin\Sliders;
 use App\Http\Controllers\Site\BuildingMaterialController;
 use App\Http\Controllers\Site\Compare\PropertyController as ComparePropertyController;
@@ -155,7 +156,7 @@ Route::controller(AuctionController::class)->group(function () {
     Route::get('/live/auctions', 'liveAuction')->name('user.live-auction');
     Route::get('/all/auctions/page', 'allAuctions')->name('user.all-auction');
     Route::get('/live/auctions/bid/{id}', 'placeAuctionBid')->name('user.auction.place-bid');
-    Route::post('/user/auctions/place-bid/amount', 'placeAuctionBidAmount')->name('user.auction.place-bid.amount');
+    Route::post('/user/auctions/place-bid/amount/{auctionID}', 'placeAuctionBidAmount')->name('user.auction.place-bid.amount');
 });
 
 //Services Route
@@ -200,6 +201,13 @@ Route::controller(PostMediaController::class)->group(function () {
     Route::post('/post/media/file/form',  'adminPostMediaForm')->name('admin.media.post');
     
 });
+
+//Property Message Route
+Route::controller(PropertyMessage::class)->group(function () {
+    Route::get('/my/property/messages',  'propertyMessage')->name('admin.property.messages');
+});
+
+
 
 //Building Materials Route
 Route::controller(BuildingMaterial::class)->group(function () {

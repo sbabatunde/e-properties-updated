@@ -289,12 +289,14 @@ body{
 main{
     width: auto;  
 }
+
 .content-header{
     display: flex;
     justify-content: space-between;
     width: 95%;
     margin: auto;
 }
+
 input[type='checkbox']{
    appearance: none;
    width: 25px;
@@ -304,6 +306,7 @@ input[type='checkbox']{
    /* border-radius: 50%; */
    cursor: pointer;
 }
+
 input[type='checkbox']:checked{
 background-color: #007bff;
 border-color: #007bff;
@@ -368,7 +371,6 @@ border-color: #007bff;
   }
 
 /* Post Property Styles Ends */
-
 
 /*Profile Styles Begins */
 .profile-body{
@@ -544,6 +546,7 @@ border-color: #007bff;
     flex-wrap: wrap;
     margin: auto;
 }
+
 .media-files .post-media{
     width: 350px;
 }
@@ -674,7 +677,7 @@ border-color: #007bff;
 }
 
 .listing-search button strong{
-  text-align: center;
+text-align: center;
 }
 
 .list-body{
@@ -696,9 +699,9 @@ border-color: #007bff;
 }
 
 .listing-picture{
-     display: flex;
-     flex-wrap: wrap;
-     gap: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
 }
 
 .listing-picture img{
@@ -771,3 +774,109 @@ border-color: #007bff;
 }
 
 /* My Listing */
+
+
+/* My Property Messages Begins */
+.message-header{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.message-button .btn{
+    border: 1px solid #5661ca;
+    border-radius:7px;
+    padding: 7px 25px;
+    margin: 5px 10px;
+    color: #5661ca;
+    font-weight: 600;
+}
+
+.message-search {
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.message-search label {
+    text-align: left;
+    font-size: 16px;
+    background: #fff;
+    border: 1px solid rgb(197, 193, 193);
+    border-radius: 7px 0 0 7px;
+    /* box-shadow: 10px 0 12px 4px rgb(204, 199, 199); */
+    width: 90%;
+    padding: 15px 30px;
+}
+
+.message-search input[type="file"] {
+    display: none;
+    /* Hide the default file input */
+}
+
+.message-search .custom-file-upload {
+    background-color: #394293;
+    color: white;
+    font-weight: bolder;
+    font-size: 17px;
+    width: fit-content;
+    border: none;
+    padding: auto  24px;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.message-search .custom-file-upload:hover {
+    background-color: #394293;
+}
+
+.message-table{
+    border: none;
+    width: 98%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    /* background-color: yellow; */
+}
+
+.message-table thead tr{
+    font-size: large;
+    font-weight: 400;
+    /* background: blue; */
+    width: 100%;
+}
+
+.message-table thead tr th,
+.message-table tbody tr td{
+    width: 20%;
+    font-size: medium;
+}
+.message-table .subject{
+    width: 70%;
+}
+.message-table {
+    float: inline-end;
+}
+
+.truncate {
+    white-space: nowrap;      /* Prevents the text from wrapping */
+    overflow: hidden;         /* Hides any content that overflows */
+    text-overflow: ellipsis;  /* Displays ellipsis (...) to represent overflow */
+    width: 50%;             /* Optional: Set a width for the container */
+    display: inline-block;    /* Optional: Allows the container to take only as much width as necessary */
+  }
+
+.pagination{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: large;
+    font-weight: bold;
+}
+
+/* My Property Messages Ends */

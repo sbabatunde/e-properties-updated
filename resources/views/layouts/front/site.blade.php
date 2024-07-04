@@ -174,7 +174,7 @@
                             icon: 'success',
                             title: data.success,
                         })
-
+                        fetchCompareList();
                     } else {
 
                         Toast.fire({
@@ -193,6 +193,25 @@
     </script>
     <!-- /// Add to Compare Function Ends  -->
 
+    {{-- fetch Compare List Script  --}}
+    <script>
+        function fetchCompareList() {
+            $.ajax({
+                url: '/compare/list', // Endpoint to fetch compare list data
+                type: 'GET',
+                success: function(response) {
+                    // Update UI to display compare list data
+                    $('#compareList').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching compare list:', error);
+                    // Display error message if fetch fails
+                    $('#compareList').html(
+                        '<p class="text-danger">Error fetching compare list. Please try again later.</p>');
+                }
+            });
+        }
+    </script>
     <!-- /// Remove from Compare Function Begins -->
     <script>
         function compareRemove(id) {
