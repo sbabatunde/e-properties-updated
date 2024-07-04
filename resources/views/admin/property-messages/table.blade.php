@@ -17,5 +17,5 @@
     @endforeach
 </table>
 <div class="pagination">
-    1-1 of 1 Results
+    {{ $myMessages->links('vendor.pagination.custom') }}
 </div>

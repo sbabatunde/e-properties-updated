@@ -12,9 +12,10 @@ class PropertyMessage extends Controller
 {
     public function propertyMessage()
     {
-        $myMessages = Message::where('agent_id',Auth::id())->with(['property','client'])->get();
+        $myMessages = Message::where('agent_id',Auth::id())->with(['property','client'])->paginate(10);
         $user = User::where('id',Auth::id())->first();
         $inbox = count($myMessages);
-        return view('admin.property-messages.main',compact('myMessages','user','inbox'));
+        
+        return view('admin.property-messages.main',compact('myMessages','user','inbox'))->withViewName('vendor.pagination.custom');
     }
 }
