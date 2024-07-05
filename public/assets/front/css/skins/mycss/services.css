@@ -3729,12 +3729,25 @@ a{
   flex-grow: 1;
   flex-shrink: 1;
   box-shadow: 2px 4px 10px 0px rgba(0, 0, 0, 0.75);
+  height: fit-content;
   min-height: 80vh;
-  max-height: 80vh;
   margin-bottom: 20px;
   min-width: fit-content;
   position: relative;
 }
+
+.residential-left.auction{
+  background: transparent;
+  min-height: fit-content;
+}
+
+.res-comp-button{
+  margin-bottom: 10px;
+  display: flex;
+  width: 90%;
+  justify-content: space-evenly;
+}
+
 .residential-right{
   width: 65% ;
   flex-shrink: 1;

@@ -1,3 +1,14 @@
+<style>
+    .page-link:hover {
+        background-color: #394293
+    }
+
+    .page-item.active .page-link {
+        background-color: #394293;
+        border-color: #394293;
+    }
+</style>
+
 @if ($paginator->hasPages())
     <nav>
         <ul class="pagination justify-content-center">
@@ -7,7 +18,7 @@
                     <span class="page-link" aria-hidden="true">&lsaquo;</span>
                 </li>
             @else
-                <li class="page-item">
+                <li class="page-item" style="">
                     <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev"
                         aria-label="@lang('pagination.previous')">&lsaquo;</a>
                 </li>

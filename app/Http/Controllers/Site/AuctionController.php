@@ -15,10 +15,11 @@ class AuctionController extends Controller
     public function allAuctions()
     {
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
-        ->whereDate('end_date','>=',Carbon::today())->limit(6)->get();
+        ->whereDate('end_date','>=',Carbon::today())->paginate(6);
         $upcomingAuctions = Auction::with(['property'])->whereDate('start_date','>=',Carbon::today())
         ->limit(6)->get();
-        return view('front.users.liveAuction.all-auctions', compact('liveAuction','upcomingAuctions'));
+        return view('front.users.liveAuction.all-auctions', compact('liveAuction','upcomingAuctions'))
+        ->withViewName('vendor.pagination.custom');;
     }
 
     public function liveAuction()
@@ -59,10 +60,21 @@ class AuctionController extends Controller
             $amount = (float)$non_comma;
             // Alert::error('message', $validate->messages()->all()[0]);
 
+            $auction = Auction::where('id',$auctionID)->first();
+            // dd($auction);
+            $startingBid = (float)$auction->starting_price; 
+
             $highestBid = AuctionBid::where('auction_id',$auctionID)->max('bid_amount');
+            
+            $numberstartingBid = number_format($startingBid);
             $numberHighestBid = number_format($highestBid);
             $numCurrentBid = number_format($amount);
-            if($highestBid>$amount){
+            if($startingBid>$amount){
+                Alert::error('Error!!!', "Your bid: ".$numCurrentBid.', is lesser than the starting bid: '. $numberstartingBid);
+                return back();
+            }
+
+            else if($highestBid>$amount){
                 Alert::error('Error!!!', "Your bid: ".$numCurrentBid.', is lesser than the current highest bid: '. $numberHighestBid);
                 return back();
             }

@@ -81,10 +81,14 @@ class PropertyController extends Controller
 
     public function commercialProperty()
     {
-        $salesProperties = Property::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();
+        $salesProperties = Property::with(['type','payment'])->where('status','Sale')->paginate(6);
+        $letProperties = Property::with(['type','payment'])->where('status','Lett')->paginate(6);
+        $rentProperties = Property::with(['type','payment'])->where('status','Rent')->paginate(6);
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
         ->whereDate('end_date','>=',Carbon::today())->get();
         // dd($liveAuction);
-        return view('front.users.properties.commercial.main-page',compact('salesProperties','liveAuction'));
+        return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties',
+        'rentProperties','liveAuction'))
+        ->withViewName('vendor.pagination.custom');
     }
 }

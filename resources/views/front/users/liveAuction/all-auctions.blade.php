@@ -110,6 +110,9 @@
                 @endforeach
 
             </div>
+            <div class="pagination mt-5 ml-2">
+                {{ $liveAuction->links('vendor.pagination.custom') }}
+            </div>
         </div>
     </div>
 @endsection

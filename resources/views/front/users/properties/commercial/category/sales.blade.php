@@ -1,6 +1,5 @@
 <div id= "residentialSales" style="display:block">
     <div class="container res-properties">
-
         @foreach ($salesProperties as $item)
             <div class="res-prop-items mt-4">
                 <img src="{{ asset($item->thumbnail) }}" alt="">
@@ -35,4 +34,11 @@
             </div>
         @endforeach
     </div>
+
+    @if (count($salesProperties) > 0)
+        <div class="pagination mt-5 ml-2">
+            {{ $salesProperties->links('vendor.pagination.custom') }}
+        </div>
+    @endif
+
 </div>

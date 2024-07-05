@@ -1,17 +1,30 @@
 @foreach ($upcomingAuctions as $item)
+    @php
+        // Assuming you have two dates
+        $now = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+        $startDate = \Carbon\Carbon::parse($item->start_date . $item->start_time);
+        $difference = $startDate->diffInSeconds($now);
+        // To get how many days are left from the time difference in seconds
+        $days = floor($difference / 86400);
+        // To get how many hours are left after days have been substracted
+        $hours = floor(($difference % 86400) / 3600);
+        //To calculate how many minutes are left
+        $minutes = floor(($difference % 3600) / 60);
+
+    @endphp
     <div class="card mb-3 mt-3 auction-card">
         <div class="row ml-1">
             <div class="col-4">
                 <span><b>Days</b></span><br>
-                <span><b>50</b></span>
+                <span><b>{{ $days }}</b></span>
             </div>
             <div class="col-4">
                 <span><b>Hours</b></span><br>
-                <span><b>20</b></span>
+                <span><b>{{ $hours }}</b></span>
             </div>
             <div class="col-4">
                 <span><b>Minutes</b></span><br>
-                <span><b>12</b></span>
+                <span><b>{{ $minutes }}</b></span>
             </div>
         </div>
         <div class="live-card-body">

@@ -206,7 +206,7 @@
                     $.each(response, function(key, value) {
                         // Add The Div section for each compare properties
                         rows += ` 
-                        <div class="res-comp-prop mt-3">
+                        <div class="res-comp-prop mt-3 mb-5">
                             <img src="/${value.property.thumbnail}" alt="">
                             <div class="res-prop-details">
                                 <span>

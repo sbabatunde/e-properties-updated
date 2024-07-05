@@ -1,3 +1,49 @@
+<style>
+    .left-item {
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.5s ease-in-out;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+
+    .left-item.active {
+        transform: translateX(0);
+    }
+
+    .left-item.hidden {
+        transform: translateX(100%);
+        visibility: hidden;
+    }
+
+    .toggle-button {
+        position: absolute;
+        bottom: 50%;
+        rotate: 90deg;
+        left: -10%;
+        padding: 5px 15px;
+        border: 1px solid black;
+        font-weight: bold;
+        border-radius: 7px 7px 0 0;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out
+    }
+
+    .toggle-button:hover {
+        cursor: pointer;
+    }
+
+    .toggle-button.compare {
+        position: absolute;
+        bottom: 50%;
+        rotate: 90deg;
+        width: fit-content;
+        left: 94%;
+    }
+</style>
+
+
 @extends('layouts.front.login-site')
 @section('content')
     {{-- Page Banner Begins --}}
@@ -53,4 +99,28 @@
     {{-- Similar Properties List --}}
     @include('front.users.properties.commercial.similar')
     {{-- @include('front.users.properties.commercial.add-to-compare-script') --}}
+
+    <script>
+        const leftItems = document.querySelectorAll('.left-item');
+        const toggleButtons = document.querySelectorAll('.toggle-button');
+
+        toggleButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                leftItems.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.toggle('active');
+                        item.classList.toggle('hidden');
+                    } else {
+                        if (item.classList.contains('active')) {
+                            item.classList.remove('active');
+                            item.classList.add('hidden');
+                        } else {
+                            item.classList.remove('hidden');
+                            item.classList.add('active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

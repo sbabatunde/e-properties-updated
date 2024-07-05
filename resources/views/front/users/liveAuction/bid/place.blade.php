@@ -2,12 +2,30 @@
 @section('content')
     {{-- calculate the difference in end date --}}
     @php
+        // Assuming you have two dates
+        $now = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+        $startDate = \Carbon\Carbon::parse($bidProperty->start_date . $bidProperty->start_time);
+        $endDate = \Carbon\Carbon::parse($bidProperty->end_date . $bidProperty->end_time);
+        if ($now >= $startDate) {
+            $difference = $endDate->diffInSeconds($now);
+            // To get how many days are left from the time difference in seconds
+            $days = floor($difference / 86400);
+            // To get how many hours are left after days have been substracted
+            $hours = floor(($difference % 86400) / 3600);
+            //To calculate how many minutes are left
+            $minutes = floor(($difference % 3600) / 60);
+            $live = $days . 'days' . ' ' . $hours . 'hrs' . ' ' . $minutes . 'mins.';
+        } else {
+            $difference = $startDate->diffInSeconds($now);
+            // To get how many days are left from the time difference in seconds
+            $days = floor($difference / 86400);
+            // To get how many hours are left after days have been substracted
+            $hours = floor(($difference % 86400) / 3600);
+            //To calculate how many minutes are left
+            $minutes = floor(($difference % 3600) / 60);
+            $upcoming = $days . 'days' . ' ' . $hours . 'hrs' . ' ' . $minutes . 'mins.';
+        }
 
-        $endDate = Carbon\Carbon::parse($bidProperty->end_date . '' . $bidProperty->end_time);
-        $startDate = Carbon\Carbon::parse($bidProperty->start_date . '' . $bidProperty->start_time);
-        $now = Carbon\Carbon::now();
-        $live = $endDate->diffForHumans($now);
-        $upcoming = $startDate->diffForHumans($now);
     @endphp
     {{-- @dd($upcoming) --}}
     {{-- calculate the difference in end date --}}
@@ -58,7 +76,7 @@
                             <span>Current Bid</span>
                         </span>
                         <span style="font-size: large">{{ $bidProperty->denomination }}
-                            {{ number_format($bidProperty->starting_price) }}</span>
+                            {{ number_format($highestBid) }}</span>
                         <span style="font-size: 25px"> | </span>
                         <span style="font-size: large">Starting Bid </span>
                         <span style="font-size: large;color:rgb(45, 175, 45)">
