@@ -127,21 +127,37 @@
                                             </strong>
                                         </span>
                                     </div>
-                                    <div class="col-lg-12 mb-2 mt-2">
-                                        <input type="text" name="name" placeholder="Your name"
-                                            value="{{ $user->firstname }} {{ $user->lastname }}"
-                                            class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    </div>
-                                    <div class="col-lg-12 mb-2">
-                                        <input type="email" name="email" value="{{ $user->email }}"
-                                            placeholder="Your Email"
-                                            class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    </div>
-                                    <div class="col-lg-12 mb-2">
-                                        <input type="text" name="phone" value="{{ $user->phone }}"
-                                            placeholder="Your Phone number"
-                                            class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    </div>
+                                    @auth
+                                        <div class="col-lg-12 mb-2 mt-2">
+                                            <input type="text" name="name" placeholder="Your name"
+                                                value="{{ $user->firstname }} {{ $user->lastname }}"
+                                                class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        </div>
+                                        <div class="col-lg-12 mb-2">
+                                            <input type="email" name="email" value="{{ $user->email }}"
+                                                placeholder="Your Email"
+                                                class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        </div>
+                                        <div class="col-lg-12 mb-2">
+                                            <input type="text" name="phone" value="{{ $user->phone }}"
+                                                placeholder="Your Phone number"
+                                                class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        </div>
+                                    @else
+                                        <div class="col-lg-12 mb-2 mt-2">
+                                            <input type="text" name="name" placeholder="Your name"
+                                                class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        </div>
+                                        <div class="col-lg-12 mb-2">
+                                            <input type="email" name="email" placeholder="Your Email"
+                                                class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        </div>
+                                        <div class="col-lg-12 mb-2">
+                                            <input type="text" name="phone" placeholder="Your Phone number"
+                                                class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        </div>
+                                    @endauth
+
                                     <div class="col-lg-12 mb-4">
                                         <textarea type="text" name="message" value="I am interested in buying..." rows="3"
                                             class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">

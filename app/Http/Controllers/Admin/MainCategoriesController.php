@@ -14,6 +14,7 @@ class MainCategoriesController extends Controller
    public function index()
    {
       $categories = Category::with('_parent')->orderBy('id', 'DESC')->paginate(10);
+      dd($categories);
       return view('dashboard.categories.index', compact('categories'));
    }
 

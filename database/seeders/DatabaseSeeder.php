@@ -20,10 +20,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\Admin::create([
+            'name' => 'Essential Admin 1',
+            'role_id' => 1,
+            'email' => 'stunde@gmail.com',
+            'password' => bcrypt('stunde@gmail.com'),
+        ]);
 
         //My Seeders
         // $this->call(PropertyCategorySeeder::class);
@@ -37,6 +39,6 @@ class DatabaseSeeder extends Seeder
         // Property::factory()->count(10)->create();
         // Auction::factory()->count(10)->create();
         // PropertyDeals::factory()->count(4)->create();s
-        PropertyPayment::factory()->count(10)->create();
+        // PropertyPayment::factory()->count(10)->create();
     }
 }

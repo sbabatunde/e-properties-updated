@@ -44,6 +44,12 @@ use App\Http\Controllers\Site\PropertyProfessionalController;
 | 
 */
 
+//load Admin route
+    // Route::middleware(['auth'])->group(function () {
+    //     require __DIR__.'/admin.php';
+    // });
+//load Admin route
+
 Route::get('/admin/test', function () {
     return view('admin.test');
 });
@@ -218,14 +224,6 @@ Route::controller(BuildingMaterial::class)->group(function () {
 //Admin Routes Ends
 //Admin Slider Image
 
-Route::controller(Sliders::class)->group(function(){
-        // Route to show form for creating a slider
-        Route::get('/admin/sliders/create', 'create')->name('admin.sliders.create');
-        // Route to handle form submission for creating a slider
-        Route::post('/admin/sliders/store', 'store')->name('admin.sliders.store');
-        // Route to display all sliders
-        Route::get('/admin/sliders/index', 'index')->name('admin.sliders.index');
-});
 
 // Route::controller(SliderController::class)->group(function () {
 //     Route::get('/add/slider/image',  'adminAddSliderImages')->name('admin.sliders.create');

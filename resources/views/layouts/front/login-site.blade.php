@@ -35,8 +35,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
-    <!-- Favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('assets/front/img/favicon.ico') }}" type="image/x-icon">
+    <!-- Logo icon -->
+    {{-- <link rel="shortcut icon" href="{{ asset('assets/front/img/favicon.ico') }}" type="image/x-icon"> --}}
 
     <!-- Google fonts -->
     <link rel="stylesheet" type="text/css"

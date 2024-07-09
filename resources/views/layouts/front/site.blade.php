@@ -22,8 +22,8 @@
         href="{{ asset('assets/front/fonts/font-awesome/css/font-awesome.min.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/fonts/flaticon/font/flaticon.css') }}">
 
-    <!-- Favicon icon -->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <!-- Logo icon -->
+    {{-- <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon"> --}}
 
     <!-- Google fonts -->
     <link rel="stylesheet" type="text/css"

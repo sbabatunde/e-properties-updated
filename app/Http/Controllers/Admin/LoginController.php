@@ -14,16 +14,7 @@ class LoginController extends Controller
         return view('dashboard.auth.essential.login');
     }
 
-    public function save()
-    {
-
-        $admin = new  Admin();
-        $admin->name = "tmichael";
-        $admin->email = "Yassir@gmail.com";
-        $admin->password = bcrypt("yassir");
-        $admin->save();
-    }
-
+    
     public function login(AdminLoginRequest $request)
     {
 
@@ -34,7 +25,7 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard')->with(['success' => 'Login successfully']);
         }
 
-        return Redirect()->route('get.admin.login')->with(['error' => 'Error In Data']);
+        return Redirect()->route('get.essential.admin.login')->with(['error' => 'Error,wrong Admin Credentials.']);
     }
 
     public function logout()

@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use App\Http\Controllers\Admin;
 
 // Route::group(
 //   [
@@ -31,6 +31,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin',], function (
     Route::get('delete/{id}', [Admin\MainCategoriesController::class, 'delete'])->name('admin.categories.delete');
   });
 
+  Route::group(['prefix' => 'sliders'], function () {
+      // Route to show form for creating a slider
+      Route::get('create', [Admin\SliderController::class, 'create'])->name('admin.sliders.create');
+      // Route to handle form submission for creating a slider
+      Route::post('store',  [Admin\SliderController::class, 'store'])->name('admin.sliders.store');
+      // Route to display all sliders
+      Route::get('index',  [Admin\SliderController::class, 'index'])->name('admin.sliders.index');
+});
 
   Route::group(['prefix' => 'cities'], function () {
     Route::get('/', [Admin\CitiesController::class, 'index'])->name('admin.cities');
@@ -84,6 +92,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin',], function (
 
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin',], function () {
-  Route::get('login', [Admin\LoginController::class, 'getLogin'])->name('get.admin.login');
+  Route::get('login', [Admin\LoginController::class, 'getLogin'])->name('get.essential.admin.login');
   Route::post('login', [Admin\LoginController::class, 'login'])->name('admin.login');
 });
+
+

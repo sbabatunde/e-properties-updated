@@ -2,46 +2,66 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Slider;
-use App\Http\Requests\SliderImagesRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\SliderImagesRequest;
 
 
 class SliderController extends Controller
 {
-    public function addImages()
+    // Show form to create a new slider
+    public function create()
     {
-        $images = Slider::get(['photo']);
-        return view('dashboard.sliders.create', compact('images'));
+        return view('admin.sliders.create');
     }
 
-    public function saveSliderImages(Request $request)
+    // Store newly created slider
+    public function store(Request $request)
     {
-        $file = $request->file('dzfile');
-        $filename = uploadImage('sliders', $file);
-
-        return response()->json([
-            'name' => $filename,
-            'original_name' => $file->getClientOriginalName(),
+        // Validate the form data
+      //   dd($request->all());
+        $request->validate([
+            'title' => 'required|string|max:255',
+          //   'photo' => 'required|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for image upload
+            // Add more fields as per your slider schema
         ]);
-    }
 
-    public function saveSliderImagesDB(SliderImagesRequest $request)
-    {
-        try {
+        foreach($request->file('photo') as $image)
+        {
+          $manager = new ImageManager(new Driver());
+          $name_gen = hexdec(uniqid()) . '.' . $image
+              ->getClientOriginalExtension();
+          $img = $manager->read($image);
+          $img = $img->resize(1550, 1350);
 
-            if ($request->has('document') && count($request->document) > 0) {
-                foreach ($request->document as $image) {
-                    Slider::create([
-                        'photo' => $image,
-                    ]);
-                }
-            }
-
-            return redirect()->back()->with(['success' => 'SuccessFully Created']);
-        } catch (\Exception $ex) {
-            return redirect()->back()->with(['success' => 'SuccessFully Created']);
+          $img->toJpeg(80)->save(base_path('public/assets/admin/images/sliders/' .
+              $name_gen));
+          $uploadPath = 'assets/admin/images/sliders/' . $name_gen;
         }
+     
+        // Upload image file
+      //   $imageName = time() . '.' . $request->photo->extension();
+      //   $request->image->move(public_path('public/assets/admin/images/sliders/'), $imageName);
+
+        // Save slider details to database
+        Slider::create([
+            'title' => $request->title,
+            'photo' => $uploadPath,
+            // Add more fields as per your slider schema
+        ]);
+
+        Alert::success('Success','Slider has been created successfuly.');
+        return redirect()->route('admin.sliders.index')->with('success', 'Slider created successfully.');
     }
+
+    // Display all sliders
+    public function index()
+    {
+        $sliders = Slider::all();
+
+        return view('admin.sliders.index', compact('sliders'));
+    }
+    
 }

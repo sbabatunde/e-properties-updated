@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
-    public function viewAgent()
+    public function viewAgent($id)
     {
         // $agent = Agent::where('user_id', $id)->first();
         return view('front.users.agents.connect');

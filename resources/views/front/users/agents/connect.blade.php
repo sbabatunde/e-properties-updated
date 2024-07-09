@@ -3,22 +3,23 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 agent-details">
-                <img class="agent-image" src=" {{ asset('/assets/images/services/landlord.png') }}" alt="">
+                <img class="agent-image" src=" {{ asset($propertyProfessional->photo) }}" alt="">
                 <div class="agent-action">
                     <span class="agent-connect"> <a href="">Connect</a></span>
                     <span class="agent-message"><a href="">Send a Message</a></span>
                     <span class="agent-share"><a href=""><i class="fa fa-heart"></i> Share</a></span>
                 </div>
             </div>
+            @dd($propertyProfessional)
             <div class="col-lg-6 agent-desc">
-                <h3>{{ $propertyProfessional->firtname }} {{ $propertyProfessional->lastname }}</h3>
+                <h3>{{ $propertyProfessional->firstname }} {{ $propertyProfessional->lastname }}</h3>
                 <h5 class="text-bold uppercase">Real Estate Agent</h5>
                 <div class="">
                     <span class="" style="float: inline-start">
                         <i class="fa fa-map-marker mr-2" style="font-size:20px;color:black"></i>
                         {{ $propertyProfessional->axis }}
                     </span>
-                    <span style="float: inline-end">Michaelhomes.com</span>
+                    <span style="float: inline-end">{{ $propertyProfessional->email }}</span>
                 </div>
                 <div class="py-2">
                     <ul class="py-3">
@@ -28,7 +29,8 @@
                             {{ $propertyProfessional->phone }} {{ $propertyProfessional->whatApp }}
                         </li>
                         <li class="mt-2"><span
-                                style="border: 1px solid black;padding:.2rem;font-weight:700">Experience</span> Over 12
+                                style="border: 1px solid black;padding:.2rem;font-weight:700">Experience</span>
+                            {{ $propertyProfessional->experience }}
                             years</li>
                     </ul>
                 </div>

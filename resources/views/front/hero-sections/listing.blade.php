@@ -8,16 +8,17 @@
 
     <div class="hero-listing">
         @foreach ($data['properties'] as $key => $item)
+            {{-- @dd($item) --}}
             <div class="pic">
-                <img src="{{ asset($item['thumbnail']) }}" alt="">
+                <img src="{{ asset($item->thumbnail) }}" alt="">
                 <span class="listing-text">
-                    <h5 class="mt-3" style="font-weight:700;width:inherit">{{ $item['title'] }}</h5>
+                    <h5 class="mt-3" style="font-weight:700;width:inherit">{{ $item->title }}</h5>
                     <p>
-                        <span style="font-size:15px">{{ $item['area'] }}</span><br>
-                        <span style="font-size:20px;font-weight:bold">{{ $item['initial_denomiation'] }}
-                            {{ number_format($item['initial_pay']) }}</span>
+                        <span style="font-size:15px">{{ $item->area }}</span><br>
+                        <span style="font-size:20px;font-weight:bold">{{ $item->payment->initial_denomination }}
+                            {{ number_format($item->payment->initial_pay) }}</span>
                     </p>
-                    <a href="{{ route('property.details', $item['id']) }}" class="btn btn-info listing-anchor">View</a>
+                    <a href="{{ route('property.details', $item->id) }}" class="btn btn-info listing-anchor">View</a>
                 </span>
             </div>
         @endforeach
