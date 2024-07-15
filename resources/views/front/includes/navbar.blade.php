@@ -1,22 +1,23 @@
 <div class="navbar-head">
-    <div class=""  style="background: black">
-        <img  src="{{asset('assets/frontend/navbar-flags.png')}}" alt="logo">
+    <div class="" style="background: black">
+        <img src="{{ asset('assets/frontend/navbar-flags.png') }}" alt="logo">
     </div>
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/')}}"><span class="text-secondary">Logo</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="{{ url('/') }}"><span class="text-secondary">Logo</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport"
+                aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
-            <div class="collapse navbar-collapse mt-0"  id="navbarSupport">
+
+            <div class="collapse navbar-collapse mt-0" id="navbarSupport">
                 <ul class="navbar-nav ml-auto">
                     <li class=" active">
                         <a lass="nav-link" href="{{ url('/') }}">
                             <strong style="color:red;">
-                               <u>
-                                Home
-                                </u> 
+                                <u>
+                                    Home
+                                </u>
                             </strong>
                         </a>
                     </li>
@@ -26,7 +27,8 @@
                         </a>
                     </li>
                     <li class="">
-                        <a class="nav-link" href="{{ route('landlord.index') }}" class="{{ request()->is('landlord.index') ? 'text-red': 'text-green'}}">
+                        <a class="nav-link" href="{{ route('landlord.index') }}"
+                            class="{{ request()->is('landlord.index') ? 'text-red' : 'text-green' }}">
                             <strong>Landlords</strong>
                         </a>
                     </li>
@@ -57,20 +59,22 @@
                     </li>
                     @auth()
                         <li class="">
-                            <a class="nav-link" href="{{route('logout')}}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                            <form id="logout-form" action="{{route('logout')}}" method="POST" style="display:non;">{{csrf_field()}}</form>
+                            <a class="nav-link"
+                                href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:non;">
+                                {{ csrf_field() }}</form>
                         </li>
                     @else
                         <li class="sign-up">
-                            <a class="nav-link" href="{{route('register')}}" type="button">
-                                <strong>SignUp</strong> 
+                            <a class="nav-link" href="{{ route('register') }}" type="button">
+                                <strong>SignUp</strong>
                             </a>
                         </li>
-                        <li class="" > 
-                            <a class="nav-link login btn" href="{{route('login')}}" type="button">
+                        <li class="">
+                            <a class="nav-link login btn" href="{{ route('user.login') }}" type="button">
                                 <strong>
-                                Login
-                                </strong>  
+                                    Login
+                                </strong>
                             </a>
                         </li>
                     @endauth

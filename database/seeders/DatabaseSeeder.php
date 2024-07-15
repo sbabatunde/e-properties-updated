@@ -19,14 +19,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-
-        \App\Models\Admin::create([
-            'name' => 'Essential Admin 1',
-            'role_id' => 1,
-            'email' => 'stunde@gmail.com',
-            'password' => bcrypt('stunde@gmail.com'),
+        $admin = \App\Models\User::create([
+            'firstname' => 'Essential',
+            'lastname'=>'Admin',
+            'user_type' =>'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin@gmail.com'),
         ]);
 
+        \App\Models\Admin::create([
+            'user_id' =>$admin->id,
+            'username' => 'essential_admin',
+        ]);
+       
         //My Seeders
         // $this->call(PropertyCategorySeeder::class);
         // $this->call(PropertyTypeSeeder::class);

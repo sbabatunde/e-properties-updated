@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
     // public const VERYFIED = '/verify';
-    // public const ADMIN = '/admin'; // admin
+    public const ADMIN = '/staff'; // admin
 
 
     /**
@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
             Route::middleware('web')
                 ->group(base_path('routes/site.php'));
-            Route::middleware('admin')
+            Route::middleware('web')
                 ->prefix('admin')
                 ->group(base_path('routes/admin.php'));
         });

@@ -44,6 +44,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function isAdmin()
+    {
+        return $this->user_type === 'admin'; // Adjust as per your database schema
+    }
+
     public function tenant()
     {
         return $this->hasMany(Tenant::class);

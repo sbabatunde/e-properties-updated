@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
 {
@@ -14,11 +16,13 @@ class Authenticate extends Middleware
     {
         // return $request->expectsJson() ? null : route('login');
         if (!$request->expectsJson()) {
-
-            if (request()->is('/staff*'))
+            if (Auth::check() && Auth::user()->isAdmin()){
+                return route('staff.users');
+            }
+            else{
+                Alert::error('Unauthorized Access','Login as an admin');
                 return route('get.essential.admin.login');
-            else
-                return route('get.essential.admin.login');
+            }
         }
     }
 }

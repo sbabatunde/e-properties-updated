@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminLoginRequest;
 use App\Models\Admin;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AdminLoginRequest;
 
 class LoginController extends Controller
 {
@@ -15,12 +16,16 @@ class LoginController extends Controller
     }
 
     
-    public function login(AdminLoginRequest $request)
+    public function Adminlogin(AdminLoginRequest $request)
     {
 
         // return $request;
-
-        if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")])) {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        if (Auth::attempt($credentials) &&  Auth::user()->isAdmin()) {
+        // if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")])) {
 
             return redirect()->route('admin.dashboard')->with(['success' => 'Login successfully']);
         }
