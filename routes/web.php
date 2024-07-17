@@ -51,7 +51,7 @@ use App\Http\Controllers\Site\PropertyProfessionalController;
 //load Admin route
 
 Route::get('/admin/test', function () {
-    return view('admin.test');
+    return view('admin.test1');
 });
 
 

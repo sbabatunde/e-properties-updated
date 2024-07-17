@@ -1,4 +1,4 @@
-<div class="sideBar">
+<div class="sideBar active">
     <div class="top">
         <div class="logo">
             <i class="fa fa-line-chart mr-2"></i>
@@ -49,13 +49,40 @@
             </a>
             <span class="tooltip">Media</span>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('admin.building.material.form') }}">
                 <i class="fa fa-building"></i>
                 <span class="nav-item">Materials</span>
             </a>
             <span class="tooltip">Building Materials</span>
-        </li>
+        </li> --}}
+        <div class="menu">
+            <i class="bx bx-building-house"></i>
+            <span class="nav-item">Materials</span>
+            <i class="bx bx-chevron-down nav-item"></i>
+            <span class="tooltip">Building Materials</span>
+        </div>
+        <div class="menu-dropdown">
+            <div class="sub-menu">
+                <span class="menu">
+                    <a href="{{ route('admin.building.material.form') }}">
+                        New Material
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.categories.create') }}">
+                        Create Category
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.categories') }}">
+                        All Category
+                    </a>
+                </span>
+            </div>
+        </div>
+
+
         <li>
             <a href="{{ route('admin.property.messages') }}">
                 <i class="fa fa-envelope"></i>
@@ -63,7 +90,26 @@
             </a>
             <span class="tooltip">Messages</span>
         </li>
-
+        <div class="menu">
+            <i class="bx bx-slider"></i>
+            <span class="nav-item">Sliders</span>
+            <i class="bx bx-chevron-down nav-item"></i>
+            <span class="tooltip">Sliders</span>
+        </div>
+        <div class="menu-dropdown">
+            <div class="sub-menu">
+                <span class="menu">
+                    <a href="{{ route('admin.sliders.create') }}">
+                        All
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.sliders.create') }}">
+                        Create
+                    </a>
+                </span>
+            </div>
+        </div>
 
         <li>
             <a href="">

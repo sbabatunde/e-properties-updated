@@ -7,6 +7,7 @@ use App\http\Enums\CategoryType;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\MainCategoryRequest;
+use App\Models\Admin\BuildingCategory;
 use  DB;
 
 class MainCategoriesController extends Controller
@@ -14,13 +15,13 @@ class MainCategoriesController extends Controller
    public function index()
    {
       $categories = Category::with('_parent')->orderBy('id', 'DESC')->paginate(10);
-      dd($categories);
       return view('dashboard.categories.index', compact('categories'));
    }
 
    public function create()
    {
-      $categories = Category::select('id', 'parent_id')->get();
+      // $categories = Category::select('id', 'parent_id')->get();
+      $categories = BuildingCategory::get();
       return view('dashboard.categories.create', compact('categories'));
    }
 
@@ -47,7 +48,7 @@ class MainCategoriesController extends Controller
             $request->request->add(['parent_id' => null]);
          }
 
-         // if he choose child category we mus t add parent id
+         // if he choose child category we must add parent id
 
 
          $category = Category::create($request->except('_token'));

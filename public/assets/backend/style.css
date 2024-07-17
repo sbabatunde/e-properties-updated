@@ -61,6 +61,7 @@ body{
     top: 0;
     left: 0;
     height: 100vh;
+    min-height: 120vh;
     background-color:  #394293;
     width: 80px;
     padding: 0.4rem 0.8rem;
@@ -130,7 +131,7 @@ body{
 }
 
 .sideBar.active p{
-    opacity: 1;
+    opacity: 0;
 }
 
 .sideBar ul li{
@@ -172,22 +173,108 @@ body{
 
 .sideBar ul li .tooltip{
     position: absolute;
-    left: 125px;
-    top: 50%;
-    transform: translateX(-50%, -50%);
-    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2 );
-     border-radius: .6rem;
-     padding:  .4rem 1.2rem;
-     line-height: 1.8rem;
-     z-index: 20;
-     opacity: 0;
+    background: rgba(0, 0, 0, 0.25);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-left: 70px;
+    font-size: 16px;
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
 }
+
 .sideBar ul li:hover .tooltip{
     opacity: 1;
 }
 
-.sideBar.active ul li .tooltip{
+.sideBar.active ul li:hover .tooltip{
+    opacity: 0;
+}
+
+.sideBar .menu {
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    transition: 0.3s;
+    justify-content: space-between;
+}
+
+.sideBar .menu:hover {
+    background: #F2F2F2;
+    color: black;
+}
+
+.menu i {
+    font-size: 20px;
+}
+
+.menu span {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 15px;
+    flex: 1;
+}
+
+.sideBar .menu-dropdown {
+    position: relative;
+}
+
+.sideBar .menu-dropdown .sub-menu {
+    position: absolute;
+    background: linear-gradient(90deg, #eff0ff, #c8cbf3);
+    color: black;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    padding-left: 0;
+    /* color: black; */
+    margin-left: 90px;
+    padding-bottom: 10px;
+    padding-left: 10px; 
+    padding-right: 10px;
+    border-radius: 12px;
+    min-width: 120px;
+    top: -55px;
+    z-index: 2;
+}
+
+.sideBar.active .menu-dropdown .sub-menu {
+    position: absolute;
+    background: linear-gradient(90deg, #eff0ff, #c8cbf3);
+    color: black;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    padding-left: 0;
+    /* color: black; */
+    margin-left: 90px;
+    margin-top: 60px;
+    padding-bottom: 10px;
+    padding-left: 10px; 
+    padding-right: 10px;
+    border-radius: 12px;
+    top: -55px;
+    z-index: 2;
+}
+
+
+.menu-dropdown .sub-menu {
     display: none;
+    padding-left: 45px;
+}
+
+.sub-menu .menu {
+    font-size: 14px;
+    color: black;
+}
+
+
+.sidebar-foot{
+    border-top: 1px solid #fff;
+    padding: 2px;
 }
 
 .main-content{
