@@ -237,5 +237,11 @@
       InputPresetSlug({
         selectFields: '#name', 
         writingField: '#slug',
+        // selectFields: '#sub_name', 
+        // writingField: '#sub_slug',
+      })
+      InputPresetSlug({
+        selectFields: '#sub_name', 
+        writingField: '#sub_slug',
       })
     });

@@ -78,11 +78,12 @@
     </ul>
     <ul class="sidebar-foot">
         <li>
-            <a href="">
+            <a
+                href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-sign-out"></i>
-                <span class="nav-item">Logot</span>
+                <span class="nav-item">Logout</span>
             </a>
-            <span class="tooltip">Logot</span>
+            <span class="tooltip">Logout</span>
         </li>
     </ul>
 

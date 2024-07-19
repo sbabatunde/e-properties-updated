@@ -8,13 +8,16 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\MainCategoryRequest;
 use App\Models\Admin\BuildingCategory;
+use App\Models\Admin\BuildingCategoryType;
 use  DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MainCategoriesController extends Controller
 {
    public function index()
    {
-      $categories = Category::with('_parent')->orderBy('id', 'DESC')->paginate(10);
+      $categories = BuildingCategoryType::with('category')->orderBy('id', 'DESC')->paginate(10);
+
       return view('dashboard.categories.index', compact('categories'));
    }
 
@@ -27,42 +30,38 @@ class MainCategoriesController extends Controller
 
    public function store(MainCategoryRequest $request)
    {
-
       try {
 
          DB::beginTransaction();
-
-         //validation
-
-         if (!$request->has('is_active'))
-            $request->request->add(['is_active' => 0]);
-         else
-            $request->request->add(['is_active' => 1]);
-
-
-
+         
          //if user choose main category then we must remove paret id from the request
 
-         if ($request->type == CategoryType::mainCategory) //main category
+         if ($request->type == "main_category") //main category
          {
-            $request->request->add(['parent_id' => null]);
+            // dd($request->except(['_token']));
+            // $request->request->add(['parent_id' => 1]);
+
+            $buildingCat = BuildingCategory::create($request->except(['_token','building_category_slug','type']));
+            Alert::success('Success','Building Category added successfully');
          }
-
+         else{
+            $buildingCat = BuildingCategoryType::create([
+               'type'=>$request->category,
+               'slug'=>$request->slug,
+               'building_category_slug'=>$request->building_category_slug	
+            ]);
+            Alert::success('Success','Building Category added successfully');
+         }
          // if he choose child category we must add parent id
-
-
-         $category = Category::create($request->except('_token'));
-
-         //save translations
-         $category->name = $request->name;
-         $category->save();
 
          DB::commit();
 
-         return redirect()->route('admin.categories')->with(['success' => 'The Session Has Updated Successfully']);
+         // return redirect()->route('admin.categories')->with(['success' => 'The Session Has Updated Successfully']);
+         return redirect()->route('admin.categories');
       } catch (\Exception $ex) {
          DB::rollback();
-         return redirect()->route('admin.categories')->with(['error' => 'There is Something Wrong In Session']);
+         // return redirect()->route('admin.categories')->with(['error' => 'There is Something Wrong In Session']);
+         return redirect()->route('admin.categories')->with(Alert::error('Ooops','Someting went wrong.'));
       }
    }
 
@@ -70,38 +69,46 @@ class MainCategoriesController extends Controller
 
    public function edit($id)
    {
-      $category = Category::orderBy('id', 'DESC')->find($id);
-
+      $category = BuildingCategoryType::with('category')->orderBy('id', 'DESC')->find($id);
+      $categories = BuildingCategory::orderBy('id', 'DESC')->get();
       if (!$category) {
          return redirect()->route('admin.categories')->with(['error' => 'This section does not exist']);
       }
-      return view('dashboard.categories.edit', compact('category'));
+      return view('dashboard.categories.edit', compact('category','categories'));
    }
 
-   public function update($id, MainCategoryRequest $request)
+   public function update($id, Request $request)
    {
+
+      validator($request->all(),[
+         'category'=>'required',
+         'slug'=>'required',
+      ]);
       try {
          DB::beginTransaction();
+         
+         //if user choose main category then we must remove paret id from the request
+         if ($request->type == "main_category") //main category
+         {
+            // dd($request->except(['_token']));
+            // $request->request->add(['parent_id' => 1]);
 
-         //validation
-
-         if (!$request->has('is_active'))
-            $request->request->add(['is_active' => 0]);
-         else
-            $request->request->add(['is_active' => 1]);
-
-
-         $category =  Category::find($id);
-         if (!$category) {
-            return redirect()->route('admin.categories')->with(['error' => 'This section does not exist']);
+            $buildingCat = BuildingCategory::where('id',$id)
+            ->update($request->except(['_token','building_category_slug','type','old_slug']));
+            //update main category slug in category type table
+            $buildingCat = BuildingCategoryType::where('building_category_slug','LIKE',"%".$request->old_slug."%")
+            ->update(['building_category_slug'=> $request->slug]);
+            Alert::success('Success','Building Category added successfully');
          }
-         $category->update($request->all());
-
-         //save translation
-         $category->name = $request->name;
-         $category->save();
-
-
+         else{
+            $buildingCat = BuildingCategoryType::where('id',$id)->update([
+               'type'=>$request->category,
+               'slug'=>$request->slug,
+               'building_category_slug'=>$request->building_category_slug	
+            ]);
+            Alert::success('Success','Building Category added successfully');
+         }
+         // if he choose child category we must add parent id
          DB::commit();
 
          return redirect()->route('admin.categories')->with(['success' => 'The Session Has Updated Successfully']);
@@ -114,7 +121,7 @@ class MainCategoriesController extends Controller
    public function delete($id)
    {
       try {
-         $category = Category::orderBy('id', 'DESC')->find($id);
+         $category = BuildingCategoryType::orderBy('id', 'DESC')->find($id);
 
          if (!$category) {
             return redirect()->route('admin.categories')->with(['error' => 'This section does not exist']);

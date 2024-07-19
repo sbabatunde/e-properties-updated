@@ -2,7 +2,13 @@
     <div class="top">
         <div class="logo">
             <i class="fa fa-line-chart mr-2"></i>
-            <span class="mr-2">Algorithm</span> 31/12/22
+            <span class="mr-2">Algorithm</span>
+            @php
+                use Carbon\Carbon;
+                $today = Carbon::now()->format('d/m/Y');
+                // $today->format('Y-m-d');
+            @endphp
+            {{ $today }}
         </div>
         <i class="fa fa-list" id="btn"></i>
     </div>
@@ -49,13 +55,6 @@
             </a>
             <span class="tooltip">Media</span>
         </li>
-        {{-- <li>
-            <a href="{{ route('admin.building.material.form') }}">
-                <i class="fa fa-building"></i>
-                <span class="nav-item">Materials</span>
-            </a>
-            <span class="tooltip">Building Materials</span>
-        </li> --}}
         <div class="menu">
             <i class="bx bx-building-house"></i>
             <span class="nav-item">Materials</span>
@@ -71,7 +70,7 @@
                 </span>
                 <span class="menu">
                     <a href="{{ route('admin.categories.create') }}">
-                        Create Category
+                        Add Category
                     </a>
                 </span>
                 <span class="menu">
@@ -124,11 +123,12 @@
     </ul>
     <ul class="sidebar-foot">
         <li>
-            <a href="">
+            <a
+                href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-sign-out"></i>
-                <span class="nav-item">Logot</span>
+                <span class="nav-item">Logout</span>
             </a>
-            <span class="tooltip">Logot</span>
+            <span class="tooltip">Logout</span>
         </li>
     </ul>
 

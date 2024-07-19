@@ -260,7 +260,6 @@ body{
     z-index: 2;
 }
 
-
 .menu-dropdown .sub-menu {
     display: none;
     padding-left: 45px;
@@ -296,7 +295,7 @@ body{
     .navbar-head nav{
         background: #fff;
         height: 60px;
-        z-index: 1;
+        z-index: 2;
     }
 
     .navbar-head .container{
@@ -321,6 +320,7 @@ body{
         width: 30px;
         height: 60px;
         position: fixed;
+        z-index: 3;
     }
 
     .main-content{
@@ -967,3 +967,24 @@ text-align: center;
 }
 
 /* My Property Messages Ends */
+
+
+/* All Categories Styles Begins */
+    table{
+        border-collapse: collapse;
+        box-sizing: border-box;
+        width: 100%;
+    }
+    thead{
+        border-bottom: 1px solid #000000;
+        display: table-header-group;
+        font-size: medium;
+        padding: 10px;
+    }
+    td{
+        padding: 8px 4px; 
+        color: #000000;
+        font-size: medium;
+    }
+  
+/* All Categories Styles Ends */

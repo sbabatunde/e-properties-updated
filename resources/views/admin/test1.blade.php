@@ -4,98 +4,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar Navigation</title>
-    <link rel="stylesheet" href="{{ asset('assets/backend/e-admin/style.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- IMPORT BOXICONS -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Four Level Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .level {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .grouped {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80%;
+            flex: 1;
+        }
+
+        .input,
+        .select {
+            padding: 10px;
+            margin: 0;
+            font-size: 16px;
+            flex: 1;
+            border: none;
+            border-right: 2px solid black;
+        }
+
+        .select {
+            width: 20%;
+        }
+
+        .input {
+            width: calc(80% - 2px);
+            /* 80% - border-right */
+        }
+
+        .input:last-child,
+        .select:last-child {
+            border-right: none;
+        }
+    </style>
 </head>
 
 <body>
-
-    <aside class="close">
-
-        <div class="head">
-            <div class="logo">
-                <img src="images/logo.png" alt="logo">
-                <h2 class="logo-title">Code<span>Arry</span></h2>
-            </div>
-            <i class='bx bx-menu hamburger-menu'></i>
-        </div>
-
-        <div class="nav">
-            <div class="menu active">
-                <i class="bx bx-pie-chart-alt"></i>
-                <span>Dashboard</span>
-            </div>
-
-            <div class="menu">
-                <i class="bx bx-edit"></i>
-                <span>Posts</span>
-            </div>
-
-            <div class="menu">
-                <i class="bx bx-task"></i>
-                <span>Tasks</span>
-                <i class="bx bx-chevron-down"></i>
-            </div>
-            <div class="menu-dropdown">
-                <div class="sub-menu">
-                    <span class="menu">Assignment</span>
-                    <span class="menu">Completed</span>
+    <div class="container">
+        <form action="/submit-form" method="post">
+            <!-- First Level -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="level">
+                        <div class="grouped">
+                            <select id="first-select" class="select" name="first_select">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                            </select>
+                            <input type="text" id="first-input" class="input" name="first_input"
+                                placeholder="Input">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="level">
+                        <div class="grouped">
+                            <select id="second-select1" class="select" name="second_select1">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                            </select>
+                            <select id="second-select2" class="select" name="second_select2">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="menu">
-                <i class="bx bx-bell"></i>
-                <span>Notifications</span>
-            </div>
-
-            <div class="menu">
-                <i class="bx bx-group"></i>
-                <span>Teams</span>
-                <i class="bx bx-chevron-down"></i>
-            </div>
-            <div class="menu-dropdown">
-                <div class="sub-menu">
-                    <span class="menu">Programmer</span>
-                    <span class="menu">Trader</span>
-                    <span class="menu">Youtuber</span>
+            <!-- Second Level -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="level">
+                        <div class="grouped">
+                            <input type="text" id="third-input1" class="input" name="third_input1"
+                                placeholder="Input">
+                            <input type="text" id="third-input2" class="input" name="third_input2"
+                                placeholder="Input">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="level">
+                        <div class="grouped">
+                            <select id="fourth-select1" class="select" name="fourth_select1">
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                            </select>
+                            <input type="text" id="fourth-input" class="input" name="fourth_input"
+                                placeholder="Input">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="menu">
-                <i class="bx bx-cog"></i>
-                <span>Settings</span>
+            <!-- Submit Button -->
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="submit" style="padding: 10px 20px; font-size: 18px;">Submit</button>
             </div>
-
-            <div class="menu" style="pointer-events: none;"></div>
-        </div>
-
-        <div class="foot">
-            <div class="profile">
-                <img src="images/profile.jpg" alt="profile">
-                <div class="info">
-                    <span class="name">John Doe</span>
-                    <span class="job">Student</span>
-                </div>
-            </div>
-
-            <div class="menu menu-logout">
-                <i class="bx bx-log-out"></i>
-                <span>Logout</span>
-            </div>
-        </div>
-
-    </aside>
-
-    <header>
-        <h1>SIDEBAR</h1>
-    </header>
-
-
-
+        </form>
+    </div>
 </body>
 
 </html>
-<script src="{{ asset('assets/admin/build/js/e-admin-sidebar.js') }}"></script>

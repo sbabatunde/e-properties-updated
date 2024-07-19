@@ -24,9 +24,9 @@ class MainCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'category' => 'required',
             // 'type' => 'required|in:1,2',
-            'slug' => 'required|unique:categories,slug,'.$this -> id
+            'slug' => 'required|unique:building_categories,slug'
         ];
     }
 }

@@ -64,8 +64,6 @@
                         </li>
                         <li class="">
                             <a class=" login btn" href="{{ route('login') }}" type="button">
-
-
                                 </strong>
                             </a>
                         </li>
