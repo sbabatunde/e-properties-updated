@@ -63,22 +63,15 @@ Route::group(['namespace' => 'admin', 'middleware' => ['adminCheck']], function 
 
   Route::group(['prefix' => 'properties'], function () {
 
-    Route::get('/', [Admin\propertiesController::class, 'index'])->name('admin.properties');
-    Route::get('create', [Admin\propertiesController::class, 'create'])->name('admin.properties.general.create');
+    Route::get('/', [Admin\propertiesController::class, 'AllProperties'])->name('admin.properties.all');
+    Route::POST('/add/to/trending/{id}', [Admin\propertiesController::class, 'addToTrending'])->name('admin.trending.add');
+    Route::POST('/remove/from/trending/{id}', [Admin\propertiesController::class, 'removeFromTrending'])->name('admin.trending.remove');
+    Route::get('/all/trending/properties', [Admin\propertiesController::class, 'trendingProperties'])->name('admin.trending.all');
+    Route::get('/all/deals/properties', [Admin\propertiesController::class, 'allDealsProperties'])->name('admin.deals.all');
     Route::post('store', [Admin\propertiesController::class, 'store'])->name('admin.properties.general.store');
     Route::get('edit/{id}', [Admin\propertiesController::class, 'edit'])->name('admin.properties.edit');
     Route::get('update/{id}', [Admin\propertiesController::class, 'update'])->name('admin.properties.update');
     Route::get('delete/{id}', [Admin\propertiesController::class, 'delete'])->name('admin.properties.delete');
-
-    Route::get('price/{id}', [Admin\propertiesController::class, 'getprice'])->name('admin.properties.price');
-    Route::post('price', [Admin\propertiesController::class, 'savePropertyPrice'])->name('admin.properties.price.store');
-
-    Route::get('feature/{id}', [Admin\propertiesController::class, 'getPropertyFeature'])->name('admin.properties.features');
-    Route::post('feature', [Admin\propertiesController::class, 'savePropertyFeature'])->name('admin.properties.features.store');
-
-    Route::get('images/{id}', [Admin\propertiesController::class, 'addImages'])->name('admin.properties.images');
-    Route::post('images', [Admin\propertiesController::class, 'savePropertyImages'])->name('admin.properties.images.store');
-    Route::post('images/db', [Admin\propertiesController::class, 'savePropertyImagesDB'])->name('admin.properties.images.store.db');
   });
 
 
@@ -90,7 +83,6 @@ Route::group(['namespace' => 'admin', 'middleware' => ['adminCheck']], function 
   });
   ################################## end sliders    #######################################
 });
-
 
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin',], function () {

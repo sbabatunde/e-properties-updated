@@ -27,13 +27,37 @@
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
-        <li>
-            <a href="{{ route('admin.add.listing') }}">
-                <i class="glyphicon glyphicon-home"></i>
-                <span class="nav-item">Property</span>
-            </a>
-            <span class="tooltip">Post Property</span>
-        </li>
+
+        <div class="menu">
+            <i class="fa fa-home"></i>
+            <span class="nav-item">Property</span>
+            <i class="bx bx-chevron-down nav-item"></i>
+            <span class="tooltip">Property</span>
+        </div>
+        <div class="menu-dropdown">
+            <div class="sub-menu">
+                <span class="menu">
+                    <a href="{{ route('admin.properties.all') }}">
+                        All
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.add.listing') }}">
+                        Post
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.deals.all') }}">
+                        Deals
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.trending.all') }}">
+                        Trending
+                    </a>
+                </span>
+            </div>
+        </div>
         <li>
             <a href="{{ route('admin.listings.all') }}">
                 <i class="fa fa-archive "></i>
@@ -55,6 +79,8 @@
             </a>
             <span class="tooltip">Media</span>
         </li>
+
+        {{-- Materials Link  --}}
         <div class="menu">
             <i class="bx bx-building-house"></i>
             <span class="nav-item">Materials</span>

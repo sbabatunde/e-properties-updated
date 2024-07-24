@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\Trending;
 use App\Models\Site\PropertyType;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -49,7 +50,7 @@ class Property extends Model
 
     public function agent()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'agent_id','id');
     }
 
     public function categories()
@@ -73,8 +74,18 @@ class Property extends Model
         return $this->belongsTo(Auction::class,'id','property_id');
     }
 
+    public function deals()
+    {
+        return $this->belongsTo(PropertyDeals::class,'id','property_id');
+    }
+
     public function type()
     {
         return $this->belongsTo(PropertyType::class,'type_id','id');
+    }
+
+    public function trending()
+    {
+        return $this->belongsTo(Trending::class,'id','property_id');
     }
 }

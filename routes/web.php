@@ -218,6 +218,7 @@ Route::controller(PropertyMessage::class)->group(function () {
 //Building Materials Route
 Route::controller(BuildingMaterial::class)->group(function () {
     Route::get('/building/materials/form',  'buildingMaterialForm')->name('admin.building.material.form');
+    Route::get('/building/materials/form/search/{category_slug}',  'buidlingTypeSearch')->name('admin.building.material.form.search');
     Route::post('/building/materials/store',  'buildingMaterialStore')->name('admin.building-material.store');
     
 });

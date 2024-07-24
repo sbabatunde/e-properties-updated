@@ -10,29 +10,26 @@
     </div>
 
     <div id="" class="form-group col-md-3">
-        <select id="subCat" required onchange="subCategory(this)" type="text"
-            style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+        <select id="Matcategory" required type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            autocomplete="" value="{{ old('category') }}" name="category">
+            autocomplete="" onchange="fetchItemsByCategory(this)" value="{{ old('category') }}" name="category">
             <option disabled selected value="">---Select Material Category---</option>
-            <option>Roofing</option>
-            <option>Dry Lining and Plaster</option>
+            @foreach ($materialCategory as $item)
+                <option value="{{ $item->slug }}">{{ $item->category }}</option>
+            @endforeach
         </select>
         @error('category')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-
     <div id="" class="form-group col-md-3">
         <select id="subCat" required type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             autocomplete="" value="{{ old('type') }}" name="type">
-            <option disabled selected value="">---Select Material Type---</option>
-            <option>Roofing Hammer</option>
-            <option>Roofing Nail</option>
+            <option disabled selected value="">----Select Material Type----</option>'
         </select>
         @error('type')
             <span class="text-danger">{{ $message }}</span>
@@ -76,7 +73,7 @@
 
     <div class="form-group col-md-6">
         <div class="form-group name2 col-md-12">
-            <input type="text" name="price" id="currency-field"
+            <input type="number" name="price" id="currency-field"
                 class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 pattern="^\₦ \d{1,3}(,\d{3})*(\.\d+)?₦" required data-type="currency" placeholder="Price(₦)"
                 autocomplete="" value="{{ old('price') }}" style="border: 1px solid #2626ac">

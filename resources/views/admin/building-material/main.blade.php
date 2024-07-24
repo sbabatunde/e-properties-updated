@@ -48,4 +48,47 @@
         </div>
     </div>
     <!-- /page content -->
+
+    <script type="text/javascript">
+        // Function to fetch items based on category
+        function fetchItemsByCategory(that) {
+            console.log(that.value);
+            fetch(`/building/materials/form/search/${that.value}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(items => {
+                    var select = document.getElementById('subCat');
+
+                    // Clear existing options
+                    select.innerHTML = '<option disabled selected value="">----Select Material Type----</option>';
+
+                    // Populate select with items
+                    items.forEach(item => {
+                        var option = document.createElement('option');
+                        option.value = item.slug; // Adjust as per your item structure
+                        option.textContent = item.type; // Adjust as per your item structure
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching items:', error);
+                });
+        }
+
+        // Event listener for category select
+        document.getElementById('categorySelect').addEventListener('change', function() {
+            var categoryId = this.value;
+            if (categoryId) {
+                fetchItemsByCategory(categoryId);
+            } else {
+                // Clear item select if no category selected
+                var select = document.getElementById('itemSelect');
+                select.innerHTML = '<option value="">Select an item...</option>';
+            }
+        });
+    </script>
 @endsection

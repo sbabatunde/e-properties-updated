@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\City;
-use App\Models\Property;
+use App\Models\User;
 use App\Models\Category;
-use App\Models\Site\PropertyType;
+use App\Models\Property;
 use App\Models\site\Slider;
+use Illuminate\Http\Request;
+use App\Models\Site\PropertyType;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,7 @@ class HomeController extends Controller
     {
         $data = [];
         $data['sliders'] = Slider::get(['photo','title']);
+        $data['users'] = User::get();
         // $data['cities'] = City::geProperty::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();t();
         $data['properties'] = Property::with(['payment'])->take(6)->get();
         $data['category'] = PropertyType::with(['property','propertyCategory'])->whereHas('propertyCategory',function($q){

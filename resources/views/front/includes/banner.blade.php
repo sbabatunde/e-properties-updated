@@ -2,7 +2,7 @@
     <article>
         <h1 class="home-title-main">
             Number 1 stop for your property solution in Nigeria with
-            Over <span style="color: red">1,578,987</span> Registered Users
+            Over <span style="color: red">{{ count($data['users']) }}</span> Registered Users
         </h1>
         <p class="home-title-sub mt-1">
             Search deals on;Property Building Materials, Auction, Rents, Sales,Development, Maintenance, Valuation

@@ -16,12 +16,12 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->string('thumbnail');
             $table->string('title');
-            $table->string('category');
+            // $table->string('category');
             $table->string('type');
             $table->string('address');
-            $table->integer('quantity');
+            $table->string('quantity');
             $table->decimal('price', 10, 2);
-            $table->string('installment');
+            $table->string('installment')->default('No');
             $table->string('description');
             $table->timestamps();
         });
