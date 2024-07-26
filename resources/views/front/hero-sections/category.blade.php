@@ -1,7 +1,7 @@
 <div class="hero-category">
     <div class="hero-meet-expert">
         <h5 style="color: black">Category</h5>
-        <a href="{{ route('category.all') }}" style="color: red;text-decoration:none;cursor: pointer;">
+        <a href="{{ route('property.category.all') }}" style="color: red;text-decoration:none;cursor: pointer;">
             <h5 style="color: red;">See more</h5>
         </a>
     </div>

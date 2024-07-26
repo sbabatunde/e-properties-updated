@@ -1,120 +1,24 @@
 @extends('layouts.front.site')
 @section('content')
-    <style>
-        .form-container {
-            position: absolute;
-            left: 169px;
-            top: 524px;
-            display: inline-flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 2.5rem;
-        }
-
-        .form-image {
-            width: 200px;
-            /* Adjust as per your design */
-            height: 200px;
-            /* Adjust as per your design */
-            background-color: #E5E7EB;
-            /* Use your actual background color */
-            border-radius: 50%;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            /* Example shadow */
-        }
-
-        .form-content {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
-            background-color: #FFFFFF;
-            /* Use your actual background color */
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            /* Example shadow */
-        }
-
-        .form-header {
-            font-size: 2rem;
-            font-weight: bold;
-            font-family: 'Inter', sans-serif;
-            color: #1F2937;
-            /* Use your text color */
-        }
-
-        .form-fields {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .form-field {
-            position: relative;
-        }
-
-        .input-field {
-            width: 100%;
-            height: 40px;
-            /* Adjust height as needed */
-            padding: 0.5rem;
-            border: 1px solid #D1D5DB;
-            /* Example border color */
-            border-radius: 4px;
-            font-size: 0.875rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .field-info {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 0.5rem;
-            font-size: 0.875rem;
-            color: #4B5563;
-            /* Example color */
-        }
-
-        .search-button {
-            width: 100%;
-            padding: 1rem;
-            background-color: #4C51BF;
-            /* Example background color */
-            color: #FFFFFF;
-            /* Example text color */
-            border: none;
-            border-radius: 4px;
-            font-size: 1.125rem;
-            font-weight: bold;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .search-button:hover {
-            background-color: #4338CA;
-            /* Example hover background color */
-        }
-    </style>
-
     @include('front.hero-sections.circular-properties')
     @include('front.hero-sections.brands')
 
     {{-- Commercial And Residential Properties Link Begins --}}
     <div class="container mt-4">
         <div class="row hero-prop-type">
-            <div class="hero-commmerce-prop mt-3">
-                <a href="{{ route('all.commercial') }}" style="text-decoration: none">
-                    Commercial Properties
-                </a>
-            </div>
-            <div class="hero-resident-prop mt-3">
+            @foreach ($data['propertyCategories'] as $item)
+                <div class="hero-commmerce-prop mt-3">
+                    <a href="{{ route('all.property.by.category', $item->category_slug) }}" style="text-decoration: none">
+                        {{ $item->category_name }} Properties
+                    </a>
+                </div>
+            @endforeach
+
+            {{-- <div class="hero-resident-prop mt-3">
                 <a href="{{ route('all.residential') }}" style="text-decoration: none">
                     Residential Properties
                 </a>
-            </div>
+            </div> --}}
         </div>
     </div>
     {{-- Commercial And Residential Properties Link Ends --}}
@@ -217,29 +121,29 @@
         </div>
         <div class="row d-flex justify-content-between">
             <div class="mb-2 text-center">
-                <h3 style="color: blue"><b>53,074</b></h3>
+                <h3 style="color: blue"><b>{{ number_format($data['rented']) }}</b></h3>
                 <a href="" style="color: black"><b>Rented Properties</b></a>
             </div>
             <div class="mb-2 text-center">
-                <h3 style="color: blue"><b>53,074</b></h3>
+                <h3 style="color: blue"><b>{{ number_format($data['sold']) }}</b></h3>
                 <a href="" style="color: black"><b>Sold Properties</b></a>
             </div>
             <div class="mb-2 text-center">
-                <h3 style="color: red"><b>1,122,533</b></h3>
+                <h3 style="color: red"><b>{{ number_format($data['liveAuction']) }}</b></h3>
                 <a href="{{ route('user.live-auction') }}" style="color: red"><b>Ongoing Auction</b></a>
             </div>
             <div class="mb-2 text-center">
-                <h3 style="color: blue"><b>34,879</b></h3>
+                <h3 style="color: blue"><b>{{ number_format($data['tenants']) }}</b></h3>
                 <a href="" style="color: black"><b>Registered Tenants</b></a>
             </div>
             <div class="mb-2 text-center">
-                <h3 style="color: blue"><b>674,000</b></h3>
+                <h3 style="color: blue"><b>{{ number_format($data['landlords']) }}</b></h3>
                 <a href="{{ route('all.landlords') }}" style="color: black"><b>Registered Landlords</b></a>
             </div>
-            <div class="mb-2 text-center">
-                <h3 style="color: red"><b>201,905</b></h3>
+            {{-- <div class="mb-2 text-center">
+                <h3 style="color: red"><b>{{ number_format($blacklist) }}</b></h3>
                 <a href="{{ route('blacklist.all') }}" style="color: red"><b>Blacklist</b></a>
-            </div>
+            </div> --}}
         </div>
     </div>
     {{-- E-properties Numbers Ends --}}

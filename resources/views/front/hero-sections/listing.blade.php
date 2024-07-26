@@ -1,7 +1,7 @@
 <div class="hero-category">
     <div class="hero-meet-expert">
         <h5 style="color: black">New Listing</h5>
-        <a href="{{ route('all.residential') }}" style="text-decoration: none">
+        <a href="{{ route('all.properties.listing') }}" style="text-decoration: none">
             <h5 style="color: red">See more</h5>
         </a>
     </div>
@@ -10,7 +10,7 @@
         @foreach ($data['properties'] as $key => $item)
             {{-- @dd($item) --}}
             <div class="pic">
-                <img src="{{ asset($item->thumbnail) }}" alt="">
+                <img src="{{ asset($item->thumbnail) }}" alt="{{ $item->title }}">
                 <span class="listing-text">
                     <h5 class="mt-3" style="font-weight:700;width:inherit">{{ $item->title }}</h5>
                     <p>

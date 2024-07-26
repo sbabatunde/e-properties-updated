@@ -70,25 +70,43 @@ class PropertyController extends Controller
         return view('front.users.properties.home.properties-details');
     }
 
-    public function residentialProperty()
+    public function propertyCategory($category_slug)
     {
-        $salesProperties = Property::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();
+        $salesProperties = Property::with(['type','payment'])
+        ->whereHas('type', function($q) use($category_slug){
+            $q->where('category_slug',$category_slug);
+        })->where('status','Sale')->paginate(6);
+        $letProperties = Property::with(['type','payment'])
+        ->whereHas('type', function($q) use($category_slug){
+            $q->where('category_slug',$category_slug);
+        })->where('status','Let')->paginate(6);
+        $rentProperties = Property::with(['type','payment'])
+        ->whereHas('type', function($q) use($category_slug){
+            $q->where('category_slug',$category_slug);
+        })->where('status','Rent')->paginate(6);
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
         ->whereDate('end_date','>=',Carbon::today())->get();
-        // dd($properties);
-        return view('front.users.properties.residential.main-page', compact('salesProperties','liveAuction'));
+
+        $similarProperties  = Property::with(['type','payment'])->take('3')->get();
+        // dd($similarProperties);
+        return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
+        ,'rentProperties','liveAuction','similarProperties'))->withViewName('vendor.pagination.custom');
     }
 
-    public function commercialProperty()
+    public function commercialProperty($category_slug)
     {
         $salesProperties = Property::with(['type','payment'])->where('status','Sale')->paginate(6);
-        $letProperties = Property::with(['type','payment'])->where('status','Lett')->paginate(6);
+        $letProperties = Property::with(['type','payment'])->where('status','Let')->paginate(6);
         $rentProperties = Property::with(['type','payment'])->where('status','Rent')->paginate(6);
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
         ->whereDate('end_date','>=',Carbon::today())->get();
         // dd($liveAuction);
-        return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties',
-        'rentProperties','liveAuction'))
-        ->withViewName('vendor.pagination.custom');
+        return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
+        ,'rentProperties','liveAuction'))->withViewName('vendor.pagination.custom');
+    }
+
+    public function allPropertyDeals()
+    {
+
     }
 }

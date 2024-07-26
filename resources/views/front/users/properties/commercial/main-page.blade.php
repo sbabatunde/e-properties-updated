@@ -72,7 +72,7 @@
         <div class="residential-right">
             <div class="res-btn-group">
                 <div class="btn category-btn-group res-btn-container d-flex justify-content-center">
-                    <button onclick="showResSales()" class="active-btn-group">
+                    <button onclick="showResSales()" class="req-target active-btn-group">
                         <strong>
                             Sales
                         </strong>

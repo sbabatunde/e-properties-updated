@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Admin\Trending;
+use App\Models\Site\PropertyCategory;
 use App\Models\Site\PropertyType;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,10 +54,10 @@ class Property extends Model
         return $this->belongsTo(User::class,'agent_id','id');
     }
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'property_categories');
-    }
+    // public function categories()
+    // {
+    //     return $this->belongsTo(PropertyType::class,'property_id','id');
+    // }
 
 
     public function amenities()

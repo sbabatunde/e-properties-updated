@@ -4,16 +4,17 @@ use App\Http\Controllers\Site;
 use Admin\propertiesController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Site\Admin\BuildingMaterial;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Admin\Index;
 use App\Http\Controllers\Site\Admin\Profile;
+use App\Http\Controllers\Site\Admin\Sliders;
 use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\LandController;
 use App\Http\Controllers\Site\UserController;
 use App\Http\Controllers\Site\AgentController;
+use App\Http\Controllers\Site\GroupController;
 use App\Http\Controllers\Site\ReportController;
 use App\Http\Controllers\Site\SliderController;
 use App\Http\Controllers\Site\TenantController;
@@ -24,15 +25,14 @@ use App\Http\Controllers\Site\LandlordController;
 use App\Http\Controllers\Site\PropertyController;
 use App\Http\Controllers\Site\ServicesController;
 use App\Http\Controllers\Site\BlacklistController;
+use App\Http\Controllers\Site\Admin\PropertyMessage;
+use App\Http\Controllers\Site\Admin\BuildingMaterial;
 use App\Http\Controllers\Site\Admin\ListingController;
 use App\Http\Controllers\Site\Admin\PostMediaController;
-use App\Http\Controllers\Site\Admin\PropertyMessage;
-use App\Http\Controllers\Site\Admin\Sliders;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Http\Controllers\Site\BuildingMaterialController;
-use App\Http\Controllers\Site\Compare\PropertyController as ComparePropertyController;
-use App\Http\Controllers\Site\GroupController;
 use App\Http\Controllers\Site\PropertyProfessionalController;
-
+use App\Http\Controllers\Site\Compare\PropertyController as ComparePropertyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -112,9 +112,9 @@ Route::controller(BuildingMaterialController::class)->group(function () {
 
 //User Categories Routes
 Route::controller(CategoryController::class)->group(function () {
-    Route::get('/all-category', 'allCategory')->name('category.all');
+    Route::get('/all/property/{slug}', 'propertiesByCategory')->name('all.property.by.category');
     Route::get('/property/by/type/{slug}', 'propertyByType')->name('property.by.type');
-    
+    Route::get('/all/property', 'allPropertyCategories')->name('property.category.all');
 });
 
 //Blogs Routes
@@ -136,14 +136,17 @@ Route::controller(BlacklistController::class)->group(function () {
 Route::controller(PropertyController::class)->group(function () {
     Route::get('property/{id}', 'propertyById')->name('property.details');
     Route::post('property/messge/{pID}/{aID}', 'propertyMessage')->name('user.property.message');
-    
+    Route::get('all/property/deals', 'allPropertyDeals')->name('all.properties.deals');
+    Route::get('all/property/by/type', 'allPropertyTypes')->name('all.property.by.type');
+   
+   
 
     //Residential Properties Routes Begins
-    Route::get('all-residential-properties', 'residentialProperty')->name('all.residential');
+    Route::get('all/properties/by/category/{category_slug}', 'propertyByCategory')->name('all.properties.category');
     //Residential Properties Routes Ends
 
     //commercial Properties Routes Begins
-    Route::get('all-commercial-properties', 'commercialProperty')->name('all.commercial');
+    Route::get('all-commercial-properties', 'allPropertyListings')->name('all.properties.listing');
     //commercial Properties Routes Ends
 });
 
@@ -179,6 +182,23 @@ Route::controller(UserController::class)->group(function () {
 });
 
 
+Route::get('/test-cloudinary', function () {
+    try {
+        $uploadedImage = Cloudinary::upload('../assets/admin/images/photo/service11.png');
+        return response()->json(['url' => $uploadedImage->getSecurePath()]);
+    } catch (Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+});
+
+Route::get('/env-test', function () {
+    return [
+        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+        'api_key' => env('CLOUDINARY_API_KEY'),
+        'api_secret' => env('CLOUDINARY_API_SECRET'),
+        'upload_preset' => env('CLOUDINARY_UPLOAD_PRESET'),
+    ];
+});
 
 //All Admin Routes Begins
 //Index Route

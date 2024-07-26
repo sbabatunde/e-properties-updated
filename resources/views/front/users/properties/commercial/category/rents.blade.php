@@ -11,11 +11,11 @@
                 <div class="res-price">
                     <span style="color: black">Price:
                         <b>
-                            {{ $item->initial_denomination }}
-                            {{ number_format($item->initial_pay) }}
+                            {{ $item->payment->initial_denomination }}
+                            {{ number_format($item->payment->initial_pay) }}
                         </b>
                     </span>
-                    <span style="color: #394293" class="mr-2">Annually</span>
+                    <span style="color: #394293" class="mr-2">{{ $item->payment->sequence }}</span>
                 </div>
                 <div class="comp-like-share">
                     <span style="font-weight:550">
