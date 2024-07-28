@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Site;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Auction;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\site\AuctionBid;
 use App\Http\Controllers\Controller;
@@ -18,6 +20,7 @@ class AuctionController extends Controller
         ->whereDate('end_date','>=',Carbon::today())->paginate(6);
         $upcomingAuctions = Auction::with(['property'])->whereDate('start_date','>=',Carbon::today())
         ->limit(6)->get();
+         
         return view('front.users.liveAuction.all-auctions', compact('liveAuction','upcomingAuctions'))
         ->withViewName('vendor.pagination.custom');;
     }
@@ -29,8 +32,17 @@ class AuctionController extends Controller
 
         $upcomingAuctions = Auction::with(['property'])->orderBy('start_date','asc')
         ->whereDate('start_date','>=',Carbon::today())->limit(6)->get();
+
+        //General statistic of the website
+        $data['users'] = User::get();
+        $data['landlords'] = User::where('user_type','landlord')->count();
+        $data['tenants'] = User::where('user_type','tenant')->count();
+        $data['liveAuction'] = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
+        ->whereDate('end_date','>=',Carbon::today())->count();
+        $data['sold'] = Property::where('status','Sold')->count();
+        $data['rented'] = Property::where('status','Rented')->count();
         // dd(Auction::all());
-        return view('front.users.liveAuction.main-page', compact('liveAuction','upcomingAuctions'));
+        return view('front.users.liveAuction.main-page', compact('liveAuction','upcomingAuctions','data'));
     }
 
     public function placeAuctionBid($id)

@@ -1852,7 +1852,7 @@ a.text-dark:hover, a.text-dark:focus {
   margin-bottom: 10px;
   background: #dbdbf1;
   border: 1px solid #9d9dc5;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   border-radius: 60px;
   width: 100%;
   padding: 2rem 0rem;
@@ -2287,7 +2287,6 @@ a.text-dark:hover, a.text-dark:focus {
   align-items: center;
   margin: auto;
   gap: 10px;
-
 }
 .hero-listing .pic{
  background: #ededee;
@@ -2295,6 +2294,11 @@ a.text-dark:hover, a.text-dark:focus {
  width: 23%;
  min-width: 250px;
  margin-bottom: 2rem;
+ transform: .3s ease;
+}
+
+.hero-listing .pic:hover{
+  transform: scale(1.1);
 }
 @media(max-width:760px)
 {
@@ -4268,7 +4272,12 @@ a{
   margin-left: 2.2rem;
   margin-top: 1rem;
 }
+
+
 /* Property Request Page Begins */
+
+
+/* Property Search Page */
 
 /* All Groups Begins */
 

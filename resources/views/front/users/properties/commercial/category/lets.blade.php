@@ -4,7 +4,7 @@
             <div class="res-prop-items mt-4">
                 <img src="{{ asset($item->thumbnail) }}" alt="">
                 <p style="color: black">
-                    <span style="font-weight:550;">{{ $item->title }}</span><br>
+                    <span style="font-weight:550;font-size:4vmin">{{ $item->title }}</span><br>
                     {{ $item->area }}
                 </p>
                 <a href="{{ route('property.details', $item->id) }}" class="btn res-prop-view"> View</a><br>

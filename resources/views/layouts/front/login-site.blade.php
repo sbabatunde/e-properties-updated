@@ -343,6 +343,77 @@
         });
     </script>
 
+    {{-- Script for search button Tabs --}}
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show the selected tab content and set the button as active
+            let x = document.getElementById('searchType').value = tabName;
+            document.querySelector(`.tab-button[onclick="showTab('${tabName}')"]`).classList.add('active');
+            console.log(x);
+        }
+    </script>
+
+    {{-- Trending Slide Script --}}
+    <script>
+        jQuery(document).ready(function() {
+            if (jQuery('.testimonial-slider-rtl').length) {
+                const reviewsCarouselOptions = {
+                    slidesPerView: 1, // Default value for smaller screens
+                    spaceBetween: 30,
+                    loop: true,
+                    speed: 7500,
+                    grabCursor: true, // Show a grab cursor when hovering over slides
+                    pauseOnMouseEnter: false,
+                    mousewheel: {
+                        enabled: false,
+                    },
+                    keyboard: {
+                        enabled: false,
+                    },
+                    allowTouchMove: true, // Enable dragging and touch movement
+                    autoHeight: false,
+                    initialSlide: 0,
+                    autoplay: {
+                        delay: 3000, // Delay in milliseconds (e.g., 3000ms = 3 seconds)
+                        disableOnInteraction: false, // Continue autoplay even after user interactions
+                    },
+                    breakpoints: {
+                        1200: { // When viewport is 1200px or wider
+                            slidesPerView: 2,
+                            spaceBetween: 30,
+                        },
+                        992: { // When viewport is 992px or wider
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+                        768: { // When viewport is 768px or wider
+                            slidesPerView: 1.5,
+                            spaceBetween: 15,
+                        },
+                        576: { // When viewport is 576px or wider
+                            slidesPerView: 1, // Show one slide per view
+                            spaceBetween: 10,
+                        },
+                    },
+                };
+
+                const reviewsCarousel = new Swiper(".testimonial-slider-rtl", reviewsCarouselOptions);
+            }
+        });
+    </script>
 
 
 </body>

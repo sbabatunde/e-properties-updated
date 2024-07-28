@@ -4,6 +4,7 @@ use App\Http\Controllers\Site;
 use Admin\propertiesController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PropertyDealsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Admin\Index;
@@ -110,12 +111,6 @@ Route::controller(BuildingMaterialController::class)->group(function () {
     Route::get('/building/material', 'buildingMaterials')->name('user.buiding-materials');
 });
 
-//User Categories Routes
-Route::controller(CategoryController::class)->group(function () {
-    Route::get('/all/property/{slug}', 'propertiesByCategory')->name('all.property.by.category');
-    Route::get('/property/by/type/{slug}', 'propertyByType')->name('property.by.type');
-    Route::get('/all/property', 'allPropertyCategories')->name('property.category.all');
-});
 
 //Blogs Routes
 Route::controller(BlogController::class)->group(function () {
@@ -131,24 +126,34 @@ Route::controller(GroupController::class)->group(function () {
 Route::controller(BlacklistController::class)->group(function () {
     Route::get('/blacklist', 'allBlacklist')->name('blacklist.all');
 });
+Route::get('property/search',[PropertyController::class,'propertySearch'])->name('property.search');
 
 // All User Property Related Routes Begins
 Route::controller(PropertyController::class)->group(function () {
     Route::get('property/{id}', 'propertyById')->name('property.details');
     Route::post('property/messge/{pID}/{aID}', 'propertyMessage')->name('user.property.message');
-    Route::get('all/property/deals', 'allPropertyDeals')->name('all.properties.deals');
     Route::get('all/property/by/type', 'allPropertyTypes')->name('all.property.by.type');
-   
-   
 
     //Residential Properties Routes Begins
     Route::get('all/properties/by/category/{category_slug}', 'propertyByCategory')->name('all.properties.category');
     //Residential Properties Routes Ends
 
     //commercial Properties Routes Begins
-    Route::get('all-commercial-properties', 'allPropertyListings')->name('all.properties.listing');
-    //commercial Properties Routes Ends
+    Route::get('all/properties/listings', 'allPropertyListings')->name('all.properties.listing');
+    //commercial Properties Routes Ends\\
+    
 });
+Route::group(['prefix' => 'properties/'], function () {
+    Route::get('all/deals', [PropertyDealsController::class,'index'])->name('properties.deals.all');
+   });
+  
+//User Categories Routes
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/all/property/{slug}', 'propertiesByCategory')->name('all.property.by.category');
+    Route::get('/property/by/type/{slug}', 'propertyByType')->name('property.by.type');
+    Route::get('/all/property', 'allPropertyCategories')->name('property.category.all');
+});
+
 
 // Compare Add Route
 Route::controller(ComparePropertyController::class)->group(function () {
@@ -230,7 +235,7 @@ Route::controller(PostMediaController::class)->group(function () {
 
 //Property Message Route
 Route::controller(PropertyMessage::class)->group(function () {
-    Route::get('/my/property/messages',  'propertyMessage')->name('admin.property.messages');
+    Route::get('/my/property/messages',  'propertyMessage')->name('admin.property.messages')->middleware('auth');;
 });
 
 

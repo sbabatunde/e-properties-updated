@@ -43,25 +43,13 @@
     }
 </style>
 
-
 @extends('layouts.front.login-site')
 @section('content')
     {{-- Page Banner Begins --}}
-    <div class="page-hero bg-image" style="background-image: url(../assets/images/services/banner.png);">
-        <div class="hero-section">
-            <div class="search-form col-8" style="position: relative;top:50%">
-                <form class="form" action="" method="POST" enctype="multipart/form-data">
-                    <div class="blog-search shadow-md border-gray-500">
-                        <input type="text" name="" id="" class="form-control mt-1 blog-input"
-                            placeholder="Search for Blogs and news">
-
-                        <button class="blacklist-search" style="font: 300;font-size:18px;cursor: pointer;"><i
-                                class="fa fa-search" style="color: white;cursor:"></i>Search</button>
-                    </div>
-                </form>
-            </div>
+    <div class="page-hero bg-image" style="background:#5856cf">
+        <div class="hero-section" style="display: flex;flex-direction:column;width:90vw;margin:auto">
+            @include('front.hero-sections.search-form')
         </div>
-    </div>
     </div>
     {{-- Page Banner Ends  --}}
 

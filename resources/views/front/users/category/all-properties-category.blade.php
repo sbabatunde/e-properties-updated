@@ -1,19 +1,10 @@
 @extends('layouts.front.login-site')
 @section('content')
     {{-- Page Banner Begins --}}
-    <div class="page-hero bg-image " style="background-image: url(../assets/images/services/banner.png);">
-        <div class="hero-section ">
-            <div class="search-form col-8" style="position: relative;top:50%">
-                <form class="form" action="" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="" id=""
-                        style="z-index:50;border: 1px solid rgb(255, 245, 245); border-radius:30px;background-color:rgb(245, 245, 245)"
-                        class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-md focus:border-indigo-300 
-                    focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        placeholder="Location">
-                </form>
-            </div>
+    <div class="page-hero bg-image" style="background:#5856cf">
+        <div class="hero-section" style="display: flex;flex-direction:column;width:90vw;margin:auto">
+            @include('front.hero-sections.search-form')
         </div>
-    </div>
     </div>
     {{-- Page Banner Ends  --}}
     <div class="container mt-5">

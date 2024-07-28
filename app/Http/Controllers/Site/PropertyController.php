@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use Carbon\Carbon;
 use App\Models\City;
-use App\Models\Image as SliderImage;
+use App\Models\User;
 use App\Models\Auction;
 use App\Models\Category;
 use App\Models\Property;
@@ -12,14 +12,15 @@ use App\Models\site\Message;
 use Illuminate\Http\Request;
 use App\Models\PropertyPayment;
 use App\Models\PropertyAmenities;
+use App\Models\Site\PropertyType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PropertyMessageRequest;
-use App\Models\User;
+use App\Models\Image as SliderImage;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
 use RealRashid\SweetAlert\Facades\Alert;
-use Intervention\Image\Laravel\Facades\Image;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Http\Requests\PropertyMessageRequest;
+use Intervention\Image\Laravel\Facades\Image;
 
 class PropertyController extends Controller
 {
@@ -33,17 +34,13 @@ class PropertyController extends Controller
             $data['user']= User::where('id',Auth::id())->first();
 
         }
-        
-        // dd($data['property']->type_id);
-        // if (!$data['property']) {
-        //     return redirect()->route('home');
-        // }
-        // dd($data);
+   
         return view('front.users.properties.home.properties-details', $data);
     }
 
     public function propertyMessage(PropertyMessageRequest $request,$prop_id,$agent_id)
     {
+        
         if (Auth::check()) {
             Message::insert([
                 'user_id' => Auth::user()->id,
@@ -105,8 +102,93 @@ class PropertyController extends Controller
         ,'rentProperties','liveAuction'))->withViewName('vendor.pagination.custom');
     }
 
-    public function allPropertyDeals()
+    public function propertySearch(Request $request)
     {
+        // Retrieve search parameters from the request
+        $keyword = $request->input('keyword');
+        $area = $request->input('area');
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+        $minBedroom = $request->input('min_bedroom');
+        $maxBedroom = $request->input('max_bedroom');
+        $furnished = $request->input('furnished');
+        $propertyType = $request->input('p_type');
+        $searchType = $request->input('type');
 
+        // Build the query
+        $query = Property::query()
+            ->select('properties.*')
+            ->leftJoin('property_payments as prices', 'properties.id', '=', 'prices.property_id');
+            // ->groupBy('properties.id'); // Group by property to avoid duplicate results
+
+        // Apply filters if they are provided
+        if (!empty($keyword)) {
+            $query->where('properties.title', 'like', '%' . $keyword . '%');
+        }
+        // dd($query->get());
+
+        if (!empty($area)) {
+            $query->where('properties.localty', $area);
+
+        }
+        if (!empty($minPrice)) {
+            $query->where('prices.initial_pay', '>=', $minPrice);
+
+        }
+        if (!empty($maxPrice)) {
+            $query->where('prices.initial_pay', '<=', $maxPrice);
+
+        }
+        if (!empty($minBedroom)) {
+            $query->where('properties.bedrooms', '>=', $minBedroom);
+
+        }
+        if (!empty($maxBedroom)) {
+            $query->where('properties.bedrooms', '<=', $maxBedroom);
+        }
+        if (!empty($furnished)) {
+            $query->where('properties.furnishing', $furnished);
+        }
+        if (!empty($propertyType)) {
+            $query->where('properties.type_id', $propertyType);
+        }
+        if (!empty($searchType)) {
+            $query->where('properties.status', $searchType);
+        }
+
+        // Execute the query and get the results
+        $properties = $query->get();
+        // Return the view with the results
+        return view('front.users.properties.search',compact('properties'))->withViewName('vendor.pagination.custom');
+    }
+
+    
+
+    public function allPropertyListings()
+    { 
+        // data for form
+        $data['minPrice'] = PropertyPayment::orderBy('initial_pay','asc')->get(['initial_pay','initial_denomination'])
+            ->unique('initial_pay')->take(4);
+        $data['maxPrice'] = PropertyPayment::orderBy('initial_pay','desc')->get(['initial_pay','initial_denomination'])
+            ->unique('initial_pay')->take(4);
+        $data['minBedroom'] = Property::orderBy('bedrooms','asc')->get(['bedrooms'])
+            ->unique('bedrooms')->take(4);
+        $data['maxBedroom'] = Property::orderBy('bedrooms','desc')->get(['bedrooms'])
+            ->unique('bedrooms')->take(4);
+        $data['localty'] = Property::orderBy('localty','desc')->get(['localty'])->unique('localty');
+        $data['type'] = PropertyType::with(['property','propertyCategory'])->get();
+        $data['localty'] = Property::orderBy('localty','desc')->get(['localty'])->unique('localty');
+        // /end form data
+
+        $salesProperties = Property::with(['type','payment'])->where('status','Sale')->orderBy('created_at','desc')->paginate(6);
+        $rentProperties = Property::with(['type','payment'])->where('status','Rent')->orderBy('created_at','desc')->paginate(6);
+        $letProperties = Property::with(['type','payment'])->where('status','Let')->orderBy('created_at','desc')->paginate(6);
+        $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
+        ->whereDate('end_date','>=',Carbon::today())->get();
+
+        $similarProperties  = Property::with(['type','payment'])->orderBy('created_at','desc')->take('3')->get();
+
+        return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
+        ,'rentProperties','liveAuction','similarProperties','data'))->withViewName('vendor.pagination.custom');
     }
 }

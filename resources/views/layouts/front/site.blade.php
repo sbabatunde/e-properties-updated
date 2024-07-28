@@ -325,8 +325,9 @@
             });
 
             // Show the selected tab content and set the button as active
-            document.getElementById(tabName).classList.add('active');
+            let x = document.getElementById('searchType').value = tabName;
             document.querySelector(`.tab-button[onclick="showTab('${tabName}')"]`).classList.add('active');
+            console.log(x);
         }
     </script>
 

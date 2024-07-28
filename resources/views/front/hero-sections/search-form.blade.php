@@ -1,20 +1,22 @@
 <div class="tab-container">
-    <div class="tab-button active" onclick="showTab('sales')">Sales</div>
-    <div class="tab-button" onclick="showTab('rent')">Rent</div>
+    <div class="tab-button active" onclick="showTab('Sale')">Sales</div>
+    <div class="tab-button" onclick="showTab('Rent')">Rent</div>
     {{-- <div class="tab-button" onclick="showTab('buy')">Buy</div> --}}
-    <div class="tab-button" onclick="showTab('lets')">Lets</div>
-    <div class="tab-button" onclick="showTab('land')">Land</div>
+    <div class="tab-button" onclick="showTab('Let')">Lets</div>
+    <div class="tab-button" onclick="showTab('Land')">Land</div>
 </div>
 
 {{-- <input type="text" class="search-input" placeholder="Search...">
     <button class="search-button">Search</button> --}}
 
-<form action="" enctype="multipart/form-data" method="POST">
+<form action="{{ route('property.search') }}" enctype="multipart/form-data" method="GET">
+    @csrf
     <div class="select-container">
         <div class="group-input">
             <div class="select-group">
-                <input type="text" class="input" style="width: 70%" placeholder="Enter search keyword">
-                <select id="level1-1" style="width: 30%">
+                <input type="text" class="input" name="keyword" style="width: 70%"
+                    placeholder="Enter search keyword">
+                <select id="level1-1" name="area" style="width: 30%">
                     <option value="">Area</option>
                     @foreach ($data['localty'] as $item)
                         <option value="{{ $item->localty }}">
@@ -45,6 +47,8 @@
                     </select>
                 </div>
             </div>
+            <input type="text" hidden id="searchType" name="type" value="sale">
+
         </div>
         <div class="group-input">
             <div class="select-group">
@@ -90,26 +94,3 @@
 
     </div>
 </form>
-
-<div id="sales" class="tab-content active">
-    <h2>Sales Listings</h2>
-    <p>Here you can find properties for sale.</p>
-</div>
-
-<div id="rent" class="tab-content">
-    <h2>Rent Listings</h2>
-    <p>Here you can find properties for rent.</p>
-</div>
-
-<div id="buy" class="tab-content">
-    <h2>Buy Listings</h2>
-    <p>Here you can find properties to buy.</p>
-</div>
-<div id="lets" class="tab-content">
-    <h2>Lets Listings</h2>
-    <p>Here you can find properties to Lets.</p>
-</div>
-<div id="land" class="tab-content">
-    <h2>Land Listings</h2>
-    <p>Here you can find properties to buy.</p>
-</div>

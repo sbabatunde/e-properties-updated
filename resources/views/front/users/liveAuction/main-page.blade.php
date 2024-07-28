@@ -48,35 +48,7 @@
                 {{-- Current Live Auction Properties Begins --}}
 
                 {{-- E-properties Statistics Begins --}}
-                <div class="container mb-4 mt-5 d-flex justify-content-center">
-                    <h3><b>E-properties in Numbers</b></h3>
-                </div>
-                <div class="container row d-flex justify-content-between">
-                    <div class="mb-2 text-center">
-                        <h3 style="color: blue"><b>53,074</b></h3>
-                        <p><b>Rented Properties</b></p>
-                    </div>
-                    <div class="mb-2 text-center">
-                        <h3 style="color: blue"><b>53,074</b></h3>
-                        <p><b>Sold Properties</b></p>
-                    </div>
-                    <div class="mb-2 text-center">
-                        <h3 style="color: red"><b>1,122,533</b></h3>
-                        <p style="color: red"><b>Ongoing Auction</b></p>
-                    </div>
-                    <div class="mb-2 text-center">
-                        <h3 style="color: blue"><b>34,879</b></h3>
-                        <p><b>Registered Tenants</b></p>
-                    </div>
-                    <div class="mb-2 text-center">
-                        <h3 style="color: blue"><b>674,000</b></h3>
-                        <p><b>Registered Landlords</b></p>
-                    </div>
-                    <div class="mb-2 text-center">
-                        <h3 style="color: red"><b>201,905</b></h3>
-                        <p style="color: red"><b>Blacklist</b></p>
-                    </div>
-                </div>
+                @include('front.hero-sections.stats')
                 {{-- E-properties Statistics Ends --}}
             </div>
         </div>

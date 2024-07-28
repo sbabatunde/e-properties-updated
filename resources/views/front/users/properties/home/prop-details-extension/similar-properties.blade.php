@@ -6,7 +6,7 @@
                 <div class="res-similar-prop-items mt-4">
                     <img src="{{ asset($property->thumbnail) }}" alt="">
                     <p style="color: black">
-                        <span style="font-weight:550;">{{ $property->title }}</span><br>
+                        <span style="font-weight:550;" class="truncate">{{ $property->title }}</span><br>
                         {{ $property->localty }}
                     </p>
                     <a href="{{ route('property.details', $property->id) }}" class="btn res-prop-view"> View</a><br>

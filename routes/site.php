@@ -2,17 +2,19 @@
 
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Site;
+use App\Http\Controllers\Site\PropertyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\PropertyDealsController;
 
 
-Route::group(['prefix' => 'staff/users','middleware'=>'adminCheck'], function () {
-    Route::get('/', [Admin\UsersController::class, 'index'])->name('admin.users');
-    Route::get('create', [Admin\UsersController::class, 'create'])->name('admin.users.create');
-    Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
-    Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
-  });
+// Route::group(['prefix' => 'staff/users','middleware'=>'adminCheck'], function () {
+//     Route::get('/', [Admin\UsersController::class, 'index'])->name('admin.users');
+//     Route::get('create', [Admin\UsersController::class, 'create'])->name('admin.users.create');
+//     Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
+//     Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
+//   });
   Route::group(['prefix' => 'staff/sliders','middleware'=>['adminCheck']], function () {
     // Route to show form for creating a slider
     Route::get('/create', [Admin\SliderController::class, 'create'])->name('admin.sliders.create');
@@ -25,7 +27,7 @@ Route::group(['prefix' => 'staff/users','middleware'=>'adminCheck'], function ()
   
 Route::group(['namespace' => 'admin', 'middleware' => ['adminCheck']], function () {
 
-  Route::get('/dashboard', [Admin\AdminController::class, 'index'])->name('admin.dashboard');
+  Route::get('/dashboard', [Admin\AdminController::class, 'index'])->name('e-admin.dashboard');
   Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.logout');
   // new route
   Route::get('/edit/profile', [Admin\ProfileController::class, 'editProfile'])->name('admin.edit.profile');
@@ -67,7 +69,7 @@ Route::group(['namespace' => 'admin', 'middleware' => ['adminCheck']], function 
     Route::POST('/add/to/trending/{id}', [Admin\propertiesController::class, 'addToTrending'])->name('admin.trending.add');
     Route::POST('/remove/from/trending/{id}', [Admin\propertiesController::class, 'removeFromTrending'])->name('admin.trending.remove');
     Route::get('/all/trending/properties', [Admin\propertiesController::class, 'trendingProperties'])->name('admin.trending.all');
-    Route::get('/all/deals/properties', [Admin\propertiesController::class, 'allDealsProperties'])->name('admin.deals.all');
+    Route::get('/admin/all/deals/properties', [Admin\propertiesController::class, 'allDealsProperties'])->name('admin.deals.all');
     Route::post('store', [Admin\propertiesController::class, 'store'])->name('admin.properties.general.store');
     Route::get('edit/{id}', [Admin\propertiesController::class, 'edit'])->name('admin.properties.edit');
     Route::get('update/{id}', [Admin\propertiesController::class, 'update'])->name('admin.properties.update');

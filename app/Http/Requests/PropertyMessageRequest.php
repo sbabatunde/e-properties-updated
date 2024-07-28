@@ -28,4 +28,14 @@ class PropertyMessageRequest extends FormRequest
             'message' => 'required|string',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'The name field is required.',
+            'phone.required' => 'The name field is required.',
+            'email.string' => 'The email field must be a string.',
+            'message.required' => 'The field cannot exceed 255 characters.',
+        ];
+    }
 }

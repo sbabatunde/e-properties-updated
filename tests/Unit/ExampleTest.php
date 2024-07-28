@@ -13,4 +13,11 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function allPropertyDeals()
+    {
+        $response = $this->get('/all/property/deals');
+        $response->assertStatus(200);
+    }
+
 }

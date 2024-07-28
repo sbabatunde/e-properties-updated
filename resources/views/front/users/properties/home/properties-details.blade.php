@@ -38,7 +38,8 @@
                                                 </li>
 
                                                 <li>
-                                                    <i class="fa-solid fa-toilet"></i>{{ $property->toilets }} <br>
+                                                    <i class="glyphicon glyphicon-toilet"></i><i
+                                                        class="box-icon-toilet"></i>{{ $property->toilets }} <br>
                                                     toilets <i class="glyphicon glyphicon-tent"></i>
 
                                                 </li>
