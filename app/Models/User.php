@@ -69,4 +69,8 @@ class User extends Authenticatable
         return $this->hasMany(ServiceProvider::class);
     }
 
+    public function property()
+    {
+        return $this->hasMany(Property::class,'agent_id','id');
+    }
 }

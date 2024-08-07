@@ -13,11 +13,11 @@ class AgentController extends Controller
         // $agent = Agent::where('user_id', $id)->first();
         return view('front.users.agents.connect');
     }
-
+ 
     public function allAgents()
     {
-        $allAgents = Agent::get();
-
+        $allAgents = Agent::with(['user','property'])->get();
+        // dd($allAgents);
         return view('front.users.agents.all', compact('allAgents'));
     }
 }

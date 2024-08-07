@@ -13,18 +13,20 @@
     <div class="container">
         <div class="category-card-container mt-3">
             @foreach ($building_dev as $item)
-                <div class="category-card category">
-                    <div class="image">
-                        <img src="{{ asset($item->image) }}" alt="{{ asset($item->service) }}" style="width:100%;"
-                            height="150" width="100">
-                        <div class="category-card-sub ">
-                            <div class="card-text mb-0">
-                                <h5>{{ $item->service }}</h5>
-                                <p>Available: <b>{{ count($item->providers) }}</b></p>
+                <a href="{{ route('services.type.all', $item->slug) }}">
+                    <div class="category-card category">
+                        <div class="image">
+                            <img src="{{ asset($item->image) }}" alt="{{ asset($item->service) }}" style="width:100%;"
+                                height="150" width="100">
+                            <div class="category-card-sub ">
+                                <div class="card-text mb-0">
+                                    <h5>{{ $item->service }}</h5>
+                                    <p>Available: <b>{{ count($item->providers) }}</b></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </div>

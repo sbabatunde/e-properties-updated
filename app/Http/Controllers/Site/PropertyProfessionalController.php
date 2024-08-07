@@ -11,15 +11,18 @@ class PropertyProfessionalController extends Controller
 {
     public function allPropertyProfessionals()
     {
-        $propertyProfessionals = User::with(['agent','landlord','providers'])->where('user_type','!=','tenant')->orderBy('firstname','asc')->get();
+        $propertyProfessionals = User::with(['agent','landlord','providers'])
+        ->where('user_type','<>','tenant')->where('user_type','<>','admin')->orderBy('firstname','asc')->get();
 
         return view('front.users.property-professionals.all', compact('propertyProfessionals'));
     }
 
     public function viewPropertyProfessionals($id)
     {
-        $propertyProfessional = User::with(['agent','landlord','providers'])->where('users.id', $id)->first();
+        $propertyProfessional = User::with(['property','providers'])->where('users.id', $id)->first();
 
-        return view('front.users.agents.connect', compact('propertyProfessional'));
+        $similarProfs = User::with(['property'])->where('user_type',$propertyProfessional->user_type)
+        ->where('users.id','<>',$propertyProfessional->id)->get();
+        return view('front.users.agents.connect', compact('propertyProfessional','similarProfs'));
     }
 }

@@ -104,7 +104,7 @@
                     <div class="search-area-inner">
                         <div class="search-contents ">
                             <div class=" col-lg-12 schedule-header">
-                                <img src="{{ asset('../assets/images/properties-1.png') }}" alt="">
+                                <img src="{{ asset($property->agent->business_image) }}" alt="">
                                 <h6>{{ $property->agent->business_name }}</h6>
                             </div>
                             <ul class="col-lg-12 mb-2">

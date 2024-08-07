@@ -95,7 +95,7 @@ class UserController extends Controller
             });
         }
         Alert::success('Registration Successful', 'Kindly login to proceed.Thank you');
-        return redirect()->route('login');
+        return redirect()->route('user.login');
     }
 
     public function login()

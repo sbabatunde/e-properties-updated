@@ -15,4 +15,9 @@ class Agent extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function property()
+    {
+        return $this->hasMany(Property::class,'agent_id','user_id');
+    }
 }

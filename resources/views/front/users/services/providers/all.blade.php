@@ -1,7 +1,7 @@
 @extends('layouts.front.login-site')
 @section('content')
     {{-- Page Banner Begins --}}
-    <div class="page-hero bg-image " style="background-image: url(../assets/images/services/banner.png);">
+    <div class="page-hero bg-image " style="background-image: url(./assets/images/services/banner.png);">
         <div class="hero-section ">
             <div class="search-form col-8" style="position: relative;top:50%">
                 <form class="form" action="" method="POST" enctype="multipart/form-data">
@@ -20,26 +20,29 @@
     <div class="container mt-5">
         <div class="meet-header ml-0">
             <h3 style="font-weight: 700;color:black">
-                The Agents
+                All {{ $title }}
             </h3>
         </div>
     </div>
     <div class="landlord-sub-category">
         {{-- Row 1 Begins --}}
-        @foreach ($allAgents as $agent)
-            <div class="landlord-cat-venue">
-                <img class=""
-                    src="{{ !empty($agent->user->photo) ? url(asset($agent->user->photo)) : url('/assets/admin/images/no_image.jpg') }}"
-                    alt="{{ $agent->business_name }}">
-                <span class="hero-expert-text">
-                    <h4 class="mb-0">{{ $agent->user->firstname ?? '' }} {{ $agent->user->lastname ?? '' }}</h4>
-                    <p>
-                        {{ count($agent->property) > 1 ? count($agent->property) . ' Properties' : count($agent->property) . ' Property' }}
-                    </p>
-                    <a href="{{ route('property.professional.view', $agent->user_id) }}" class="btn btn-info mb-3"
-                        style="background-color:#394293;font-weight:500;font-size:20px">Connect</a>
-                </span>
-            </div>
+        @foreach ($providers as $item)
+            @foreach ($item->providers as $item)
+                <div class="landlord-cat-venue">
+                    <img class=""
+                        src="{{ !empty($item->photo) ? url(asset($item->photo)) : url('/assets/admin/images/no_image.jpg') }}"
+                        alt="{{ $item->business_name }}">
+                    <span class="hero-expert-text">
+                        <h4 class="mb-0">{{ $item->firstname ?? '' }} {{ $item->lastname ?? '' }}</h4>
+                        <p>
+                            5 Followers
+                            {{-- {{ count($agent->property) > 1 ? count($agent->property) . ' Properties' : count($agent->property) . ' Property' }} --}}
+                        </p>
+                        <a href="{{ route('service.provider.view', $item->id) }}" class="btn btn-info mb-3"
+                            style="background-color:#394293;font-weight:500;font-size:20px">Connect</a>
+                    </span>
+                </div>
+            @endforeach
         @endforeach
 
         {{-- Row 1 Ends --}}

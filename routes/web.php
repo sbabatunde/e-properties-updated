@@ -177,6 +177,9 @@ Route::controller(AuctionController::class)->group(function () {
 Route::controller(ServicesController::class)->group(function () {
     Route::get('/services-page', 'findServices')->name('services.find');
     Route::get('/get/service/category/type/{slug}', 'getServiceType')->name('services.find.type');
+    Route::get('/get/service/category/view/{slug}', 'allServiceProviders')->name('services.type.all');
+    Route::get('/service/provider/view/{id}', 'viewServiceProviders')->name('service.provider.view');
+    
 });
 
 //User Login Controller

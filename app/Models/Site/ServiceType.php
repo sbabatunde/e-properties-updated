@@ -3,6 +3,7 @@
 namespace App\Models\Site;
 
 use App\Models\ServiceProvider;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,7 @@ class ServiceType extends Model
 
     public function providers()
     {
-        return $this->hasMany(ServiceProvider::class);
+        return $this->hasManyThrough(User::class,ServiceProvider::class,'service_type_id','id','id','user_id');
     }
 
     public function serviceCategory()

@@ -13,7 +13,7 @@
     <div class="container">
         <div class="category-card-container mt-3">
             @foreach ($maintenance as $item)
-                <a href="">
+                <a href="{{ route('services.type.all', $item->slug) }}">
                     <div class="category-card category">
                         <div class="image">
                             <img src="{{ asset($item->image) }}" alt="{{ asset($item->service) }}" style="width:100%;"

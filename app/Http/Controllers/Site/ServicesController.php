@@ -21,7 +21,8 @@ class ServicesController extends Controller
 
         $property = ServiceType::with(['serviceCategory','providers'])->whereHas('serviceCategory',
         function($q){$q->where('category','Property');})->get();
-
+        
+        // dd($property);
         return view('front.users.services.main-page',compact('maintenance','building_dev','legal','property'));
     }
 
@@ -36,4 +37,20 @@ class ServicesController extends Controller
             ], 500);
         }
     }
+
+    public function allServiceProviders($slug)
+    {
+        $providers = ServiceType::with(['serviceCategory','providers'])->where('slug',$slug)->paginate(10);
+
+        $title = $providers->value('service') ;
+        return view('front.users.services.providers.all',compact('providers','title'));
+    }
+
+    public function viewServiceProviders($id)
+    {
+        // $provider = User::(['provi'])->first();
+
+        return view('front.users.services.providers.view');
+    }
+
 }

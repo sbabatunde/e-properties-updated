@@ -3,21 +3,28 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 agent-details">
-                <img class="agent-image" src=" {{ asset($propertyProfessional->photo) }}" alt="">
+                <img class="agent-image"
+                    src="{{ !empty($propertyProfessional->photo) ? url(asset($propertyProfessional->photo)) : url('/assets/admin/images/no_image.jpg') }}"
+                    alt="{{ $propertyProfessional->firstname }}">
                 <div class="agent-action">
                     <span class="agent-connect"> <a href="">Connect</a></span>
                     <span class="agent-message"><a href="">Send a Message</a></span>
-                    <span class="agent-share"><a href=""><i class="fa fa-heart"></i> Share</a></span>
+                    <span class="agent-share"><a href=""><i class="fa fa-share"></i> Share</a></span>
                 </div>
             </div>
-            @dd($propertyProfessional)
             <div class="col-lg-6 agent-desc">
                 <h3>{{ $propertyProfessional->firstname }} {{ $propertyProfessional->lastname }}</h3>
-                <h5 class="text-bold uppercase">Real Estate Agent</h5>
+                @if ($propertyProfessional->user_type == 'agent')
+                    <h5 class="text-bold uppercase">Real Estate Agent</h5>
+                @elseif($propertyProfessional->user_type == 'landlord')
+                    <h5 class="text-bold uppercase">landlord</h5>
+                @else
+                    {{ $propertyProfessional->providers }}
+                @endif
                 <div class="">
                     <span class="" style="float: inline-start">
                         <i class="fa fa-map-marker mr-2" style="font-size:20px;color:black"></i>
-                        {{ $propertyProfessional->axis }}
+                        {{ $propertyProfessional->org_axis }},{{ $propertyProfessional->org_state }}
                     </span>
                     <span style="float: inline-end">{{ $propertyProfessional->email }}</span>
                 </div>
@@ -26,7 +33,7 @@
                         <li><i class="fa fa-envelope mr-2 mt-2"
                                 style="font-size:20px;color:black"></i>{{ $propertyProfessional->email }}</li>
                         <li><i class="fa fa-phone mr-2 mt-2" style="font-size:20px;color:black"></i>
-                            {{ $propertyProfessional->phone }} {{ $propertyProfessional->whatApp }}
+                            {{ $propertyProfessional->phone }} {{ ',' . $propertyProfessional->whatApp ?? '' }}
                         </li>
                         <li class="mt-2"><span
                                 style="border: 1px solid black;padding:.2rem;font-weight:700">Experience</span>
@@ -37,9 +44,7 @@
 
                 <div class="py-2">
                     <h3>Bio</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-                        cum? Quos enim doloribus tempore, atque deleniti animi mollitia totam reprehender
-                        it tempora quaerat pariatur at ab unde distinctio saepe asperiores voluptate?
+                    <p>{{ $propertyProfessional->about_org }}
                     </p>
                 </div>
             </div>
@@ -48,18 +53,13 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 agent-house">
-                <img src="{{ asset('/assets/images/houses/house2.png') }}" alt="">
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 agent-house">
-                <img src="{{ asset('/assets/images/houses/house1.png') }}" alt="">
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 agent-house">
-                <img src="{{ asset('/assets/images/houses/house2.png') }}" alt="">
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 agent-house">
-                <img src="{{ asset('/assets/images/houses/house3.png') }}" alt="">
-            </div>
+            @foreach ($propertyProfessional->property->take(8) as $item)
+                <div class="col-lg-3 col-md-3 col-sm-6 agent-house">
+                    <a href="{{ route('property.details', $item->id) }}">
+                        <img src="{{ asset($item->thumbnail) }}" alt="">
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
 
@@ -96,83 +96,28 @@
 
     <div class="container">
         <div class="row mt-3">
-            {{-- First Row --}}
-            <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="meet-card">
-                    <div class="image">
-                        <img src="../assets/images/services/service2.png" alt="Avatar" style="width:100%;" height="150"
-                            width="100">
-                    </div>
-                    <div class="meet-card-sub">
-                        <div class="card-text mb-0">
-                            <h5>Mally Cleff</h5>
-                            <p>12 Followers</p>
+            @foreach ($similarProfs as $item)
+                <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
+                    <div class="meet-card">
+                        <div class="image">
+                            <img src="{{ !empty($item->photo) ? url(asset($item->photo)) : url('/assets/admin/images/no_image.jpg') }}"
+                                alt="{{ $item->firstname }}" style="width:100%;" height="150" width="100">
                         </div>
-                        <div class="card-footer   meet-footer">
-                            <a href="services.html">
-                                Connect
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="meet-card">
-                    <div class="image">
-                        <img src="../assets/images/services/service3.png" alt="Avatar" style="width:100%;" height="150"
-                            width="100">
-                    </div>
-                    <div class="meet-card-sub">
-                        <div class="card-text mb-0">
-                            <h5>Jentl Hsghe</h5>
-                            <p>16 Followers</p>
-                        </div>
-                        <div class="card-footer   meet-footer">
-                            <a href="services.html">
-                                Connect
-                            </a>
+                        <div class="meet-card-sub">
+                            <div class="card-text mb-0">
+                                <h5>{{ $item->firstname }} {{ $item->lastname }}</h5>
+                                <p>12 Followers</p>
+                            </div>
+                            <div class="card-footer   meet-footer">
+                                <a href="{{ route('property.professional.view', $item->id) }}">
+                                    Connect
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="meet-card">
-                    <div class="image">
-                        <img src="../assets/images/services/service5.png" alt="Avatar" style="width:100%;" height="150"
-                            width="100">
-                    </div>
-                    <div class="meet-card-sub">
-                        <div class="card-text mb-0">
-                            <h5>Michael Alele</h5>
-                            <p>24 Followers</p>
-                        </div>
-                        <div class="card-footer   meet-footer">
-                            <a href="services.html">
-                                Connect
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="meet-card">
-                    <div class="image">
-                        <img src="../assets/images/services/service4.png" alt="Avatar" style="width:100%;" height="150"
-                            width="100">
-                    </div>
-                    <div class="meet-card-sub">
-                        <div class="card-text mb-0">
-                            <h5>Emeka Davidson</h5>
-                            <p>20 Followers</p>
-                        </div>
-                        <div class="card-footer   meet-footer">
-                            <a href="services.html">
-                                Connect
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
 @endsection

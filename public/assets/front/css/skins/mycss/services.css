@@ -4734,3 +4734,213 @@ a{
 }
 
 /* Swipper Css Begins  For Brands Ends*/
+
+
+/* Service Provider Css Begins */
+  .provider-connect{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px 20px;
+    margin-top: 80px;
+    width: 100%;
+  }
+  .provider-connect i{
+    color: black;
+  }
+  .provider-image{
+    display: flex;
+    width: 48%;
+    margin: 10px auto;
+    flex-direction: column;
+    gap: 30px 0;
+  }
+  
+
+  .provider-description{
+    display: flex;
+    width: 48%;
+    line-height: 1.5;
+    margin: 40px auto;
+    flex-direction: column;
+    gap: 4px 0;
+  }
+  @media(max-width:760px) {
+    .provider-image,.provider-description{
+      width: 100%;
+    }
+  }
+
+  .provider-image img{
+    width: 100%;
+    height: 400px;
+  }
+
+  .provider-btn{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+    gap: 0 15px;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .provider-connect-link{
+    color: #fff;
+    background: #394293;
+    border-radius: 5px;
+    padding: 11px 35px;
+  }
+
+  .provider-message-link{
+    color: #394293;
+    background: #fff;
+    border: 1px solid #394293;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+
+  .provider-message-link:hover{
+    color: #fff;
+    background: #394293;
+  }
+
+  .provider-share-link{
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+  }
+
+  .provider-share-link:hover{
+    color: black;
+  }
+
+  .provider-share-link i{
+    color: black;
+    font-size: larger;
+    margin-right: 10px;
+  }
+
+  .provider-services-display{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 10px;
+    justify-content: center;
+    align-items: center;
+    /* flex-basis: 20%; */
+    /* margin: 10px; */
+  }
+
+  @media(min-width:768px) and (max-width:1280px) {
+    .provider-services-display{
+      justify-content: space-between;
+      /* background: red; */
+    }
+  }
+
+  
+  @media(max-width:450px) {
+    .provider-services-display{
+    justify-content: center;
+      
+    }
+  }
+
+  .provider-services-display img{
+    height: 220px;
+    width: 265px;
+  }
+
+  .provider-services-display .two-images{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap:  10px  0;
+  }
+
+  .provider-services-display .two-images img{
+    height: 105px
+  }
+
+  .provider-open{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    background: #f4f5f7;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .open-days{
+    width: 35%;
+  }
+
+  @media(max-width:450px){
+    .open-days{
+      width: 100%;
+    }
+
+    .provider-map img{
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+
+  @media(min-width:768px) and (max-width:1280px){
+    .open-days{
+      width: 100%;
+    }
+
+    .provider-map img{
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+
+  .day-time{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .other-providers-more{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .other-providers{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media(max-width:450px){
+  .other-providers{
+    justify-content: center;
+  }
+  }
+
+  .other-providers .other-provider-sub{
+    width: 100%;
+    flex-basis: 250px;
+    text-align: center;
+    background: #f4f5f7;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  }
+
+  .other-providers .other-provider-sub img{
+    width: 100%;
+  }
+
+  .other-provider-sub span h4, .other-provider-sub span p{
+    font-size: large;
+    margin-top: 10px;
+  }
+/* Service Provider Css Ends */
