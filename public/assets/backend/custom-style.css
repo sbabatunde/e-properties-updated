@@ -137,5 +137,44 @@
 
 /* Post Property Form styles Ends */
 
+/* All Properties Style Begins*/
 
- 
+.property-mini-image{
+    width: 3rem;
+    height: 3rem;
+    clip-path: circle();
+}
+
+/* All Properties Style Ends*/
+
+/* new Icon tooltip Begins*/
+.icon-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    /* Optional: Change cursor to pointer on hover */
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    /* Position the tooltip above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.icon-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+/* new Icon tooltip Begins*/

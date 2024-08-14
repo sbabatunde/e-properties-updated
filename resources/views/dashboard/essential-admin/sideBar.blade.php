@@ -115,6 +115,7 @@
             </a>
             <span class="tooltip">Messages</span>
         </li>
+
         <div class="menu">
             <i class="bx bx-slider"></i>
             <span class="nav-item">Sliders</span>
@@ -124,13 +125,39 @@
         <div class="menu-dropdown">
             <div class="sub-menu">
                 <span class="menu">
-                    <a href="{{ route('admin.sliders.create') }}">
-                        All
+                    <a href="{{ route('admin.sliders.index') }}">
+                        All Sliders
                     </a>
                 </span>
                 <span class="menu">
                     <a href="{{ route('admin.sliders.create') }}">
                         Create
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        <div class="menu">
+            <i class="fa fa-users"></i>
+            <span class="nav-item">Users</span>
+            <i class="bx bx-chevron-down nav-item"></i>
+            <span class="tooltip">Users</span>
+        </div>
+        <div class="menu-dropdown">
+            <div class="sub-menu">
+                <span class="menu">
+                    <a href="{{ route('admin.sliders.index') }}">
+                        All Users
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.users') }}">
+                        Admin Users
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.users.create') }}">
+                        Create User
                     </a>
                 </span>
             </div>

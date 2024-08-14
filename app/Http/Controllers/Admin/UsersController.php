@@ -2,23 +2,122 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Requests\UserRequest;
 use App\Models\Admin;
+use App\Models\Agent;
+use App\Models\Tenant;
+use App\Models\Landlord;
+use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id', 'DESC')->paginate(10);
+        $users = User::with('providers')->orderBy('created_at', 'DESC')->paginate(10);
         return view('dashboard.users.index', compact('users'));
     }
 
     public function create()
     {
         return view('dashboard.users.create');
+    }
+
+    public function edit(Request $request)
+    {
+        $request->validate([
+            'user_type' => 'required',
+        ]);
+        $user_type = $request->user_type;
+
+        if ($user_type == "landlord" || $user_type == "agent") {
+            $request->validate([
+                'bussiness_name' => 'required|string',
+                'bussiness_ID' => 'required|string',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|confirmed',
+                'user_type' => 'required',
+
+            ]);
+            DB::transaction(function () use ($request, $user_type) {
+                $user = User::create([
+                    'email' => $request->email,
+                    'password' =>  Hash::make($request->password),
+                    'user_type' => $request->user_type,
+                ]);
+                if ($user_type == "landlord") {
+                    Landlord::create([
+                        'business_name' => $request->bussiness_name,
+                        'business_ID' => $request->bussiness_ID,
+                        'user_id' => $user['id']
+                    ]);
+                } else {
+                    Agent::create([
+                        'business_name' => $request->bussiness_name,
+                        'business_ID' => $request->bussiness_ID,
+                        'user_id' => $user['id']
+                    ]);
+                }
+            });
+        } else if ($user_type == "tenant") {
+            $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|confirmed',
+                'user_type' => 'required',
+            ]);
+            DB::transaction(function () use ($request, $user_type) {
+                $user = User::create([
+                    'email' => $request->email,
+                    'password' =>  Hash::make($request->password),
+                    'user_type' => $user_type,
+                ]);
+                Tenant::create([
+                    'fullname' => $request->name,
+                    'user_id' => $user['id']
+                ]);
+            });
+        } else if ($user_type == "service_provider") {
+            $request->validate([
+                'bussiness_name' => 'required|string',
+                'bussiness_ID' => 'required|string',
+                'service_type' => 'required|string',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|confirmed',
+                'user_type' => 'required',
+
+            ]);
+            DB::transaction(function () use ($request, $user_type) {
+                $user = User::create([
+                    'email' => $request->email,
+                    'password' =>  Hash::make($request->password),
+                    'user_type' => $user_type,
+                ]);
+                ServiceProvider::create([
+                    'business_name' => $request->bussiness_name,
+                    'business_ID' => $request->bussiness_ID,
+                    'user_id' => $user['id'],
+                    'service_type_id' => $request->service_type,
+                ]);
+            });
+        }
+        Alert::success('Registration Successful', 'Kindly login to proceed.Thank you');
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+
+        $user = new Admin();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+
+        if ($user->save()) {
+            return redirect()->route('admin.users')->with(['success' => 'The Section has been created']);
+        }
+        return redirect()->route('admin.users')->with(['error' => 'Something went wrong']);
     }
 
     public function store(UserRequest $request)

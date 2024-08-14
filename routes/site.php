@@ -9,12 +9,13 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\PropertyDealsController;
 
 
-// Route::group(['prefix' => 'staff/users','middleware'=>'adminCheck'], function () {
-//     Route::get('/', [Admin\UsersController::class, 'index'])->name('admin.users');
-//     Route::get('create', [Admin\UsersController::class, 'create'])->name('admin.users.create');
-//     Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
-//     Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
-//   });
+Route::group(['prefix' => 'staff/users','middleware'=>'adminCheck'], function () {
+    Route::get('/', [Admin\UsersController::class, 'index'])->name('admin.users');
+    Route::get('create', [Admin\UsersController::class, 'create'])->name('admin.users.create');
+    Route::post('edit', [Admin\UsersController::class, 'edit'])->name('admin.users.edit');
+    Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
+    Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
+  });
   Route::group(['prefix' => 'staff/sliders','middleware'=>['adminCheck']], function () {
     // Route to show form for creating a slider
     Route::get('/create', [Admin\SliderController::class, 'create'])->name('admin.sliders.create');

@@ -59,9 +59,10 @@ class SliderController extends Controller
     // Display all sliders
     public function index()
     {
-        $sliders = Slider::all();
+        $sliders = Slider::paginate(10);
 
-        return view('admin.sliders.index', compact('sliders'));
+        // return view('admin.sliders.index', compact('sliders'));
+        return view('dashboard.sliders.all', compact('sliders'));
     }
     
 }

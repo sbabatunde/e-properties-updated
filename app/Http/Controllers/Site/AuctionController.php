@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Auction;
 use App\Models\Property;
 use Illuminate\Http\Request;
-use App\Models\site\AuctionBid;
+use App\Models\Site\AuctionBid;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;

@@ -27,16 +27,8 @@
                                             <div class="row">
 
                                                 {{-- Material Details --}}
-                                                @include('admin.building-material.form.details')
+                                                {{-- @include('admin.building-material.form.details') --}}
                                             </div>
-                                        </div>
-
-                                        <div class="form-group col-md-11 d-flex justify-content-end">
-                                            <button class="btn btn-outline btn-info"
-                                                style="color:#394293;background-color:transparent;border: 2px solid #394293;font-size:10px bold"
-                                                type="button">Save</button>
-                                            <button type="submit" class="btn btn-success"
-                                                style="color:#fff;background-color:#394293;border: 2px solid #394293;font-size:10px bold">Submit</button>
                                         </div>
                                     </div>
                                 </div>

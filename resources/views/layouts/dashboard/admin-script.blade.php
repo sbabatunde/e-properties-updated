@@ -69,6 +69,7 @@
 <script src="{{ asset('assets/admin/build/js/custom.min.js') }}"></script>
 <script src="{{ asset('assets/admin/build/js/admin-profile.js') }}"></script>
 <script src="{{ asset('assets/admin/build/js/listing.js') }}"></script>
+<script src="{{ asset('assets/admin/build/js/admin-user-form.js') }}"></script>
 <script src="{{ asset('assets/admin/build/js/slug-creation.js') }}"></script>
 <script src="{{ asset('assets/admin/build/js/e-admin-sidebar.js') }}"></script>
 

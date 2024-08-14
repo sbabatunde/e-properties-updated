@@ -7,7 +7,7 @@
                 <div class="post-prop">
                     <h3>
                         <strong style="color: black">
-                            All Properties
+                            All Sliders
                         </strong>
                     </h3>
                 </div>
@@ -29,76 +29,39 @@
                                                     <th># </th>
                                                     <th>Image </th>
                                                     <th>Title </th>
-                                                    <th>Code </th>
-                                                    <th>Status </th>
-                                                    <th>Price </th>
-                                                    <th>Agent</th>
-                                                    <th>Trending</th>
+                                                    <th>Created Date </th>
                                                     <th>Edit</th>
                                                     <th>Delete</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    @isset($properties)
-                                                        @foreach ($properties as $index => $property)
+                                                    @isset($sliders)
+                                                        @foreach ($sliders as $index => $slider)
                                                     <tr>
+                                                        <td>
+                                                            {{ ($sliders->currentPage() - 1) * $sliders->perPage() + $index + 1 }}
+                                                        </td>
+                                                        <td>
+                                                            <img src="{{ asset($slider->photo) }}" alt="{{ $slider->title }}"
+                                                                class="property-mini-image">
+                                                        </td>
+                                                        <td>{{ $slider->title }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($slider->created_at)->format('D,M j,Y g:i A') }}
+                                                        </td>
 
-                                                        <td>
-                                                            {{ ($properties->currentPage() - 1) * $properties->perPage() + $index + 1 }}
-                                                        </td>
-                                                        <td>
-                                                            <img src="{{ asset($property->thumbnail) }}"
-                                                                alt="{{ $property->title }}" class="property-mini-image">
-                                                        </td>
-                                                        <td>{{ $property->title }}</td>
-                                                        <td>{{ $property->property_code }}</td>
-                                                        <td>{{ $property->status }}</td>
-                                                        <td>
-                                                            {{ $property->payment->initial_denomination ?? '' }}
-                                                            {{ number_format($property->payment->initial_pay) ?? '' }}
-
-                                                        </td>
-                                                        <td>
-                                                            {{ $property->agent->firstname ?? '' }}
-                                                            {{ $property->agent->lastname ?? '' }}
-                                                        </td>
                                                         <td class="table-btn">
-                                                            @if ($property->trending == null)
-                                                                <form id="addToTrend_{{ $property->id }}" class="addForm"
-                                                                    action="{{ route('admin.trending.add', $property->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button onclick="addToTrending(event,{{ $property->id }})"
-                                                                        class="btn removeForm btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        <i class="bx bx-trending-up"></i>
-                                                                    </button>
-                                                                </form>
-                                                            @else
-                                                                <form id="removeTrending{{ $property->id }}"
-                                                                    {{-- style="display: none" --}}
-                                                                    action="{{ route('admin.trending.remove', $property->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button onclick="removeTrending(event,{{ $property->id }})"
-                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        <i class="bx bx-trending-down"></i>
-                                                                    </button>
-                                                                </form>
-                                                            @endif
-                                                        </td>
-                                                        <td class="table-btn">
-                                                            <a href="{{ route('admin.categories.edit', $property->id) }}"
+                                                            <a href="{{ route('admin.categories.edit', $slider->id) }}"
                                                                 class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
                                                         </td>
                                                         <td class="table-btn">
                                                             <a class="icon-container"
-                                                                href="{{ route('admin.categories.delete', $property->id) }}"
+                                                                href="{{ route('admin.categories.delete', $slider->id) }}"
                                                                 class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
                                                                 <i class="fa fa-trash "></i>
-                                                                <span class="tooltip">Home</span>
+                                                                <span class="tooltip">Delete</span>
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -112,9 +75,9 @@
                                 </div>
                             </div>
                             <div>
-                                @if (count($properties) > 0)
+                                @if (count($sliders) > 0)
                                     <div class="pagination mt-5 ml-2 d-flex justify-content-center">
-                                        {{ $properties->links('vendor.pagination.custom') }}
+                                        {{ $sliders->links('vendor.pagination.custom') }}
                                     </div>
                                 @endif
                             </div>
