@@ -95,6 +95,11 @@
                     </a>
                 </span>
                 <span class="menu">
+                    <a href="{{ route('admin.materials.my') }}">
+                        My Materials
+                    </a>
+                </span>
+                <span class="menu">
                     <a href="{{ route('admin.categories.create') }}">
                         Add Category
                     </a>

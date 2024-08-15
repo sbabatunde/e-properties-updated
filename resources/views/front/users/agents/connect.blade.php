@@ -7,9 +7,13 @@
                     src="{{ !empty($propertyProfessional->photo) ? url(asset($propertyProfessional->photo)) : url('/assets/admin/images/no_image.jpg') }}"
                     alt="{{ $propertyProfessional->firstname }}">
                 <div class="agent-action">
-                    <span class="agent-connect"> <a href="">Connect</a></span>
-                    <span class="agent-message"><a href="">Send a Message</a></span>
-                    <span class="agent-share"><a href=""><i class="fa fa-share"></i> Share</a></span>
+                    <span class="agent-connect"> <a href="#">Connect</a></span>
+                    <span class="agent-message"><a href="#" onclick="showMessageModal(event)">Send a Message</a></span>
+                    <span class="agent-message">
+                        <a href="#" onclick="showShareModal(event)">
+                            <i class="fa fa-share-alt text-black" style="color: rgb(82, 80, 182)"></i> Share
+                        </a>
+                    </span>
                 </div>
             </div>
             <div class="col-lg-6 agent-desc">
@@ -17,7 +21,7 @@
                 @if ($propertyProfessional->user_type == 'agent')
                     <h5 class="text-bold uppercase">Real Estate Agent</h5>
                 @elseif($propertyProfessional->user_type == 'landlord')
-                    <h5 class="text-bold uppercase">landlord</h5>
+                    <h5 class="text-bold uppercase">Landlord</h5>
                 @else
                     {{ $propertyProfessional->providers }}
                 @endif
@@ -33,19 +37,19 @@
                         <li><i class="fa fa-envelope mr-2 mt-2"
                                 style="font-size:20px;color:black"></i>{{ $propertyProfessional->email }}</li>
                         <li><i class="fa fa-phone mr-2 mt-2" style="font-size:20px;color:black"></i>
-                            {{ $propertyProfessional->phone }} {{ ',' . $propertyProfessional->whatApp ?? '' }}
+                            {{ $propertyProfessional->phone }}
+                            {{ $propertyProfessional->whatApp ? ', ' . $propertyProfessional->whatApp : '' }}
                         </li>
                         <li class="mt-2"><span
                                 style="border: 1px solid black;padding:.2rem;font-weight:700">Experience</span>
-                            {{ $propertyProfessional->experience }}
-                            years</li>
+                            {{ $propertyProfessional->experience }} years
+                        </li>
                     </ul>
                 </div>
 
                 <div class="py-2">
                     <h3>Bio</h3>
-                    <p>{{ $propertyProfessional->about_org }}
-                    </p>
+                    <p>{{ $propertyProfessional->about_org }}</p>
                 </div>
             </div>
         </div>
@@ -64,34 +68,26 @@
     </div>
 
     <div class="container mb-5">
-        <h5 class="ml-5 pl-2 mb-4 mt-5" style="font-weight:600"> Reviews </h5>
+        <h5 class="ml-5 pl-2 mb-4 mt-5" style="font-weight:600">Reviews</h5>
         <div class="row mb-5">
             <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
+                <p>Lorem ipsum dolor sit amet consectetur,adipisicing elit. Recusandae, nam hic! Suscipit temporeanimi omnis
+                    at et.</p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
+                <p>Lorem ipsum dolor sit amet consectetur,adipisicing elit. Recusandae, nam hic! Suscipit temporeanimi omnis
+                    at et.</p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
+                <p>Lorem ipsum dolor sit amet consectetur,adipisicing elit. Recusandae, nam hic! Suscipit temporeanimi omnis
+                    at et.</p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
+                <p>Lorem ipsum dolor sit amet consectetur,adipisicing elit. Recusandae, nam hic! Suscipit temporeanimi omnis
+                    at et.</p>
             </div>
         </div>
-        <span class="agent-message ml-5"><a href="">Post a comment</a></span>
+        <span class="agent-message ml-5"><a href="#">Post a comment</a></span>
     </div>
 
     <div class="container">
@@ -108,8 +104,8 @@
                                 <h5>{{ $item->firstname }} {{ $item->lastname }}</h5>
                                 <p>12 Followers</p>
                             </div>
-                            <div class="card-footer   meet-footer">
-                                <a href="{{ route('property.professional.view', $item->id) }}">
+                            <div class="card-footer meet-footer">
+                                <a href="{{ route('property.professionals.view', $item->id) }}">
                                     Connect
                                 </a>
                             </div>
@@ -117,7 +113,11 @@
                     </div>
                 </div>
             @endforeach
-
         </div>
     </div>
+    <!-- Share Modal -->
+    @include('front.users.agents.share-modal')
+
+    <!-- Message Modal -->
+    @include('front.users.agents.message-modal')
 @endsection

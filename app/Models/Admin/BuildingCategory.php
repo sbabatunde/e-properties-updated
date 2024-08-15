@@ -20,4 +20,9 @@ class BuildingCategory extends Model
             ]
         ];
     }
+
+    public function types()
+    {
+        return $this->hasMany(BuildingCategoryType::class, 'building_category_slug', 'slug');
+    }
 }

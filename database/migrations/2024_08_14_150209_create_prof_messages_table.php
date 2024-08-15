@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('prof_messages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('agent_id')->nullable();
-            $table->unsignedBigInteger('property_id')->nullable();
             $table->string('msg_name')->nullable();
             $table->string('msg_email')->nullable();
-            // $table->string('msg_mobile')->nullable();
             $table->string('msg_phone')->nullable();
             $table->string('message')->nullable();
             $table->enum('status', ['read', 'unread','trash'])->default('unread');
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('prof_messages');
     }
 };

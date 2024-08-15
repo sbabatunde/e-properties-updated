@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('assets/front/css/skins/default.css') }}"> -->
     <!-- External CSS libraries -->
-
+    {{-- Font Awesome addititon --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/bootstrap.min.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/magnific-popup.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/jquery.selectBox.css') }}">
@@ -25,11 +26,11 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/fonts/flaticon/font/flaticon.css') }}">
     <!-- Font Awesome -->
     <link href="{{ asset('assets/admin/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+
     {{-- My Custom CSS --}}
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/skins/mycss/banners.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/skins/mycss/services.css') }}">
     {{-- Additiona Font Awesome Library --}}
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-VJ/9nF9YHV7mODaoHTHl6br9F0W3Z+jLpV8jlF9iD2JF8fzoc86ZsaVbteprscmXrlg3oTmkKp4H3jWUkC9RzA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />

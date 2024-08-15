@@ -48,12 +48,31 @@
         </h5>
     </div>
 
-    <div class="form-group col-md-12">
+    <div class="form-group col-md-6">
         <input type="text" placeholder="Address" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             autocomplete="" value="{{ old('address') }}" name="address" required>
         @error('address')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="form-group col-md-6 ">
+        <select type="text" placeholder="State" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+            class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+        focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            name="state" required>
+            <option selected disabled value="">State</option>
+            <option>Ogun</option>
+            <option>Lagos</option>
+            <option>Oyo</option>
+            <option>Abia</option>
+            <option>Rivers</option>
+            <option>Nassarawa</option>
+            <option>Kano</option>
+        </select>
+        @error('state')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
@@ -71,7 +90,23 @@
         </h5>
     </div>
 
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
+        <select type="text" placeholder="Denomination" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+            class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            name="deal_denomination">
+            <option disabled selected value="">Denomination</option>
+            <option value="€">EUR(€)</option>
+            <option value="$">USD($)</option>
+            <option value="£">GBP(£)</option>
+            <option value="₦">Naira(₦)</option>
+        </select>
+        @error('deal_denomination')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="form-group col-md-4">
         <div class="form-group name2 col-md-12">
             <input type="number" name="price" id="currency-field"
                 class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -83,7 +118,7 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         <input type="text" placeholder="Quantity" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -113,8 +148,8 @@
         <label for="" style="color: black;font-size:15px"><b>Description</b></label>
         <textarea required type="text" placeholder="Short description of material"
             style="border: 1px solid rgb(224, 223, 223); 
-        background-color:transparent" rows="3" autocomplete=""
-            value="{{ old('description') }}"
+        background-color:transparent" rows="3"
+            autocomplete="" value="{{ old('description') }}"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             name="description"></textarea>

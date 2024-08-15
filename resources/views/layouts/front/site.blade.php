@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- External CSS libraries -->
+    {{-- Font Awesome addititon --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/bootstrap.min.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/magnific-popup.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/jquery.selectBox.css') }}">

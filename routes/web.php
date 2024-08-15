@@ -100,10 +100,13 @@ Route::controller(AgentController::class)->group(function () {
 
 //Property Professionals Routes
 Route::controller(PropertyProfessionalController::class)->group(function () {
-    Route::get('/view/property/professional/{id}', 'viewPropertyProfessionals')->name('property.professional.view');
+    Route::get('/view/property/professional/{id}', 'viewPropertyProfessionals')->name('property.professionals.view');
     Route::get('/all/property/professionals', 'allPropertyProfessionals')->name('property.professionals.all');
     Route::get('/property/professional/connect', 'allPropertyProfessionals')->name('property.professionals.connect');
+    Route::post('/message/professional/{profID}', 'messagePropertyProfessional')->name('user.professional.message');
+    
 });
+
 
 //Building Materials Routes
 Route::controller(BuildingMaterialController::class)->group(function () {
@@ -188,6 +191,7 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/user/login', 'login')->name('user.login');
     Route::post('/registered-user/login', 'redirect')->name('registered.user.login');
 });
+Route::get('/test/loudinar', [BuildingMaterial::class,'testCloudinaryConnection']);
 
 
 Route::get('/test-cloudinary', function () {
@@ -248,7 +252,7 @@ Route::controller(BuildingMaterial::class)->group(function () {
     Route::get('/building/materials/form',  'buildingMaterialForm')->name('admin.building.material.form');
     Route::get('/building/materials/form/search/{category_slug}',  'buidlingTypeSearch')->name('admin.building.material.form.search');
     Route::post('/building/materials/store',  'buildingMaterialStore')->name('admin.building-material.store');
-    
+    Route::get('/building/materials/$%$%%A(()))9/all',  'myMaterials')->name('admin.materials.my');
 });
 //Admin Routes Ends
 //Admin Slider Image

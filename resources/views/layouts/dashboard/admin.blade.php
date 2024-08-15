@@ -31,6 +31,8 @@
     <!-- Custom Theme Style -->
     <link href="{{ asset('assets/admin/build/css/style.css') }}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/admin/build/css/mycss/custom-admin.css') }}">
+    {{-- Font Awesome addititon --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     {{-- Scripts for Google charts --}}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

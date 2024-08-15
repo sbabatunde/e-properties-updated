@@ -49,13 +49,34 @@
             </a>
             <span class="tooltip">Media</span>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('admin.building.material.form') }}">
                 <i class="fa fa-building"></i>
                 <span class="nav-item">Materials</span>
             </a>
             <span class="tooltip">Building Materials</span>
-        </li>
+        </li> --}}
+        {{-- Materials Link  --}}
+        <div class="menu">
+            <i class="bx bx-building-house"></i>
+            <span class="nav-item">Materials</span>
+            <i class="bx bx-chevron-down nav-item"></i>
+            <span class="tooltip">Building Materials</span>
+        </div>
+        <div class="menu-dropdown">
+            <div class="sub-menu">
+                <span class="menu">
+                    <a href="{{ route('admin.building.material.form') }}">
+                        New Material
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.materials.my') }}">
+                        My Materials
+                    </a>
+                </span>
+            </div>
+        </div>
         <li>
             <a href="{{ route('admin.property.messages') }}">
                 <i class="fa fa-envelope"></i>

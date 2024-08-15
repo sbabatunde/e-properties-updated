@@ -6,10 +6,10 @@
                 <div class="footer-item clearfix">
                     <h4>About</h4>
                     <div class="Subscribe-box">
-                        <p>Lorem ipsum dolor sit amet consectetur. Ullamcorper bibendum diam sapien faucibus. 
+                        <p>Lorem ipsum dolor sit amet consectetur. Ullamcorper bibendum diam sapien faucibus.
                             Dolor in nibh malesuada pharetra aenean eu rhoncus. Non tortor sagittis metus vitae nunc.
-                             Varius congue fauc-ibus lacus pharetra nisl risus. Bibendum integer fringilla 
-                             id ante fusce varius eget.</p>
+                            Varius congue fauc-ibus lacus pharetra nisl risus. Bibendum integer fringilla
+                            id ante fusce varius eget.</p>
                         <a href="#" name="submitNewsletter" class="btn btn-block btn-color">
                             Learn More
                         </a>
@@ -84,24 +84,36 @@
                         <div class="row">
                             <div style="justify-content: flex-start; align-items: flex-start; display: inline-flex">
                                 <div style="width: 60px; height: 60px; position: relative">
-                                    <div style="width: 50px; height: 49.88px; left: 5px; top: 5px; position: absolute; background: #F8F8F8; border-radius:4px">
-                                        <a href="#" class="facebook-bg pl-2 pt-2" style="background-color: white"><i class="fa fa-facebook fa-3x" style="color:rgba(24, 38, 226, 0.705);background-color: white"></i></a>
+                                    <div
+                                        style="width: 50px; height: 49.88px; left: 5px; top: 5px; position: absolute; background: #F8F8F8; border-radius:4px">
+                                        <a href="#" class="facebook-bg pl-2 pt-2"
+                                            style="background-color: white"><i class="fa fa-facebook fa-3x"
+                                                style="color:rgba(24, 38, 226, 0.705);background-color: white"></i></a>
                                     </div>
                                 </div>
                                 <div style="width: 60px; height: 60px; position: relative">
-                                    <div style="width: 50px; height: 49.88px; left: 5px; top: 5px; position: absolute; background: #F8F8F8; border-radius:4px">
-                                        <a href="#" class="instagram-bg pl-2 pt-2" style="background-color: white"><i class="fa fa-instagram fa-3x" style="color:rgba(24, 38, 226, 0.705);background-color: white"></i></a>
+                                    <div
+                                        style="width: 50px; height: 49.88px; left: 5px; top: 5px; position: absolute; background: #F8F8F8; border-radius:4px">
+                                        <a href="#" class="instagram-bg pl-2 pt-2"
+                                            style="background-color: white"><i class="fa fa-instagram fa-3x"
+                                                style="color:rgba(24, 38, 226, 0.705);background-color: white"></i></a>
                                     </div>
                                 </div>
 
                                 <div style="width: 60px; height: 60px; position: relative">
-                                    <div style="width: 50px; height: 49.88px; left: 5px; top: 5px; position: absolute; background: #F8F8F8; border-radius:4px">
-                                        <a href="#" class="facebook-bg pl-2 pt-2" style="background-color: white"><i class="fa fa-linkedin fa-3x" style="color:rgba(24, 38, 226, 0.705);background-color: white"></i></a>
+                                    <div
+                                        style="width: 50px; height: 49.88px; left: 5px; top: 5px; position: absolute; background: #F8F8F8; border-radius:4px">
+                                        <a href="#" class="facebook-bg pl-2 pt-2"
+                                            style="background-color: white"><i class="fa fa-linkedin fa-3x"
+                                                style="color:rgba(24, 38, 226, 0.705);background-color: white"></i></a>
                                     </div>
                                 </div>
                                 <div style="width: 60px; height: 60px; position: relative">
-                                    <div style="width: 50px; height: 49.88px; left: 5px; top: 5px; position: absolute; background: #F8F8F8; border-radius:4px">
-                                        <a href="#" class="facebook-bg pl-2 pt-2" style="background-color: white"><i class="fa fa-twitter fa-3x" style="color:rgba(24, 38, 226, 0.705);background-color: white"></i></a>
+                                    <div
+                                        style="width: 50px; height: 49.88px; left: 5px; top: 5px; position: absolute; background: #F8F8F8; border-radius:4px">
+                                        <a href="#" class="facebook-bg pl-2 pt-2"
+                                            style="background-color: white"><i class="fa fa-twitter fa-3x"
+                                                style="color:rgba(24, 38, 226, 0.705);background-color: white"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +121,7 @@
                     </div>
                 </div>
             </div>
-          
+
         </div>
     </div>
 </footer>
@@ -119,13 +131,14 @@
 <div id="full-page-search">
     <button type="button" class="close">×</button>
     <form action="#" class="search">
-        <input type="search" value="" placeholder="type keyword(s) here"/>
+        <input type="search" value="" placeholder="type keyword(s) here" />
         <button type="button" class="btn btn-sm btn-color">Search</button>
     </form>
 </div>
 
 <!-- Property Video Modal -->
-<div class="modal property-modal fade" id="propertyModal" tabindex="-1" role="dialog" aria-labelledby="propertyModalLabel" aria-hidden="true">
+<div class="modal property-modal fade" id="propertyModal" tabindex="-1" role="dialog"
+    aria-labelledby="propertyModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -146,7 +159,8 @@
                             <div id="modalCarousel" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner" role="listbox">
                                     <div class="carousel-item active">
-                                        <iframe class="modalIframe" src="https://www.youtube.com/embed/5e0LxrLSzok"  allowfullscreen></iframe>
+                                        <iframe class="modalIframe" src="https://www.youtube.com/embed/5e0LxrLSzok"
+                                            allowfullscreen></iframe>
                                     </div>
                                     <div class="carousel-item">
                                         <img src="http://placehold.it/400x267" alt="Test ALT">
@@ -155,17 +169,21 @@
                                         <img src="http://placehold.it/400x267" alt="Test ALT">
                                     </div>
                                 </div>
-                                <a class="control control-prev" href="#modalCarousel" role="button" data-slide="prev">
+                                <a class="control control-prev" href="#modalCarousel" role="button"
+                                    data-slide="prev">
                                     <i class="fa fa-angle-left"></i>
                                 </a>
-                                <a class="control control-next" href="#modalCarousel" role="button" data-slide="next">
+                                <a class="control control-next" href="#modalCarousel" role="button"
+                                    data-slide="next">
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>
-                            <div class="description"><h3>Description</h3>
+                            <div class="description">
+                                <h3>Description</h3>
                                 <p>
                                     Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque
-                                    massa, viverra interdum eros ut, imperdiet pellentesque mauris. Proin sit amet scelerisque
+                                    massa, viverra interdum eros ut, imperdiet pellentesque mauris. Proin sit amet
+                                    scelerisque
                                     risus. Donec
                                 </p>
                             </div>
@@ -229,7 +247,7 @@
                     <li class="menu-item"><a href="properties-grid-leftside.html">Properties List</a></li>
                     <li class="menu-item"><a href="properties-details.html">Property Detail</a></li>
                     <li class="menu-item"><a href="blog-single-sidebar-right.html">Blog</a></li>
-                    <li class="menu-item"><a href="about.html">About  US</a></li>
+                    <li class="menu-item"><a href="about.html">About US</a></li>
                     <li class="menu-item"><a href="contact-3.html">Contact US</a></li>
                 </ul>
             </aside>
