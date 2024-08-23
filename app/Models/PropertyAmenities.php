@@ -9,7 +9,7 @@ class PropertyAmenities extends Model
 {
     use HasFactory;
 
-    protected $fillables = [];
+    protected $guarded = [];
 
     public function property()
     {

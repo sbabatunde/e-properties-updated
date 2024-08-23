@@ -5,12 +5,12 @@
     </style>
     <div class="page-hero bg-image " style="background-image: url(../assets/images/services/banner.png);">
         {{-- <div class="hero-section">
-    <div class="container text-center wow zoomIn">
-      <span class="subhead">A Reliable Network Connection Makes A</span>
-      <h1 class="display-4">Happy Customer</h1>
-      <a href="#" class="btn btn-primary">Let's Connect</a>
-    </div>
-  </div> --}}
+            <div class="container text-center wow zoomIn">
+                <span class="subhead">A Reliable Network Connection Makes A</span>
+                <h1 class="display-4">Happy Customer</h1>
+                <a href="#" class="btn btn-primary">Let's Connect</a>
+            </div>
+        </div> --}}
     </div>
 
     <div style="background-color:white;">

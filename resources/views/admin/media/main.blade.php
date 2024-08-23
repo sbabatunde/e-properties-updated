@@ -34,23 +34,4 @@
 
     @include('admin.media.files')
     @include('admin.media.post-form')
-
-    <script>
-        document.getElementById('imageUpload').addEventListener('change', function() {
-            document.getElementById('uploadType').value = 'image';
-        });
-
-        document.getElementById('videoUpload').addEventListener('change', function() {
-            document.getElementById('uploadType').value = 'video';
-        });
-    </script>
-    <script>
-        document.getElementById('imageUpload').addEventListener('change', function() {
-            document.getElementById('uploadType').value = 'image';
-        });
-
-        document.getElementById('videoUpload').addEventListener('change', function() {
-            document.getElementById('uploadType').value = 'video';
-        });
-    </script>
 @endsection

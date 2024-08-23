@@ -110,8 +110,11 @@ Route::controller(PropertyProfessionalController::class)->group(function () {
 
 //Building Materials Routes
 Route::controller(BuildingMaterialController::class)->group(function () {
-    Route::get('/building-material-view', 'getMaterials')->name('user.materials.get');
+    Route::get('/building-material-view/{id}', 'getMaterials')->name('user.materials.get');
     Route::get('/building/material', 'buildingMaterials')->name('user.buiding-materials');
+
+    // Route for search functionality
+Route::get('/search/checkbox','checkboxSearch')->name('search.radio');
 });
 
 
@@ -137,6 +140,9 @@ Route::controller(PropertyController::class)->group(function () {
     Route::post('property/messge/{pID}/{aID}', 'propertyMessage')->name('user.property.message');
     Route::get('all/property/by/type', 'allPropertyTypes')->name('all.property.by.type');
 
+    //Property Interactions 
+    Route::post('property/likes/{id}', 'propertyLikes')->name('user.property.likes');
+    
     //Residential Properties Routes Begins
     Route::get('all/properties/by/category/{category_slug}', 'propertyByCategory')->name('all.properties.category');
     //Residential Properties Routes Ends
@@ -144,6 +150,11 @@ Route::controller(PropertyController::class)->group(function () {
     //commercial Properties Routes Begins
     Route::get('all/properties/listings', 'allPropertyListings')->name('all.properties.listing');
     //commercial Properties Routes Ends\\
+
+    //Properti Review Routes Begins
+    Route::post('property/review/{id}', 'propertyReview')->name('property.review');
+
+    
     
 });
 Route::group(['prefix' => 'properties/'], function () {
@@ -163,7 +174,9 @@ Route::controller(ComparePropertyController::class)->group(function () {
     Route::post('/add-property-to-compare/{property_id}', 'addPropertyToCompare');
     Route::get('/user/compare', 'UserCompare')->name('user.compare');
     Route::get('/get-compare-property', 'GetCompareProperty');
-    Route::get('/remove-property-compare/{id}', 'removePropertyCompare');
+    Route::post('/remove-property-compare/{id}', 'removePropertyCompare');
+    Route::post('/clear-property-compare/{id}', 'clearPropertyCompare');
+    
     Route::get('/compare-properties-page', 'comparePropertyPage')->name('compare.property.page');
 });
 // All User Property Related Routes Ends
@@ -214,7 +227,7 @@ Route::get('/env-test', function () {
 
 //All Admin Routes Begins
 //Index Route
-Route::controller(Index::class)->group(function () {
+Route::controller(Index::class)->middleware('auth')->group(function () {
 //     Route::get('admin/index',  'adminIndex')->name('admin.index.page');
     Route::get('admin/dashboard',  'adminDashboard')->name('admin.dashboard');
 });
@@ -234,11 +247,11 @@ Route::controller(ListingController::class)->group(function () {
 });
 
 //Post Media Route
-Route::controller(PostMediaController::class)->group(function () {
-    Route::get('/post/media/file',  'adminPostMedia')->name('admin.media.page');
-    Route::post('/post/media/file/form',  'adminPostMediaForm')->name('admin.media.post');
+// Route::controller(PostMediaController::class)->group(function () {
+//     Route::get('/post/media/file',  'adminPostMedia')->name('admin.media.page');
+//     Route::post('/post/media/file/form',  'adminPostMediaForm')->name('admin.media.post');
     
-});
+// });
 
 //Property Message Route
 Route::controller(PropertyMessage::class)->group(function () {

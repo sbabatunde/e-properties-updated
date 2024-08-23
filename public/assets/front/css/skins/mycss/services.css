@@ -2130,50 +2130,95 @@ a.text-dark:hover, a.text-dark:focus {
   color: rgb(216, 211, 211);
   margin: 0 20%;
 }
-.hero-land-verf{
-  margin: 2rem 0;
-  width: 100%;
+
+.hero-land-verf {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  align-items: stretch; /* Ensure both items stretch to equal height */
+  gap: 1rem; /* Space between items */
+  max-width: 1200px; /* Max width to ensure content doesn't stretch too wide */
+  width: 100%; /* Full width of the container */
 }
-.hero-land-verf span{
+
+.hero-land-verf span {
   background-color: #394293;
-  width: 22%;
-  padding: 2rem 2rem .5rem 1rem;
+  width: 30%; /* 40% width for span */
+  padding: 2rem;
   border-radius: 10px;
   overflow-wrap: break-word;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  display: flex;
+  flex-direction: column; /* Align content vertically */
+  justify-content: space-between; /* Space out content */
 }
-.hero-land-verf span p{
+
+.hero-land-verf span p {
   color: white;
-  font-size: larger;
+  font-size: 1.125rem; /* Larger font size for readability */
+  margin: 0; /* Remove default margin */
 }
-.btn-hero-verf{
+
+.btn-hero-verf {
   background-color: #f2f2f7;
   color: #394293;
   display: flex;
   justify-content: center;
-  padding: .7rem;
+  align-items: center; /* Center text vertically */
+  padding: 0.7rem;
   border-radius: 7px;
   font-weight: 600;
-  font-size: large;
-  width: 80%;
+  font-size: 1.125rem; /* Consistent with paragraph size */
+  width: 100%; /* Full width to align with the container */
+  text-align: center; /* Center text inside the button */
+  margin-top: 1rem; /* Space above the button */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
 }
-.hero-land-verf img{
-  width: 75%;
+
+.btn-hero-verf:hover {
+  background-color: #e0e0e0; /* Light background color on hover */
 }
+
+.hero-land-verf img {
+  width: 60%; /* 60% width for image */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 100%; /* Ensure image height is constrained */
+  border-radius: 10px; /* Match border radius with span */
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .hero-land-verf {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: center; /* Center items */
+  }
+
+  .hero-land-verf span {
+    width: 100%; /* Full width on smaller screens */
+    max-width: none; /* Remove max-width on smaller screens */
+  }
+
+  .hero-land-verf img {
+    width: 100%; /* Full width for image on smaller screens */
+    max-height: none; /* Remove height constraint on smaller screens */
+  }
+}
+
+
+
 .hero-meet-expert{
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
+
 .hero-expert-text h4,
 .hero-expert-text p,
 .hero-expert-text a
 {
   margin-left:15px ;
 }
+
 .hero-expert-text h4,
 .hero-expert-text p
 {
@@ -2181,10 +2226,12 @@ a.text-dark:hover, a.text-dark:focus {
   font-size: bold;
   font-weight: 600;
 }
+
 .trend-container{
   width: 90%;
   margin: auto;
 }
+
 .trend-card{
   display: flex;
   flex-wrap: wrap;
@@ -2192,6 +2239,7 @@ a.text-dark:hover, a.text-dark:focus {
   gap: 30px;
   margin: auto;
 }
+
  /* Trending Properties Swipper   */
     .testimonial-slider-rtl {
         width: 100%;
@@ -2244,13 +2292,16 @@ a.text-dark:hover, a.text-dark:focus {
  left: 5%;
  /* transform: translate(-50%,-50%); */
 }
+
 .hero-trend-text h1,h3,p,i,a{
   color: white;
   margin-left: 0%;
 }
+
 .hero-trend-text p a{
  background: #394293;
 }
+
 .hero-category{
   margin: auto;
   width: 90%;
@@ -2279,6 +2330,7 @@ a.text-dark:hover, a.text-dark:focus {
   text-align: center;
   color: black;
 }
+
 .hero-listing{
   display: flex;
   flex-wrap: wrap;
@@ -2333,6 +2385,91 @@ a.text-dark:hover, a.text-dark:focus {
 .listing-anchor:hover{
   background: #394293;
 }
+
+/* hero media styles begins */
+
+.hero-media-files {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr); /* 3 columns of equal width */
+  gap: 30px; /* Adjust the gap between items */
+  margin-top: 30px;
+  margin: auto;
+  max-width: 1300px; /* Optional: to center the grid and constrain its width */
+}
+
+.hero-media-files .post-media {
+  width: 100%; /* Ensures the item takes full width of its grid cell */
+  height: 300px; /* Set a fixed height for all media items */
+  overflow: hidden; /* Hide overflow if content exceeds */
+  position: relative; /* Allows absolute positioning of the play button */
+}
+
+.hero-media-files img,
+.hero-media-files video {
+  width: 100%; /* Ensures media scales to fill the container */
+  height: 100%; /* Ensures media scales to fill the container */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.hero-media-files .post-media video {
+  position: relative; /* Position for the play button overlay */
+  z-index: 1; /* Ensure video is below the play button */
+}
+
+.hero-media-files .play-button {
+  position: absolute; /* Positioning within the .post-media container */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset to perfectly center */
+  width: 50px; /* Size of the play button */
+  height: 50px; /* Size of the play button */
+  background: url('path-to-your-play-button-icon.svg') no-repeat center center; /* Replace with your play button icon */
+  background-size: contain; /* Scale icon to fit */
+  cursor: pointer; /* Indicate clickable */
+  z-index: 2; /* Ensure play button is above the video */
+  display: none; /* Initially hide the play button */
+}
+
+.hero-media-files .post-media:hover .play-button {
+  display: block; /* Show play button on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .hero-media-files {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for smaller screens */
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-media-files {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-media-files {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-media-files {
+    grid-template-columns: 1fr; /* 1 column for very small screens */
+  }
+}
+
+
+.post-media img{
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 400px;
+  max-height: 400px;
+  margin-bottom: 30px;
+}
+/* hero media styles ends */
+
 .hero-services{
   display: flex;
   flex-wrap: wrap ;
@@ -3390,14 +3527,16 @@ transform: rotate(45deg);
   display: flex;
   flex-wrap: wrap;
 }
+
 .material-body{
   display: flex;
   gap: 1px;
   width: 95%;
-  margin: auto;
+  margin:30px auto;
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 .mat-search{
   /* width: max-content; */
   display: flex;
@@ -3491,7 +3630,7 @@ transform: rotate(45deg);
 }
 .material-list{
   width: 78%;
-  margin: auto;
+  margin:10px  auto;
 
 }
 .mat-list-header{
@@ -3537,12 +3676,14 @@ transform: rotate(45deg);
   margin-bottom: 70px;
   color: #fff;
 }
+
 .new-material-list{
   width: 95%;
   margin: auto;
   margin-bottom: 40px;
 
 }
+
 .new-mat-list-header{
   display: flex;
   justify-content: space-between;
@@ -3560,6 +3701,7 @@ transform: rotate(45deg);
   margin: auto;
   /* flex: 2 1 2; */
 }
+
 .new-material-items .pic{
   border: 1px solid #f4f5fa;
   border-radius: 10px;
@@ -3567,12 +3709,14 @@ transform: rotate(45deg);
   box-shadow: 5px 10px 15px rgba(83, 82, 82, 0.5);
   position: relative;
 }
+
 .new-material-items .pic img{
   min-width: 259px;
   min-height: 164px;
   max-width: 259px;
   max-height: 164px;
 }
+
 .new-material-items .pic i{
   color: black;
   position: absolute;

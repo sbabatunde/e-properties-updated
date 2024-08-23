@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('address');
             $table->string('quantity');
+            $table->string('unit');
             $table->string('denomination');
             $table->decimal('price', 10, 2);
             $table->string('installment')->default('No');

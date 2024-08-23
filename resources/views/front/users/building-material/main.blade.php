@@ -67,11 +67,12 @@
         {{-- Search Materials Ends --}}
 
         {{-- Material Item Begins --}}
-        <div class="material-body">
+        <div class="material-body ">
             <div class="material-search">
-                <h1 class="text-left">Materials</h1>
+                <h1 class="text-left" style="font-size:4.8vmin">Materials</h1>
                 <div class="checkbox-input">
                     <form class="form" action="" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="mat-search">
                             <input type="text" name="" id="" class="form-control mt-1 mat-input"
                                 placeholder="Search Tools">
@@ -80,68 +81,19 @@
                     </form>
                 </div>
                 <div class="search-tools">
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing hammer</span>
-                        <input type="radio" checked="checked" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing nail gun</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing knife</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Chalk line</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing pry bar</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing safety harness</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing boots</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing sealants</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing screws</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Flashing</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Ladder</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Nail</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Roofing wire</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="enclosure"><span class="ml-2 align-middle">Anticulut</span>
-                        <input type="radio" name="radio">
-                        <span class="checkmark"></span>
-                    </label>
+                    @foreach ($types as $item)
+                        <label class="enclosure"><span class="ml-2 align-middle">{{ $item->type }}</span>
+                            <input type="radio" name="material" class="search-radio" value="{{ $item->slug }}">
+                            {{-- <input type="radio" checked="checked" name="radio"> --}}
+                            <span class="checkmark"></span>
+                        </label>
+                    @endforeach
                 </div>
             </div>
             <div class="material-list">
                 <div class="mat-list-header">
-                    <h4 style="color: black;font-weight:700;font-size:29px">Nails</h4>
-                    <h4 style="color: red;font-weight:550;font-size:18px">See more</h4>
+                    <h4 style="color: black;font-weight:700;font-size:4.5vmin">Nails</h4>
+                    <h4 style="color: red;font-weight:550;font-size:4.5vmin">See more</h4>
                 </div>
                 <div class="material-items">
                     {{-- @dd($materials) --}}
@@ -150,129 +102,19 @@
                             <img src="{{ $item->thumbnail }}" alt="{{ $item->title }}">
                             <i class="fa fa-heart"></i>
                             <span class="listing-text mat-cost" style="background: #d6daf3">
-                                <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
+                                <h5 class="mt-3" style="font-weight:700;width:inherit">{{ $item->title }}</h5>
                                 <p>
-                                    <span>{{ $item->title }}</span>
-                                    <span>$ 200,000</span>
-                                    <span>180,000</span><br>
-                                    <span style="font-weight:550">Lagos</span>
+                                    {{-- <span>{{ $item->type }}</span> --}}
+                                    <span>{{ $item->denomination ?? '₦' }} {{ number_format($item->price) }}</span>
+                                    <span>{{ $item->quantity }}</span><br>
+                                    <span style="font-weight:550">{{ $item->state ?? 'Lagos' }}</span>
                                 </p>
-                                <a href="{{ route('user.materials.get') }}" class="btn btn-info listing-anchor">View</a>
+                                <a href="{{ route('user.materials.get', $item->id) }}"
+                                    class="btn btn-info listing-anchor">View</a>
                             </span>
                         </div>
                     @endforeach
-                    <div class="pic">
-                        <img src="../assets/images/building/bm-2.png" alt="">
-                        <i class="fa fa-heart"></i>
-                        <span class="listing-text mat-cost" style="background: #d6daf3">
-                            <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
-                            <p>
-                                <span># 20,000</span>
-                                <span>$ 200,000</span>
-                                <span>180,000</span><br>
-                                <span style="font-weight:550">Lagos</span>
-                            </p>
-                            <a href="{{ route('user.materials.get') }}" class="btn btn-info listing-anchor">View</a>
-                        </span>
-                    </div>
-                    <div class="pic">
-                        <img src="../assets/images/building/bm-1.png" alt="">
-                        <i class="fa fa-heart"></i>
-                        <span class="listing-text mat-cost" style="background: #d6daf3">
-                            <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
-                            <p>
-                                <span># 20,000</span>
-                                <span>$ 200,000</span>
-                                <span>180,000</span><br>
-                                <span style="font-weight:550">Lagos</span>
-                            </p>
-                            <a href="" class="btn btn-info listing-anchor">View</a>
-                        </span>
-                    </div>
-                    <div class="pic">
-                        <img src="../assets/images/building/bm-3.png" alt="">
-                        <i class="fa fa-heart"></i>
-                        <span class="listing-text mat-cost" style="background: #d6daf3">
-                            <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
-                            <p>
-                                <span># 20,000</span>
-                                <span>$ 200,000</span>
-                                <span>180,000</span><br>
-                                <span style="font-weight:550">Lagos</span>
-                            </p>
-                            <a href="" class="btn btn-info listing-anchor">View</a>
-                        </span>
-                    </div>
-                    <div class="pic">
-                        <img src="../assets/images/building/bm-4.png" alt="">
-                        <i class="fa fa-heart"></i>
-                        <span class="listing-text mat-cost" style="background: #d6daf3">
-                            <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
-                            <p>
-                                <span># 20,000</span>
-                                <span>$ 200,000</span>
-                                <span>180,000</span><br>
-                                <span style="font-weight:550">Lagos</span>
-                            </p>
-                            <a href="" class="btn btn-info listing-anchor">View</a>
-                        </span>
-                    </div>
-                    <div class="pic">
-                        <img src="../assets/images/building/bm-5.png" alt="">
-                        <i class="fa fa-heart"></i>
-                        <span class="listing-text mat-cost" style="background: #d6daf3">
-                            <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
-                            <p>
-                                <span># 20,000</span>
-                                <span>$ 200,000</span>
-                                <span>180,000</span><br>
-                                <span style="font-weight:550">Lagos</span>
-                            </p>
-                            <a href="" class="btn btn-info listing-anchor">View</a>
-                        </span>
-                    </div>
-                    <div class="pic">
-                        <img src="../assets/images/building/bm-6.png" alt="">
-                        <i class="fa fa-heart"></i>
-                        <span class="listing-text mat-cost" style="background: #d6daf3">
-                            <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
-                            <p>
-                                <span># 20,000</span>
-                                <span>$ 200,000</span>
-                                <span>180,000</span><br>
-                                <span style="font-weight:550">Lagos</span>
-                            </p>
-                            <a href="" class="btn btn-info listing-anchor">View</a>
-                        </span>
-                    </div>
-                    <div class="pic">
-                        <img src="../assets/images/building/bm-3.png" alt="">
-                        <i class="fa fa-heart"></i>
-                        <span class="listing-text mat-cost" style="background: #d6daf3">
-                            <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
-                            <p>
-                                <span># 20,000</span>
-                                <span>$ 200,000</span>
-                                <span>180,000</span><br>
-                                <span style="font-weight:550">Lagos</span>
-                            </p>
-                            <a href="" class="btn btn-info listing-anchor">View</a>
-                        </span>
-                    </div>
-                    <div class="pic">
-                        <img src="../assets/images/building/bm-5.png" alt="">
-                        <i class="fa fa-heart"></i>
-                        <span class="listing-text mat-cost" style="background: #d6daf3">
-                            <h5 class="mt-3" style="font-weight:700;width:inherit">Nail</h5>
-                            <p>
-                                <span># 20,000</span>
-                                <span>$ 200,000</span>
-                                <span>180,000</span><br>
-                                <span style="font-weight:550">Lagos</span>
-                            </p>
-                            <a href="" class="btn btn-info listing-anchor">View</a>
-                        </span>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -424,6 +266,9 @@
         {{-- For Verified Icon --}}
         {{-- <div class="rectangle">
         <div class="circle"></div>
-    </div> --}}
-        {{-- For Verified Icon --}}
-    @endsection
+        </div> --}}
+        {{-- For checkbox-search by type  Icon --}}
+        @include('front.users.building-material.search-checkbox')
+        {{-- For checkbox-search by type Icon --}}
+    </div>
+@endsection

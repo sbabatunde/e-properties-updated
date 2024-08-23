@@ -151,7 +151,7 @@
         <div class="menu-dropdown">
             <div class="sub-menu">
                 <span class="menu">
-                    <a href="{{ route('admin.sliders.index') }}">
+                    <a href="{{ route('admin.users.all') }}">
                         All Users
                     </a>
                 </span>
@@ -163,6 +163,11 @@
                 <span class="menu">
                     <a href="{{ route('admin.users.create') }}">
                         Create User
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.blacklist.index') }}">
+                        Blacklisted
                     </a>
                 </span>
             </div>

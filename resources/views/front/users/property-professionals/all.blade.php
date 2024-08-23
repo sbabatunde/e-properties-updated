@@ -57,7 +57,7 @@
                             <p>
                                 <span style="font-weight:550">5 Followers</span>
                             </p>
-                            <a href="{{ route('property.professional.view', $item->id) }}" style="float: left"
+                            <a href="{{ route('property.professionals.view', $item->id) }}" style="float: left"
                                 class="btn btn-info listing-anchor">Connect</a>
                         </span>
                     </div>

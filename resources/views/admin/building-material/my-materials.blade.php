@@ -7,7 +7,7 @@
                 <div class="post-prop">
                     <h3>
                         <strong style="color: black">
-                            All Properties
+                            My Materials
                         </strong>
                     </h3>
                 </div>
@@ -31,8 +31,8 @@
                                                     <th>Title </th>
                                                     <th>Status </th>
                                                     <th>Price </th>
-                                                    <th>Category </th>
-                                                    <th>Type </th>
+                                                    {{-- <th>Category </th>
+                                                    <th>Type </th> --}}
                                                     {{-- <th>Agent</th> --}}
                                                     <th>Edit</th>
                                                     <th>Delete</th>
@@ -43,7 +43,7 @@
                                                     @isset($materials)
                                                         @foreach ($materials as $index => $material)
                                                     <tr>
-                                                        @dd($material->type)
+                                                        {{-- @dd($material->type) --}}
                                                         <td>
                                                             {{ ($materials->currentPage() - 1) * $materials->perPage() + $index + 1 }}
                                                         </td>
@@ -55,10 +55,10 @@
                                                         <td>{{ $material->status }}</td>
                                                         <td>
                                                             {{ $material->initial_denomination ?? '' }}
-                                                            {{ number_format($material->initial_pay) ?? '' }}
+                                                            {{ number_format($material->price) ?? '' }}
 
                                                         </td>
-                                                        <td>{{ $material->type->type }}</td>
+                                                        {{-- <td>{{ $material->type->type }}</td> --}}
                                                         {{-- <td>{{ $material->type->category }}</td> --}}
 
                                                         {{-- <td>

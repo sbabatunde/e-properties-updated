@@ -25,8 +25,8 @@
                                     <span><b>12</b></span>
                                 </div>
                                 <div class="col-3">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                        style="cursor: pointer">
+                                    <button type="button" class="btn-close pl-2 pr-2 pt-1 pb-1" data-bs-dismiss="modal"
+                                        aria-label="Close" style="cursor: pointer">
                                         <div><strong>X</strong></div>
                                     </button>
                                 </div>

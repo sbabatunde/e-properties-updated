@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('blacklists', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('reporter_id');
+            $table->bigInteger('reported_id');
+            $table->bigInteger('blacklisted_by');
+            $table->string('org_description');
+            $table->string('reported_on');
+            $table->integer('rating');
             $table->timestamps();
         });
     }

@@ -6,7 +6,8 @@
     </div>
     <div class="res-comp-button mt-5 pt-5">
         <a href="{{ route('compare.property.page') }}" class="btn res-compare" style="font-weight:550;">Compare</a>
-        <a href="" class="btn btn-danger res-cancel">Cancel</a>
+        <a href="" onclick="clearPropertyCompare( {{ Auth::id() }}); return false;"
+            class="btn btn-danger res-cancel">Cancel</a>
     </div>
     <button class="toggle-button compare">Compare</button>
 

@@ -1,7 +1,5 @@
 <div class="user-details">
-    <img class="user-pic"
-        src="{{ !empty(Auth::user()->photo) ? url(asset(Auth::user()->photo)) : url('/assets/admin/images/no_image.jpg') }}"
-        alt="profile">
+    <img class="user-pic" src="{{ Auth::user()->photo ?? url('/assets/admin/images/no_image.jpg') }}" alt="profile">
     <span>
         <h5 style="color: black">
             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}

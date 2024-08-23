@@ -21,7 +21,7 @@
 </div>
 <div class="col-md-12 mt-2">
     <div class="form-group col-md-3">
-        <input type="text" placeholder="Initial Payment"
+        <input type="text" placeholder="Initial Payment" required
             style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-group col-md-4 pl-5">
-        <select type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+        <select type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px" required
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:rin3g focus:ring-indigo-200 focus:ring-opacity-50"
             name="init_denomination">
@@ -48,7 +48,7 @@
     </div>
 
     <div class="form-group col-md-3 ml-4">
-        <select type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+        <select type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px" required
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             name="init_append">
@@ -63,7 +63,7 @@
 </div>
 <div class="col-md-12 mt-2">
     <div class="form-group col-md-3">
-        <input type="text" placeholder="Subsequent Payment"
+        <input type="text" placeholder="Subsequent Payment" required
             style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -73,7 +73,7 @@
         @enderror
     </div>
     <div class="form-group col-md-4 pl-5">
-        <select type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+        <select type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px" required
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:rin3g focus:ring-indigo-200 focus:ring-opacity-50"
             name="subs_denomination">
@@ -88,7 +88,7 @@
         @enderror
     </div>
     <div class="form-group col-md-3 ml-4">
-        <select type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+        <select type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px" required
             class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             name="subs_append">

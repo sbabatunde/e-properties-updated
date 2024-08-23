@@ -21,7 +21,7 @@ class Authenticate extends Middleware
             }
             else{
                 Alert::error('Unauthorized Access','Login as an admin');
-                return route('get.essential.admin.login');
+                return route('user.login');
             }
         }
     }

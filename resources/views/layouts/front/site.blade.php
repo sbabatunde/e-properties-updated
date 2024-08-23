@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- External CSS libraries -->
     {{-- Font Awesome addititon --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -146,6 +147,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script src="assets/js/app.js"></script>
     <script src="assets/front/js/reg-form.js"></script>
+    <script src="assets/front/js/exchange-rates.js"></script>
     <script src="assets/front/js/properties.js"></script>
     {{-- <script src="{{asset('assets/js/reg-form.js')}}"></script> --}}
     <!-- Beginning  of required script for Modal -->
@@ -382,6 +384,55 @@
         });
     </script>
 
+
+    {{-- Short Video Slide Script --}}
+    <script>
+        jQuery(document).ready(function() {
+            if (jQuery('.video-slider').length) {
+                const reviewsCarouselOptions = {
+                    slidesPerView: 1, // Default value for smaller screens
+                    spaceBetween: 30,
+                    loop: true,
+                    speed: 7500,
+                    grabCursor: true, // Show a grab cursor when hovering over slides
+                    pauseOnMouseEnter: false,
+                    mousewheel: {
+                        enabled: false,
+                    },
+                    keyboard: {
+                        enabled: false,
+                    },
+                    allowTouchMove: true, // Enable dragging and touch movement
+                    autoHeight: false,
+                    initialSlide: 0,
+                    autoplay: {
+                        delay: 3000, // Delay in milliseconds (e.g., 3000ms = 3 seconds)
+                        disableOnInteraction: false, // Continue autoplay even after user interactions
+                    },
+                    breakpoints: {
+                        1200: { // When viewport is 1200px or wider
+                            slidesPerView: 2,
+                            spaceBetween: 30,
+                        },
+                        992: { // When viewport is 992px or wider
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+                        768: { // When viewport is 768px or wider
+                            slidesPerView: 1.5,
+                            spaceBetween: 15,
+                        },
+                        576: { // When viewport is 576px or wider
+                            slidesPerView: 1, // Show one slide per view
+                            spaceBetween: 10,
+                        },
+                    },
+                };
+
+                const reviewsCarousel = new Swiper(".video-slider", reviewsCarouselOptions);
+            }
+        });
+    </script>
 </body>
 
 </html>

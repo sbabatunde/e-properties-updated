@@ -29,7 +29,7 @@
             </div>
             @foreach ($sliders as $key => $item)
                 <div class="slider_wrapper carousel-item item-bg">
-                    <img class="d-block w-100 h-100" src="{{ asset($item['photo']) }}"
+                    <img class="d-block w-100 h-100" src="{{ $item['photo'] ?? asset($item['photo']) }}"
                         alt="banner{{ $sliders[$key]->photo }}">
                 </div>
             @endforeach

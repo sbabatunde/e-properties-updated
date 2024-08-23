@@ -19,14 +19,14 @@
                 </div>
                 <div class="comp-like-share">
                     <span style="font-weight:550">
-                        <button aria-label="Add To Compare" class="action-btn" id="{{ $item->id }}"
-                            onclick="addToCompare(this.id)">Compare</button>
+                        <a href="#" onclick="addToCompare({{ $item->id }}); return false;">Compare</a>
                     </span>
                     <span>
-                        <a href="">
+                        <a href="#" onclick="addToFav({{ $item->id }}); return false;">
                             <i class="fa fa-heart ml-2" style="color: rgb(131, 131, 131);font-size:25px"></i>
                         </a>
-                        <a href="">
+
+                        <a href="#" id="shareLink" data-id="{{ $item->id }}">
                             <i class="fa fa-share-alt" style="color: rgb(131, 131, 131);font-size:25px"></i>
                         </a>
                     </span>

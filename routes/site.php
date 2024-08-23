@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Controllers\Admin;
 use App\Http\Controllers\Site;
-use App\Http\Controllers\Site\PropertyController;
+use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\PropertyDealsController;
+use App\Http\Controllers\Site\PropertyController;
+use App\Http\Controllers\Site\Admin\PostMediaController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
-Route::group(['prefix' => 'staff/users','middleware'=>'adminCheck'], function () {
-    Route::get('/', [Admin\UsersController::class, 'index'])->name('admin.users');
-    Route::get('create', [Admin\UsersController::class, 'create'])->name('admin.users.create');
-    Route::post('edit', [Admin\UsersController::class, 'edit'])->name('admin.users.edit');
-    Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
-    Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
-  });
-  Route::group(['prefix' => 'staff/sliders','middleware'=>['adminCheck']], function () {
+// Route::group(['prefix' => 'staff/user/','middleware'=>'adminCheck'], function () {
+  
+//     Route::get('create', [Admin\UsersController::class, 'create'])->name('admin.users.create');
+//     Route::post('edit', [Admin\UsersController::class, 'edit'])->name('admin.users.edit');
+//     Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
+//     Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
+//   });
+  Route::group(['prefix' => 'staff/sliders','middleware'=>['auth','adminCheck']], function () {
     // Route to show form for creating a slider
     Route::get('/create', [Admin\SliderController::class, 'create'])->name('admin.sliders.create');
     // Route to handle form submission for creating a slider
@@ -25,8 +26,27 @@ Route::group(['prefix' => 'staff/users','middleware'=>'adminCheck'], function ()
     Route::get('index',  [Admin\SliderController::class, 'index'])->name('admin.sliders.index');
 });
 
+//Post Media Route
+Route::group(['middleware'=>['auth','adminCheck']],function () {
+  Route::get('/post/media/file',   [PostMediaController::class,'adminPostMedia'])->name('admin.media.page');
+    Route::post('/post/media/file/form',   [PostMediaController::class,'adminPostMediaForm'])->name('admin.media.post');
+
+    
+    // Route::get('/create', [PostMediaController::class, 'adminPostMedia'])->name('admin.media.page');
+    // Route::get('/post/file', [PostMediaController::class, 'adminPostMedia'])->name('admin.media.page');
+    // Route::post('/post/file/form', [PostMediaController::class, 'adminPostMediaForm'])->name('admin.media.post');
+});
+
+Route::group(['prefix' => 'staff/blacklist','middleware'=>['auth','adminCheck']], function () {
+  // Route to show form for creating a slider
+  Route::get('/create', [Admin\BlacklistController::class, 'create'])->name('admin.blacklist.create');
+  // Route to handle form submission for creating a slider
+  Route::post('store',  [Admin\BlacklistController::class, 'store'])->name('admin.blacklist.store');
+  // Route to display all sliders
+  Route::get('index',  [Admin\BlacklistController::class, 'index'])->name('admin.blacklist.index');
+});
   
-Route::group(['namespace' => 'admin', 'middleware' => ['adminCheck']], function () {
+Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], function () {
 
   Route::get('/dashboard', [Admin\AdminController::class, 'index'])->name('e-admin.dashboard');
   Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.logout');
@@ -56,10 +76,21 @@ Route::group(['namespace' => 'admin', 'middleware' => ['adminCheck']], function 
 
 
 
-  Route::group(['prefix' => 'users'], function () {
-    Route::get('/', [Admin\UsersController::class, 'index'])->name('admin.users');
+  Route::group(['prefix' => 'staff/users'], function () {
+    Route::get('all', [Admin\UsersController::class, 'index'])->name('admin.users.all');
+    Route::get('admins', [Admin\UsersController::class, 'admins'])->name('admin.users');
+    Route::get('edit', [Admin\UsersController::class, 'edit'])->name('admin.users.edit');
+    
     Route::get('create', [Admin\UsersController::class, 'create'])->name('admin.users.create');
-    Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
+    Route::post('store', [Admin\UsersController::class, 'storeUser'])->name('admin.users.store');
+    Route::get('/service-types/search/{slug}',   [Admin\UsersController::class, 'categoryTypeSearch'])
+    ->name('admin.service.type.search');
+    Route::post('store/admin', [Admin\UsersController::class, 'storeAdmin'])->name('admin.users.add');
+    Route::post('verify/user/{id}', [Admin\UsersController::class, 'verifyUser'])->name('admin.verify.user');
+    Route::post('blacklist/user/remove', [Admin\UsersController::class, 'removeFromBlacklist'])->name('admin.users.remove');
+    Route::post('blacklist/user/add', [Admin\UsersController::class, 'addToBlacklist'])->name('admin.blacklist.add');
+    
+    // Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
     Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
   });
 

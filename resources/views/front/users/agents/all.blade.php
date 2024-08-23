@@ -36,7 +36,7 @@
                     <p>
                         {{ count($agent->property) > 1 ? count($agent->property) . ' Properties' : count($agent->property) . ' Property' }}
                     </p>
-                    <a href="{{ route('property.professional.view', $agent->user_id) }}" class="btn btn-info mb-3"
+                    <a href="{{ route('property.professionals.view', $agent->user_id) }}" class="btn btn-info mb-3"
                         style="background-color:#394293;font-weight:500;font-size:20px">Connect</a>
                 </span>
             </div>

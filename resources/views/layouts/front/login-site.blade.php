@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('assets/front/css/skins/default.css') }}"> -->
     <!-- External CSS libraries -->
     {{-- Font Awesome addititon --}}
@@ -244,10 +245,16 @@
                     var rows = ""
                     $.each(response, function(key, value) {
                         // Add The Div section for each compare properties
+                        var thumbnailUrl = value.property.thumbnail ? value.property.thumbnail :
+                            '';
+
                         rows += ` 
                         <div class="res-comp-prop mt-3 mb-5">
-                            <img src="/${value.property.thumbnail}" alt="">
+                            <img src="${thumbnailUrl}" alt="${value.property.title}">
                             <div class="res-prop-details">
+                                <a href="#" 
+                                    onclick="compareRemove(${value.property.id}); return false;"
+                                    class="">X</a>
                                 <span>
                                     <h6><b>${value.property.title}</b></h6>
                                     <h6>${value.property.area}</h6>
@@ -260,8 +267,6 @@
                         </div> `
                     });
 
-                    // $('#compare').html(rows);
-
                     $('#compareList').html(rows);
                 },
                 error: function(xhr, status, error) {
@@ -272,6 +277,57 @@
                 }
             });
         }
+
+        $(document).ready(function() {
+            fetchCompareList();
+        });
+
+        function clearPropertyCompare(user_id) {
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "/clear-property-compare/" + user_id,
+                data: {
+                    _token: '{{ csrf_token() }}', // Add this line to include CSRF token
+                    // other data as needed
+                },
+                success: function(data) {
+
+                    // Start Message 
+                    console.log(data);
+                    fetchCompareList();
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+
+
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                    // End Message  
+
+                }
+            })
+
+        }
     </script>
     <!-- /// Add to And Fetch Compare Function Ends  -->
 
@@ -279,10 +335,13 @@
     <script>
         function compareRemove(id) {
             $.ajax({
-                type: "GET",
+                type: "POST",
                 dataType: 'json',
-                url: "/compare-remove/" + id,
-
+                url: "/remove-property-compare/" + id,
+                data: {
+                    _token: '{{ csrf_token() }}', // Add this line to include CSRF token
+                    // other data as needed
+                },
                 success: function(data) {
                     compare();
 

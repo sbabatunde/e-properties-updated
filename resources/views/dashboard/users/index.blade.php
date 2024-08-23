@@ -23,6 +23,20 @@
                             <div class="row justify-content-md-center">
                                 <div class="col-md-11">
                                     <div class="form-body">
+                                        <div class="row mb-2">
+                                            <a href="#" style=""
+                                                class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"
+                                                data-bs-toggle="modal" data-bs-target="#addUser">
+                                                <i class="fa fa-plus 2x"></i>
+
+                                            </a>
+                                            <h6>
+                                                <strong style="color: black">
+                                                    Add User
+                                                </strong>
+                                            </h6>
+                                        </div>
+
                                         <table>
                                             <thead>
                                                 <tr>
@@ -32,6 +46,8 @@
                                                     <th>Email </th>
                                                     <th>Type </th>
                                                     <th>Edit</th>
+                                                    <th>Verify</th>
+                                                    <th>Blacklist</th>
                                                     <th>Delete</th>
                                                 </tr>
                                             </thead>
@@ -46,8 +62,8 @@
                                                             {{ ($users->currentPage() - 1) * $users->perPage() + $index + 1 }}
                                                         </td>
                                                         <td>
-                                                            <img src="{{ asset($user->photo) }}" alt="{{ $user->title }}"
-                                                                class="property-mini-image">
+                                                            <img src="{{ $user->photo ?? asset('/assets/admin/images/no_image.jpg') }}"
+                                                                alt="{{ $user->title }}" class="property-mini-image">
                                                         </td>
                                                         <td>{{ $user->firstname }} {{ $user->lastname }}</td>
                                                         @if ($user->user_type !== 'service_provider')
@@ -76,6 +92,44 @@
                                                                      mr-1 mb-1"> --}}
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
+                                                        </td>
+                                                        <td class="table-btn">
+                                                            <form id="verifyUser{{ $user->id }}" class="addForm"
+                                                                action="{{ route('admin.verify.user', $user->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <button onclick="verifyUser(event,{{ $user->id }})"
+                                                                    class="btn removeForm btn-outline-secondary btn-min-width box-shadow-3 mr-1 mb-1"
+                                                                    style="outline:1px solid rgb(23, 182, 23)">
+                                                                    <i class="fa fa-check-circle"
+                                                                        style="color:rgb(23, 182, 23) "></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                        <td class="table-btn">
+                                                            @if ($user->blacklist == null)
+                                                                <form id="addtoBlacklisr{{ $user->id }}" class="addForm"
+                                                                    action="{{ route('admin.blacklist.add', $user->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    <button onclick="addToBlacklist(event,{{ $user->id }})"
+                                                                        class="btn removeForm btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                        <i class="fa fa-ban" style="color: red"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @else
+                                                                <form id="removeFromBlacklist{{ $user->id }}"
+                                                                    {{-- style="display: none" --}}
+                                                                    action="{{ route('admin.blacklist.remove', $user->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    <button
+                                                                        onclick="removeFromBlacklist(event,{{ $user->id }})"
+                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                        <i class="fa fa-unlock"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
                                                         </td>
                                                         <td class="table-btn">
                                                             <a class="icon-container"
@@ -114,6 +168,9 @@
     @foreach ($users as $user)
         @include('dashboard.users.edit')
     @endforeach
+    @include('dashboard.users.add-user')
+    @include('dashboard.users.blacklist.script')
+
     <!-- /page content -->
 @endsection
 

@@ -10,10 +10,11 @@ use App\Models\Category;
 use App\Models\Property;
 use App\Models\site\Slider;
 use Illuminate\Http\Request;
+use App\Models\Site\Blacklist;
+use App\Models\Admin\PostMedia;
 use App\Models\PropertyPayment;
 use App\Models\Site\PropertyType;
 use App\Http\Controllers\Controller;
-use App\Models\Site\Blacklist;
 use App\Models\Site\PropertyCategory;
 
 class HomeController extends Controller
@@ -57,7 +58,7 @@ class HomeController extends Controller
             $q->where('category_name','Commercial'); })->take(5)->get();
         $data['type'] = PropertyType::with(['property','propertyCategory'])->get();
         $data['trending'] = Property::has('trending')->with(['payment','agent','trending'])->get();
-
+        $data['media'] = PostMedia::with('user')->get();
         $sliders = $data['sliders'];
         // dd($data['properties']);
         return view('front.site', compact('data', 'sliders'));

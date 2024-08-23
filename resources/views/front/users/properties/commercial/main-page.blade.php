@@ -54,6 +54,13 @@
     {{-- Page Banner Ends  --}}
 
     {{-- Residential Properties List --}}
+    <!-- Hidden form for Property Interaction Submission -->
+
+    <form id="submitForm" method="POST" action="" style="display:none;">
+        @csrf
+        <input type="hidden" name="id" id="LikesFormId"> <!-- Hidden input to store ID -->
+    </form>
+
     <div class="residential-main">
         @include('front.users.properties.commercial.compare')
         @include('front.users.properties.commercial.live-auction')
@@ -86,8 +93,8 @@
 
     {{-- Similar Properties List --}}
     @include('front.users.properties.commercial.similar')
-    {{-- @include('front.users.properties.commercial.add-to-compare-script') --}}
 
+    {{-- Compare property Script --}}
     <script>
         const leftItems = document.querySelectorAll('.left-item');
         const toggleButtons = document.querySelectorAll('.toggle-button');
@@ -110,5 +117,53 @@
                 });
             });
         });
+    </script>
+
+    {{-- For Property Likes update in database --}}
+    <script>
+        // Function to get the CSRF token from meta tag
+        function getCsrfToken() {
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            console.log("CSRF Token:", token); // Debug output
+            return token;
+        }
+
+        function addToFav(id) {
+            $.ajax({
+                type: "POST",
+                url: "/property/likes/" + id,
+                headers: {
+                    'X-CSRF-TOKEN': getCsrfToken() // Include CSRF token in request headers
+                },
+                success: function(data) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.success,
+                        });
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: data.error,
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    });
+                }
+            });
+        }
     </script>
 @endsection

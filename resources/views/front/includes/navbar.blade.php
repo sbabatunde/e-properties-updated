@@ -1,7 +1,5 @@
 <div class="navbar-head">
-    <div class="" style="background: black">
-        <img src="{{ asset('assets/frontend/navbar-flags.png') }}" alt="logo">
-    </div>
+    @include('front.includes.exchange-rates')
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}"><span class="text-secondary">Logo</span></a>

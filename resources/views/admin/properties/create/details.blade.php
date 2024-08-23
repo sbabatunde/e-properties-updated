@@ -103,6 +103,7 @@
             focus:border-indigo-300 focus:rin3g focus:ring-indigo-200 focus:ring-opacity-50"
             name="bedrooms" required>
             <option disabled selected value="">Bedrooms</option>
+            <option>0</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -121,6 +122,7 @@
             focus:border-indigo-300 focus:rin3g focus:ring-indigo-200 focus:ring-opacity-50"
             name="bathrooms" required>
             <option disabled selected value="">Bathrooms</option>
+            <option>0</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -139,6 +141,7 @@
         focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             name="toilet" required>
             <option disabled selected value="">Toilets</option>
+            <option>0</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>

@@ -85,6 +85,8 @@ class BuildingMaterial extends Controller
                 'user_id' => Auth::id(),
                 'title' => $request->title,
                 'type' => $request->type,
+                'unit' => $request->unit,
+                'denomination' => $request->denomination,
                 'address' => $request->address,
                 'price' => $request->price,
                 'quantity' => $request->quantity,

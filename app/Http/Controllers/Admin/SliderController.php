@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Slider;
+use Cloudinary\Cloudinary;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\ImageManager;
 use RealRashid\SweetAlert\Facades\Alert;
+use Intervention\Image\Drivers\Gd\Driver;
 use App\Http\Requests\SliderImagesRequest;
-
+use Intervention\Image\Laravel\Facades\Image;
 
 class SliderController extends Controller
 {
@@ -30,25 +33,45 @@ class SliderController extends Controller
 
         foreach($request->file('photo') as $image)
         {
-          $manager = new ImageManager(new Driver());
-          $name_gen = hexdec(uniqid()) . '.' . $image
-              ->getClientOriginalExtension();
-          $img = $manager->read($image);
-          $img = $img->resize(1550, 1350);
+          $cloudinary = new Cloudinary();
+          if ($request->file('photo')) 
+          {
+            // Use ImageManager from Intervention Image
+            $manager = new ImageManager(new Driver()); // or 'imagick'
+            $file = $request->file('photo');
+            $name_gen = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
 
-          $img->toJpeg(80)->save(base_path('public/assets/admin/images/sliders/' .
-              $name_gen));
-          $uploadPath = 'assets/admin/images/sliders/' . $name_gen;
+            // Process the image
+            $img = $manager->read($file->getPathname());
+            $img->resize(1550, 1350, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+
+            // Save the image to a temporary location
+            $tempFilePath = sys_get_temp_dir() . '/' . $name_gen;
+            $img->save($tempFilePath); // Encode the image to JPEG format
+
+            // Upload to Cloudinary
+            $uploadResult = $cloudinary->uploadApi()->upload($tempFilePath, [
+                'folder' => 'e-properties/admin/images/sliders/',
+                'resource_type' => 'image',
+                'overwrite' => true
+            ]);
+
+            // Clean up temporary file
+            unlink($tempFilePath);
+
+            $file_type = 'image';
+            $url = $uploadResult['secure_url'];
+          }
         }
      
-        // Upload image file
-      //   $imageName = time() . '.' . $request->photo->extension();
-      //   $request->image->move(public_path('public/assets/admin/images/sliders/'), $imageName);
-
+     
         // Save slider details to database
         Slider::create([
             'title' => $request->title,
-            'photo' => $uploadPath,
+            'photo' => $url,
             // Add more fields as per your slider schema
         ]);
 

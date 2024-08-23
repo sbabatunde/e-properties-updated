@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Auction;
 use App\Models\Category;
 use App\Models\Property;
+use Jorenvh\Share\Share;
 use App\Models\site\Message;
 use Illuminate\Http\Request;
 use App\Models\PropertyPayment;
@@ -20,6 +21,9 @@ use Intervention\Image\ImageManager;
 use RealRashid\SweetAlert\Facades\Alert;
 use Intervention\Image\Drivers\Gd\Driver;
 use App\Http\Requests\PropertyMessageRequest;
+use App\Models\Interactions\PropertyLikes;
+use App\Models\Interactions\PropertyViews;
+use App\Models\Review\PropertyReview;
 use Intervention\Image\Laravel\Facades\Image;
 
 class PropertyController extends Controller
@@ -32,9 +36,17 @@ class PropertyController extends Controller
         ->where('type_id', $data['property']->type_id)->take(4)->get();
         if(Auth::check()){
             $data['user']= User::where('id',Auth::id())->first();
-
         }
-   
+        $exist = PropertyViews::where('property_id',$id)->where('user_id',Auth::id())->first();
+        if(!$exist)
+        {
+            $updateViews = PropertyViews::create([
+                'user_id'=>Auth::id(),
+                'property_id'=>$id,
+            ]);
+        }
+        $data['reviews'] =  PropertyReview::where('property_id',$id)->get();
+
         return view('front.users.properties.home.properties-details', $data);
     }
 
@@ -62,9 +74,25 @@ class PropertyController extends Controller
         }
     }
 
-    public function propertyDetails()
+    public function propertyReview(Request $request, $id)
     {
-        return view('front.users.properties.home.properties-details');
+        if(auth::id())
+        {
+            $user_id = auth::id();
+        }
+        else{
+            $user_id = null;
+        }
+        
+        $review = PropertyReview::create([
+            'user_id'=> $user_id,
+            'property_id'=> $id,
+            'review'=>$request->input('review'),
+        ]);
+
+        Alert::info('Success','Your Property review has been recorded.');
+
+        return back();
     }
 
     public function propertyCategory($category_slug)
@@ -162,8 +190,6 @@ class PropertyController extends Controller
         return view('front.users.properties.search',compact('properties'))->withViewName('vendor.pagination.custom');
     }
 
-    
-
     public function allPropertyListings()
     { 
         // data for form
@@ -190,5 +216,43 @@ class PropertyController extends Controller
 
         return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
         ,'rentProperties','liveAuction','similarProperties','data'))->withViewName('vendor.pagination.custom');
+    }
+
+    public function propertyLikes(Request $request,$id)
+    {
+
+        // Check if a record already exists with the given property_id in Trending table
+       $likes = PropertyLikes::where('user_id', Auth::id())->where('property_id',$id)->first();
+   
+       // Example: Process the ID and return a JSON response
+       
+
+       if (!$likes)
+        {
+            // Create a new record in Trending table if none exists
+            $trending = PropertyLikes::create([
+                'property_id' => $id,
+                'user_id' => Auth::id(),
+            ]);
+
+            $response = [
+                'success' => 'Property Added to Favourites!',
+                // Any additional data you want to return
+                ];
+        }
+        else{
+            $response = [
+                'error' => 'Property is already in Favourites!',
+                // Any additional data you want to return
+                ];
+        }
+
+        return response()->json($response); // Return JSON response
+    }
+
+    public function propertyShare($id)
+    {
+        
+        // return redirect()->back(); // Redirect after submission
     }
 }

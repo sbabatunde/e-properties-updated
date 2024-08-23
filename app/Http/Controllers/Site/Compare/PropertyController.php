@@ -67,4 +67,12 @@ class PropertyController extends Controller
         Alert::success('Success!', 'Property removed from Compare List');
         return back();
     }
+
+    public function clearPropertyCompare($id)
+    {
+        CompareProperty::where('user_id', $id)->delete();
+        // Property already exists in compare list
+        return response()->json(['success' => 'Compare List cleared successfully']);
+    }
+
 }

@@ -17,66 +17,35 @@ For Dynamic Video display
 
 
 <!-- videos.blade.php -->
-<div class="videos-grid">
-    <div class="row">
-        <div class="col-3">
-            <!-- Video 1 -->
-            <div class="video-container">
-                <iframe width="300" height="200"
-                    src="https://www.youtube.com/playlist?list=PLUs62aqkjy8lFWZON72434Sf4kXVAHdzk" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-3">
-            <!-- Video 2 -->
-            <div class="video-container">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-3">
-            <!-- Video 3 -->
-            <div class="video-container">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-3">
-            <!-- Video 4 -->
-            <div class="video-container">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_4" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
+<div class="hero-category">
+    <div class="hero-meet-expert">
+        <h5 style="color: black">Short Videos</h5>
+        <a href="{{ route('all.properties.listing') }}" style="text-decoration: none">
+            <h5 style="color: red">See more</h5>
+        </a>
     </div>
-    <div class="row">
-        <div class="col-3">
-            <!-- Video 5 -->
-            <div class="video-container">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_5" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-3">
-            <!-- Video 6 -->
-            <div class="video-container">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_6" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-3">
-            <!-- Video 7 -->
-            <div class="video-container">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_7" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-3">
-            <!-- Video 8 -->
-            <div class="video-container">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/VIDEO_ID_8" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
+
+    <div class="hero-listing">
+        <div class="hero-media-files">
+            @foreach ($data['media'] as $postMedia)
+                @if ($postMedia->file_type === 'image')
+                    <div class="post-media">
+                        <img src="{{ $postMedia->file_url }}" alt="Image">
+                    </div>
+                @elseif ($postMedia->file_type === 'video')
+                    <div class="post-media">
+                        <video controls>
+                            <source src="{{ $postMedia->file_url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button"></div>
+                    </div>
+                @else
+                    <div class="post-media">
+                        <p>No media available</p>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
 </div>

@@ -4,6 +4,18 @@
     box-sizing: border-box ;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+/* button */
+.add-btn{
+    color:#fff;
+    background-color:#394293;
+    border: 2px solid #394293;
+    font-size:10px bold;
+    margin-left: auto;
+}
+
+.add-btn:hover{
+    color: #969191;
+}
 
 body{
     background-color: #eff0ff;
@@ -625,17 +637,50 @@ border-color: #007bff;
     height: 100px;
 }
 
-.media-files{
-    display: flex;
-    justify-content: space-evenly;
+.media-files {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns of equal width */
+    gap: 20px; /* Adjust the gap between items */
     margin-top: 30px;
-    gap: 40px;
-    flex-wrap: wrap;
     margin: auto;
+    max-width: 1200px; /* Optional: to center the grid and constrain its width */
 }
 
-.media-files .post-media{
-    width: 350px;
+.media-files .post-media {
+    width: 100%; /* Ensures the item takes full width of its grid cell */
+    height: 400px; /* Set a fixed height for all media items */
+    overflow: hidden; /* Hide overflow if content exceeds */
+    position: relative; /* Allows absolute positioning of the play button */
+}
+
+.media-files img,
+.media-files video {
+    width: 100%; /* Ensures media scales to fill the container */
+    height: 100%; /* Ensures media scales to fill the container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.media-files .post-media video {
+    position: relative; /* Position for the play button overlay */
+    z-index: 1; /* Ensure video is below the play button */
+}
+
+.media-files .play-button {
+    position: absolute; /* Positioning within the .post-media container */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset to perfectly center */
+    width: 50px; /* Size of the play button */
+    height: 50px; /* Size of the play button */
+    background: url('path-to-your-play-button-icon.svg') no-repeat center center; /* Replace with your play button icon */
+    background-size: contain; /* Scale icon to fit */
+    cursor: pointer; /* Indicate clickable */
+    z-index: 2; /* Ensure play button is above the video */
+    display: none; /* Initially hide the play button */
+}
+
+.media-files .post-media:hover .play-button {
+    display: block; /* Show play button on hover */
 }
 
 .post-media img{
@@ -656,6 +701,7 @@ border-color: #007bff;
     font-size: large;
     font-weight: 700;
 }
+
 .post-user-img{
     width: 95%;
     margin-left: 5px;

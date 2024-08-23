@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Auction;
 use App\Models\Category;
 use App\Models\Property;
+use Cloudinary\Cloudinary;
 use Illuminate\Support\Str;
 use App\Models\site\Message;
 use Illuminate\Http\Request;
@@ -24,7 +25,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Laravel\Facades\Image;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ListingController extends Controller
 {
@@ -379,14 +379,40 @@ class ListingController extends Controller
                 $land_receipt,
             ) {
                 // Handle thumbnail upload
+                $cloudinary = new Cloudinary();
+
                 $thumbnailUrl = null;
-                if ($request->file('thumbnail')) {
-                    $uploadedThumbnail = Cloudinary::upload($request->file('thumbnail')->getRealPath());
-                    $thumbnailUrl = $uploadedThumbnail->getSecurePath();
+                if ($request->file('thumbnail')) 
+                {
+                    // Use ImageManager from Intervention Image
+                    $manager = new ImageManager(new Driver()); // or 'imagick'
+                    $file = $request->file('thumbnail');
+                    $name_gen = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+    
+                    // Process the image
+                    $img = $manager->read($file->getPathname());
+                    $img->resize(450, 450, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+    
+                    // Save the image to a temporary location
+                    $tempFilePath = sys_get_temp_dir() . '/' . $name_gen;
+                    $img->save($tempFilePath); // Encode the image to JPEG format
+    
+                    // Upload to Cloudinary
+                    $uploadResult = $cloudinary->uploadApi()->upload($tempFilePath, [
+                        'folder' => 'e-properties/properties/thumbnail',
+                        'resource_type' => 'image',
+                        'overwrite' => true
+                    ]);
+    
+                    // Clean up temporary file
+                    unlink($tempFilePath);
+                    $thumbnailUrl = $uploadResult['secure_url'];
                 }
 
-                $propertyID = "EP" . (int) substr(Str::orderedUuid(), 0, 8);
-
+                $propertyID = "EP"."".(int) substr(Str::orderedUuid(),0,8)."";
                 $property = Property::create([
                     'agent_id' => Auth::id(),
                     'title' => $request->title,
@@ -419,13 +445,39 @@ class ListingController extends Controller
 
                 // Handle amenities upload
                 if ($request->has('amenities')) {
+                       
                     foreach ($request->file('amenities') as $img) {
-                        $uploadedImage = Cloudinary::upload($img->getRealPath());
-                        $uploadPath = $uploadedImage->getSecurePath();
+                       
+                         // Use ImageManager from Intervention Image
+                         $manager = new ImageManager(new Driver()); // or 'imagick'
+                         $file = $img;
+                         $name_gen = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+         
+                         // Process the image
+                         $img = $manager->read($file->getPathname());
+                         $img->resize(450, 450, function ($constraint) {
+                             $constraint->aspectRatio();
+                             $constraint->upsize();
+                         });
+         
+                         // Save the image to a temporary location
+                         $tempFilePath = sys_get_temp_dir() . '/' . $name_gen;
+                         $img->save($tempFilePath); // Encode the image to JPEG format
+         
+                         // Upload to Cloudinary
+                         $uploadResult = $cloudinary->uploadApi()->upload($tempFilePath, [
+                             'folder' => 'e-properties/properties/amenities',
+                             'resource_type' => 'image',
+                             'overwrite' => true
+                         ]);
+         
+                         // Clean up temporary file
+                         unlink($tempFilePath);
+                         $url = $uploadResult['secure_url'];
 
                         PropertyAmenities::create([
                             'property_id' => $property->id,
-                            'amenities' => $uploadPath,
+                            'amenities' => $url,
                             'created_at' => Carbon::now(),
                         ]);
                     }
@@ -446,18 +498,18 @@ class ListingController extends Controller
                 }
 
                 // Insert Auction Installment Payment Details
-                if ($property->installment === 'Yes') {
+                // if ($property->installment === 'Yes' ) {
                     PropertyPayment::create([
                         'property_id' => $property->id,
                         'sequence' => $request->payment_mthd,
                         'initial_pay' => $request->init_pay,
                         'subsequent_pay' => $request->subs_pay,
-                        'initial_denomiation' => $request->init_denomination,
+                        'initial_denomination' => $request->init_denomination,
                         'subsequent_denomination' => $request->subs_denomination,
                         'initial_append' => $request->init_append,
                         'subsequent_append' => $request->subs_append,
                     ]);
-                }
+                // }
 
                 // Insert Deal Details
                 if ($property->deal === 'Yes') {

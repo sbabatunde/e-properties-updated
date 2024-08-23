@@ -26,5 +26,11 @@ class BuildingCategoryType extends Model
         return $this->belongsTo(BuildingCategory::class,'building_category_slug','slug');
     }
 
+    public function materials()
+    {
+        return $this->hasMany(BuildingMaterial::class,'type','slug');
+    }
+    
+
 
 }

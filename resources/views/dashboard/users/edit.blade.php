@@ -9,7 +9,8 @@
                         Edit User
                     </div>
                     <div class="post-close">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-close pl-2 pr-2 pt-1 pb-1" data-bs-dismiss="modal"
+                            aria-label="Close">
                             <div><strong>X</strong></div>
                         </button>
                     </div>

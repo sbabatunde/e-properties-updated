@@ -7,7 +7,8 @@
         <i class="fa fa-list" id="btn"></i>
     </div>
     <div class="user">
-        <img src="../assets/admin/images/users/user1.jpeg" alt="ay" class="user-img">
+        <img class="user-img" src="{{ Auth::user()->photo ?? url('/assets/admin/images/no_image.jpg') }}"
+            alt="{{ auth::user()->firstname }}">
         <div>
             <p class="bold"> Clint B.</p>
             <p>Admin</p>

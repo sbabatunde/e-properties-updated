@@ -48,7 +48,7 @@
 
 <body>
     @include('sweetalert::alert')
-    @if (auth::user()->isadmin())
+    @if (auth()->user()->isAdmin())
         @include('dashboard.essential-admin.sideBar')
     @else
         @include('admin.sideBar')

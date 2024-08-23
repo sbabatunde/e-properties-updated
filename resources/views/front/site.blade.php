@@ -139,7 +139,7 @@
     {{-- Deals Ends --}}
 
     {{-- Video Files Begins --}}
-    {{-- @include('front.hero-sections.video-file') --}}
+    @include('front.hero-sections.video-file')
     {{-- Video Files Ends --}}
 
     {{-- Property Service  And Management Begins --}}

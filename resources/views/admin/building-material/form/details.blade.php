@@ -127,6 +127,16 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
+    <div class="form-group col-md-4">
+        <input type="text" placeholder="Unit (packs, bags,etc.)"
+            style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+            class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+        focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            autocomplete="" value="{{ old('unit') }}" name="unit" required>
+        @error('unit')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
     <div class="form-group col-md-12">
         <label class="container">
             <input type="checkbox" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
