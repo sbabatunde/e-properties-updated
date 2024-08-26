@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\site\AuctionBid;
+use App\Models\Site\AuctionBid;
 use Illuminate\Http\Request;
 
 class AuctionBidController extends Controller

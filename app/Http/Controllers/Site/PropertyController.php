@@ -36,16 +36,21 @@ class PropertyController extends Controller
         ->where('type_id', $data['property']->type_id)->take(4)->get();
         if(Auth::check()){
             $data['user']= User::where('id',Auth::id())->first();
+            $user_id = Auth::id();
         }
-        $exist = PropertyViews::where('property_id',$id)->where('user_id',Auth::id())->first();
-        if(!$exist)
-        {
+        else{
+            $user_id = null;
+        }
+        // $exist = PropertyViews::where('property_id',$id)->where('user_id',Auth::id())->first();
+        // if(!$exist)
+        // {
             $updateViews = PropertyViews::create([
-                'user_id'=>Auth::id(),
+                'user_id'=>$user_id,
                 'property_id'=>$id,
             ]);
-        }
-        $data['reviews'] =  PropertyReview::where('property_id',$id)->get();
+        // }
+
+        $data['reviews'] =  PropertyReview::where('property_id',$id)->orderBy('id','desc')->get();
 
         return view('front.users.properties.home.properties-details', $data);
     }
@@ -220,34 +225,38 @@ class PropertyController extends Controller
 
     public function propertyLikes(Request $request,$id)
     {
-
-        // Check if a record already exists with the given property_id in Trending table
-       $likes = PropertyLikes::where('user_id', Auth::id())->where('property_id',$id)->first();
-   
-       // Example: Process the ID and return a JSON response
-       
-
-       if (!$likes)
+        if(Auth::check())
         {
-            // Create a new record in Trending table if none exists
-            $trending = PropertyLikes::create([
-                'property_id' => $id,
-                'user_id' => Auth::id(),
-            ]);
+            // Check if a record already exists with the given property_id in Trending table
+            $likes = PropertyLikes::where('user_id', Auth::id())->where('property_id',$id)->first();
+            
+            // Example: Process the ID and return a JSON response
+            if (!$likes)
+            {
+                // Create a new record in Trending table if none exists
+                $trending = PropertyLikes::create([
+                    'property_id' => $id,
+                    'user_id' => Auth::id(),
+                ]);
 
-            $response = [
-                'success' => 'Property Added to Favourites!',
-                // Any additional data you want to return
-                ];
-        }
-        else{
-            $response = [
-                'error' => 'Property is already in Favourites!',
-                // Any additional data you want to return
-                ];
-        }
+                $response = [
+                    'success' => 'Property Added to Favourites!',
+                    // Any additional data you want to return
+                    ];
+            }
+            else{
+                $response = [
+                    'error' => 'Property is already in Favourites!',
+                    // Any additional data you want to return
+                    ];
+            }
 
-        return response()->json($response); // Return JSON response
+            return response()->json($response); // Return JSON response
+        }
+        else {
+            // User is not authenticated
+            return response()->json(['error' => 'Unauthorized access, Login First']);
+        }
     }
 
     public function propertyShare($id)

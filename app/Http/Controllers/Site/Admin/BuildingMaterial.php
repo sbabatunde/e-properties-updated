@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Site\Admin;
 
+use Cloudinary\Cloudinary;
 use Illuminate\Http\Request;
+use Cloudinary\CloudinaryResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManager;
 use App\Models\Admin\BuildingCategory;
 use RealRashid\SweetAlert\Facades\Alert;
+use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\Admin\BuildingCategoryType;
 use App\Http\Requests\BuildingMaterialRequest;
-use App\Models\Admin\BuildingMaterial as AdminBuildingMaterial;
-use Cloudinary\Cloudinary;
 use Cloudinary\Transformation\ImageTransformation;
-use Cloudinary\CloudinaryResource;
+use App\Models\Admin\BuildingMaterial as AdminBuildingMaterial;
 // use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class BuildingMaterial extends Controller
@@ -71,8 +73,25 @@ class BuildingMaterial extends Controller
                 
                 // Upload to Cloudinary
                 $cloudinary = new Cloudinary();
+                 // Use ImageManager from Intervention Image
+                 $manager = new ImageManager(new Driver()); // or 'imagick'
+                 $file = $request->file('thumbnail');
+                 $name_gen = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+ 
+                 // Process the image
+                 $img = $manager->read($file->getPathname());
+                 $img->resize(450, 450, function ($constraint) {
+                     $constraint->aspectRatio();
+                     $constraint->upsize();
+                 });
+ 
+                 // Save the image to a temporary location
+                 $tempFilePath = sys_get_temp_dir() . '/' . $name_gen;
+                 $img->save($tempFilePath); // Encode the image to JPEG format
+ 
+                 
                 $uploadResult = $cloudinary->uploadApi()->upload($file->getPathname(), [
-                    'folder' => 'building_materials', // Optional folder structure in Cloudinary
+                    'folder' => 'e-properties/building_materials', // Optional folder structure in Cloudinary
                     'overwrite' => true
                 ]);
 

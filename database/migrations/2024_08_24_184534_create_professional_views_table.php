@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('property_views', function (Blueprint $table) {
+        Schema::create('professional_views', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable();
-            $table->bigInteger('property_id');
+            $table->bigInteger('professional_id');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('property_views');
+        Schema::dropIfExists('professional_views');
     }
 };

@@ -4,7 +4,6 @@ use App\Http\Controllers\Site;
 use Admin\propertiesController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PropertyDealsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\Admin\Index;
@@ -21,6 +20,7 @@ use App\Http\Controllers\Site\SliderController;
 use App\Http\Controllers\Site\TenantController;
 use App\Http\Controllers\Site\AuctionController;
 use App\Http\Controllers\Site\RequestController;
+use App\Http\Controllers\PropertyDealsController;
 use App\Http\Controllers\Site\CategoryController;
 use App\Http\Controllers\Site\LandlordController;
 use App\Http\Controllers\Site\PropertyController;
@@ -33,6 +33,7 @@ use App\Http\Controllers\Site\Admin\PostMediaController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Http\Controllers\Site\BuildingMaterialController;
 use App\Http\Controllers\Site\PropertyProfessionalController;
+use App\Http\Controllers\BlacklistController as UserBlacklist;
 use App\Http\Controllers\Site\Compare\PropertyController as ComparePropertyController;
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +105,8 @@ Route::controller(PropertyProfessionalController::class)->group(function () {
     Route::get('/all/property/professionals', 'allPropertyProfessionals')->name('property.professionals.all');
     Route::get('/property/professional/connect', 'allPropertyProfessionals')->name('property.professionals.connect');
     Route::post('/message/professional/{profID}', 'messagePropertyProfessional')->name('user.professional.message');
+    Route::post('/review/professional/{profID}', 'propertyProfessionalReview')->name('professional.review');
+    
     
 });
 
@@ -129,7 +132,7 @@ Route::controller(GroupController::class)->group(function () {
 });
 
 //Blacklist Routes
-Route::controller(BlacklistController::class)->group(function () {
+Route::controller(UserBlacklist::class)->group(function () {
     Route::get('/blacklist', 'allBlacklist')->name('blacklist.all');
 });
 Route::get('property/search',[PropertyController::class,'propertySearch'])->name('property.search');

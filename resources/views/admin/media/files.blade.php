@@ -1,24 +1,3 @@
-{{-- <div class="media-files">
-    <div class="post-media">
-        <img src="{{ asset('../assets/images/post/post-1.png') }}" alt="">
-    </div>
-    <div class="post-media">
-        <img src="{{ asset('../assets/images/post/post-2.png') }}" alt="">
-    </div>
-    <div class="post-media">
-        <img src="{{ asset('../assets/images/post/post-3.png') }}" alt="">
-    </div>
-    <div class="post-media">
-        <img src="{{ asset('../assets/images/post/post-1.png') }}" alt="">
-    </div>
-    <div class="post-media">
-        <img src="{{ asset('../assets/images/post/post-2.png') }}" alt="">
-    </div>
-    <div class="post-media">
-        <img src="{{ asset('../assets/images/post/post-3.png') }}" alt="">
-    </div>
-</div> --}}
-
 <div class="media-files">
     @foreach ($media as $postMedia)
         @if ($postMedia->file_type === 'image')

@@ -9,14 +9,6 @@ use App\Http\Controllers\Site\PropertyController;
 use App\Http\Controllers\Site\Admin\PostMediaController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-
-// Route::group(['prefix' => 'staff/user/','middleware'=>'adminCheck'], function () {
-  
-//     Route::get('create', [Admin\UsersController::class, 'create'])->name('admin.users.create');
-//     Route::post('edit', [Admin\UsersController::class, 'edit'])->name('admin.users.edit');
-//     Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
-//     Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
-//   });
   Route::group(['prefix' => 'staff/sliders','middleware'=>['auth','adminCheck']], function () {
     // Route to show form for creating a slider
     Route::get('/create', [Admin\SliderController::class, 'create'])->name('admin.sliders.create');
@@ -30,11 +22,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group(['middleware'=>['auth','adminCheck']],function () {
   Route::get('/post/media/file',   [PostMediaController::class,'adminPostMedia'])->name('admin.media.page');
     Route::post('/post/media/file/form',   [PostMediaController::class,'adminPostMediaForm'])->name('admin.media.post');
-
-    
-    // Route::get('/create', [PostMediaController::class, 'adminPostMedia'])->name('admin.media.page');
-    // Route::get('/post/file', [PostMediaController::class, 'adminPostMedia'])->name('admin.media.page');
-    // Route::post('/post/file/form', [PostMediaController::class, 'adminPostMediaForm'])->name('admin.media.post');
 });
 
 Route::group(['prefix' => 'staff/blacklist','middleware'=>['auth','adminCheck']], function () {
@@ -45,9 +32,15 @@ Route::group(['prefix' => 'staff/blacklist','middleware'=>['auth','adminCheck']]
   // Route to display all sliders
   Route::get('index',  [Admin\BlacklistController::class, 'index'])->name('admin.blacklist.index');
 });
+
+Route::group(['prefix' => 'staff/blog','middleware'=>['auth','adminCheck']], function () {
+  Route::post('post',  [Admin\BlogController::class, 'post'])->name('admin.blog.post');
+  // Route to display all blog posts
+  Route::get('index',  [Admin\BlogController::class, 'index'])->name('admin.blog.page');
+});
+
   
 Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], function () {
-
   Route::get('/dashboard', [Admin\AdminController::class, 'index'])->name('e-admin.dashboard');
   Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.logout');
   // new route
@@ -73,7 +66,6 @@ Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], fu
     Route::post('update/{id}', [Admin\CitiesController::class, 'update'])->name('admin.cities.update');
     Route::get('delete/{id}', [Admin\CitiesController::class, 'delete'])->name('admin.cities.delete');
   });
-
 
 
   Route::group(['prefix' => 'staff/users'], function () {
@@ -117,7 +109,6 @@ Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], fu
   });
   ################################## end sliders    #######################################
 });
-
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin',], function () {
   Route::get('login', [Admin\LoginController::class, 'getLogin'])->name('get.essential.admin.login');

@@ -10,33 +10,6 @@
                 </div>
             @endforeach
         </div>
-    @else
-        <div class="row mb-5">
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
-            </div>
-        </div>
     @endif
 
     <span class="agent-message ml-5"><a href="#" onclick="showReviewModal(event)">Post a comment</a></span>

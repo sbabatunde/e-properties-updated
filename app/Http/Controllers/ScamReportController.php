@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\site\ScamReport;
+use App\Models\Site\ScamReport;
 use Illuminate\Http\Request;
 
 class ScamReportController extends Controller

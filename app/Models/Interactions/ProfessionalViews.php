@@ -3,23 +3,22 @@
 namespace App\Models\Interactions;
 
 use App\Models\User;
-use App\Models\Property;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class PropertyShares extends Model
+class ProfessionalViews extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function user()
+    public function viewer()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function property()
+    public function professional()
     {
-        return $this->belongsTo(Property::class);
+        return $this->belongsTo(User::class,'professional_id','id');
     }
 }

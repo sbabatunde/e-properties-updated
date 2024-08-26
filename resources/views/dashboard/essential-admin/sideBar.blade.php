@@ -112,7 +112,6 @@
             </div>
         </div>
 
-
         <li>
             <a href="{{ route('admin.property.messages') }}">
                 <i class="fa fa-envelope"></i>
@@ -127,6 +126,7 @@
             <i class="bx bx-chevron-down nav-item"></i>
             <span class="tooltip">Sliders</span>
         </div>
+
         <div class="menu-dropdown">
             <div class="sub-menu">
                 <span class="menu">
@@ -141,6 +141,14 @@
                 </span>
             </div>
         </div>
+
+        <li>
+            <a href="{{ route('admin.blog.page') }}">
+                <i class="glyphicon glyphicon-film"></i>
+                <span class="nav-item">Blog</span>
+            </a>
+            <span class="tooltip">Blog</span>
+        </li>
 
         <div class="menu">
             <i class="fa fa-users"></i>

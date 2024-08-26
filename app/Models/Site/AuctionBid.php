@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\site;
+namespace App\Models\Site;
 
 use App\Models\Auction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

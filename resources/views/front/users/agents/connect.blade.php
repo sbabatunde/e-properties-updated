@@ -2,6 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
+
             <div class="col-lg-6 agent-details">
                 <img class="agent-image"
                     src="{{ !empty($propertyProfessional->photo) ? url(asset($propertyProfessional->photo)) : url('/assets/admin/images/no_image.jpg') }}"
@@ -23,7 +24,9 @@
                 @elseif($propertyProfessional->user_type == 'landlord')
                     <h5 class="text-bold uppercase">Landlord</h5>
                 @else
-                    {{ $propertyProfessional->providers }}
+                    @foreach ($propertyProfessional->providers as $item)
+                        {{ $item->serviceType->service }}
+                    @endforeach
                 @endif
                 <div class="">
                     <span class="" style="float: inline-start">
@@ -69,25 +72,18 @@
 
     <div class="container mb-5">
         <h5 class="ml-5 pl-2 mb-4 mt-5" style="font-weight:600">Reviews</h5>
-        <div class="row mb-5">
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>Lorem ipsum dolor sit amet consectetur,adipisicing elit. Recusandae, nam hic! Suscipit temporeanimi omnis
-                    at et.</p>
+        @if ($reviews !== null)
+            <div class="row mb-5">
+                @foreach ($reviews->take(4) as $item)
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <p>
+                            {!! $item->review !!}
+                        </p>
+                    </div>
+                @endforeach
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>Lorem ipsum dolor sit amet consectetur,adipisicing elit. Recusandae, nam hic! Suscipit temporeanimi omnis
-                    at et.</p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>Lorem ipsum dolor sit amet consectetur,adipisicing elit. Recusandae, nam hic! Suscipit temporeanimi omnis
-                    at et.</p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>Lorem ipsum dolor sit amet consectetur,adipisicing elit. Recusandae, nam hic! Suscipit temporeanimi omnis
-                    at et.</p>
-            </div>
-        </div>
-        <span class="agent-message ml-5"><a href="#">Post a comment</a></span>
+        @endif
+        <span class="agent-message ml-5"><a href="#" onclick="showReviewModal(event)">Post a comment</a></span>
     </div>
 
     <div class="container">
@@ -120,4 +116,8 @@
 
     <!-- Message Modal -->
     @include('front.users.agents.message-modal')
+
+    <!-- Review Modal -->
+    @include('front.users.agents.review-modal')
+
 @endsection

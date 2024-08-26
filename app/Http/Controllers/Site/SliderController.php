@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Models\site\Slider;
+use App\Models\Site\Slider;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

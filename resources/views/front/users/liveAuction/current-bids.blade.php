@@ -30,7 +30,7 @@
             </div>
             <div class="live-card-body">
                 <div class="auction-image">
-                    <img src="{{ asset($item->property->thumbnail) }}" alt="">
+                    <img src="{{ $item->property->thumbnail ?? '' }}" alt="">
                     <i class="fa fa-user"></i>
                     <i class="fa fa-share-alt text-black"></i>
                 </div>

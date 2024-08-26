@@ -20,7 +20,7 @@ class ServiceProvider extends Model
 
     public function serviceType()
     {
-        return $this->belongsTo(ServiceType::class,'id','service_type_id');
+        return $this->belongsTo(ServiceType::class,'service_type_id','id');
     }
     
 }
