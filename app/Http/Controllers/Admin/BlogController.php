@@ -16,7 +16,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::with('user')->get();
+        $blogs = Blog::with('user')->paginate(10);
 
         return view('dashboard.blog.index', compact('blogs'));
     }

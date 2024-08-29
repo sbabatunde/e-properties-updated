@@ -42,7 +42,6 @@
                                                     <th># </th>
                                                     <th>Photo</th>
                                                     <th>title</th>
-                                                    <th>News</th>
                                                     <th>Posted By</th>
                                                     <th>Posted On</th>
                                                     <th>Edit</th>
@@ -64,25 +63,22 @@
                                                         </td>
                                                         <td>{{ $blog->title }}</td>
                                                         <td>
+                                                            {{ $blog->user->firstname ?? '' }}
+                                                            {{ $blog->user->lastname ?? '' }}
+                                                        </td>
+                                                        <td>
                                                             {{ \Carbon\Carbon::parse($blog->created_at)->format('D,M j,Y g:i A') ?? '' }}
                                                         </td>
-                                                        <td>
-                                                            {{ $blog->bloged_by->firtname ?? '' }}
-                                                            {{ $blog->bloged_by->lastname ?? '' }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $blog->reporter->firtname ?? '' }}
-                                                            {{ $blog->reporter->lastname ?? '' }}
-                                                        </td>
+
                                                         <td class="table-btn">
-                                                            <a href="{{ route('admin.categories.edit', $property->id) }}"
+                                                            <a href="#"
                                                                 class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
                                                         </td>
                                                         <td class="table-btn">
                                                             <a href="#"
-                                                                class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
                                                                 <i class="fa fa-trash"></i>
                                                                 <span class="tooltip">Delete</span>
                                                             </a>

@@ -81,8 +81,8 @@
                         @enderror
                     </div>
                     <div class="col-md-12 mt-2 post-form-custom">
-                        <label for="comment">News</label><br>
-                        <textarea id="comment" name="news" rows="2" placeholder="Blog news..."></textarea>
+                        <label for="blog">News</label><br>
+                        <textarea id="blog" name="news" rows="2" placeholder="Blog news..."></textarea>
                     </div>
                 </div>
                 <div class="post-footer">
@@ -116,4 +116,10 @@
 
 
     });
+</script>
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('blog');
 </script>
