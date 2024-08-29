@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Site;
 
+use Exception;
 use App\Models\User;
 use App\Models\Agent;
 use Jorenvh\Share\Share;
+use App\Models\ProfMessages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\Properties\ProfMessage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Review\ProfessionalReview;
-use App\Models\Interactions\ProfessionalViews;
-use App\Models\ProfMessages;
-use Exception;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Interactions\ProfessionalViews;
 
 class PropertyProfessionalController extends Controller
 {
@@ -89,6 +91,25 @@ class PropertyProfessionalController extends Controller
                     "message"=> $request->message,
                     "status"=>'unread'
                 ]);
+
+                $agent = User::where('id',$message['agent_id'])->first();
+                $agentEmail = $agent->email;
+                
+                $to = [$agentEmail];
+                $cc = ['admin@eproperties.ng'];
+
+                $details = [
+                    "name" =>  $message['msg_name'],
+                    "contact" => $message['msg_phone'],
+                    "userEmail" =>  $message['msg_email'],
+                    "message" =>  $message['message'],
+                    "agent"=> $agent->firstname.' '.$agent->lastname,
+                ];
+
+                Mail::to($to)
+                    ->bcc($cc)
+                    // ->bcc($bcc)
+                    ->send(new ProfMessage($details));
     
                 Alert::success('Success', 'Your message has been sent successfully');
             }

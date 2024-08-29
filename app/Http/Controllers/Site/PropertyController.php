@@ -12,18 +12,20 @@ use Jorenvh\Share\Share;
 use App\Models\site\Message;
 use Illuminate\Http\Request;
 use App\Models\PropertyPayment;
+use App\Mail\Properties\Prospect;
 use App\Models\PropertyAmenities;
 use App\Models\Site\PropertyType;
 use App\Http\Controllers\Controller;
 use App\Models\Image as SliderImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\ImageManager;
+use App\Models\Review\PropertyReview;
 use RealRashid\SweetAlert\Facades\Alert;
 use Intervention\Image\Drivers\Gd\Driver;
-use App\Http\Requests\PropertyMessageRequest;
 use App\Models\Interactions\PropertyLikes;
 use App\Models\Interactions\PropertyViews;
-use App\Models\Review\PropertyReview;
+use App\Http\Requests\PropertyMessageRequest;
 use Intervention\Image\Laravel\Facades\Image;
 
 class PropertyController extends Controller
@@ -59,7 +61,7 @@ class PropertyController extends Controller
     {
         
         if (Auth::check()) {
-            Message::insert([
+            $message = Message::insert([
                 'user_id' => Auth::user()->id,
                 'agent_id' => $agent_id,
                 'property_id' =>  $prop_id,
@@ -69,6 +71,28 @@ class PropertyController extends Controller
                 'message' => $request->message,
                 'created_at' => Carbon::now(),
             ]);
+
+           
+            $agent = User::where('id',$message['agent_id'])->first();
+            $property = Property::where('id',$message['property_id'])->first();
+            $agentEmail = $agent->email;
+            $to = [$agentEmail];
+            $cc = ['admin@eproperties.ng'];
+            $details = [
+                "name" =>  $message['msg_name'],
+                "contact" => $message['msg_phone'],
+                "userEmail" =>  $message['msg_email'],
+                "message" =>  $message['message'],
+                "property"=> $property['title'],
+                "property_code"=> $property['property_code'],
+                'agent'=>$agent->firstname.''.$agent->lastname,
+            ];
+
+            Mail::to($to)
+                ->bcc($cc)
+                // ->bcc($bcc)
+                ->send(new Prospect($details));
+
             Alert::success('Success', 'Message sent successfully.');
 
             return redirect()->back();

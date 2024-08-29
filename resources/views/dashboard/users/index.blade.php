@@ -94,6 +94,7 @@
                                                             </a>
                                                         </td>
                                                         <td class="table-btn">
+                                                            <strong>{{ $user->status }}</strong>
                                                             <form id="verifyUser{{ $user->id }}" class="addForm"
                                                                 action="{{ route('admin.verify.user', $user->id) }}"
                                                                 method="POST">
@@ -108,15 +109,12 @@
                                                         </td>
                                                         <td class="table-btn">
                                                             @if ($user->blacklist == null)
-                                                                <form id="addtoBlacklisr{{ $user->id }}" class="addForm"
-                                                                    action="{{ route('admin.blacklist.add', $user->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button onclick="addToBlacklist(event,{{ $user->id }})"
-                                                                        class="btn removeForm btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        <i class="fa fa-ban" style="color: red"></i>
-                                                                    </button>
-                                                                </form>
+                                                                <a href="#"
+                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#Blacklist{{ $user->id }}">
+                                                                    <i class="fa fa-ban" style="color: red"></i>
+                                                                </a>
                                                             @else
                                                                 <form id="removeFromBlacklist{{ $user->id }}"
                                                                     {{-- style="display: none" --}}
@@ -170,83 +168,8 @@
     @endforeach
     @include('dashboard.users.add-user')
     @include('dashboard.users.blacklist.script')
-
+    @foreach ($users as $user)
+        @include('dashboard.users.blacklist.add')
+    @endforeach
     <!-- /page content -->
 @endsection
-
-<script>
-    function addToTrending(event, id) {
-        event.preventDefault(); // Prevent the default form submission
-        // Serialize the form data
-        var formData = new FormData(document.getElementById('addToTrend_' + id));
-        // const addForm = document.querySelector('.addForm');
-        // const removeForm = document.querySelector('.removeForm');
-        // Make an AJAX request to submit the form data
-        fetch(document.getElementById('addToTrend_' + id).action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest', // Indicate that this is an AJAX request
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value // CSRF token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server
-                if (data.success) {
-                    // Toastr success message
-                    toastr.success('Added to trending successfully!');
-                    // Add the desired class to the element
-                    // addForm.classList.add('hidden');
-                    // removeForm.classList.add('visible');
-
-                } else {
-                    // Toastr error message
-                    toastr.error(data.message);
-                }
-            })
-            .catch(error => {
-                // Handle and display error
-                toastr.error('An error occurred while adding to trending.');
-            });
-    }
-</script>
-
-
-<script>
-    function removeTrending(event, id) {
-        event.preventDefault(); // Prevent the default form submission
-        // Serialize the form data
-        var formData = new FormData(document.getElementById('removeTrending' + id));
-        // const addForm = document.querySelector('.addForm');
-        // const removeForm = document.querySelector('.removeForm');
-        // Make an AJAX request to submit the form data
-        fetch(document.getElementById('removeTrending' + id).action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest', // Indicate that this is an AJAX request
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value // CSRF token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server
-                if (data.success) {
-                    // Toastr success message
-                    toastr.success('Property Removed from trending successfully!');
-                    // Add the desired class to the element
-                    // addForm.classList.add('hidden');
-                    // removeForm.classList.add('visible');
-
-                } else {
-                    // Toastr error message
-                    toastr.error(data.message);
-                }
-            })
-            .catch(error => {
-                // Handle and display error
-                toastr.error('An error occurred while adding to trending.');
-            });
-    }
-</script>

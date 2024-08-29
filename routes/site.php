@@ -25,10 +25,8 @@ Route::group(['middleware'=>['auth','adminCheck']],function () {
 });
 
 Route::group(['prefix' => 'staff/blacklist','middleware'=>['auth','adminCheck']], function () {
-  // Route to show form for creating a slider
-  Route::get('/create', [Admin\BlacklistController::class, 'create'])->name('admin.blacklist.create');
-  // Route to handle form submission for creating a slider
-  Route::post('store',  [Admin\BlacklistController::class, 'store'])->name('admin.blacklist.store');
+  Route::post('blacklist/user/remove', [Admin\BlacklistController::class, 'removeFromBlacklist'])->name('admin.users.remove');
+  Route::post('blacklist/user/add', [Admin\BlacklistController::class, 'addToBlacklist'])->name('admin.blacklist.add');
   // Route to display all sliders
   Route::get('index',  [Admin\BlacklistController::class, 'index'])->name('admin.blacklist.index');
 });
@@ -79,9 +77,6 @@ Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], fu
     ->name('admin.service.type.search');
     Route::post('store/admin', [Admin\UsersController::class, 'storeAdmin'])->name('admin.users.add');
     Route::post('verify/user/{id}', [Admin\UsersController::class, 'verifyUser'])->name('admin.verify.user');
-    Route::post('blacklist/user/remove', [Admin\UsersController::class, 'removeFromBlacklist'])->name('admin.users.remove');
-    Route::post('blacklist/user/add', [Admin\UsersController::class, 'addToBlacklist'])->name('admin.blacklist.add');
-    
     // Route::post('store', [Admin\UsersController::class, 'store'])->name('admin.users.store');
     Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
   });

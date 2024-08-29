@@ -26,4 +26,21 @@ class BlacklistController extends Controller
     {
         return view('dashboard.blacklist.create');
     }
+
+    public function verifyUser($id)
+    {
+        // Check if a record already exists with the given property_id in Trending table
+        $existingTrending = Blacklist::where('id', $id)->update(['status'=>'Verified']);
+    
+          // Return a JSON response indicating success
+          return response()->json(['success' => true]);
+    }
+ 
+    public function removeFromBlacklist($id)
+    {
+       // Check if a record already exists with the given property_id in Trending table
+       $existingTrending = Trending::where('property_id', $id)->delete();
+          // Return a JSON response indicating success
+          return response()->json(['success' => true]);
+    }
 }

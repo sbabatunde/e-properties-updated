@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site\Admin;
 
 use Carbon\Carbon;
 use App\Models\City;
+use App\Models\User;
 use App\Models\Auction;
 use App\Models\Category;
 use App\Models\Property;
@@ -19,8 +20,10 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Image as SliderImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\ImageManager;
 use App\Models\Site\PropertyCategory;
+use App\Mail\Properties\NewListingMail;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -96,7 +99,6 @@ class ListingController extends Controller
                 'thumbnail' => 'image|mimes:jpg,png|max:3072|nullable',
                 'amenities.*' => 'image|mimes:jpg,bmp,png|max:3072|nullable',
             ];
-
 
             // Create a validator instance
             $validator = Validator::make($request->all(), $rules);
@@ -287,8 +289,24 @@ class ListingController extends Controller
                         'append' => $request->deal_append_to,
                     ]);
                 }
+                $user = User::where('id',$property['agent_id'])->first();
+                $userName = $user->firstname.' '.$user->lastname;
+                $userEmail = $user->email;
+                $to = [$userEmail];
+                $cc = ['admin@eproperties.ng'];
+    
+                $details = [
+                    "name" => $userName,
+                    "title" => $property['title'],
+                    "property_code" => $property['property_code'],
+                ];
+    
+                Mail::to($to)
+                    ->cc($cc)
+                    // ->bcc($bcc)
+                    ->send(new NewListingMail($details));
             });
-
+           
             Alert::success('Success!', 'Your Property has been posted successfully');
             return back();
         } else if (Auth::id() && Auth::user()->user_type == "tenant") {
