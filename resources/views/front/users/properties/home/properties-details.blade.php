@@ -185,4 +185,77 @@
     @include('front.users.properties.home.prop-details-extension.reviews')
     @include('front.users.properties.home.prop-details-extension.similar-properties')
     <!-- Properties details page start -->
+
+    {{-- Compare property Script --}}
+    <script>
+        const leftItems = document.querySelectorAll('.left-item');
+        const toggleButtons = document.querySelectorAll('.toggle-button');
+
+        toggleButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                leftItems.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.toggle('active');
+                        item.classList.toggle('hidden');
+                    } else {
+                        if (item.classList.contains('active')) {
+                            item.classList.remove('active');
+                            item.classList.add('hidden');
+                        } else {
+                            item.classList.remove('hidden');
+                            item.classList.add('active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- For Property Likes update in database --}}
+    <script>
+        // Function to get the CSRF token from meta tag
+        function getCsrfToken() {
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            console.log("CSRF Token:", token); // Debug output
+            return token;
+        }
+
+        function addToFav(id) {
+            $.ajax({
+                type: "POST",
+                url: "/property/likes/" + id,
+                headers: {
+                    'X-CSRF-TOKEN': getCsrfToken() // Include CSRF token in request headers
+                },
+                success: function(data) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.success,
+                        });
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: data.error,
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    });
+                }
+            });
+        }
+    </script>
 @endsection

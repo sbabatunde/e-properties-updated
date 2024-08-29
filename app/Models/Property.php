@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\Admin\Trending;
+use App\Models\Interactions\PropertyLikes;
+use App\Models\Interactions\PropertyShares;
+use App\Models\Interactions\PropertyViews;
 use App\Models\Site\PropertyCategory;
 use App\Models\Site\PropertyType;
 use Astrotomic\Translatable\Translatable;
@@ -88,5 +91,20 @@ class Property extends Model
     public function trending()
     {
         return $this->belongsTo(Trending::class,'id','property_id');
+    }
+
+    public function views()
+    {
+        return $this->hasMany(PropertyViews::class);
+    }
+
+    public function shares()
+    {
+        return $this->hasMany(PropertyShares::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(PropertyLikes::class);
     }
 }

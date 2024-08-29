@@ -24,6 +24,7 @@ class BlacklistController extends Controller
 
     public function create()
     {
+        
         return view('dashboard.blacklist.create');
     }
 

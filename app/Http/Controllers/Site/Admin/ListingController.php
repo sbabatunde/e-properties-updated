@@ -320,6 +320,19 @@ class ListingController extends Controller
 
     public function adminPropertyListing()
     {
-        return view('admin.listings.main-page');
+       $myListings = Property::with(['amenities','agent', 'payment', 'auction','likes','shares','views'])
+        ->where('agent_id', Auth::id())->paginate(3); 
+        $sales = Property::with(['amenities','agent', 'payment', 'auction','likes','shares','views'])
+        ->where('agent_id', Auth::id())->where('status', 'Sale')->paginate(3);
+        $rents = Property::with(['amenities','agent', 'payment', 'auction','likes','shares','views'])
+        ->where('agent_id', Auth::id())->where('status', 'Rent')->paginate(3);
+        $lets = Property::with(['amenities','agent', 'payment', 'auction','likes','shares','views'])
+        ->where('agent_id', Auth::id())->where('status', 'Let')->paginate(3);
+        $lands = Property::with(['amenities','agent', 'payment', 'auction','likes','shares','views'])
+        ->where('agent_id', Auth::id())->where('status', 'Land')->paginate(3);
+        $shortlets = Property::with(['amenities','agent', 'payment', 'auction','likes','shares','views'])
+        ->where('agent_id', Auth::id())->where('status', 'Shortlet')->paginate(3);
+     
+        return view('admin.listings.main-page',compact('myListings','sales','rents','lets','lands','shortlets'));
     }
 }

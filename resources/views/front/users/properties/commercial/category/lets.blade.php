@@ -2,7 +2,7 @@
     <div class="container res-properties">
         @foreach ($letProperties as $item)
             <div class="res-prop-items mt-4">
-                <img src="{{ asset($item->thumbnail) }}" alt="">
+                <img src="{{ $item->thumbnail ?? asset($item->thumbnail) }}" alt="">
                 <p style="color: black">
                     <span style="font-weight:550;font-size:4vmin">{{ $item->title }}</span><br>
                     {{ $item->area }}
