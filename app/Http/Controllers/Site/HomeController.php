@@ -58,7 +58,7 @@ class HomeController extends Controller
             $q->where('category_name','Commercial'); })->take(5)->get();
         $data['type'] = PropertyType::with(['property','propertyCategory'])->get();
         $data['trending'] = Property::has('trending')->with(['payment','agent','trending'])->get();
-        $data['media'] = PostMedia::with('user')->get();
+        $data['media'] = PostMedia::with('user')->where('file_type','video')->get();
         $sliders = $data['sliders'];
         // dd($data['properties']);
         return view('front.site', compact('data', 'sliders'));

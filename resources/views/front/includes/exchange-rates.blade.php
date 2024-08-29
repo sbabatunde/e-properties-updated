@@ -1,9 +1,9 @@
-{{-- <div class="" style="background: black">
+<div class="" style="background: black">
     <img src="{{ asset('assets/frontend/navbar-flags.png') }}" alt="logo">
-</div> --}}
+</div>
 
 
-<style>
+{{-- <style>
     .exchange-rates-wrapper {
         width: 100%;
         overflow: hidden;
@@ -90,4 +90,4 @@
     <div id="exchange-rates-container" class="exchange-rates-container">
         <!-- Exchange rates will be dynamically inserted here -->
     </div>
-</div>
+</div> --}}

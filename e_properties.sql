@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2024 at 06:01 PM
+-- Generation Time: Aug 29, 2024 at 04:28 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -104,7 +104,10 @@ INSERT INTO `auctions` (`id`, `property_id`, `start_date`, `start_time`, `end_da
 (82, 30, '2024-05-28', '00:10:52', '2024-09-22', '23:37:19', 74829226.58, '$', 'Monthly', '2024-08-06 21:16:38', '2024-07-10 13:13:06'),
 (83, 32, '2024-05-31', '04:44:40', '2024-07-02', '09:42:48', 5000000.00, '$', 'Annually', '2024-09-22 00:44:30', '2024-09-18 11:16:26'),
 (84, 28, '2024-06-18', '05:49:55', '2024-07-07', '03:29:08', 5000000.00, '₦', 'Monthly', '2024-09-02 12:03:37', '2024-08-24 11:11:37'),
-(85, 39, '2024-08-22', '22:40', '2024-11-21', '00:00', 5000000.00, '₦', 'Monthly', '2024-08-22 19:45:25', '2024-08-22 19:45:25');
+(85, 38, '2024-08-22', '22:40', '2024-11-21', '00:00', 5000000.00, '₦', 'Monthly', '2024-08-22 19:45:25', '2024-08-22 19:45:25'),
+(86, 33, '', '', '', '', 0.00, '', '', NULL, NULL),
+(87, 33, '2024-08-22', ' 20:31:44', '2024-10-22', ' 20:31:44', 4000000.00, '₦', 'Monthly', NULL, NULL),
+(88, 40, '2024-08-06', '16:35', '2024-10-16', '13:58', 4000000.00, '₦', 'Monthly', '2024-08-27 14:42:16', '2024-08-27 14:42:16');
 
 -- --------------------------------------------------------
 
@@ -149,6 +152,32 @@ CREATE TABLE `blacklists` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `title` text NOT NULL,
+  `news` text NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `user_id`, `title`, `news`, `photo`, `created_at`, `updated_at`) VALUES
+(1, 21, 'Nigeria\'s Property Market: Emerging Trends and Investment Opportunities in 2024', 'Lagos, Nigeria — As Nigeria continues to evolve economically and socially, the property market is witnessing significant transformations. The year 2024 has already shown promising developments in the real estate sector, reflecting both challenges and opportunities for investors, developers, and homebuyers. Here’s a look at the latest trends and what they mean for the future of property in Nigeria.\r\n\r\n1. Surge in Urban Property Developments\r\nPicture Suggestion: A high-resolution image of the skyline of Lagos or Abuja, showcasing modern high-rise buildings under construction or recently completed.\r\n\r\nIn major cities like Lagos and Abuja, urban property developments are booming. The demand for high-rise residential buildings and mixed-use developments is on the rise, driven by a growing urban population and increasing affluence. Notable projects include the completion of luxury apartments in Lekki and the expansion of commercial spaces in Abuja\'s central business district.\r\n\r\nHighlight Project: The \"Skyline Towers\" in Lekki, a state-of-the-art residential complex, promises top-tier amenities and panoramic views of the cityscape. With occupancy rates already exceeding expectations, it sets a new standard for luxury living in Lagos.\r\n\r\n2. Affordable Housing Initiatives Gain Traction\r\nPicture Suggestion: An image of a modern, affordable housing community, ideally showing diverse families and well-designed housing units.\r\n\r\nAddressing the housing deficit has become a priority for both the government and private developers. Several affordable housing projects are underway to cater to the growing middle class and low-income families. Initiatives such as the \"National Affordable Housing Scheme\" aim to provide quality housing at reduced costs.\r\n\r\nSuccess Story: The \"Eagle Homes Initiative\" in Abuja has successfully delivered over 1,000 units of affordable housing in the past year. This project not only offers budget-friendly options but also incorporates sustainable design principles.\r\n\r\n3. Growing Interest in Real Estate Investment Trusts (REITs)\r\nPicture Suggestion: A graphical representation of the stock market or an image of financial analysts reviewing charts and data, symbolizing investment opportunities.\r\n\r\nReal Estate Investment Trusts (REITs) are gaining popularity among investors looking for diversified exposure to the property market without directly owning physical assets. REITs offer a way to invest in real estate through shares, providing liquidity and accessibility.\r\n\r\nInvestment Insight: The Nigerian Stock Exchange (NSE) recently saw an increase in REIT listings, reflecting growing investor confidence. The \"Nigerian Property Fund,\" which focuses on residential and commercial properties, has seen a 15% increase in value over the past six months.\r\n\r\n4. Emphasis on Sustainable and Green Buildings\r\nPicture Suggestion: An image of a green building with eco-friendly features like solar panels, rainwater harvesting systems, or green roofs.\r\n\r\nSustainability is becoming a key consideration in new property developments. Developers are increasingly focusing on green building practices to reduce environmental impact and enhance energy efficiency. Features such as solar panels, rainwater harvesting systems, and energy-efficient lighting are becoming standard.\r\n\r\nGreen Development: The \"EcoCity Complex\" in Lagos is a prime example of sustainable development. The project includes green roofs, advanced waste management systems, and a commitment to using locally sourced materials.\r\n\r\n5. Challenges in Property Financing\r\nPicture Suggestion: A picture of a financial meeting or a close-up of documents related to property financing and mortgage loans.\r\n\r\nDespite positive trends, challenges in property financing remain. High interest rates and limited access to credit continue to impact both buyers and developers. The Central Bank of Nigeria (CBN) has introduced measures to ease financing, including lower interest rates for mortgage loans and grants for first-time homebuyers.\r\n\r\nFinancial Update: The recent \"Affordable Housing Loan Scheme\" by the CBN offers competitive interest rates and favorable repayment terms, aimed at increasing home ownership among Nigerians.\r\n\r\n6. Future Outlook and Market Predictions\r\nPicture Suggestion: A futuristic cityscape of Nigeria with conceptual graphics or an image of a real estate analyst giving a presentation.\r\n\r\nLooking ahead, the Nigerian property market is expected to continue its growth trajectory, driven by urbanization, economic development, and infrastructure improvements. However, stakeholders should remain vigilant about potential risks such as fluctuating oil prices and political instability, which could impact market dynamics.\r\n\r\nExpert Opinion: According to real estate analyst Dr. Chuka Nwosu, \"The Nigerian property market holds significant potential. Investors who stay informed about market trends and adapt to evolving demands will find lucrative opportunities.\"\r\n\r\nConclusion\r\n\r\nThe Nigerian property market in 2024 is a dynamic landscape with evolving trends and opportunities. From urban developments and affordable housing initiatives to sustainable practices and REIT investments, there are numerous avenues for growth and innovation. Staying informed and strategically navigating these trends will be key for anyone involved in Nigeria\'s real estate sector.\r\n\r\nStay tuned to our blog for the latest updates and expert insights on Nigeria\'s property market.', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724687838/e-properties/blogs/y8rska8tkhyn7rsunmdq.png', '2024-08-26 14:57:18', '2024-08-26 14:57:18'),
+(2, 21, 'Title: \"How Technology is Revolutionizing Nigeria’s Real Estate Sector\"', 'Explore the impact of technologies like property management software, virtual tours, and blockchain on Nigeria\'s real estate market. Highlight specific examples and case studies of how tech innovations are improving efficiency and transparency.', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724688381/e-properties/blogs/wrydzleev28jnel9uepj.png', '2024-08-26 15:06:22', '2024-08-26 15:06:22'),
+(3, 21, 'Building a Greener Future: Sustainable Real Estate Trends in Nigeria', '<p><strong>Examine the increasing focus on sustainable and eco-friendly buildings.</strong> <em>Discuss green building practices, benefits of sustainable living, and examples of</em> green real estate projects in Nigeria.<br />\r\n<br />\r\nExamine the increasing focus on sustainable and eco-friendly buildings. Discuss green building practices, benefits of sustainable living, and examples of green real estate projects in Nigeria.</p>', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724688613/e-properties/blogs/zreerwuknaeoukbn3znl.png', '2024-08-26 15:10:14', '2024-08-26 15:10:14'),
+(4, 21, 'Legal Considerations in the Sale of Real Property in Nigeria', '<p>The real estate market in Nigeria presents lucrative opportunities for investors, developers, and private individuals looking to buy or sell property. However, the process of selling real property in Nigeria is complex and requires careful navigation through a myriad of legal requirements and procedures. These legal considerations in the sale of real property are crucial to ensure that the transaction is legitimate, binding, and free from future disputes.</p>\r\n\r\n<p>The legal framework governing land transactions in Nigeria is influenced by the Land Use Act of 1978, which centralized land ownership in the hands of the government, making the Governor&rsquo;s consent a critical component of any land sale. Additionally, the legal environment is shaped by customary laws, particularly in rural and communal settings, adding another layer of complexity to land transactions.</p>\r\n\r\n<p>In this article, we will delve into the essential legal considerations involved in the sale of real property in Nigeria. From understanding land ownership types and verifying titles to drafting contracts and handling taxes, each step of the process requires meticulous attention to detail. Whether you are a seasoned real estate investor or a first-time seller, this guide will provide you with the necessary knowledge to navigate the legal landscape of property sales in Nigeria effectively.</p>\r\n\r\n<p>By understanding these legal considerations, parties involved in the sale of real property can protect their interests, avoid legal pitfalls, and ensure that the transaction is both smooth and compliant with Nigerian laws.<br />\r\n<br />\r\n&nbsp;</p>\r\n\r\n<p>1.&nbsp;<strong>Land Ownership and Title Verification</strong></p>\r\n\r\n<p><strong>Types of Land Ownership:</strong>&nbsp;In Nigeria, land ownership can be classified into three main categories:</p>\r\n\r\n<ul>\r\n	<li><strong>Individual Ownership:</strong>&nbsp;Land owned by private individuals.</li>\r\n	<li><strong>Communal Ownership:</strong>&nbsp;Land owned by communities or families, often managed according to customary law.</li>\r\n	<li><strong>Government Ownership:</strong>&nbsp;Land controlled by the government, particularly under the&nbsp;<a href=\"https://www.kwikattorneys.com/understanding-the-land-use-act-of-1978-a-comprehensive-overview/\">Land Use Act of 1978</a>, which vests all land in a state in the governor of that state.</li>\r\n</ul>\r\n\r\n<p><strong>Title Verification:</strong>&nbsp;Verifying the title is crucial to confirm the seller&rsquo;s legal right to sell the property. This involves:</p>\r\n\r\n<ul>\r\n	<li><strong>Certificate of Occupancy (C of O):</strong>&nbsp;A crucial document issued by the state government indicating ownership.</li>\r\n	<li><strong>Governor&rsquo;s Consent:</strong>&nbsp;Required for transferring any interest in land, ensuring the transaction complies with the Land Use Act.</li>\r\n</ul>\r\n\r\n<p>2.&nbsp;<strong>Due Diligence</strong></p>\r\n\r\n<p><strong>Land Search:</strong>&nbsp;Conduct a thorough search at the land registry to verify:</p>\r\n\r\n<ul>\r\n	<li><strong>Legal Status:</strong>&nbsp;Ensure there are no legal disputes or encumbrances.</li>\r\n	<li><strong>Ownership History:</strong>&nbsp;Trace the history of the land to confirm the legitimacy of the seller&rsquo;s title.</li>\r\n</ul>\r\n\r\n<p><strong>Survey Plan:</strong>&nbsp;A registered survey plan is essential to:</p>\r\n\r\n<ul>\r\n	<li><strong>Verify Boundaries:</strong>&nbsp;Confirm the exact location and size of the property.</li>\r\n	<li><strong>Identify Discrepancies:</strong>&nbsp;Resolve any inconsistencies with the title documents.</li>\r\n</ul>\r\n\r\n<p>3.&nbsp;<strong>Governor&rsquo;s Consent</strong></p>\r\n\r\n<p>The Land Use Act mandates obtaining the Governor&rsquo;s consent for any land transfer to:</p>\r\n\r\n<ul>\r\n	<li><strong>Legitimize the Transaction:</strong>&nbsp;Validate the transfer of ownership.</li>\r\n	<li><strong>Avoid Legal Issues:</strong>&nbsp;Prevent future disputes related to unauthorized transfers.</li>\r\n</ul>\r\n\r\n<p>4.&nbsp;<strong>Contract of Sale</strong></p>\r\n\r\n<p><strong>Drafting the Contract:</strong>&nbsp;The contract of sale should include:</p>\r\n\r\n<ul>\r\n	<li><strong>Parties Involved:</strong>&nbsp;Details of the buyer and seller.</li>\r\n	<li><strong>Property Description:</strong>&nbsp;Accurate description of the property.</li>\r\n	<li><strong>Purchase Price and Payment Terms:</strong>&nbsp;Clearly stated financial terms.</li>\r\n	<li><strong>Obligations and Warranties:</strong>&nbsp;Responsibilities and assurances of both parties.</li>\r\n	<li><strong>Timelines:</strong>&nbsp;Specific dates for payment and possession transfer.</li>\r\n</ul>\r\n\r\n<p><strong>Execution of the Contract:</strong>&nbsp;Ensure the contract is:</p>\r\n\r\n<ul>\r\n	<li><strong>Signed by Both Parties:</strong>&nbsp;Legally binding once signed.</li>\r\n	<li><strong>Witnessed:</strong>&nbsp;Signature by witnesses to confirm authenticity.</li>\r\n</ul>\r\n\r\n<p>5.&nbsp;<strong>Deed of Assignment</strong></p>\r\n\r\n<p><strong>Preparation:</strong>&nbsp;After the sale, a Deed of Assignment is prepared to:</p>\r\n\r\n<ul>\r\n	<li><strong>Formalize Transfer:</strong>&nbsp;Legally transfer ownership from the seller to the buyer.</li>\r\n</ul>\r\n\r\n<p><strong>Execution:</strong>&nbsp;The Deed of Assignment must be:</p>\r\n\r\n<ul>\r\n	<li><strong>Signed and Stamped:</strong>&nbsp;By both parties and duly stamped at the relevant tax office.</li>\r\n	<li><strong>Registered:</strong>&nbsp;At the land registry to make the transfer legally binding.</li>\r\n</ul>\r\n\r\n<p>6.&nbsp;<strong>Taxes and Fees</strong></p>\r\n\r\n<p><strong>Capital Gains Tax:</strong>&nbsp;The seller is liable for&nbsp;<a href=\"https://www.firs.gov.ng/capital-gains-tax\">capital gains tax</a>&nbsp;on the profit made from the sale, typically calculated at 10% of the gain.</p>\r\n\r\n<p><strong>Stamp Duty:</strong>&nbsp;Paid on the Deed of Assignment, usually a percentage of the purchase price.</p>\r\n\r\n<p><strong>Registration Fees:</strong>&nbsp;Fees for registering the property at the land registry, varying by state.</p>\r\n\r\n<p>7.&nbsp;<strong>Legal and Professional Fees</strong></p>\r\n\r\n<p><strong>Legal Fees:</strong>&nbsp;Both parties typically engage lawyers, with fees often being a percentage of the purchase price.</p>\r\n\r\n<p><strong>Survey and Valuation Fees:</strong>&nbsp;Necessary for:</p>\r\n\r\n<ul>\r\n	<li><strong>Survey Fees:</strong>&nbsp;Confirming property boundaries.</li>\r\n	<li><strong>Valuation Fees:</strong>&nbsp;Determining the market value of the property.</li>\r\n</ul>\r\n\r\n<p>8.&nbsp;<strong>Possession and Handover</strong></p>\r\n\r\n<p><strong>Vacant Possession:</strong>&nbsp;Ensure the property is delivered free from occupants unless otherwise agreed.</p>\r\n\r\n<p><strong>Handover Process:</strong>&nbsp;Document the handover, including:</p>\r\n\r\n<ul>\r\n	<li><strong>Transfer of Keys:</strong>&nbsp;Physical handover of the property.</li>\r\n	<li><strong>Delivery of Documents:</strong>&nbsp;Transfer of all relevant documents.</li>\r\n</ul>\r\n\r\n<p>9.&nbsp;<strong>Dispute Resolution</strong></p>\r\n\r\n<p><strong>Arbitration and Mediation:</strong>&nbsp;Include clauses for alternative dispute resolution methods to handle potential disputes amicably.</p>\r\n\r\n<p><strong>Court Proceedings:</strong>&nbsp;As a last resort, disputes can be resolved through the judicial system, though this can be time-consuming and costly.</p>\r\n\r\n<p>10.&nbsp;<strong>Compliance with Local Laws</strong></p>\r\n\r\n<p><strong>Zoning and Planning Regulations:</strong>&nbsp;Ensure the property adheres to local zoning and planning laws to avoid future legal issues.</p>\r\n\r\n<p><strong>Environmental Regulations:</strong>&nbsp;Verify compliance with environmental laws, particularly for industrial properties, to avoid penalties.</p>\r\n\r\n<p>Conclusion</p>\r\n\r\n<p>The sale of real property in Nigeria involves multiple legal considerations to protect the interests of both the buyer and the seller. By conducting thorough due diligence, ensuring compliance with legal requirements, and engaging professional assistance, parties can facilitate a smooth and legally compliant transaction. It is essential to navigate these processes carefully to avoid potential legal pitfalls and ensure a successful transfer of ownership.</p>', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724688743/e-properties/blogs/lrw6ljcadht9probeogi.png', '2024-08-26 15:12:25', '2024-08-26 15:12:25');
 
 -- --------------------------------------------------------
 
@@ -278,6 +307,7 @@ CREATE TABLE `building_materials` (
   `type` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `quantity` varchar(255) NOT NULL,
+  `unit` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `installment` varchar(255) DEFAULT 'No',
   `description` varchar(255) NOT NULL,
@@ -289,12 +319,12 @@ CREATE TABLE `building_materials` (
 -- Dumping data for table `building_materials`
 --
 
-INSERT INTO `building_materials` (`id`, `user_id`, `thumbnail`, `title`, `type`, `address`, `quantity`, `price`, `installment`, `description`, `created_at`, `updated_at`) VALUES
-(2, 21, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1723891975/e-properties/media/image/ydt1rcpogkkftlytqujz.jpg', 'Thread Nails', 'roofing-hammer', '13, Tony Elumelu, Crescent, Ojodu Berger, Lagos.', '20', 20500.00, 'Yes', 'Verified nails with neat appearance', '2024-07-22 19:05:37', '2024-07-22 19:05:37'),
-(4, 21, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1723892884/e-properties/media/image/quugircwctviluw82mlw.jpg', 'Jig Saw', 'saw', '10, Ekundayo road, Abule Odu, Alimosho,Lagos', '4 set', 40000.00, NULL, 'Very cool saws', '2024-07-22 19:13:19', '2024-07-22 19:13:19'),
-(5, 21, 'https://res.cloudinary.com/dqcess34g/image/upload/v1723710466/building_materials/jhol9csesdxyb31a2zks.jpg', 'Long \n Nails', 'roofing-nail-gun', '2, banjo street off Lisabi Street off Ojuelegba Road, Yaba', '24', 200000.00, 'Yes', 'sssss', '2024-08-14 14:55:38', '2024-08-14 14:55:38'),
-(6, 21, 'https://res.cloudinary.com/dqcess34g/image/upload/v1723710466/building_materials/jhol9csesdxyb31a2zks.jpg', 'Scre w Head Nail', 'roofing-nail-gun', '10, Emina Crescent, Off Toyin Street, behind White House Hotel, Ikeja, Lagos.', '24', 23000.00, 'Yes', 'ssss', '2024-08-15 07:27:46', '2024-08-15 07:27:46'),
-(7, 21, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1723711298/building_materials/nzfsveeesst6ahckjprv.jpg', 'Nail', 'roofing-hammer', '10, Emina Crescent, Off Toyin Street, behind White House Hotel, Ikeja, Lagos.', '90', 300000.00, 'Yes', 'This nails are very good', '2024-08-15 07:41:38', '2024-08-15 07:41:38');
+INSERT INTO `building_materials` (`id`, `user_id`, `thumbnail`, `title`, `type`, `address`, `quantity`, `unit`, `price`, `installment`, `description`, `created_at`, `updated_at`) VALUES
+(2, 21, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1723891975/e-properties/media/image/ydt1rcpogkkftlytqujz.jpg', 'Thread Nails', 'roofing-hammer', '13, Tony Elumelu, Crescent, Ojodu Berger, Lagos.', '20', NULL, 20500.00, 'Yes', 'Verified nails with neat appearance', '2024-07-22 19:05:37', '2024-07-22 19:05:37'),
+(4, 21, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1723892884/e-properties/media/image/quugircwctviluw82mlw.jpg', 'Jig Saw', 'saw', '10, Ekundayo road, Abule Odu, Alimosho,Lagos', '4 set', NULL, 40000.00, NULL, 'Very cool saws', '2024-07-22 19:13:19', '2024-07-22 19:13:19'),
+(5, 21, 'https://res.cloudinary.com/dqcess34g/image/upload/v1723710466/building_materials/jhol9csesdxyb31a2zks.jpg', 'Long \n Nails', 'roofing-nail-gun', '2, banjo street off Lisabi Street off Ojuelegba Road, Yaba', '24', NULL, 200000.00, 'Yes', 'sssss', '2024-08-14 14:55:38', '2024-08-14 14:55:38'),
+(6, 21, 'https://res.cloudinary.com/dqcess34g/image/upload/v1723710466/building_materials/jhol9csesdxyb31a2zks.jpg', 'Scre w Head Nail', 'roofing-nail-gun', '10, Emina Crescent, Off Toyin Street, behind White House Hotel, Ikeja, Lagos.', '24', NULL, 23000.00, 'Yes', 'ssss', '2024-08-15 07:27:46', '2024-08-15 07:27:46'),
+(7, 21, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1723711298/building_materials/nzfsveeesst6ahckjprv.jpg', 'Nail', 'roofing-hammer', '10, Emina Crescent, Off Toyin Street, behind White House Hotel, Ikeja, Lagos.', '90', NULL, 300000.00, 'Yes', 'This nails are very good', '2024-08-15 07:41:38', '2024-08-15 07:41:38');
 
 -- --------------------------------------------------------
 
@@ -489,7 +519,7 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `user_id`, `agent_id`, `property_id`, `msg_name`, `msg_email`, `msg_mobile`, `msg_phone`, `message`, `status`, `created_at`, `updated_at`) VALUES
-(1, 18, NULL, NULL, 'Adekunle Gabriel', 'stunde@gmail.com', '08138504844', NULL, 'I need this house as soon as possible. But please rent is to start a month after full payment. \n\nKindly reach out if possible. \n\nThanks', 'unread', '2024-06-26 21:14:46', NULL),
+(1, 18, '21', 33, 'Adekunle Gabriel', 'stunde@gmail.com', '08138504844', NULL, 'I need this house as soon as possible. But please rent is to start a month after full payment. \n\nKindly reach out if possible. \n\nThanks', 'unread', '2024-06-26 21:14:46', NULL),
 (2, 18, '15', 2, 'Adekunle Gabriel', 'stunde@gmail.com', NULL, '08138504844', 'I need this house as soon as possible. But please rent is to start a month after full payment. \r\n\r\nKindly reach out if possible. \r\n\r\nThanks', 'unread', '2024-06-26 21:17:37', NULL);
 
 -- --------------------------------------------------------
@@ -551,7 +581,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (380, '2024_08_22_212245_create_property_likes_table', 11),
 (381, '2024_08_22_212507_create_property_views_table', 11),
 (382, '2024_08_22_212518_create_property_shares_table', 11),
-(383, '2024_08_23_102655_create_property_reviews_table', 12);
+(383, '2024_08_23_102655_create_property_reviews_table', 12),
+(384, '2024_08_24_181806_create_professional_reviews_table', 13),
+(385, '2024_08_24_184534_create_professional_views_table', 13),
+(387, '2024_08_25_190518_create_blogs_table', 14);
 
 -- --------------------------------------------------------
 
@@ -611,6 +644,80 @@ CREATE TABLE `post_media` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `professional_reviews`
+--
+
+CREATE TABLE `professional_reviews` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `professional_id` bigint(20) NOT NULL,
+  `review` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `professional_reviews`
+--
+
+INSERT INTO `professional_reviews` (`id`, `user_id`, `professional_id`, `review`, `created_at`, `updated_at`) VALUES
+(1, NULL, 23, 'The agent was well mannered and well behaved when I spoke with him.', '2024-08-25 12:01:16', '2024-08-25 12:01:16'),
+(2, NULL, 23, 'He\'s very good at what he does, I think he will be fine with whatever he does.', '2024-08-25 12:01:56', '2024-08-25 12:01:56'),
+(3, NULL, 43, 'This agent is a very experienced one and from my experience with him he knows his job well.', '2024-08-25 12:09:40', '2024-08-25 12:09:40'),
+(4, NULL, 18, 'Mr Kunle is a very competent and trustworthy man. I\'ve been able to work with him on two or three occassion and I\'ve been impressed by his professionalism', '2024-08-25 12:25:18', '2024-08-25 12:25:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `professional_views`
+--
+
+CREATE TABLE `professional_views` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `professional_id` bigint(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `professional_views`
+--
+
+INSERT INTO `professional_views` (`id`, `user_id`, `professional_id`, `created_at`, `updated_at`) VALUES
+(1, NULL, 18, '2024-08-24 18:05:03', '2024-08-24 18:05:03'),
+(2, NULL, 23, '2024-08-24 18:05:41', '2024-08-24 18:05:41'),
+(3, NULL, 43, '2024-08-24 18:05:47', '2024-08-24 18:05:47'),
+(4, NULL, 24, '2024-08-25 12:08:20', '2024-08-25 12:08:20'),
+(5, NULL, 43, '2024-08-25 12:08:35', '2024-08-25 12:08:35'),
+(6, NULL, 43, '2024-08-25 12:09:40', '2024-08-25 12:09:40'),
+(7, NULL, 23, '2024-08-25 12:11:05', '2024-08-25 12:11:05'),
+(8, NULL, 18, '2024-08-25 12:23:43', '2024-08-25 12:23:43'),
+(9, NULL, 18, '2024-08-25 12:25:18', '2024-08-25 12:25:18'),
+(10, NULL, 18, '2024-08-25 12:27:25', '2024-08-25 12:27:25'),
+(11, NULL, 18, '2024-08-25 12:28:05', '2024-08-25 12:28:05'),
+(12, NULL, 18, '2024-08-25 12:29:28', '2024-08-25 12:29:28'),
+(13, 21, 23, '2024-08-25 12:34:00', '2024-08-25 12:34:00'),
+(14, 21, 23, '2024-08-25 12:34:55', '2024-08-25 12:34:55'),
+(15, 21, 23, '2024-08-25 12:34:56', '2024-08-25 12:34:56'),
+(16, NULL, 24, '2024-08-27 19:19:38', '2024-08-27 19:19:38'),
+(17, 21, 23, '2024-08-29 10:40:52', '2024-08-29 10:40:52'),
+(18, 21, 23, '2024-08-29 11:01:15', '2024-08-29 11:01:15'),
+(19, 21, 23, '2024-08-29 11:06:08', '2024-08-29 11:06:08'),
+(20, 21, 23, '2024-08-29 11:07:14', '2024-08-29 11:07:14'),
+(21, 21, 23, '2024-08-29 11:09:30', '2024-08-29 11:09:30'),
+(22, 21, 23, '2024-08-29 11:14:12', '2024-08-29 11:14:12'),
+(23, 21, 23, '2024-08-29 11:15:02', '2024-08-29 11:15:02'),
+(24, 21, 23, '2024-08-29 11:16:11', '2024-08-29 11:16:11'),
+(25, 21, 23, '2024-08-29 11:17:28', '2024-08-29 11:17:28'),
+(26, 21, 23, '2024-08-29 11:17:50', '2024-08-29 11:17:50'),
+(27, 21, 23, '2024-08-29 11:18:08', '2024-08-29 11:18:08'),
+(28, 21, 23, '2024-08-29 11:20:25', '2024-08-29 11:20:25'),
+(29, 21, 23, '2024-08-29 11:21:35', '2024-08-29 11:21:35');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `profiles`
 --
 
@@ -638,6 +745,27 @@ CREATE TABLE `prof_messages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `prof_messages`
+--
+
+INSERT INTO `prof_messages` (`id`, `user_id`, `agent_id`, `msg_name`, `msg_email`, `msg_phone`, `message`, `status`, `created_at`, `updated_at`) VALUES
+(1, 18, '21', 'Salawu Babatunde', 'stunde@gmail.com', '09034578622', 'I need an house at Ojuelegba and I think with your years of experience you should be the best for the job.', 'unread', '2024-08-25 12:21:15', '2024-08-25 12:21:15'),
+(2, 23, '23', 'Salawu Babatunde', 'stunde@gmail.com', '09034578622', 'I need an house at Ojuelegba and I think with your years of experience you should be the best for the job.', 'unread', '2024-08-25 12:22:00', '2024-08-25 12:22:00'),
+(3, 21, '21', 'Essential Admin', 'admin@gmail.com', '07011237633', 'I need a two bedroom Apartment at Lekki Ajah, with price range of 1.2M to 2m', 'unread', '2024-08-25 12:34:54', '2024-08-25 12:34:54'),
+(4, 21, '23', 'Essential Admin', 'admin@gmail.com', '07011237633', 'I need a two bedroom Apartment at Lekki Ajah, with price range of 1.2M to 2m', 'unread', '2024-08-25 12:34:55', '2024-08-25 12:34:55'),
+(5, 21, '23', 'Essential Admin', 'admin@gmail.com', '08051835090', 'I need a house in Ajah area and someone told me you\'re the righ person for the job.', 'unread', '2024-08-29 11:00:47', '2024-08-29 11:00:47'),
+(6, 21, '23', 'Essential Admin', 'admin@gmail.com', '090788230020', 'Hi I need a two bedroom apartment along Iju-Ishaga area, my budget is #230,000. Minimum of two bedroom. \r\nKindly let me know if it\'s available.', 'unread', '2024-08-29 11:06:03', '2024-08-29 11:06:03'),
+(7, 21, '23', 'Essential Admin', 'admin@gmail.com', '09021234567', 'Can you help me out with an apartment in orile.', 'unread', '2024-08-29 11:07:07', '2024-08-29 11:07:07'),
+(8, 21, '23', 'Essential Admin', 'admin@gmail.com', '0823039303', 'I need two bedroom apartment in a quiet area.', 'unread', '2024-08-29 11:09:23', '2024-08-29 11:09:23'),
+(9, 21, '23', 'Essential Admin', 'admin@gmail.com', '888800000000', 'Test', 'unread', '2024-08-29 11:14:05', '2024-08-29 11:14:05'),
+(10, 21, '23', 'Essential Admin', 'admin@gmail.com', '02223333', 'Test', 'unread', '2024-08-29 11:14:56', '2024-08-29 11:14:56'),
+(11, 21, '23', 'Essential Admin', 'admin@gmail.com', '090456677888', 'Test 3', 'unread', '2024-08-29 11:16:03', '2024-08-29 11:16:03'),
+(12, 21, '23', 'Essential Admin', 'admin@gmail.com', '090000000', 'Test 4', 'unread', '2024-08-29 11:17:20', '2024-08-29 11:17:20'),
+(13, 21, '23', 'Essential Admin', 'admin@gmail.com', '07012345555', 'Test5', 'unread', '2024-08-29 11:18:03', '2024-08-29 11:18:03'),
+(14, 21, '23', 'Essential Admin', 'admin@gmail.com', '080345552112', 'Test 6', 'unread', '2024-08-29 11:20:14', '2024-08-29 11:20:14'),
+(15, 21, '23', 'Essential Admin', 'admin@gmail.com', '0902232112', 'Test 7', 'unread', '2024-08-29 11:21:30', '2024-08-29 11:21:30');
 
 -- --------------------------------------------------------
 
@@ -697,7 +825,8 @@ INSERT INTO `properties` (`id`, `agent_id`, `property_code`, `title`, `thumbnail
 (33, 23, 'EP9301', 'Deleniti voluptas fugiat et animi sed repellendus.', 'https://picsum.photos/800/600?random=558', 'Yes', 'Yes', 11, 'Let', 5, 5, 2, 'No', 'No', 'Et ab veniam error minus.', 'Enugu', 'Ewaldhaven', 'Mr Biggs Eatery', '955 Giles Radial Suite 730', 'Yes', 'No', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'Yes', '2024-07-10 10:33:00', '2024-06-23 20:05:22'),
 (34, 15, 'EP9775', 'Atque quia fugiat delealiquam hic.', 'https://picsum.photos/800/600?random=225', 'Yes', 'Yes', 6, 'Let', 2, 5, 2, 'No', 'No', 'Quis explicabo quod quo voluptas.', 'Lagos', 'Lake Consuelo', 'Alloy Plaza', '7629 Wilbert Ferry Suite 159', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'No', '2024-08-13 07:31:37', '2024-06-23 20:05:22'),
 (35, 23, 'EP9574', 'Sunt et qui vitae id et qui.', 'https://picsum.photos/800/600?random=534', 'Yes', 'No', 4, 'Let', 2, 9, 9, 'No', 'No', 'Placeat neque quis fugiat voluptatem est vel enim.', 'Oyo', 'Lake Devanteview', 'Mr Biggs Eatery', '81613 Martin Mountains Apt. 288', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', '2024-07-13 17:43:25', '2024-06-23 20:05:22'),
-(38, 24, 'EP9', '4 Bedroom Flat at Ajanikoko Estate, Isolo.', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724358703/e-properties/properties/thumbnail/v9qtcghumxqlqqospq0l.jpg', 'No', 'No', 1, 'Rent', 4, 3, 2, 'No', 'No', 'This is a house that is comfortable and situated in a very good environment. It has a lot of benefit just staying there.', 'Lagos', 'Mainland, Lagos', 'Isolo', 'Aruna Ikukoyi Road, Isolo Lagos.', 'No', 'Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No', '2024-08-22 19:31:44', '2024-08-22 19:31:44');
+(38, 24, 'EP9', '4 Bedroom Flat at Ajanikoko Estate, Isolo.', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724358703/e-properties/properties/thumbnail/v9qtcghumxqlqqospq0l.jpg', 'No', 'No', 1, 'Rent', 4, 3, 2, 'No', 'No', 'This is a house that is comfortable and situated in a very good environment. It has a lot of benefit just staying there.', 'Lagos', 'Mainland, Lagos', 'Isolo', 'Aruna Ikukoyi Road, Isolo Lagos.', 'No', 'Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No', '2024-08-22 19:31:44', '2024-08-22 19:31:44'),
+(40, 21, 'EP9', 'Mini Flat at Gateway Garden, Ewekoro', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773322/e-properties/properties/thumbnail/hfqblzlc0rbvprf2ykm5.jpg', 'No', 'No', 4, 'Sale', 2, 2, 2, 'Yes', 'No', 'It\'s a nice apartment in the neighbourhood. The coompound is also very neat and with constant power.', 'Ogun', 'Ewekoro', 'Ajagba', '23, Adejobi Ogog close, Ajagba,Ewekoro.', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', 'No', 'Yes', '2024-08-27 14:42:06', '2024-08-27 14:42:06');
 
 -- --------------------------------------------------------
 
@@ -741,7 +870,11 @@ INSERT INTO `property_amenities` (`id`, `property_id`, `amenities`, `created_at`
 (29, 39, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724359513/e-properties/properties/amenities/cqucnxzijuwnpzq6fjo7.jpg', '2024-08-22 19:45:14', '2024-08-22 19:45:14'),
 (30, 39, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724359516/e-properties/properties/amenities/tj8qm7rsxw34x89d964l.jpg', '2024-08-22 19:45:17', '2024-08-22 19:45:17'),
 (31, 39, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724359519/e-properties/properties/amenities/fbgb6pgyaabriu4uyclz.jpg', '2024-08-22 19:45:19', '2024-08-22 19:45:19'),
-(32, 39, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724359521/e-properties/properties/amenities/ypa1cqcdr3f0pv3ysvhe.jpg', '2024-08-22 19:45:24', '2024-08-22 19:45:24');
+(32, 39, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724359521/e-properties/properties/amenities/ypa1cqcdr3f0pv3ysvhe.jpg', '2024-08-22 19:45:24', '2024-08-22 19:45:24'),
+(33, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773328/e-properties/properties/amenities/mh3hqefrfsoskab3vrfx.png', '2024-08-27 14:42:09', '2024-08-27 14:42:09'),
+(34, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773331/e-properties/properties/amenities/zhjuteoc5tlh6na8clp7.png', '2024-08-27 14:42:11', '2024-08-27 14:42:11'),
+(35, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773333/e-properties/properties/amenities/dyugdksixiftlif3vy26.png', '2024-08-27 14:42:14', '2024-08-27 14:42:14'),
+(36, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773335/e-properties/properties/amenities/posxpkc2nfvxgpwd7du9.png', '2024-08-27 14:42:16', '2024-08-27 14:42:16');
 
 -- --------------------------------------------------------
 
@@ -826,7 +959,12 @@ INSERT INTO `property_likes` (`id`, `user_id`, `property_id`, `created_at`, `upd
 (4, 21, 28, '2024-08-23 07:47:13', '2024-08-23 07:47:13'),
 (5, 21, 26, '2024-08-23 08:49:37', '2024-08-23 08:49:37'),
 (6, 21, 3, '2024-08-23 08:51:31', '2024-08-23 08:51:31'),
-(7, 21, 33, '2024-08-23 08:51:46', '2024-08-23 08:51:46');
+(7, 21, 33, '2024-08-23 08:51:46', '2024-08-23 08:51:46'),
+(8, 21, 5, '2024-08-29 12:00:37', '2024-08-29 12:00:37'),
+(9, 21, 35, '2024-08-29 12:02:36', '2024-08-29 12:02:36'),
+(10, 21, 40, '2024-08-29 12:02:38', '2024-08-29 12:02:38'),
+(11, 21, 30, '2024-08-29 12:02:59', '2024-08-29 12:02:59'),
+(12, 21, 32, '2024-08-29 12:03:06', '2024-08-29 12:03:06');
 
 -- --------------------------------------------------------
 
@@ -867,7 +1005,8 @@ INSERT INTO `property_payments` (`id`, `property_id`, `sequence`, `initial_pay`,
 (13, 28, 'Annually', 5000000.00, 38021947.20, '$', 'Annually', '₦', 'Monthly', '2024-06-10 13:38:03', '2024-06-12 09:20:37'),
 (14, 35, 'Annually', 7443112.69, 5000000.00, '₦', 'Annually', '$', 'Monthly', '2024-06-23 19:20:39', '2024-06-12 04:57:51'),
 (15, 33, 'Annually', 5000000.00, 5000000.00, '₦', 'Monthly', '₦', 'Annually', '2024-06-17 04:40:49', '2024-05-27 02:15:19'),
-(16, 38, 'Monthly', 900000.00, 600000.00, '₦', 'Annually', '₦', 'Monthly', '2024-08-22 19:31:54', '2024-08-22 19:31:54');
+(16, 38, 'Monthly', 900000.00, 600000.00, '₦', 'Annually', '₦', 'Monthly', '2024-08-22 19:31:54', '2024-08-22 19:31:54'),
+(17, 40, 'Monthly', 2000000.00, 500000.00, '₦', 'Monthly', '₦', 'Monthly', '2024-08-27 14:42:16', '2024-08-27 14:42:16');
 
 -- --------------------------------------------------------
 
@@ -891,7 +1030,14 @@ CREATE TABLE `property_reviews` (
 INSERT INTO `property_reviews` (`id`, `user_id`, `property_id`, `review`, `created_at`, `updated_at`) VALUES
 (1, 21, 33, '<blockquote>\r\n<p>This is a very good property, the agent also is very nice and the place is very clean.</p>\r\n</blockquote>', '2024-08-23 09:36:09', '2024-08-23 09:36:09'),
 (2, 21, 33, '<blockquote>\r\n<p>This is a very good property, the agent also is very nice and the place is very clean.</p>\r\n</blockquote>', '2024-08-23 09:37:17', '2024-08-23 09:37:17'),
-(3, 21, 33, '<p>For me it&#39;s a very nice place of abode and very&nbsp;<strong>affordable.</strong><br />\r\nI couldn&#39;t believe my eyes when they told me the cost.</p>', '2024-08-23 09:44:33', '2024-08-23 09:44:33');
+(3, 21, 33, '<p>For me it&#39;s a very nice place of abode and very&nbsp;<strong>affordable.</strong><br />\r\nI couldn&#39;t believe my eyes when they told me the cost.</p>', '2024-08-23 09:44:33', '2024-08-23 09:44:33'),
+(4, NULL, 1, 'It looks like a nice apartment and i also think it very okay.', '2024-08-24 16:45:36', '2024-08-24 16:45:36'),
+(5, NULL, 1, 'I spoke with this agent and checked out the apartment, it befits the money that\'s placed on it.', '2024-08-24 16:46:28', '2024-08-24 16:46:28'),
+(6, NULL, 28, 'It\'s beautiful apartment and very nice to have.\r\n\r\nI think it would be a lovely one.', '2024-08-24 17:20:58', '2024-08-24 17:20:58'),
+(7, NULL, 28, 'It\'s beautiful apartment and very nice to have.\r\n\r\nI think it would be a lovely one.', '2024-08-25 11:48:30', '2024-08-25 11:48:30'),
+(8, NULL, 28, 'I spoke with the agent in charge but his response wasn\'t very good. But apart from that I think it\'s a good place.', '2024-08-25 11:49:47', '2024-08-25 11:49:47'),
+(9, NULL, 28, 'As a tenant who has lived in this house for a while i think it\'s a very good place to be.\r\n\r\nThere\'s water, constant power supply, and most importantly,, it\'s in a secure neighbourhood.', '2024-08-25 11:51:41', '2024-08-25 11:51:41'),
+(10, NULL, 28, 'Well, I\'ve checked out the apartment and I love the place, but the total package seems too high for me.', '2024-08-25 11:52:26', '2024-08-25 11:52:26');
 
 -- --------------------------------------------------------
 
@@ -955,7 +1101,7 @@ INSERT INTO `property_types` (`id`, `property_type`, `property_type_slug`, `imag
 
 CREATE TABLE `property_views` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
   `property_id` bigint(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -970,7 +1116,19 @@ INSERT INTO `property_views` (`id`, `user_id`, `property_id`, `created_at`, `upd
 (7, 24, 2, '2024-08-22 22:20:38', '2024-08-22 22:20:38'),
 (8, 21, 5, '2024-08-23 07:47:37', '2024-08-23 07:47:37'),
 (9, 21, 26, '2024-08-23 08:50:13', '2024-08-23 08:50:13'),
-(10, 21, 33, '2024-08-23 08:52:03', '2024-08-23 08:52:03');
+(10, 21, 33, '2024-08-23 08:52:03', '2024-08-23 08:52:03'),
+(11, NULL, 3, '2024-08-24 16:43:36', '2024-08-24 16:43:36'),
+(12, NULL, 1, '2024-08-24 16:45:03', '2024-08-24 16:45:03'),
+(13, NULL, 28, '2024-08-24 17:20:13', '2024-08-24 17:20:13'),
+(14, NULL, 2, '2024-08-25 17:49:50', '2024-08-25 17:49:50'),
+(15, NULL, 28, '2024-08-25 17:53:30', '2024-08-25 17:53:30'),
+(16, 21, 2, '2024-08-27 18:56:10', '2024-08-27 18:56:10'),
+(17, 21, 5, '2024-08-29 11:54:12', '2024-08-29 11:54:12'),
+(18, 21, 5, '2024-08-29 11:54:29', '2024-08-29 11:54:29'),
+(19, 21, 5, '2024-08-29 11:54:36', '2024-08-29 11:54:36'),
+(20, 21, 5, '2024-08-29 11:58:34', '2024-08-29 11:58:34'),
+(21, 21, 5, '2024-08-29 12:00:31', '2024-08-29 12:00:31'),
+(22, 21, 5, '2024-08-29 12:03:12', '2024-08-29 12:03:12');
 
 -- --------------------------------------------------------
 
@@ -1021,6 +1179,14 @@ CREATE TABLE `scam_reports` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `scam_reports`
+--
+
+INSERT INTO `scam_reports` (`id`, `user_id`, `name_of_offender`, `business`, `location`, `complaint`, `reporter`, `country`, `phone`, `email`, `created_at`, `updated_at`) VALUES
+(1, 21, 'Idoma Ugboniyo', 'Akulo Business Ltd.', 'Agege', 'I met this man and he didn\'t pay me as we agreed. This is not the first time he\'s been doing that', 'Kalu Uche', 'Ghana', '090332233344', 'kalush@gmail.com', '2024-08-29 10:43:28', '2024-08-29 10:43:28'),
+(2, 21, 'Idoma Ugboniyo', 'Akulo Business Ltd.', 'Agege', 'I met this man and he didn\'t pay me as we agreed. This is not the first time he\'s been doing that', 'Kalu Uche', 'Ghana', '090332233344', 'kalush@gmail.com', '2024-08-29 10:49:17', '2024-08-29 10:49:17');
 
 -- --------------------------------------------------------
 
@@ -1230,16 +1396,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `email`, `email_verified_at`, `password`, `firstname`, `lastname`, `business_name`, `business_image`, `photo`, `country_code`, `phone`, `whatApp`, `state`, `axis`, `about_org`, `org_service`, `org_state`, `org_desc`, `org_axis`, `business_cat`, `experience`, `fb`, `twitter`, `linkedIn`, `instagram`, `gender`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(9, 'tenant', 'salawubabatunde69@gmail.com', NULL, '$2y$12$Jps5HdQzBiXXLGtdgQhDXOzkGjDtuDXCTuKNbCyEnL9HSNsvljjdu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-05-29 07:00:22', '2024-08-21 15:38:56'),
-(15, 'landlord', 'ajib@ng.com', NULL, '$2y$12$xXOBJ7pYsD/h6X640ZACeOo4L0.hMaNQ9ao3ugqymc.Z7eDDW5KCu', 'Ajibola', 'Adekunle', 'BeeDeeBee Ventures', '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', 234, '09034578622', '09034578622', 'OYO', '+234', NULL, 'Great', 'OYO', NULL, '+234', '+234', '', 'stunde@fb.com', 'stunde@twitter.com', 'salawutunde-104b', NULL, NULL, 'verified', NULL, '2024-05-29 09:29:05', '2024-08-21 15:39:36'),
-(18, 'service_provider', 'stunde@gmail.com', NULL, '$2y$12$WVy1LmbqDqgzVbD1ItFbSO98bHUVLjA9R4iIAoHw4.vq1I3/FKAei', 'Adekunle', 'Gabriel', NULL, NULL, '/assets/admin/images/photo/service12.png', NULL, '08138504844', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-06-22 15:41:06', '2024-08-21 15:39:34'),
-(21, 'admin', 'admin@gmail.com', NULL, '$2y$12$ySdhBN2dG5RO5hW5726kXek99zSd9QrYQB.YXz7hfFsmVSNXTF3va', 'Essential', 'Admin', NULL, NULL, '/assets/admin/images/photo/service13.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-07-10 23:13:41', '2024-07-10 23:13:41'),
+(9, 'tenant', 'salawubabatunde69@gmail.com', NULL, '$2y$12$Jps5HdQzBiXXLGtdgQhDXOzkGjDtuDXCTuKNbCyEnL9HSNsvljjdu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-05-29 07:00:22', '2024-08-27 13:15:02'),
+(15, 'landlord', 'ajib@ng.com', NULL, '$2y$12$xXOBJ7pYsD/h6X640ZACeOo4L0.hMaNQ9ao3ugqymc.Z7eDDW5KCu', 'Ajibola', 'Adekunle', 'BeeDeeBee Ventures', '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', 234, '09034578622', '09034578622', 'OYO', '+234', NULL, 'Great', 'OYO', NULL, '+234', '+234', '8', 'stunde@fb.com', 'stunde@twitter.com', 'salawutunde-104b', NULL, NULL, 'verified', NULL, '2024-05-29 09:29:05', '2024-08-21 15:39:36'),
+(18, 'service_provider', 'stunde@gmail.com', NULL, '$2y$12$WVy1LmbqDqgzVbD1ItFbSO98bHUVLjA9R4iIAoHw4.vq1I3/FKAei', 'Adekunle', 'Gabriel', NULL, NULL, '/assets/admin/images/photo/service12.png', NULL, '08138504844', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-06-22 15:41:06', '2024-08-21 15:39:34'),
+(21, 'admin', 'admin@gmail.com', NULL, '$2y$12$ySdhBN2dG5RO5hW5726kXek99zSd9QrYQB.YXz7hfFsmVSNXTF3va', 'Essential', 'Admin', NULL, NULL, '/assets/admin/images/photo/service13.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-07-10 23:13:41', '2024-08-27 14:10:33'),
 (23, 'agent', 'jola@gmail.com', NULL, '$2y$12$wnQuGbZXWXD/8Er3ZcjcuuYp4xxjBj2l6Vcwq8/lNCqAMbQDNPiUi', 'Jolayemi', 'Olaiya', NULL, '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', NULL, '08077889832', '09087459822', 'Ibadan', 'Iwo road', 'At Jolayemi Global we take every part of property negotiation with full precaution and guarantee customer\'s satisfaction.', NULL, 'Ibadan', NULL, 'Bashorun', NULL, '7', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-01 06:48:59', '2024-08-01 06:48:59'),
 (24, 'agent', 'kalglo@gmail.com', NULL, '$2y$12$/JE7neoCHOQbzXB7yjIDPuendJt.BtXIvzH86AOIgSnKYXhxEY1xe', 'Kalu ', 'Uche', NULL, '/assets/images/RS1.jpg', '/assets/admin/images/photo/service12.png', NULL, '07067543213', NULL, NULL, NULL, 'We are very good at whatwe do rregardless of the circumstances\\', NULL, 'Lagos', NULL, 'Ikeja', NULL, '10', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-08-01 06:52:12', '2024-08-21 15:39:47'),
-(25, 'agent', 'ikekal@gmail.com', NULL, '$2y$12$MKkn1Ha2DD7nKzgkqv7OF./ira6aNNujxvDUS8NlLN4ZywurHcpv2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-20 20:00:52', '2024-08-20 20:00:52'),
-(34, 'tenant', 'lukasade@gmail.com', NULL, '$2y$12$pFkERtrsKNH5iXwOFBBQ2OG3/8K1w8XLvh6WceMlR.2wF57Y0m.eS', 'Adeyemi', 'Lukas', NULL, NULL, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724253590/e-properties/users/rk4hcqtu6bpkcgr8ebex.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-21 14:19:49', '2024-08-21 14:19:51'),
-(43, 'agent', 'ogbevo@gmail.com', NULL, '$2y$12$S6L9YHpx46S8QxdpRAimGu.XlLOpNHNZMirgbNCvPBT6AHPsFUFW.', 'Ogbeviro', 'Eunice', NULL, NULL, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724254343/e-properties/users/k4bjzqexfisabcqzvwg3.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-21 14:32:22', '2024-08-21 14:32:24'),
-(54, 'service_provider', 'ejiwil@yahoo.com', NULL, '$2y$12$WukESHc1qwM3OfsQ.nf9fuaxDvMJ/BhdFL0KRX6LUH7CBHEPx3.Um', 'Williams', 'Ejiroh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-21 14:53:23', '2024-08-21 14:53:23');
+(25, 'agent', 'ikekal@gmail.com', NULL, '$2y$12$MKkn1Ha2DD7nKzgkqv7OF./ira6aNNujxvDUS8NlLN4ZywurHcpv2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-20 20:00:52', '2024-08-20 20:00:52'),
+(34, 'tenant', 'lukasade@gmail.com', NULL, '$2y$12$pFkERtrsKNH5iXwOFBBQ2OG3/8K1w8XLvh6WceMlR.2wF57Y0m.eS', 'Adeyemi', 'Lukas', NULL, NULL, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724253590/e-properties/users/rk4hcqtu6bpkcgr8ebex.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-08-21 14:19:49', '2024-08-27 14:10:28'),
+(43, 'agent', 'ogbevo@gmail.com', NULL, '$2y$12$S6L9YHpx46S8QxdpRAimGu.XlLOpNHNZMirgbNCvPBT6AHPsFUFW.', 'Ogbeviro', 'Eunice', NULL, NULL, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724254343/e-properties/users/k4bjzqexfisabcqzvwg3.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '15', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-21 14:32:22', '2024-08-21 14:32:24'),
+(54, 'service_provider', 'ejiwil@yahoo.com', NULL, '$2y$12$WukESHc1qwM3OfsQ.nf9fuaxDvMJ/BhdFL0KRX6LUH7CBHEPx3.Um', 'Williams', 'Ejiroh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-21 14:53:23', '2024-08-21 14:53:23');
 
 --
 -- Indexes for dumped tables
@@ -1273,6 +1439,12 @@ ALTER TABLE `auction_bids`
 -- Indexes for table `blacklists`
 --
 ALTER TABLE `blacklists`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1386,6 +1558,18 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `post_media`
 --
 ALTER TABLE `post_media`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `professional_reviews`
+--
+ALTER TABLE `professional_reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `professional_views`
+--
+ALTER TABLE `professional_views`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1536,7 +1720,7 @@ ALTER TABLE `agents`
 -- AUTO_INCREMENT for table `auctions`
 --
 ALTER TABLE `auctions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `auction_bids`
@@ -1549,6 +1733,12 @@ ALTER TABLE `auction_bids`
 --
 ALTER TABLE `blacklists`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `building_categories`
@@ -1632,7 +1822,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=388;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1647,6 +1837,18 @@ ALTER TABLE `post_media`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `professional_reviews`
+--
+ALTER TABLE `professional_reviews`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `professional_views`
+--
+ALTER TABLE `professional_views`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
@@ -1656,19 +1858,19 @@ ALTER TABLE `profiles`
 -- AUTO_INCREMENT for table `prof_messages`
 --
 ALTER TABLE `prof_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `property_amenities`
 --
 ALTER TABLE `property_amenities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `property_categories`
@@ -1686,19 +1888,19 @@ ALTER TABLE `property_deals`
 -- AUTO_INCREMENT for table `property_likes`
 --
 ALTER TABLE `property_likes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `property_payments`
 --
 ALTER TABLE `property_payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `property_reviews`
 --
 ALTER TABLE `property_reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `property_shares`
@@ -1716,7 +1918,7 @@ ALTER TABLE `property_types`
 -- AUTO_INCREMENT for table `property_views`
 --
 ALTER TABLE `property_views`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -1728,7 +1930,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `scam_reports`
 --
 ALTER TABLE `scam_reports`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `service_categories`
