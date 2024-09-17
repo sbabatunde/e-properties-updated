@@ -106,8 +106,6 @@ Route::controller(PropertyProfessionalController::class)->group(function () {
     Route::get('/property/professional/connect', 'allPropertyProfessionals')->name('property.professionals.connect');
     Route::post('/message/professional/{profID}', 'messagePropertyProfessional')->name('user.professional.message');
     Route::post('/review/professional/{profID}', 'propertyProfessionalReview')->name('professional.review');
-    
-    
 });
 
 

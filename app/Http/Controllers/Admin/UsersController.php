@@ -24,6 +24,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::with('providers','blacklist')->orderBy('firstname', 'ASC')->paginate(10);
+
         return view('dashboard.users.index', compact('users'));
     }
 

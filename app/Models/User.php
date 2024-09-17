@@ -73,6 +73,6 @@ class User extends Authenticatable
 
     public function blacklist()
     {
-        return $this->belongsTo(Blacklist::class,'reported_id','id');
+        return $this->hasOne(Blacklist::class,'reported_id','id');
     }
 }

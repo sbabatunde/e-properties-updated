@@ -35,7 +35,7 @@
             @endforeach
             <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                 <div class="carousel-content container b1-inner">
-                    <div class="tab-search-section">
+                    <div class="tab-search-section mb-5">
                         <h1>Locate Your Treasured Properties Through E-Properties</h1>
                         <div id="typed-strings">
                             <p>Get Exuisite Properties And Delightful Property Deals

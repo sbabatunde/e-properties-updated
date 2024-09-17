@@ -11,8 +11,8 @@
             <a href="{{ route('property.by.type', $item->property_type_slug) }}">
                 <div class="category-card category">
                     <div class="image">
-                        <img src="{{ asset($item['image_path']) }}" alt="{{ asset($item['property_type']) }}"
-                            style="width:100%;" height="150" width="100">
+                        <img src="{{ $item['image_path'] ?? asset($item['image_path']) }}"
+                            alt="{{ asset($item['property_type']) }}" style="width:100%;" height="150" width="100">
                         <div class="category-card-sub ">
                             <div class="card-text mb-0">
                                 <h5>{{ $item['property_type'] }}</h5>

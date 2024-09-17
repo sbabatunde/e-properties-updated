@@ -116,14 +116,14 @@
                                                                     <i class="fa fa-ban" style="color: red"></i>
                                                                 </a>
                                                             @else
+                                                                <strong>blacklisted</strong>
                                                                 <form id="removeFromBlacklist{{ $user->id }}"
-                                                                    {{-- style="display: none" --}}
                                                                     action="{{ route('admin.blacklist.remove', $user->id) }}"
                                                                     method="POST">
                                                                     @csrf
                                                                     <button
                                                                         onclick="removeFromBlacklist(event,{{ $user->id }})"
-                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                        class="btn btn-outline-info btn-min-width box-shadow-3 mr-1 mb-1">
                                                                         <i class="fa fa-unlock"></i>
                                                                     </button>
                                                                 </form>

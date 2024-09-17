@@ -103,3 +103,86 @@
     </div>
 </div>
 {{-- Essential Group Brands Ends --}}
+
+<style>
+    /* styles.css */
+    .home-container {
+        padding: 20px;
+    }
+
+    .product-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .product-card img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Swiper styles */
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (min-width: 600px) {
+        .swiper-slide {
+            flex: 0 0 50%;
+            /* Two slides visible */
+        }
+    }
+
+    @media (min-width: 900px) {
+        .swiper-slide {
+            flex: 0 0 33.33%;
+            /* Three slides visible */
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .swiper-slide {
+            flex: 0 0 25%;
+            /* Four slides visible */
+        }
+    }
+</style>
+
+
+<script>
+    // script.js
+    document.addEventListener('DOMContentLoaded', () => {
+        const swiper = new Swiper('.swiper-container', {
+            slidesPerView: 'auto',
+            spaceBetween: 10,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                600: {
+                    slidesPerView: 2,
+                },
+                900: {
+                    slidesPerView: 3,
+                },
+                1200: {
+                    slidesPerView: 4,
+                },
+            },
+        });
+    });
+</script>

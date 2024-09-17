@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Site\Blacklist;
 use Illuminate\Http\Request;
+use App\Models\Admin\Blacklist;
 
 class BlacklistController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function allBlacklist()
     {
-        //
+        $blacklisted['Landlords'] = Blacklist::with(['reporter','reported','blacklister'])
+                                    ->where('category','landlord')->get();
+        $blacklisted['Tenants'] = Blacklist::with(['reporter','reported','blacklister'])
+                                    ->where('category','tenant')->get();
+        $blacklisted['Agents'] = Blacklist::with(['reporter','reported','blacklister'])
+                                    ->where('category','agent')->get();
+        $blacklisted['Properties'] = Blacklist::with(['reporter','reported','blacklister'])
+                                    ->where('category','property')->get();
+
+        return view('front.users.blacklist.main-page',compact('blacklisted'));
     }
 
     /**

@@ -214,8 +214,11 @@ class PropertyController extends Controller
         }
 
         // Execute the query and get the results
-        $properties = $query->get();
+        $data = $properties = $query->paginate();
         // Return the view with the results
+        // dd($properties);
+       
+
         return view('front.users.properties.search',compact('properties'))->withViewName('vendor.pagination.custom');
     }
 

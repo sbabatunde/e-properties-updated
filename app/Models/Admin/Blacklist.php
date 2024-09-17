@@ -15,17 +15,17 @@ class Blacklist extends Model
 
     public function reporter()
     {
-        return $this->belongsTo(User::class,'id','reporter_id');
+        return $this->belongsTo(User::class,'reporter_id','id');
     }
 
     public function reported()
     {
-        return $this->belongsTo(User::class,'id','reported_id');
+        return $this->belongsTo(User::class,'reported_id','id');
     }
 
     public function blacklister()
     {
-        return $this->belongsTo(User::class,'id','blacklisted_by');
+        return $this->belongsTo(User::class,'blacklisted_by','id');
     }
 }
 

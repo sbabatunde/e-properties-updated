@@ -25,8 +25,8 @@ Route::group(['middleware'=>['auth','adminCheck']],function () {
 });
 
 Route::group(['prefix' => 'staff/blacklist','middleware'=>['auth','adminCheck']], function () {
-  Route::post('blacklist/user/remove', [Admin\BlacklistController::class, 'removeFromBlacklist'])->name('admin.users.remove');
-  Route::post('blacklist/user/add', [Admin\BlacklistController::class, 'addToBlacklist'])->name('admin.blacklist.add');
+  Route::post('blacklist/user/remove', [Admin\BlacklistController::class, 'removeFromBlacklist'])->name('admin.blacklist.remove');
+  Route::post('blacklist/user/add/{id}', [Admin\BlacklistController::class, 'addToBlacklist'])->name('admin.blacklist.add');
   // Route to display all sliders
   Route::get('index',  [Admin\BlacklistController::class, 'index'])->name('admin.blacklist.index');
 });

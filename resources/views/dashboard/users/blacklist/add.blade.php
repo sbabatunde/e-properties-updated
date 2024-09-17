@@ -1,4 +1,5 @@
-<form class="form-group" action="{{ route('admin.blacklist.add') }}" method="POST" enctype="multipart/form-data">
+<form class="form-group" action="{{ route('admin.blacklist.add', $user->id) }}" method="POST"
+    enctype="multipart/form-data">
     @csrf
     <div class="post-form modal fade" id="Blacklist{{ $user->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="BlacklistLabel" aria-hidden="true">
@@ -23,6 +24,7 @@
                         <p>{{ $user->firstname }} {{ $user->lastname }}</p>
                     </div>
                     <div class="col-md-12 mt-1 justify-content-center">
+                        <input type="hidden" value="{{ $user->user_type }}" name="category">
                         <div class="form-group col-md-6">
                             <label for="firstname">Firstname</label>
                             <input type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
@@ -46,25 +48,36 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="email">Email</label>
-                            <input type="email" required
+                            <label for="business_name">Business Name</label>
+                            <input type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+                                class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                placeholder="Enter business name" required autocomplete=""
+                                value="{{ $user->business_name }}" id="name" required name="business_name">
+                            @error('business_name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group business col-md-6">
+                            <label for="org_description">Brief Description</label>
+                            <input type="text" required
                                 style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
                                 class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
                             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                placeholder="email" autocomplete="" value="{{ $user->email }}" id="name" required
-                                name="email">
-                            @error('email')
+                                placeholder="What does the organization deal in" autocomplete=""
+                                value="{{ $user->org_service }}" id="name" required name="org_description">
+                            @error('org_description')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
                             <label for="reported_by">Reported By?</label>
-                            <select type="reported_by" required
+                            <select type="text" name="reported_by" required
                                 style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
                                 class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
                                 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 placeholder="reported_by" autocomplete="">
-                                <option value="">---Select Reprter--</option>
+                                <option value="">---Select Reporter--</option>
                                 @foreach ($users as $item)
                                     <option value="{{ $item->id }}">{{ $item->firstname }} {{ $item->lastname }}
                                     </option>
@@ -74,52 +87,34 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group col-md-6" id="bname{{ $user->id }}" style="display: none">
-                            <label for="business_name">Business Name</label>
-                            <input type="business_name" required
-                                style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
-                                class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                placeholder="business_name" autocomplete="" value="{{ $user->business_name }}"
-                                id="name" required name="business_name">
-                            @error('business_name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group business col-md-6" id="bID{{ $user->id }}" style="display: none">
-                            <label for="business_ID">Business ID</label>
-                            <input type="business_ID" required
-                                style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
-                                class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                placeholder="business_ID" autocomplete="" value="{{ $user->business_ID }}"
-                                id="name" required name="business_ID">
-                            @error('business_ID')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group name2 col-md-12 " id="sType{{ $user->id }}" style="display: none">
-                            @php
-                                $categories = App\Models\Site\ServiceCategory::get();
-                            @endphp
-                            <select type="text" name="category" id="service_category"
-                                class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option disabled selected>---Select Service Type---</option>
-                                @foreach ($categories as $item)
-                                    <option value="{{ $item->slug }}">{{ $item->category }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group name2 col-md-12" id="enclosure" style="display: none">
-                            <select type="text" name="service_type" id="service_type"
-                                class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                            </select>
+                        <div class="form-group business col-md-6">
+                            <label for="reported_on">Reported On</label>
+                            <input type="date" required
+                                style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+                                class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                placeholder="What does the organization deal in" autocomplete=""
+                                value="{{ $user->org_service }}" id="name" required name="reported_on">
+                            @error('reported_on')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group business col-md-12">
+                            <label for="org_description">Reason for Blacklisting</label>
+                            <textarea type="text" style="border: 1px solid rgb(224, 223, 223);border-radius:7px"
+                                class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                placeholder="What was the reported offence" required name="reason"></textarea>
+                            @error('reason')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
                 <div class="post-footer">
-                    <button type="submit" class="btn btn-outline">Edit</button>
+                    <button type="submit" class="btn btn-outline">Submit</button>
                 </div>
             </div>
         </div>

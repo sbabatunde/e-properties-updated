@@ -277,38 +277,33 @@
     <!-- /// Remove from Compare Function Ends -->
 
     <!-- Initialize Swiper -->
-
     <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 4, // Default to 4 slides
-            spaceBetween: 10, // Space between slides
-            loop: true, // Enable looping
-            autoplay: {
-                delay: 2500, // Delay between slides
-                disableOnInteraction: false, // Continue autoplay after user interactions
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                1200: {
-                    slidesPerView: 4, // 4 slides on large screens
+        // script.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const swiper = new Swiper('.swiper-container', {
+                slidesPerView: 'auto',
+                spaceBetween: 10,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
                 },
-                992: {
-                    slidesPerView: 3, // 3 slides on medium screens
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
                 },
-                768: {
-                    slidesPerView: 2, // 2 slides on small screens
+                breakpoints: {
+                    600: {
+                        slidesPerView: 2,
+                    },
+                    900: {
+                        slidesPerView: 3,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                    },
                 },
-                576: {
-                    slidesPerView: 1, // 1 slide on extra small screens
-                },
-            },
+            });
         });
     </script>
 
@@ -337,50 +332,36 @@
 
     {{-- Trending Slide Script --}}
     <script>
-        jQuery(document).ready(function() {
-            if (jQuery('.testimonial-slider-rtl').length) {
-                const reviewsCarouselOptions = {
-                    slidesPerView: 1, // Default value for smaller screens
-                    spaceBetween: 30,
-                    loop: true,
-                    speed: 7500,
-                    grabCursor: true, // Show a grab cursor when hovering over slides
-                    pauseOnMouseEnter: false,
-                    mousewheel: {
-                        enabled: false,
+        // script.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const swiper = new Swiper('.swiper-container', {
+                slidesPerView: 'auto',
+                spaceBetween: 10,
+                loop: true, // Enable loop mode for continuous sliding
+                autoplay: {
+                    delay: 3000, // Delay between slides in milliseconds
+                    disableOnInteraction: false, // Continue autoplay after user interactions
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 2,
                     },
-                    keyboard: {
-                        enabled: false,
+                    900: {
+                        slidesPerView: 3,
                     },
-                    allowTouchMove: true, // Enable dragging and touch movement
-                    autoHeight: false,
-                    initialSlide: 0,
-                    autoplay: {
-                        delay: 3000, // Delay in milliseconds (e.g., 3000ms = 3 seconds)
-                        disableOnInteraction: false, // Continue autoplay even after user interactions
+                    1200: {
+                        slidesPerView: 4,
                     },
-                    breakpoints: {
-                        1200: { // When viewport is 1200px or wider
-                            slidesPerView: 2,
-                            spaceBetween: 30,
-                        },
-                        992: { // When viewport is 992px or wider
-                            slidesPerView: 2,
-                            spaceBetween: 20,
-                        },
-                        768: { // When viewport is 768px or wider
-                            slidesPerView: 1.5,
-                            spaceBetween: 15,
-                        },
-                        576: { // When viewport is 576px or wider
-                            slidesPerView: 1, // Show one slide per view
-                            spaceBetween: 10,
-                        },
-                    },
-                };
-
-                const reviewsCarousel = new Swiper(".testimonial-slider-rtl", reviewsCarouselOptions);
-            }
+                },
+            });
         });
     </script>
 

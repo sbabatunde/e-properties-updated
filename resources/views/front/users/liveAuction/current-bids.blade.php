@@ -14,7 +14,7 @@
 
         @endphp
         <div class="card mb-3 mt-3 auction-card">
-            <div class="row ml-1">
+            <div class="row">
                 <div class="col-4">
                     <span><b>Days</b></span><br>
                     <span><b>{{ $days }}</b></span>
@@ -30,7 +30,7 @@
             </div>
             <div class="live-card-body">
                 <div class="auction-image">
-                    <img src="{{ $item->property->thumbnail ?? '' }}" alt="">
+                    <img src="{{ asset($item->property->thumbnail) ?? $item->property->thumbnail }}" alt="">
                     <i class="fa fa-user"></i>
                     <i class="fa fa-share-alt text-black"></i>
                 </div>
