@@ -9,7 +9,7 @@ class Agent extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['business_name', 'business_ID', 'user_id'];
+    protected $guarded = [];
 
     public function user()
     {

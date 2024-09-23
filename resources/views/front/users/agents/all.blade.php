@@ -41,11 +41,13 @@
                 </span>
             </div>
         @endforeach
-
         {{-- Row 1 Ends --}}
-
-
     </div>
+    @if (count($allAgents) > 8)
+        <div class="pagination mt-5 text-center" style="display:flex; justify-content:center">
+            {{ $allAgents->links('vendor.pagination.custom') }}
+        </div>
+    @endif
     <!-- Al the Agents  end -->
 
     <!-- Connect Property Expert start -->

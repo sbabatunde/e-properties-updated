@@ -3317,24 +3317,52 @@ transform: rotate(45deg);
   left: 10px;
 }
 
-.landlord-sub-category{
+.landlord-sub-category {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start; /* Align to the left on wider screens */
+  margin: 0 auto; /* Center the container */
+  width: 80%; /* Set the width of the container */
 }
-.landlord-cat-venue{
- background: #ededee;
- border-radius: 10px;
- box-shadow: 0 0 20px rgba(43, 42, 42, 0.1);
- margin: 20px 30px;
- margin-bottom: 2rem;
+
+.landlord-cat-venue {
+  background: #ededee;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(43, 42, 42, 0.1);
+  margin: 30px 15px; /* Increased top/bottom and side margins for better spacing */
+  overflow: hidden; /* Ensures that content doesn't overflow the border radius */
+  flex: 1 1 calc(30% - 30px); /* Responsive sizing, 3 items per row with smaller width */
+  max-width: calc(30% - 30px); /* Ensures max width matches the flex basis */
+  transition: transform 0.3s; /* Adds a hover effect */
 }
-.landlord-cat-venue img{
-  max-width: 259px;
-  min-width: 259px;
-  max-height: 184px;
-  min-height: 184px;
-  border-radius: 10px 10px 0px 0px;
+
+.landlord-cat-venue:hover {
+  transform: scale(1.05); /* Slightly enlarges the card on hover */
+}
+
+.landlord-cat-venue img {
+  width: 100%; /* Makes the image responsive */
+  height: 250px; /* Reduced height for smaller image boxes */
+  object-fit: cover; /* Ensures the image covers the box without distortion */
+  border-radius: 10px 10px 0 0; /* Rounded corners at the top */
+}
+
+@media (max-width: 768px) {
+  .landlord-sub-category {
+    justify-content: center; /* Center the content on smaller screens */
+  }
+
+  .landlord-cat-venue {
+    flex: 1 1 calc(45% - 30px); /* 2 items per row on tablets */
+    max-width: calc(45% - 30px);
+  }
+}
+
+@media (max-width: 480px) {
+  .landlord-cat-venue {
+    flex: 1 1 100%; /* 1 item per row on mobile */
+    max-width: 100%;
+  }
 }
 
 .meet-card{

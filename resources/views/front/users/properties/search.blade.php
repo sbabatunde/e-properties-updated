@@ -42,31 +42,37 @@
         left: 94%;
     }
 </style>
-
 @extends('layouts.front.login-site')
 @section('content')
     {{-- Page Banner Begins --}}
     <div class="page-hero bg-image" style="background:#5856cf">
         <div class="hero-section" style="display: flex;flex-direction:column;width:90vw;margin:auto">
-            {{-- @include('front.hero-sections.search-form') --}}
+            @include('front.hero-sections.search-form')
         </div>
     </div>
     {{-- Page Banner Ends  --}}
 
     {{-- Residential Properties List --}}
-    <!-- Hidden form for Property Interaction Submission -->
-
     <form id="submitForm" method="POST" action="" style="display:none;">
         @csrf
         <input type="hidden" name="id" id="LikesFormId"> <!-- Hidden input to store ID -->
     </form>
 
+    <div>
+        <h2 class="text-center">
+            @if ($properties->count() > 0)
+                All Search Results Found ({{ $properties->total() }})
+            @else
+                No Search Results Found
+            @endif
+        </h2>
+    </div>
+
     <div class="residential-main">
-        {{-- @include('front.users.properties.commercial.compare')
-        @include('front.users.properties.commercial.live-auction') --}}
+        @include('front.users.properties.search-compare')
         <div class="residential-right">
             <div class="res-btn-group">
-                <div class="btn category-btn-group res-btn-container d-flex justify-content-center">
+                <div class="btn category-btn-group res-btn-container">
                     <button onclick="showResSales()" class="req-target active-btn-group">
                         <strong>
                             Sales
@@ -84,56 +90,14 @@
                     </button>
                 </div>
             </div>
-            <div id= "residentialLets" style="display:none">
-                <div class="container res-properties">
-                    @foreach ($properties as $item)
-                        <div class="res-prop-items mt-4">
-                            <img src="{{ $item->thumbnail ?? asset($item->thumbnail) }}" alt="">
-                            <p style="color: black">
-                                <span style="font-weight:550;font-size:4vmin">{{ $item->title }}</span><br>
-                                {{ $item->area }}
-                            </p>
-                            <a href="{{ route('property.details', $item->id) }}" class="btn res-prop-view"> View</a><br>
-                            <div class="res-price">
-                                <span style="color: black">Price:
-                                    <b>
-                                        {{ $item->payment->initial_denomination ?? '' }}
-                                        {{ number_format($item->payment->initial_pay ?? '') }}
-                                    </b>
-                                </span>
-                                <span style="color: #394293" class="mr-2">{{ $item->payment->sequence }}</span>
-                            </div>
-                            <div class="comp-like-share">
-                                <span style="font-weight:550">
-                                    <a href="#" onclick="addToCompare({{ $item->id }}); return false;">Compare</a>
-                                </span>
-                                <span>
-                                    <a href="#" onclick="addToFav({{ $item->id }}); return false;">
-                                        <i class="fa fa-heart ml-2" style="color: rgb(131, 131, 131);font-size:25px"></i>
-                                    </a>
-
-                                    <a href="#" id="shareLink" data-id="{{ $item->id }}">
-                                        <i class="fa fa-share-alt" style="color: rgb(131, 131, 131);font-size:25px"></i>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-                @if (count($properties) > 0)
-                    <div class="pagination mt-5 ml-2">
-                        {{ $properties->links('vendor.pagination.custom') }}
-                    </div>
-                @endif
-
-            </div>
+            @include('front.users.properties.commercial.category.lets')
+            @include('front.users.properties.commercial.category.sales')
+            @include('front.users.properties.commercial.category.rents')
         </div>
-    </div>
     </div>
 
     {{-- Similar Properties List --}}
-    {{-- @include('front.users.properties.commercial.similar') --}}
+    @include('front.users.properties.commercial.similar')
 
     {{-- Compare property Script --}}
     <script>
@@ -162,7 +126,6 @@
 
     {{-- For Property Likes update in database --}}
     <script>
-        // Function to get the CSRF token from meta tag
         function getCsrfToken() {
             const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             console.log("CSRF Token:", token); // Debug output

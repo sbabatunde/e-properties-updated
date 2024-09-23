@@ -39,7 +39,7 @@ class Profile extends Controller
             $name_gen = hexdec(uniqid()) . '.' . $request->file('busi_img')
                 ->getClientOriginalExtension();
             $img = $manager->read($request->file('busi_img'));
-            $img = $img->resize(450, 750);
+            $img = $img->resize(250, 250);
 
             $img->toJpeg(80)->save(base_path('public/assets/admin/profile/business_image/' .
                 $name_gen));
@@ -85,7 +85,7 @@ class Profile extends Controller
             $name_gen = hexdec(uniqid()) . '.' . $request->file('photo')
                 ->getClientOriginalExtension();
             $img = $manager->read($request->file('photo'));
-            $img = $img->resize(450, 750);
+            $img = $img->resize(250, 250);
 
             $img->toJpeg(80)->save(base_path('public/assets/admin/images/photo/' .
                 $name_gen));

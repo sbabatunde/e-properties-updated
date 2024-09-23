@@ -33,34 +33,6 @@ class BuildingMaterial extends Controller
         
     }
 
-    // public function buildingMaterialStore(BuildingMaterialRequest $request)
-    // {
-    //     try {
-    //         $material = AdminBuildingMaterial::create([
-    //             'user_id'=>Auth::id(),
-    //             'title'=>$request->title,
-    //             'type'=>$request->type,
-    //             // 'category'=>$request->category,
-    //             'address'=>$request->address,
-    //             'price'=>$request->price,
-    //             'quantity'=>$request->quantity,
-    //             'installment'=>$request->installment,
-    //             'description'=>$request->description,
-    //             'thumbnail'=>$request->thumbnail,
-    //         ]);
-    
-    //         Alert::success('Success','Material uploaded successfully');
-    
-    //         return back();
-    //      } catch (\Exception $ex) {
-            
-    //         Alert::error('Ooops!!!','Something went wrong');
-
-    //         return back();
-    //      }
-        
-    // }
-
     public function buildingMaterialStore(BuildingMaterialRequest $request)
     {
         try {

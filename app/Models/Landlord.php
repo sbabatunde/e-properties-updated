@@ -9,10 +9,15 @@ class Landlord extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['business_name', 'business_ID', 'user_id'];
+    protected $guarded = [];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function property()
+    {
+        return $this->hasMany(Property::class,'agent_id','user_id');
     }
 }
