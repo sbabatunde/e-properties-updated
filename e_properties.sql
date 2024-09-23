@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2024 at 04:28 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Sep 23, 2024 at 10:20 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -91,7 +91,7 @@ CREATE TABLE `auctions` (
 --
 
 INSERT INTO `auctions` (`id`, `property_id`, `start_date`, `start_time`, `end_date`, `end_time`, `starting_price`, `denomination`, `append`, `created_at`, `updated_at`) VALUES
-(1, 1, '2024-09-01', '22:08', '2024-10-28', '22:08', 2000000.00, '₦', 'Monthly', '2024-05-29 19:25:51', '2024-05-29 19:25:51'),
+(1, 1, '2024-09-25', '22:08', '2024-10-28', '22:08', 2000000.00, '₦', 'Monthly', '2024-05-29 19:25:51', '2024-05-29 19:25:51'),
 (2, 3, '2024-05-02', '23:08', '2024-05-18', '10:09', 25900000.00, '₦', 'Monthly', '2024-05-29 20:11:20', '2024-05-29 20:11:20'),
 (4, 5, '2024-08-01', '13:35', '2024-09-26', '17:35', 12000000.00, '₦', 'Annually', '2024-06-22 10:40:27', '2024-06-22 10:40:27'),
 (75, 2, '2024-05-24', '08:46:38', '2024-07-28', '18:29:13', 354233797.08, '₦', 'Annually', '2024-08-10 06:29:22', '2024-07-15 03:36:58'),
@@ -146,12 +146,22 @@ CREATE TABLE `blacklists` (
   `reporter_id` bigint(20) NOT NULL,
   `reported_id` bigint(20) NOT NULL,
   `blacklisted_by` bigint(20) NOT NULL,
+  `business_name` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
   `org_description` varchar(255) NOT NULL,
+  `reason` varchar(255) NOT NULL,
   `reported_on` varchar(255) NOT NULL,
-  `rating` int(11) NOT NULL,
+  `rating` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blacklists`
+--
+
+INSERT INTO `blacklists` (`id`, `reporter_id`, `reported_id`, `blacklisted_by`, `business_name`, `category`, `org_description`, `reason`, `reported_on`, `rating`, `created_at`, `updated_at`) VALUES
+(1, 23, 15, 21, 'BeeDeeBee Ventures', 'landlord', 'Deals on property Sales and all', 'A complaint was raised concerning fraudulent activities which is yet to be clarified by the accused.', '2024-09-08', 3, '2024-09-08 16:00:12', '2024-09-08 16:00:12');
 
 -- --------------------------------------------------------
 
@@ -576,7 +586,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (372, '2024_06_21_223653_create_building_category_types_table', 8),
 (373, '2024_07_23_140523_create_trendings_table', 9),
 (377, '2020_06_14_000001_create_media_table', 10),
-(378, '2024_07_26_130939_create_blacklists_table', 10),
 (379, '2024_08_14_150209_create_prof_messages_table', 10),
 (380, '2024_08_22_212245_create_property_likes_table', 11),
 (381, '2024_08_22_212507_create_property_views_table', 11),
@@ -584,7 +593,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (383, '2024_08_23_102655_create_property_reviews_table', 12),
 (384, '2024_08_24_181806_create_professional_reviews_table', 13),
 (385, '2024_08_24_184534_create_professional_views_table', 13),
-(387, '2024_08_25_190518_create_blogs_table', 14);
+(387, '2024_08_25_190518_create_blogs_table', 14),
+(389, '2024_07_26_130939_create_blacklists_table', 15);
 
 -- --------------------------------------------------------
 
@@ -713,7 +723,17 @@ INSERT INTO `professional_views` (`id`, `user_id`, `professional_id`, `created_a
 (26, 21, 23, '2024-08-29 11:17:50', '2024-08-29 11:17:50'),
 (27, 21, 23, '2024-08-29 11:18:08', '2024-08-29 11:18:08'),
 (28, 21, 23, '2024-08-29 11:20:25', '2024-08-29 11:20:25'),
-(29, 21, 23, '2024-08-29 11:21:35', '2024-08-29 11:21:35');
+(29, 21, 23, '2024-08-29 11:21:35', '2024-08-29 11:21:35'),
+(30, NULL, 24, '2024-09-16 15:25:50', '2024-09-16 15:25:50'),
+(31, NULL, 25, '2024-09-21 08:51:35', '2024-09-21 08:51:35'),
+(32, NULL, 18, '2024-09-21 08:59:32', '2024-09-21 08:59:32'),
+(33, NULL, 15, '2024-09-21 08:59:46', '2024-09-21 08:59:46'),
+(34, NULL, 43, '2024-09-21 08:59:57', '2024-09-21 08:59:57'),
+(35, NULL, 23, '2024-09-21 09:26:23', '2024-09-21 09:26:23'),
+(36, NULL, 43, '2024-09-21 09:40:33', '2024-09-21 09:40:33'),
+(37, NULL, 15, '2024-09-21 09:42:53', '2024-09-21 09:42:53'),
+(38, NULL, 23, '2024-09-21 09:44:47', '2024-09-21 09:44:47'),
+(39, NULL, 15, '2024-09-21 09:53:06', '2024-09-21 09:53:06');
 
 -- --------------------------------------------------------
 
@@ -1128,7 +1148,10 @@ INSERT INTO `property_views` (`id`, `user_id`, `property_id`, `created_at`, `upd
 (19, 21, 5, '2024-08-29 11:54:36', '2024-08-29 11:54:36'),
 (20, 21, 5, '2024-08-29 11:58:34', '2024-08-29 11:58:34'),
 (21, 21, 5, '2024-08-29 12:00:31', '2024-08-29 12:00:31'),
-(22, 21, 5, '2024-08-29 12:03:12', '2024-08-29 12:03:12');
+(22, 21, 5, '2024-08-29 12:03:12', '2024-08-29 12:03:12'),
+(23, NULL, 38, '2024-09-21 09:21:39', '2024-09-21 09:21:39'),
+(24, NULL, 2, '2024-09-21 09:44:52', '2024-09-21 09:44:52'),
+(25, NULL, 2, '2024-09-21 10:41:25', '2024-09-21 10:41:25');
 
 -- --------------------------------------------------------
 
@@ -1396,8 +1419,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `email`, `email_verified_at`, `password`, `firstname`, `lastname`, `business_name`, `business_image`, `photo`, `country_code`, `phone`, `whatApp`, `state`, `axis`, `about_org`, `org_service`, `org_state`, `org_desc`, `org_axis`, `business_cat`, `experience`, `fb`, `twitter`, `linkedIn`, `instagram`, `gender`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(9, 'tenant', 'salawubabatunde69@gmail.com', NULL, '$2y$12$Jps5HdQzBiXXLGtdgQhDXOzkGjDtuDXCTuKNbCyEnL9HSNsvljjdu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-05-29 07:00:22', '2024-08-27 13:15:02'),
-(15, 'landlord', 'ajib@ng.com', NULL, '$2y$12$xXOBJ7pYsD/h6X640ZACeOo4L0.hMaNQ9ao3ugqymc.Z7eDDW5KCu', 'Ajibola', 'Adekunle', 'BeeDeeBee Ventures', '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', 234, '09034578622', '09034578622', 'OYO', '+234', NULL, 'Great', 'OYO', NULL, '+234', '+234', '8', 'stunde@fb.com', 'stunde@twitter.com', 'salawutunde-104b', NULL, NULL, 'verified', NULL, '2024-05-29 09:29:05', '2024-08-21 15:39:36'),
+(9, 'tenant', 'salawubabatunde69@gmail.com', NULL, '$2y$12$Jps5HdQzBiXXLGtdgQhDXOzkGjDtuDXCTuKNbCyEnL9HSNsvljjdu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-05-29 07:00:22', '2024-09-08 16:08:55'),
+(15, 'landlord', 'ajib@ng.com', NULL, '$2y$12$xXOBJ7pYsD/h6X640ZACeOo4L0.hMaNQ9ao3ugqymc.Z7eDDW5KCu', 'Ajibola', 'Adekunle', 'BeeDeeBee Ventures', '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', 234, '09034578622', '09034578622', 'OYO', '+234', NULL, 'Great', 'OYO', NULL, '+234', '+234', '8', 'stunde@fb.com', 'stunde@twitter.com', 'salawutunde-104b', NULL, NULL, 'verified', NULL, '2024-05-29 09:29:05', '2024-09-08 16:10:08'),
 (18, 'service_provider', 'stunde@gmail.com', NULL, '$2y$12$WVy1LmbqDqgzVbD1ItFbSO98bHUVLjA9R4iIAoHw4.vq1I3/FKAei', 'Adekunle', 'Gabriel', NULL, NULL, '/assets/admin/images/photo/service12.png', NULL, '08138504844', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-06-22 15:41:06', '2024-08-21 15:39:34'),
 (21, 'admin', 'admin@gmail.com', NULL, '$2y$12$ySdhBN2dG5RO5hW5726kXek99zSd9QrYQB.YXz7hfFsmVSNXTF3va', 'Essential', 'Admin', NULL, NULL, '/assets/admin/images/photo/service13.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-07-10 23:13:41', '2024-08-27 14:10:33'),
 (23, 'agent', 'jola@gmail.com', NULL, '$2y$12$wnQuGbZXWXD/8Er3ZcjcuuYp4xxjBj2l6Vcwq8/lNCqAMbQDNPiUi', 'Jolayemi', 'Olaiya', NULL, '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', NULL, '08077889832', '09087459822', 'Ibadan', 'Iwo road', 'At Jolayemi Global we take every part of property negotiation with full precaution and guarantee customer\'s satisfaction.', NULL, 'Ibadan', NULL, 'Bashorun', NULL, '7', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-01 06:48:59', '2024-08-01 06:48:59'),
@@ -1732,7 +1755,7 @@ ALTER TABLE `auction_bids`
 -- AUTO_INCREMENT for table `blacklists`
 --
 ALTER TABLE `blacklists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -1822,7 +1845,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=388;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1846,7 +1869,7 @@ ALTER TABLE `professional_reviews`
 -- AUTO_INCREMENT for table `professional_views`
 --
 ALTER TABLE `professional_views`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -1918,7 +1941,7 @@ ALTER TABLE `property_types`
 -- AUTO_INCREMENT for table `property_views`
 --
 ALTER TABLE `property_views`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `requests`
