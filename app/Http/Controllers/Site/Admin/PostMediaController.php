@@ -131,7 +131,10 @@ class PostMediaController extends Controller
      */
     public function show(PostMedia $postMedia)
     {
-        //
+        // Fetch all media records
+        $mediaItems = PostMedia::with('user')->paginate(6);
+
+        return view('front.users.media.all', compact('mediaItems'));
     }
 
     /**

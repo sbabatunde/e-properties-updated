@@ -20,7 +20,7 @@ For Dynamic Video display
 <div class="hero-category">
     <div class="hero-meet-expert">
         <h5 style="color: black">Short Videos</h5>
-        <a href="{{ route('all.properties.listing') }}" style="text-decoration: none">
+        <a href="{{ route('user.media.all') }}" style="text-decoration: none">
             <h5 style="color: red">See more</h5>
         </a>
     </div>

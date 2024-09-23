@@ -248,11 +248,11 @@ Route::controller(ListingController::class)->group(function () {
 });
 
 //Post Media Route
-// Route::controller(PostMediaController::class)->group(function () {
-//     Route::get('/post/media/file',  'adminPostMedia')->name('admin.media.page');
-//     Route::post('/post/media/file/form',  'adminPostMediaForm')->name('admin.media.post');
+Route::controller(PostMediaController::class)->group(function () {
+    Route::get('/show/all/media/file',  'show')->name('user.media.all');
+    Route::post('/post/media/file/form',  'adminPostMediaForm')->name('admin.media.post');
     
-// });
+});
 
 //Property Message Route
 Route::controller(PropertyMessage::class)->group(function () {
