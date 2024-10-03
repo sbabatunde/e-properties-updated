@@ -122,6 +122,7 @@ Route::get('/search/checkbox','checkboxSearch')->name('search.radio');
 //Blogs Routes
 Route::controller(BlogController::class)->group(function () {
     Route::get('/blog', 'allBlogPost')->name('blog.post.all');
+    Route::get('/blog/read-more/{blog}', 'readMore')->name('blog.read_more');
 });
 
 //Groups Routes

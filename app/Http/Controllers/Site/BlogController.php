@@ -14,4 +14,11 @@ class BlogController extends Controller
 
         return view('front.users.blog.main-page',compact('blogs'));
     }
+
+    public function readMore($blog)
+    {
+        $blog = Blog::with('user')->where('id',$blog)->first();
+
+        return view('front.users.blog.read-more',compact('blog'));
+    }
 }

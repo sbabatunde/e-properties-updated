@@ -37,7 +37,7 @@
                                 <p>
                                     {!! $item->title !!}
                                 </p>
-                                <span class="blog"><a href="">Read More</a></span>
+                                <span class="blog"><a href="{{ route('blog.read_more', $item->id) }}">Read More</a></span>
                             </div>
                         </div>
                     </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Models\City;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\site\ScamReport;
+use App\Models\Site\ScamReport;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
