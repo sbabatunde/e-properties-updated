@@ -2,14 +2,14 @@
     @include('front.includes.exchange-rates')
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}"><span class="text-secondary">Logo</span></a>
+            <a class="navbar-brand mt-4" href="{{ url('/') }}"><span class="text-secondary">Logo</span></a>
             <button class="navbar-toggler" style="background:none" type="button" data-toggle="collapse"
                 data-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse mt-0" id="navbarSupport">
+            <div class="collapse navbar-collapse mt-4" id="navbarSupport">
                 <ul class="navbar-nav ml-auto">
                     <li class=" active">
                         <a lass="nav-link" href="{{ url('/') }}">

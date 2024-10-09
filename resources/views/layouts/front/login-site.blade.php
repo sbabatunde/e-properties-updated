@@ -118,7 +118,6 @@
 
 <body id="top" class="index-body">
 
-
     <!-- Top header start -->
     {{-- @include('front.includes.top-header') --}}
     @include('front.includes.navbar')

@@ -1,93 +1,82 @@
-<div class="" style="background: black">
-    <img src="{{ asset('assets/frontend/navbar-flags.png') }}" alt="logo">
-</div>
+<ul class="currency-ticker-wrapper">
+    <div class="currency-ticker">
+        @foreach ($filteredRates as $currency => $data)
+            <li class="ticker-item">
+                <!-- Add a flag based on the currency code -->
+                <img src="{{ asset('assets/frontend/flags/' . strtolower($currency) . '.png') }}"
+                    alt="{{ $currency }} Flag" class="currency-flag" />
+                <span class="currency-value"><span class="text-white">{{ $currency }}</span> 1.00 </span>
+                <img src="{{ asset('assets/frontend/flags/ngn.png') }}" alt="Nigeria Flag" class="currency-flag" />
+                <span class="naira-value">
+                    <span class="text-white">NGN</span>
+                    {{ number_format($data['naira_equivalent'], 2) }}
+                </span>
+            </li>
+        @endforeach
+    </div>
+</ul>
 
-
-{{-- <style>
-    .exchange-rates-wrapper {
+<style>
+    /* Ensure the background fills the entire screen */
+    .currency-ticker-wrapper {
+        position: fixed;
+        /* Fixed position to ensure it stays in place */
         width: 100%;
-        overflow: hidden;
-        /* Ensure no scroll bars for the wrapper */
+        height: 40px;
+        /* Fills the entire width of the screen */
         background-color: black;
-        /* Background color for the wrapper */
+        /* Black background color */
+        padding: 5px 0;
+        /* Space around the ticker */
+        top: 0;
+        /* Position the ticker at the top of the screen */
+        z-index: 1000;
+        /* Ensure it's above other content */
     }
 
-    .exchange-rates-container {
-        display: flex;
-        /* Use flexbox for horizontal layout */
-        flex-wrap: nowrap;
-        /* Ensure items don't wrap */
-        gap: 10px;
-        /* Space between items */
-        width: max-content;
-        /* Ensure the container width fits the content */
-        animation: move 100s linear infinite;
-        /* Animation for scrolling effect */
+    /* Continuous scrolling effect */
+    .currency-ticker {
+        display: inline-flex;
+        white-space: nowrap;
+        animation: scroll-left 50s linear infinite;
     }
 
-    .exchange-rate {
-        background-color: #222;
-        color: white;
-        display: flex;
+    @keyframes scroll-left {
+        0% {
+            transform: translateX(100%);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .ticker-item {
+        display: inline-flex;
         align-items: center;
-        justify-content: space-between;
-        /* Space items evenly */
-        padding: 0 5px;
-        /* Adjust padding to fit content */
-        height: 20px;
-        /* Set height of the entire div */
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-        /* Hide overflow to keep height constrained */
+        padding: 0 30px;
+        /* Space between items */
+        font-size: 1.2rem;
+        font-weight: 500 bold;
+    }
+
+    .currency-value {
+        color: rgb(250, 95, 95);
+        /* Set exchange rate currency values to red */
+        margin-right: 10px;
+        font-weight: 600 bold;
+    }
+
+    .naira-value {
+        color: rgb(50, 240, 50);
+        /* Set the Naira value to green */
+        font-weight: 600 bold;
+        margin-left: 10px;
     }
 
     .currency-flag {
         width: 20px;
-        /* Adjust size as needed */
-        height: auto;
-        margin-right: 5px;
-    }
-
-    .currency-info {
-        display: flex;
-        align-items: center;
-        width: calc(100% - 30px);
-        /* Adjust width to fit within container */
-        justify-content: space-between;
-    }
-
-    .currency-name,
-    .currency-rate {
-        font-size: 12px;
-        /* Adjust font size to fit within the div */
-        margin: 0;
-    }
-
-    .currency-name {
-        font-weight: bold;
-    }
-
-    .currency-rate {
-        text-align: right;
-        /* Align rate to the right */
-    }
-
-    /* Animation for continuous scrolling */
-    @keyframes move {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(-50%);
-        }
+        height: 15px;
+        margin-right: 10px;
     }
 </style>
-
-
-<div class="exchange-rates-wrapper">
-    <div id="exchange-rates-container" class="exchange-rates-container">
-        <!-- Exchange rates will be dynamically inserted here -->
-    </div>
-</div> --}}

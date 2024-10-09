@@ -14,11 +14,20 @@ use App\Models\Site\Blacklist;
 use App\Models\Admin\PostMedia;
 use App\Models\PropertyPayment;
 use App\Models\Site\PropertyType;
+use App\Services\CurrencyService;
 use App\Http\Controllers\Controller;
 use App\Models\Site\PropertyCategory;
 
 class HomeController extends Controller
 {
+    protected $currencyService;
+
+    public function __construct(CurrencyService $currencyService)
+    {
+        $this->currencyService = $currencyService;
+    }
+
+    
     public function index()
     {
         return view('front.home');
@@ -61,6 +70,20 @@ class HomeController extends Controller
         $data['media'] = PostMedia::with('user')->where('file_type','video')->get();
         $sliders = $data['sliders'];
         // dd($data['properties']);
+
+        // Display live exhange  rates Begins
+            // $rates = $this->currencyService->getExchangeRates();
+            // // Specify the currencies you want to display
+            // $currencies = ['USD', 'GBP', 'EUR', 'GHS', 'CAD', 'AUD', 'JPY'];
+            // $filteredRates = [];
+
+            // foreach ($currencies as $currency) {
+            //     if (isset($rates['rates'][$currency])) {
+            //         $filteredRates[$currency] = $rates['rates'][$currency];
+            //     }
+            // }
+        // Display live exhange rates Ends
+
         return view('front.site', compact('data', 'sliders'));
     }
 }

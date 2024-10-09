@@ -91,7 +91,6 @@
 </head>
 
 <body id="top" class="index-body">
-
     <!-- Top header start -->
     {{-- @include('front.includes.top-header') --}}
     <!-- Top header end -->
