@@ -8,6 +8,7 @@ use App\Models\Agent;
 use Jorenvh\Share\Share;
 use App\Models\ProfMessages;
 use Illuminate\Http\Request;
+use App\Models\Site\ServiceType;
 use App\Http\Controllers\Controller;
 use App\Mail\Properties\ProfMessage;
 use Illuminate\Support\Facades\Auth;
@@ -19,13 +20,44 @@ use App\Models\Interactions\ProfessionalViews;
 
 class PropertyProfessionalController extends Controller
 {
-    public function allPropertyProfessionals()
-    {
-        $propertyProfessionals = User::with(['agent','landlord','providers'])
-        ->where('user_type','<>','tenant')->where('user_type','<>','admin')->orderBy('firstname','asc')->get();
+    // public function allPropertyProfessionals()
+    // {
+    //     $propertyProfessionals = User::with(['agent','landlord','providers'])
+    //     ->where('user_type','<>','tenant')->where('user_type','<>','admin')->orderBy('firstname','asc')->get();
 
-        return view('front.users.property-professionals.all', compact('propertyProfessionals'));
+    //     return view('front.users.property-professionals.all', compact('propertyProfessionals','serviceTypes'));
+    // } 
+
+    public function allPropertyProfessionals(Request $request)
+    {
+        // Retrieve all service types with counts
+        $serviceTypes = ServiceType::withCount(['providers'])
+            ->with('serviceCategory')
+            ->whereDoesntHave('serviceCategory', function ($query) {
+                $query->where('category', 'Maintenance');
+            })->get();
+
+        // Get the selected service type ID from the request
+        $selectedServiceTypeId = $request->input('service_type');
+
+        // Fetch property professionals based on selected service type
+        // If no service type is selected, retrieve all professionals
+        $propertyProfessionals = User::with('providers')
+        ->when($selectedServiceTypeId, function ($query) use ($selectedServiceTypeId) {
+            return $query->whereHas('providers', function ($query) use ($selectedServiceTypeId) {
+                $query->where('service_type_id', $selectedServiceTypeId);
+            });
+        })
+        ->paginate(6);
+    
+
+        return view('front.users.property-professionals.all', [
+            'propertyProfessionals' => $propertyProfessionals,
+            'serviceTypes' => $serviceTypes,
+            'selectedServiceTypeId' => $selectedServiceTypeId,
+        ]);
     }
+
 
     public function viewPropertyProfessionals(Request $request, $id)
     {
@@ -63,9 +95,10 @@ class PropertyProfessionalController extends Controller
 
         $reviews =  ProfessionalReview::where('professional_id',$id)->orderBy('id','desc')->get();
 
-        $similarProfs = User::with(['property'])
+        $similarProfs = User::with(['property',])
                             ->where('user_type', $propertyProfessional->user_type)
                             ->where('users.id', '<>', $propertyProfessional->id)
+                            ->take(4)
                             ->get();
 
         return view('front.users.agents.connect', compact('propertyProfessional', 'similarProfs', 'shareLinks','reviews'));

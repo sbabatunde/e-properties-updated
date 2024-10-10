@@ -5,10 +5,11 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Admin\Blacklist;
+use App\Models\Site\ServiceType;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -61,10 +62,7 @@ class User extends Authenticatable
         return $this->hasMany(Agent::class);
     }
 
-    public function providers()
-    {
-        return $this->hasMany(ServiceProvider::class);
-    }
+   
 
     public function property()
     {
@@ -75,4 +73,38 @@ class User extends Authenticatable
     {
         return $this->hasOne(Blacklist::class,'reported_id','id');
     }
+
+    public function providers()
+    {
+        return $this->hasMany(ServiceProvider::class);
+    }
+    
+    public static function getPropertyProfessionals($selectedServiceTypeId)
+    {
+        return self::where(function ($query) use ($selectedServiceTypeId) {
+            // Check if the selected service type is for Real Estate Agents
+            if ($selectedServiceTypeId) {
+                $realEstateAgentType = ServiceType::where('service', 'Real Estate Agents')->first();
+    
+                if ($realEstateAgentType && $realEstateAgentType->id == $selectedServiceTypeId) {
+                    // Include service providers, landlords, and tenants for Real Estate Agents
+                    $query->where(function ($q) {
+                        $q->where('user_type', 'service_provider')
+                          ->orWhere('user_type', 'landlord')
+                          ->orWhere('user_type', 'tenant');
+                    });
+                } else {
+                    // For other service types, only include service providers
+                    $query->where('user_type', 'service_provider');
+                }
+            }
+        })
+        ->when($selectedServiceTypeId, function ($query) use ($selectedServiceTypeId) {
+            return $query->whereHas('providers', function ($q) use ($selectedServiceTypeId) {
+                $q->where('service_type_id', $selectedServiceTypeId);
+            });
+        })
+        ->get();
+    }
 }
+    

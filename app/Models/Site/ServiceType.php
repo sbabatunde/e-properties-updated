@@ -19,10 +19,19 @@ class ServiceType extends Model
         return $this->hasManyThrough(User::class,ServiceProvider::class,'service_type_id','id','id','user_id');
     }
 
+     // New method to count property professionals, including landlords and tenants
+     public function totalRealEstateAgents()
+     {
+         return $this->providers()
+             ->whereIn('user_type', ['service_provider', 'landlord', 'tenant'])
+             ->count();
+     }
+     
     public function serviceCategory()
     {
         return $this->belongsTo(ServiceCategory::class,'service_category_slug','slug');
     }
+
 
     public function sluggable(): array
     {

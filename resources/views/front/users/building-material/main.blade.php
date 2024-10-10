@@ -264,9 +264,7 @@
 
 
         {{-- For Verified Icon --}}
-        {{-- <div class="rectangle">
-        <div class="circle"></div>
-        </div> --}}
+
         {{-- For checkbox-search by type  Icon --}}
         @include('front.users.building-material.search-checkbox')
         {{-- For checkbox-search by type Icon --}}
