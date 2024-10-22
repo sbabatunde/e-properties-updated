@@ -1,7 +1,7 @@
 {{-- Essential Group Brands Begins --}}
 
 
-<div class="home-container mt-4">
+<div class="home-container mt-2">
     <div class="main-title">
         <span>List of Essential Group Brands</span>
     </div>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="swiper-slide">
                     <div class="product-card">
-                        <img src="{{ asset('../assets/images/hero-images/estores.gif') }}" alt="E-News">
+                        <img src="{{ asset('../assets/images/hero-images/estores.gif') }}" alt="E-Stores">
                         <p> <span><Strong style="color: #394293">E-Stores</strong>:</span> <br>
                             Browse and shop from a variety of online stores offering everything from fashion and
                             electronics to specialty goods, all in one convenient marketplace.
@@ -119,7 +119,28 @@
 
     .product-card img {
         max-width: 100%;
-        height: auto;
+        height: 200px;
+    }
+
+    .product-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        /* Ensures the card stretches to accommodate the content */
+    }
+
+    .product-card p {
+        flex-grow: 1;
+        /* This makes the text take up the available space */
+    }
+
+    .product-card a {
+        margin-top: 10px;
     }
 
     /* Swiper styles */

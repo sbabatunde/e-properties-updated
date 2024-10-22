@@ -157,6 +157,16 @@ class PropertyProfessionalController extends Controller
         return back();
     }
 
+    public function checkAuthMessage($id)
+    {
+        // if(!auth::check())
+        // {
+        //     // Return a JSON response indicating failure (optional, depending on your logic)
+        //     return response()->json(['error' => 'Please kindly Login to get access to this']);
+        // }
+        return response()->json(['error' => 'Please kindly Login to get access to this']);
+    }
+    
     public function propertyProfessionalReview(Request $request, $id)
     {
         if(auth::id())

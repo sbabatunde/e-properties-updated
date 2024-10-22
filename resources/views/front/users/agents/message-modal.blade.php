@@ -41,9 +41,10 @@
                     @endauth
 
                     <div class="col-lg-12 mb-4">
-                        <textarea type="text" name="message" value="I am interested in buying..." rows="3"
-                            class="form-input form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            
+                        <textarea type="text" name="message" placeholder="I am interested in buying..." style="width: 100%; height: 200px;"
+                            rows="30" cols="30"
+                            class="form-input form-control mt-1 block w-full h-48 rounded-md border-gray-300 shadow-sm
+                             focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         </textarea>
                     </div>
                     <div class="col-lg-12">

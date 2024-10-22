@@ -22,7 +22,9 @@
                                         <i class="fa fa-star" style="color: #fff"></i>
                                         <i class="fa fa-star" style="color:none"></i>
                                     </p>
-                                    <a href="{{ route('property.details', $item->id) }}" class="btn btn-info mb-3"
+                                </div>
+                                <div class="btn-container">
+                                    <a href="{{ route('property.details', $item->id) }}" class="btn btn-info"
                                         style="background-color: #394293; border-radius: 5px; padding: 10px 35px;">
                                         {{ $item->status }}
                                     </a>
@@ -51,9 +53,8 @@
     .hero-trending {
         position: relative;
         overflow: hidden;
-        /* Ensuring each slide has a fixed height to make sure the content fits */
         height: 400px;
-        /* Adjust this value based on your design requirements */
+        /* Ensure each slide has a fixed height */
     }
 
     .hero-trending-image {
@@ -72,7 +73,6 @@
     .hero-trend-content {
         position: absolute;
         top: 0;
-        /* Start from the top */
         left: 0;
         right: 0;
         bottom: 0;
@@ -81,8 +81,8 @@
         color: #fff;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        /* Align content to the top */
+        justify-content: space-between;
+        /* Distributes space evenly */
         align-items: center;
         /* Center content horizontally */
         padding: 10px;
@@ -91,11 +91,16 @@
     }
 
     .hero-trend-text {
-        position: relative;
-        z-index: 1;
-        /* Ensure text and button are above the overlay */
         text-align: center;
-        height: 100%;
+        margin-bottom: auto;
+        /* Allow space for button */
+        flex-grow: 1;
+        /* Allow text to grow, taking remaining space */
+        display: flex;
+        flex-direction: column;
+        /* Align text vertically */
+        justify-content: center;
+        /* Center the text */
     }
 
     .hero-trend-text h3,
@@ -103,9 +108,19 @@
     .hero-trend-text p {
         margin: 0;
         padding: 5px 0;
+        line-height: 1.2;
+        /* Adjust line height for better spacing */
     }
 
-    .hero-trend-text .btn {
+    .btn-container {
+        /* Fixed position at the bottom */
+        margin-top: 15px;
+        /* Additional space above the button */
+        text-align: center;
+        /* Center the button */
+    }
+
+    .btn-container .btn {
         background-color: #394293;
         /* Button color */
         border-radius: 5px;
@@ -116,8 +131,6 @@
         text-decoration: none;
         /* Remove underline */
         display: inline-block;
-        margin-top: 15px;
-        /* Spacing above the button */
     }
 
     /* Swiper styles */
@@ -130,7 +143,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        /* Adjust flex basis for slide width, making each slide larger */
         flex: 0 0 100%;
         /* Each slide takes the full width of the container */
     }

@@ -48,6 +48,11 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}">
 
     {{-- Toaster Link --}}
+    <!-- jQuery first -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Toastr CSS and JS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     {{-- For Toaster Message Display --}}
@@ -380,6 +385,154 @@
     </script>
     <!-- /// Remove from Compare Function Ends -->
 
+    {{-- Check if Authorized for sending message Begins --}}
+    <script type="text/javascript">
+        //Script for adding Property to compare List
+        function addToCompare(property_id) {
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "/add-property-to-compare/" + property_id,
+                data: {
+                    _token: '{{ csrf_token() }}', // Add this line to include CSRF token
+                    // other data as needed
+                },
+                success: function(data) {
+
+                    // Start Message 
+                    console.log(data);
+                    fetchCompareList();
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+
+
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                    // End Message  
+
+                }
+            })
+
+        }
+
+        //Script for Fetching all Property Compare List
+        function fetchCompareList() {
+            $.ajax({
+                url: "/get-compare-property/", // Endpoint to fetch compare list data
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    // Update UI to display compare list data
+                    console.log(response);
+
+                    var rows = ""
+                    $.each(response, function(key, value) {
+                        // Add The Div section for each compare properties
+                        var thumbnailUrl = value.property.thumbnail ? value.property.thumbnail :
+                            '';
+
+                        rows += ` 
+                        <div class="res-comp-prop mt-3 mb-5">
+                            <img src="${thumbnailUrl}" alt="${value.property.title}">
+                            <div class="res-prop-details">
+                                <a href="#" 
+                                    onclick="compareRemove(${value.property.id}); return false;"
+                                    class="">X</a>
+                                <span>
+                                    <h6><b>${value.property.title}</b></h6>
+                                    <h6>${value.property.area}</h6>
+                                </span>
+                                <span class="comp-price">
+                                    Price: <b style="font-size: 20px">${value.payment.initial_denomination}
+                                        ${value.payment.initial_pay}</b>
+                                </span>
+                            </div> 
+                        </div> `
+                    });
+
+                    $('#compareList').html(rows);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching compare list:', error);
+                    // Display error message if fetch fails
+                    $('#compareList').html(
+                        '<p class="text-danger">Error fetching compare list. Please try again later.</p>');
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            fetchCompareList();
+        });
+
+        function checkAuthMessage(user_id) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/property/professional/checkAuth",
+                data: {
+                    _token: '{{ csrf_token() }}', // Add this line to include CSRF token
+                    // other data as needed
+                },
+                success: function(data) {
+
+                    // Start Message 
+                    console.log(data);
+                    fetchCompareList();
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+
+
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                    // End Message  
+
+                }
+            })
+
+        }
+    </script>
+    {{-- Check if Authorized for sending message Ends --}}
 
     <!-- Initialize Swiper -->
     <script>

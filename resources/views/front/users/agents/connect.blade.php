@@ -9,9 +9,10 @@
                     alt="{{ $propertyProfessional->firstname }}">
                 <div class="agent-action">
                     <span class="agent-connect"> <a href="#">Connect</a></span>
-                    <span class="agent-message"><a href="#" onclick="showMessageModal(event)">Send a Message</a></span>
+                    <span class="agent-message"><a href="#" onclick="showMessageModal(event);checkAuthMessage();">Send
+                            a Message</a></span>
                     <span class="agent-message">
-                        <a href="#" onclick="showShareModal(event)">
+                        <a href="#" onclick="showShareModal(event);">
                             <i class="fa fa-share-alt text-black" style="color: rgb(82, 80, 182)"></i> Share
                         </a>
                     </span>
@@ -119,5 +120,46 @@
 
     <!-- Review Modal -->
     @include('front.users.agents.review-modal')
+
+    <script>
+        function showMessageModal(event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+
+            var isAuthenticated = {{ Auth::check() ? 'true' : 'false' }};
+
+            if (isAuthenticated) {
+                // If the user is authenticated, show the modal
+                document.getElementById('messageModal').style.display = 'block';
+            } else {
+                // If the user is not authenticated, show a Toastr error\
+
+                toastr.error('You must be logged in to send a message.', 'Authentication Required', {
+                    closeButton: true,
+                    progressBar: true,
+                    timeOut: 5000, // Auto-dismiss after 5 seconds
+                });
+            }
+        }
+
+        // Toastr settings (optional customization)
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    </script>
+
 
 @endsection
