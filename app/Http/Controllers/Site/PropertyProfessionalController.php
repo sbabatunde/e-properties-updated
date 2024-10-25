@@ -65,7 +65,6 @@ class PropertyProfessionalController extends Controller
 
         // Generate the profile URL
         $profileUrl = route('property.professionals.view', ['id' => $id]);
-
         // Create share links
         $share = new Share;
         $shareLinks = $share->page($profileUrl, $propertyProfessional->name)

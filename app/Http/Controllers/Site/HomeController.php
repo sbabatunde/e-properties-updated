@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Site\Blacklist;
 use App\Models\Admin\PostMedia;
 use App\Models\PropertyPayment;
+use App\Models\Site\ServiceType;
 use App\Models\Site\PropertyType;
 use App\Services\CurrencyService;
 use App\Http\Controllers\Controller;
@@ -69,6 +70,11 @@ class HomeController extends Controller
         $data['trending'] = Property::has('trending')->with(['payment','agent','trending'])->get();
         $data['media'] = PostMedia::with('user')->where('file_type','video')->get();
         $sliders = $data['sliders'];
+        $proffessionals = ServiceType::withCount(['providers'])
+        ->with('serviceCategory')
+        ->whereDoesntHave('serviceCategory', function ($query) {
+            $query->where('category', 'Maintenance');
+        })->inRandomOrder()->get();
         // dd($data['properties']);
 
         // Display live exhange  rates Begins
@@ -84,6 +90,6 @@ class HomeController extends Controller
             // }
         // Display live exhange rates Ends
 
-        return view('front.site', compact('data', 'sliders'));
+        return view('front.site', compact('data', 'sliders','proffessionals'));
     }
 }

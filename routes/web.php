@@ -107,8 +107,6 @@ Route::controller(PropertyProfessionalController::class)->group(function () {
     Route::post('/message/professional/{profID}', 'messagePropertyProfessional')->name('user.professional.message');
     Route::post('/review/professional/{profID}', 'propertyProfessionalReview')->name('professional.review');
     Route::get('/property/professional/checkAuth', 'checkAuthMessage')->name('property.professionals.authcheck');
-
-    
 });
 
 
@@ -200,7 +198,6 @@ Route::controller(ServicesController::class)->group(function () {
     Route::get('/get/service/category/type/{slug}', 'getServiceType')->name('services.find.type');
     Route::get('/get/service/category/view/{slug}', 'allServiceProviders')->name('services.type.all');
     Route::get('/service/provider/view/{id}', 'viewServiceProviders')->name('service.provider.view');
-    
 });
 
 //User Login Controller
