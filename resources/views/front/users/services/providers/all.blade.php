@@ -1,7 +1,7 @@
 @extends('layouts.front.login-site')
 @section('content')
     {{-- Page Banner Begins --}}
-    <div class="page-hero bg-image " style="background-image: url(./assets/images/services/banner.png);">
+    <div class="page-hero bg-image" style="background-image: url('{{ asset('assets/images/services/banner.png') }}');">
         <div class="hero-section ">
             <div class="search-form col-8" style="position: relative;top:50%">
                 <form class="form" action="" method="POST" enctype="multipart/form-data">
@@ -9,7 +9,7 @@
                         style="z-index:50;border: 1px solid rgb(255, 245, 245); border-radius:30px;background-color:rgb(245, 245, 245)"
                         class="form-control mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 
                 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        placeholder="Search Agent">
+                        placeholder="Search Service Provider">
                 </form>
             </div>
         </div>

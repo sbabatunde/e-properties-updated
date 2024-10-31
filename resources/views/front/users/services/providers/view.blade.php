@@ -81,36 +81,6 @@
         <img src="{{ asset('/assets/images/provider/plumber-3.png') }}" alt="" class="img-3">
     </div>
 
-    {{-- <div class="container mb-5">
-        <h5 class="ml-5 pl-2 mb-4 mt-5" style="font-weight:600"> Reviews </h5>
-        <div class="row mb-5">
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur,adipisicing elit.
-                    Recusandae, nam hic! Suscipit temporeanimi omnis at et.
-                </p>
-            </div>
-        </div>
-        <span class="agent-message ml-5"><a href="">Post a comment</a></span>
-    </div> --}}
     <div class="container mb-5">
         <h5 class="ml-5 pl-2 mb-4 mt-5" style="font-weight:600">Reviews</h5>
         @if ($reviews !== null)
@@ -159,21 +129,21 @@
                 <h5>10:00 - 15:00</h5>
             </span>
         </div>
-        {{-- <div class="provider-map">
-            <img src="{{ asset('/assets/images/provider/map.png') }}" alt="">
-        </div> --}}
+
         <div class="provider-map" id="map" style="height: 400px; width: 100%;"></div>
 
     </div>
 
-    <div class="container other-providers-header">
-        <div class="other-providers-more">
+    {{-- Connect With Properties Experts Begins --}}
+    <div class="hero-category">
+        <div class="hero-meet-expert">
             <h3>Other Service Providers</h3>
-            <a href="" style="text-decoration: none">
+            <a href="{{ route('services.find') }}" style="text-decoration: none">
                 <h5 style="color: red;font-weight:700">See more</h5>
             </a>
         </div>
-        <div class="other-providers">
+
+        <div class="other-providers ">
             @foreach ($otherProviders->take(4) as $item)
                 <a href="{{ route('services.type.all', $item->first()->slug) }}">
                     <div class="other-provider-sub">
@@ -188,6 +158,7 @@
             @endforeach
         </div>
     </div>
+    {{-- Connect With Properties Experts Ends --}}
 
     @include('front.users.agents.share-modal')
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\Site\LandController;
 use App\Http\Controllers\Site\UserController;
 use App\Http\Controllers\Site\AgentController;
 use App\Http\Controllers\Site\GroupController;
+use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\Site\ReportController;
 use App\Http\Controllers\Site\SliderController;
 use App\Http\Controllers\Site\TenantController;
@@ -114,9 +115,10 @@ Route::controller(PropertyProfessionalController::class)->group(function () {
 Route::controller(BuildingMaterialController::class)->group(function () {
     Route::get('/building-material-view/{id}', 'getMaterials')->name('user.materials.get');
     Route::get('/building/material', 'buildingMaterials')->name('user.buiding-materials');
-
+    Route::get('/all/building/material', 'index')->name('user.buiding-materials.index');
     // Route for search functionality
-Route::get('/search/checkbox','checkboxSearch')->name('search.radio');
+    Route::get('/materials/fetch', 'fetchMaterialsByCategory')->name('materials.fetch');
+    Route::get('/search/checkbox','checkboxSearch')->name('search.radio');
 });
 
 
@@ -270,11 +272,6 @@ Route::controller(BuildingMaterial::class)->group(function () {
     Route::get('/building/materials/$%$%%A(()))9/all',  'myMaterials')->name('admin.materials.my');
 });
 //Admin Routes Ends
-//Admin Slider Image
 
-
-// Route::controller(SliderController::class)->group(function () {
-//     Route::get('/add/slider/image',  'adminAddSliderImages')->name('admin.sliders.create');
-//     Route::post('/save/slider/images',  'adminSaveSliderImages')->name('admin.sliders.images.store');
-//     Route::post('/save/images/db',  'adminSaveSliderImagesDB')->name('admin.sliders.images.store.db');
-// });
+//newaletter
+Route::post('/newsletter/subscribe', [SubscriberController::class, 'subscribe'])->name('newsletter.subscribe');

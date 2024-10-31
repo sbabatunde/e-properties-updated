@@ -15,6 +15,13 @@ class ServicesController extends Controller
 {
     public function findServices()
     {
+
+        $proffessionals = ServiceType::withCount(['providers'])
+        ->with('serviceCategory')
+        ->whereDoesntHave('serviceCategory', function ($query) {
+            $query->where('category', 'Maintenance');
+        }) ->inRandomOrder() // This will randomize the order
+        ->get();
         $maintenance = ServiceType::with(['serviceCategory','providers'])->whereHas('serviceCategory',
         function($q){$q->where('category','Maintenance');})->get();
         $building_dev = ServiceType::with(['serviceCategory','providers'])->whereHas('serviceCategory',
@@ -24,8 +31,7 @@ class ServicesController extends Controller
         $property = ServiceType::with(['serviceCategory','providers'])->whereHas('serviceCategory',
         function($q){$q->where('category','Property');})->get();
         
-        // dd($property);
-        return view('front.users.services.main-page',compact('maintenance','building_dev','legal','property'));
+        return view('front.users.services.main-page',compact('maintenance','building_dev','legal','property','proffessionals'));
     }
 
     public function getServiceType($slug)
@@ -44,26 +50,22 @@ class ServicesController extends Controller
     {
         $providers = ServiceType::with(['serviceCategory','providers'])->where('slug',$slug)->paginate(10);
         $proffessionals = ServiceType::withCount(['providers'])
-        ->with('serviceCategory')
+        ->with(['serviceCategory'])->whereHas('providers')
         ->whereDoesntHave('serviceCategory', function ($query) {
             $query->where('category', 'Maintenance');
         }) ->inRandomOrder() // This will randomize the order
         ->get();
 
         $title = $providers->value('service') ;
+        
         return view('front.users.services.providers.all',compact('providers','title','proffessionals'));
     }
 
     public function viewServiceProviders($id)
     {
       
-        $selectedProvider = ServiceType::with(['serviceCategory','providers'])
-        ->whereHas('providers', function ($query) use ($id) {
-            $query->where('users.id', $id); // Specify 'users.id' to avoid ambiguity
-        })
-        ->first();
-        $service = $selectedProvider->value('service');
-        $selectedProvider = $selectedProvider->providers->first();
+        $selectedProvider = User::where('id',$id)->with(['serviceProviders','serviceTypes'])->first();
+        $service = $selectedProvider->serviceTypes()->where('service_providers.user_id', $id)->value('service');
         // Get the selected provider by ID
         $otherProviders = ServiceType::with(['serviceCategory', 'providers'])
                     ->select('service','image', 'id', 'service_category_slug','slug') // Ensure you're selecting the necessary fields

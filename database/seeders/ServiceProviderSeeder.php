@@ -2,17 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Faker\Factory as Faker;
+use App\Models\ServiceProvider;
 use Illuminate\Database\Seeder;
 use App\Models\Site\ServiceType;
-use App\Models\User; // To associate with the user
-use App\Models\ServiceProvider; // Adjust based on your actual model namespace
 
 class ServiceProviderSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
         $faker = Faker::create();
@@ -20,13 +17,13 @@ class ServiceProviderSeeder extends Seeder
         // Get all service types
         $serviceTypes = ServiceType::all();
 
-        for ($i = 0; $i < 50; $i++) {
-            // Randomly pick a user who is a service provider
-            $user = User::where('user_type', 'service_provider')->inRandomOrder()->first();
+        // Get all users who are service providers and ensure they are unique
+        $users = User::where('user_type', 'service_provider')->get();
 
-            // Create a service provider
+        // Loop through the users to create a service provider for each unique user
+        foreach ($users as $user) {
             ServiceProvider::create([
-                'user_id' => $user->id,
+                'user_id' => $user->id, // Unique user ID
                 'business_ID' => strtoupper($faker->uuid), // Random UUID for business ID
                 'business_name' => $faker->company(),
                 'service_type_id' => $serviceTypes->random()->id, // Random service type
@@ -34,3 +31,4 @@ class ServiceProviderSeeder extends Seeder
         }
     }
 }
+

@@ -7,15 +7,15 @@
         </a>
     </div>
 
-    <div class="hero-sub-category">
+    <div class="other-providers">
         @foreach ($proffessionals->take(5) as $item)
-            <div class="hero-cat-venue">
+            <div class="other-provider-sub">
                 <img src="{{ asset($item->image) ?? $item->image }}" alt="{{ $item->service }}">
-                <span class="hero-expert-text">
-                    <h4 class="mb-0">{{ $item->service }}</h4>
+                <span class="">
+                    <h4><b>{{ $item->service }}</b></h4>
                     <p>5 Followers</p>
-                    <a href="" class="btn btn-info mb-3"
-                        style="background-color:#394293;font-weight:500;font-size:20px">Connect</a>
+                    <a href="{{ route('services.type.all', $item->slug) }}" class="btn btn-info mb-3"
+                        style="background-color:#394293;font-weight:500;font-size:20px;align:left">Connect</a>
                 </span>
             </div>
         @endforeach

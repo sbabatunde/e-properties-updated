@@ -45,23 +45,51 @@
         }
     </style>
 
+    <!-- CSS styling -->
+    <style>
+        .centered-text-left {
+            position: absolute;
+            left: 20px;
+            /* Adjust based on how far from the left you want the text */
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            /* Change this based on your preference */
+            text-align: left;
+        }
+
+        .centered-text-left h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .centered-text-left p {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+    </style>
+
     {{-- Page Banner Begins --}}
-    <div class="page-hero bg-image " style="background-image: url(../assets/images/banners/landlord-banner.png);">
+    {{-- <div class="page-hero bg-image " style="background-image: url(../assets/images/banners/landlord-banner.png);">
         <div class="hero-section ">
-            {{-- <div class="container text-center wow zoomIn auction-sub-banner col-md-6">
-                <div class="container col-md-8 text-center mt-2">
-                    <span class="subhead" style="font-size:1.3rem">INVEST WITH SUCCESS BUY FROM E-PROPERTY.COM</span>
-                </div>
-                <div class="container col-md-10 text-center mt-4">
-                    <p style="color: white;font-size:1rem">Exclusive Property Listing From The Nation's Leading Property Management</p>
-                </div>
-                <div class="container col-md-10 text-center mt-2 mb-5">
-                    <input type="text" placeholder="Enter a state or area" class="form-control mt-1 block w-full rounded-md border-gray-300
-                    shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-            </div> --}}
+     
+        </div>
+    </div> --}}
+    {{-- Page Banner Begins --}}
+    <div class="page-hero bg-image"
+        style="background-image: url(../assets/images/banners/landlord-banner.png); position: relative; height: 400px;">
+        <div class="hero-section">
+            <!-- Left-aligned, centered text -->
+            <div class="centered-text-left">
+                <h1 class="text-white">Welcome Landlords</h1>
+                <p class="text-white">Manage your properties with ease using our expert services.</p>
+            </div>
         </div>
     </div>
+    {{-- Page Banner Ends --}}
+
+
     {{-- Page Banner Ends  --}}
 
     <!-- services 3 start -->
@@ -69,11 +97,9 @@
         <div class="main-title mb-0">
             <h1>Letting your property with E-Properties</h1>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
-                quod, fugiat error, nesciunt eveniet quibusdam libero, commodi architecto
-                sed doloribus magni molestias odit soluta quis iste quos dicta cumque voluptas
-                quod, fugiat error, nesciunt eveniet quibusdam libero, commodi architecto ?
-                quod, fugiat error, nesciunt eveniet quibusdam libero, commodi architecto
+                Discover hassle-free property letting with E-Properties. We provide expert guidance and services to help you
+                get the most out of your apartments, houses, or commercial properties. Let us take care of everything, from
+                rental valuations to full landlord support.
             </p>
         </div>
         <div class="row">
@@ -81,8 +107,9 @@
                 <div class="lanlord-services">
                     <i class="fa fa-building"></i>
                     <h5>Apartments Clean</h5>
-                    <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt</p>
+                    <p class="pb-3">We ensure your apartment is clean and ready for tenants, providing detailed
+                        evaluations
+                        and support.</p>
                     <a href="services.html" class="read-more"><b>Free Rental Valuation</b></a>
                 </div>
             </div>
@@ -90,8 +117,8 @@
                 <div class="lanlord-services">
                     <i class="fa fa-home"></i>
                     <h5>Houses</h5>
-                    <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt</p>
+                    <p class="pb-3">Our services ensure your house is in top shape and market-ready, offering convenient
+                        online valuations.</p>
                     <a href="services.html" class="read-more"><b>Online Rental Valuation</b></a>
                 </div>
             </div>
@@ -99,8 +126,8 @@
                 <div class="lanlord-services">
                     <i class="flaticon-office-block"></i>
                     <h5>Commercial</h5>
-                    <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt</p>
+                    <p class="pb-3">We offer expert advice and comprehensive services to keep your commercial properties
+                        running smoothly.</p>
                     <a href="services.html" class="read-more"><b>Landlord Services</b></a>
                 </div>
             </div>
@@ -109,71 +136,9 @@
             </div>
         </div>
     </div>
+
     <!-- services 3 end -->
 
-    <!-- services 3 start -->
-    {{-- <div class="container mt-1">
-        <div class="main-title">
-            <h1>From Our Landlords</h1>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
-                <div class="lanlord-comments">
-                    <h5>Apartments Clean</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                    <span class="ratings">
-                        <i class="fa fa-star checked" style="font-size:1px"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star unchecked"></i>
-                    </span>
-                    <span class="">
-                        <b>Mike</b> <br>
-                        <p class="font-2px mt-0">1 Month ago</p>
-                    </span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
-                <div class="lanlord-comments">
-                    <h5>Apartments Clean</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                    <span class="ratings">
-                        <i class="fa fa-star checked" style="font-size:1px"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star unchecked"></i>
-                    </span>
-                    <span class="">
-                        <b>Mike</b> <br>
-                        <p class="font-2px mt-0">1 Month ago</p>
-                    </span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
-                <div class="lanlord-comments">
-                    <h5>Apartments Clean</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                    <span class="ratings">
-                        <i class="fa fa-star checked" style="font-size:1px"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star unchecked"></i>
-                    </span>
-                    <span class="">
-                        <b>Mike</b> <br>
-                        <p class="font-2px mt-0">1 Month ago</p>
-                    </span>
-                </div>
-            </div>
-            <div class="col-lg-12 text-center">
-                <a data-animation="animated fadeInUp delay-10s" href="#" class="btn btn-lg btn-theme">View More
-                    Reviews</a>
-            </div>
-        </div>
-    </div> --}}
     @include('front.users.landlord.comment')
     <!-- services 3 end -->
     {{-- All Your Properties start --}}
@@ -250,7 +215,7 @@
                     <p class="pb-4">A guide for those considering becoming
                         a landlord and those who already have previous experience.
                     </p>
-                    <a href="services.html" class="read-more"><b>Learn MOre</b></a>
+                    <a href="services.html" class="read-more"><b>Learn More</b></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
@@ -261,7 +226,7 @@
                         Looking to invest A buy to let property could be very
                         rewarding and is something we can help you get the most out of
                     </p>
-                    <a href="services.html" class="read-more"><b>Learn MOre</b></a>
+                    <a href="services.html" class="read-more"><b>Learn More</b></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
@@ -272,7 +237,7 @@
                         Work out the potential rental yield of a buy to let property,
                         ensuring your mental income is sufficient for you investment
                     </p>
-                    <a href="services.html" class="read-more"><b>Learn MOre</b></a>
+                    <a href="services.html" class="read-more"><b>Learn More</b></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
@@ -284,7 +249,7 @@
                         regarding letting a property and the landlord services
                         we provide.
                     </p>
-                    <a href="services.html" class="read-more"><b>Learn MOre</b></a>
+                    <a href="services.html" class="read-more"><b>Learn More</b></a>
                 </div>
             </div>
         </div>

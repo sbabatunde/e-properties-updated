@@ -106,5 +106,17 @@ class User extends Authenticatable
         })
         ->get();
     }
+
+       // User can have many ServiceProviders
+       public function serviceProviders()
+       {
+           return $this->hasMany(ServiceProvider::class, 'user_id', 'id');
+       }
+   
+       // User can access ServiceType through ServiceProvider
+       public function serviceTypes()
+       {
+           return $this->hasManyThrough(ServiceType::class, ServiceProvider::class, 'user_id', 'id', 'id', 'service_type_id');
+       }
 }
     

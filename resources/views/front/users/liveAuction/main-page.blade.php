@@ -27,10 +27,11 @@
                             Live Auction
                         </strong>
                     </h3>
-                    <div class="container">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, iure. Nihil repellat saepe beatae
-                            odit explicabo
-                            aliquid odio, ut, maiores dicta voluptas sequi velit. Doloremque ex ipsam ad ratione architecto.
+                    <div class="container col-lg-12 w-full">
+                        <p>
+                            Join our live auctions to bid on exclusive properties in real time! Engage with fellow bidders
+                            and seize the opportunity to secure your dream home. Our platform provides all the details you
+                            need for a seamless bidding experience!
                         </p>
                     </div>
                 </div>
@@ -87,9 +88,11 @@
             <strong>Up Coming Auctions</strong>
         </h3>
         <p class="container text-black text-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ut unde quo tempora,
-            doloremque quam cumque a amet ad tempore nostrum nihil
-            explicabo recusandae voluptate, facilis aliquid voluptates praesentium rerum.
+            Get ready for our upcoming auctions, where exciting opportunities await! Browse a curated selection of
+            properties and prepare to place your bids in a dynamic and engaging environment. Our platform provides all the
+            necessary details, including auction dates, property information, and bidding guidelines. Whether you’re a
+            first-time buyer or a seasoned investor, our team is here to support you every step of the way. Stay tuned for
+            announcements and be part of our next auction to secure your ideal property!
         </p>
         <div class="container all-auction-card">
             {{-- bid-properties --}}
