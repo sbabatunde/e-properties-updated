@@ -81,6 +81,21 @@ Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], fu
     Route::get('delete/{id}', [Admin\UsersController::class, 'delete'])->name('admin.users.delete');
   });
 
+  //Groups Routes Begins
+  Route::group(['prefix' => 'staff/group'], function () {
+    Route::get('all', [Admin\GroupController::class, 'index'])->name('admin.group.index');
+    Route::get('create', [Admin\GroupController::class, 'create'])->name('admin.group.create');
+    Route::post('create', [Admin\GroupController::class, 'store'])->name('admin.group.store');
+    Route::put('edit/{id}', [Admin\GroupController::class, 'edit'])->name('admin.group.edit');
+    Route::delete('destroy/{id}', [Admin\GroupController::class, 'delete'])->name('admin.group.destroy');
+    // Route for searching users
+    Route::get('admin/{group}/members', [Admin\GroupController::class, 'viewMembers'])->name('admin.group.view.members');
+    Route::delete('admin/{group}/members/{member}', [Admin\GroupController::class, 'destroyMember'])->name('admin.group.members.destroy');
+
+  });
+  Route::get('/admin/users/search', [Admin\GroupController::class, 'search'])->name('admin.users.search');
+  // Route for storing group members
+  Route::post('/admin/groups/members/store/{groupId}', [Admin\GroupController::class, 'storeMembers'])->name('admin.group.members.store');
 
   Route::group(['prefix' => 'properties'], function () {
 

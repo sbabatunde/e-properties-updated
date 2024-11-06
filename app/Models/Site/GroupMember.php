@@ -6,14 +6,19 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Group extends Model
+class GroupMember extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function members()
+    public function group()
     {
-        return $this->belongsToMany(User::class, 'group_members', 'group_id', 'user_id');
+        return $this->belongsTo(Group::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -181,6 +181,32 @@
             </div>
         </div>
 
+        <div class="menu">
+            <i class="fa fa-users"></i>
+            <span class="nav-item">Groups</span>
+            <i class="bx bx-chevron-down nav-item"></i>
+            <span class="tooltip">Groups</span>
+        </div>
+        <div class="menu-dropdown">
+            <div class="sub-menu">
+                <span class="menu">
+                    <a href="{{ route('admin.group.create') }}">
+                        Create
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.group.index') }}">
+                        All Groups
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.users.create') }}">
+                        Group Request
+                    </a>
+                </span>
+            </div>
+        </div>
+
         <li>
             <a href="">
                 <i class="fa fa-gear"></i>
