@@ -34,7 +34,7 @@ class GroupController extends Controller
         // Validate the form data
         $request->validate([
             'group_name' => 'required|string|max:255',
-            'photo' => 'nullable|file|mimes:jpg,jpeg,png,gif|max:2048', // Adjust file types and size as needed
+            'photo' => 'nullable|file|mimes:jpg,jpeg,png,gif,avif|max:2048', // Adjust file types and size as needed
         ]);
 
         // Handle the file upload if a file is selected
@@ -87,55 +87,64 @@ class GroupController extends Controller
         // Validate the form data
         $request->validate([
             'group_name' => 'required|string|max:255',
-            'photo' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048', // Adjust file types and size as needed
+            'photo' => 'nullable|file|mimes:jpg,jpeg,png,gif,avif|max:2048', // 'nullable' allows skipping file upload
         ]);
     
-        // Find the group by ID
-        $group = Group::findOrFail($id);
+        try {
+            // Find the group by ID
+            $group = Group::findOrFail($id);
     
-        // Handle the file upload if a new file is selected
-        $photoPath = $group->photo; // Keep the existing photo path by default
+            // Handle the file upload if a new file is selected
+            $photoPath = $group->photo; // Keep the existing photo path by default
     
-        // Check if a new file is uploaded
-        if ($request->hasFile('photo')) {
-            // Get the file from the request
-            $file = $request->file('photo');
+            // Check if a new file is uploaded
+            if ($request->hasFile('photo')) {
+                // Get the file from the request
+                $file = $request->file('photo');
     
-            // Upload to Cloudinary
-            $cloudinary = new Cloudinary();
-            $manager = new ImageManager(); // Use ImageManager from Intervention Image
+                // Upload to Cloudinary
+                $cloudinary = new Cloudinary();
+                $manager = new ImageManager(new Driver()); // Use ImageManager from Intervention Image
     
-            // Process the image
-            $name_gen = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-            $img = $manager->make($file->getPathname());
-            $img->resize(450, 450, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
+                // Generate a unique file name
+                $name_gen = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
     
-            // Save the image to a temporary location
-            $tempFilePath = sys_get_temp_dir() . '/' . $name_gen;
-            $img->save($tempFilePath); 
+                // Process the image
+                $img = $manager->read($file->getPathname());
+                $img->resize(450, 450, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
     
-            // Upload to Cloudinary
-            $uploadResult = $cloudinary->uploadApi()->upload($tempFilePath, [
-                'folder' => 'e-properties/groups', // Optional folder structure in Cloudinary
-                'overwrite' => true
-            ]);
+                // Save the image to a temporary location
+                $tempFilePath = sys_get_temp_dir() . '/' . $name_gen;
+                $img->save($tempFilePath);
     
-            // Get the URL of the uploaded file
-            $photoPath = $uploadResult['secure_url'];
+                // Upload to Cloudinary
+                $uploadResult = $cloudinary->uploadApi()->upload($tempFilePath, [
+                    'folder' => 'e-properties/groups', // Optional folder structure in Cloudinary
+                    'overwrite' => true
+                ]);
+    
+                // Get the URL of the uploaded file
+                $photoPath = $uploadResult['secure_url'];
+            }
+    
+            // Update the group record in the database
+            $group->group_name = $request->input('group_name');
+            $group->photo = $photoPath; // Save the updated file path to the 'photo' column
+            $group->save();
+    
+            // Success response
+            Alert::success('Success', 'Group updated successfully');
+            return redirect()->route('admin.group.index')->with('success', 'Group updated successfully.');
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            \Log::error('Group update failed: '.$e->getMessage());
+    
+            // Display a friendly error message to the user
+            return redirect()->back()->withErrors('An error occurred while updating the group. Please try again.');
         }
-    
-        // Update the group record in the database
-        $group->group_name = $request->input('group_name');
-        $group->photo = $photoPath; // Save the updated file path to the 'photo' column
-        $group->save();
-    
-        Alert::success('Success', 'Group updated successfully');
-        
-        // Redirect back with a success message
-        return redirect()->route('admin.group.index')->with('success', 'Group updated successfully.');
     }
 
     public function search(Request $request)

@@ -37,11 +37,11 @@
                                                         <td>
                                                             {{ $key + 1 }}
                                                         </td>
+                                                        <td>{{ $member->firstname }} {{ $member->lastname }}</td>
                                                         <td>
                                                             <img src="{{ $member->photo ?? asset('/assets/admin/images/no_image.jpg') }}"
                                                                 alt="{{ $member->firstname }}" class="property-mini-image">
                                                         </td>
-                                                        <td>{{ $member->firstname }} {{ $member->lastname }}</td>
                                                         <td>
                                                             <!-- Action buttons for edit, remove, etc. -->
                                                             <form

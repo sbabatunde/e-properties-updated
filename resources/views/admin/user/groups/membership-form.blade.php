@@ -1,29 +1,35 @@
 <form class="form-group" action="{{ route('admin.group.members.store', $group->id) }}" method="POST"
     enctype="multipart/form-data">
     @csrf
-    <div class="post-form modal fade" id="addMember{{ $group->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="addMember{{ $group->id }}Label" aria-hidden="true">
+    <div class="post-form modal fade" id="addMemberModal{{ $group->id }}" data-bs-backdrop="static"
+        data-bs-keyboard="false" tabindex="-1" aria-labelledby="addMemberModalLabel{{ $group->id }}"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" style="margin-top:20vh">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addMember{{ $group->id }}Label">Members to {{ $group->group_name }}
-                    </h5>
+                    <h5 class="modal-title" id="addMemberModalLabel{{ $group->id }}">Members to
+                        {{ $group->group_name }}</h5>
                     <button type="button" class="btn-close pt-1 pb-1 pr-2 pl-2" data-bs-dismiss="modal"
                         aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
+                    <!-- Hidden input for group_id -->
+                    <input type="hidden" name="group_id" value="{{ $group->id }}">
+
                     <div class="form-group">
-                        <label for="user-search">Search for Users:</label>
-                        <input type="text" id="user-search" class="form-control" placeholder="Search users...">
+                        <label for="user-search{{ $group->id }}">Search for Users:</label>
+                        <input type="text" id="user-search{{ $group->id }}" class="form-control"
+                            placeholder="Search users...">
                     </div>
-                    <div id="user-list" class="list-group" style="max-height: 200px; overflow-y: auto; display: none;">
+                    <div id="user-list{{ $group->id }}" class="list-group"
+                        style="max-height: 200px; overflow-y: auto; display: none;">
                     </div>
 
                     <h5>Selected Users:</h5>
-                    <ul id="selected-users" class="list-group mb-3"></ul>
+                    <ul id="selected-users{{ $group->id }}" class="list-group mb-3"></ul>
 
                     <!-- Hidden input container will be created dynamically -->
-                    <div id="hidden-inputs"></div>
+                    <div id="hidden-inputs{{ $group->id }}"></div>
                 </div>
                 <div class="post-footer">
                     <button type="submit" class="btn btn-outline-primary">Submit</button>
@@ -34,16 +40,17 @@
 </form>
 
 <script>
-    const selectedUsers = [];
+    // Define variables specific to each group using the group's ID
+    const selectedUsers{{ $group->id }} = [];
 
-    document.getElementById('user-search').addEventListener('input', function() {
+    document.getElementById('user-search{{ $group->id }}').addEventListener('input', function() {
         const query = this.value;
 
         if (query.length > 0) {
             fetch(`/admin/users/search?q=${query}`)
                 .then(response => response.json())
                 .then(data => {
-                    const userList = document.getElementById('user-list');
+                    const userList = document.getElementById('user-list{{ $group->id }}');
                     userList.innerHTML = '';
                     userList.style.display = 'block';
 
@@ -52,29 +59,29 @@
                         item.classList.add('list-group-item', 'd-flex', 'justify-content-between',
                             'align-items-center');
                         item.innerText = user.firstname + " " + user
-                            .lastname; // Adjust according to your user model
+                        .lastname; // Adjust according to your user model
                         item.dataset.id = user.id; // Store user ID in data attribute
 
                         const selectButton = document.createElement('button');
                         selectButton.classList.add('btn', 'btn-primary', 'btn-sm');
                         selectButton.innerText = 'Select';
                         selectButton.type = 'button'; // Prevents form submission
-                        selectButton.onclick = () => selectUser(user.id, user.firstname + " " + user
-                            .lastname);
+                        selectButton.onclick = () => selectUser{{ $group->id }}(user.id, user
+                            .firstname + " " + user.lastname);
 
                         item.appendChild(selectButton);
                         userList.appendChild(item);
                     });
                 });
         } else {
-            document.getElementById('user-list').style.display = 'none';
+            document.getElementById('user-list{{ $group->id }}').style.display = 'none';
         }
     });
 
-    function selectUser(id, name) {
-        if (!selectedUsers.includes(id)) {
-            selectedUsers.push(id);
-            const selectedUsersList = document.getElementById('selected-users');
+    function selectUser{{ $group->id }}(id, name) {
+        if (!selectedUsers{{ $group->id }}.includes(id)) {
+            selectedUsers{{ $group->id }}.push(id);
+            const selectedUsersList = document.getElementById('selected-users{{ $group->id }}');
             const item = document.createElement('li');
             item.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
             item.innerText = name;
@@ -82,47 +89,44 @@
             const removeButton = document.createElement('button');
             removeButton.classList.add('btn', 'btn-danger', 'btn-sm');
             removeButton.innerText = 'Remove';
-            removeButton.onclick = () => removeUser(id, item);
+            removeButton.onclick = () => removeUser{{ $group->id }}(id, item);
 
             item.appendChild(removeButton);
             selectedUsersList.appendChild(item);
-            updateHiddenInputs(); // Update hidden inputs after selecting a user
+            updateHiddenInputs{{ $group->id }}(); // Update hidden inputs after selecting a user
         }
     }
 
-    function removeUser(id, item) {
-        const index = selectedUsers.indexOf(id);
+    function removeUser{{ $group->id }}(id, item) {
+        const index = selectedUsers{{ $group->id }}.indexOf(id);
         if (index > -1) {
-            selectedUsers.splice(index, 1);
+            selectedUsers{{ $group->id }}.splice(index, 1);
             item.remove();
-            updateHiddenInputs(); // Update hidden inputs after removing a user
+            updateHiddenInputs{{ $group->id }}(); // Update hidden inputs after removing a user
         }
     }
 
-    function updateHiddenInputs() {
+    function updateHiddenInputs{{ $group->id }}() {
         // Clear existing hidden inputs
-        let hiddenInputContainer = document.getElementById('hidden-inputs');
+        let hiddenInputContainer = document.getElementById('hidden-inputs{{ $group->id }}');
 
         if (!hiddenInputContainer) {
             // Create a container to hold hidden inputs if it doesn't exist
             hiddenInputContainer = document.createElement('div');
-            hiddenInputContainer.id = 'hidden-inputs';
+            hiddenInputContainer.id = 'hidden-inputs{{ $group->id }}';
             document.querySelector('form').appendChild(hiddenInputContainer);
         } else {
             hiddenInputContainer.innerHTML = ''; // Clear previous inputs
         }
 
         // Create hidden input for each selected user
-        selectedUsers.forEach(userId => {
+        selectedUsers{{ $group->id }}.forEach(userId => {
             const hiddenInput = document.createElement('input');
             hiddenInput.type = 'hidden';
             hiddenInput.name = 'user_ids[]'; // This makes it an array in Laravel
             hiddenInput.value = userId;
             hiddenInputContainer.appendChild(hiddenInput);
         });
-
-        // Debugging: Check the contents of the hidden input container
-        console.log("Hidden Inputs:", hiddenInputContainer.innerHTML);
     }
 </script>
 

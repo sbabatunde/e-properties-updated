@@ -10,15 +10,19 @@
     </div>
 
     <div class="hero-sub-category">
-        <div class="hero-cat-venue">
-            <img src="{{ asset('../assets/images/hero-images/group-1.png') }}" alt="">
-            <span class="hero-expert-text">
-                <h4 class="mb-0">IT News</h4>
-                <p>5 Members <span class="ml-2">0 Post Today</span></p>
-                <a href="" class="btn btn-info mb-3"
-                    style="background-color:#394293;font-weight:500;font-size:20px">Join</a>
-            </span>
-        </div>
+        @foreach ($data['groups'] as $item)
+            <div class="hero-cat-venue">
+                <img src="{{ $item->photo }}" alt="{{ $item->group_name }}">
+                <span class="hero-expert-text">
+                    <h4 class="mb-0">{{ $item->group_name }}</h4>
+                    <p>{{ $item->members_count }} Members <span class="ml-2">{{ $item->posts_count }} Post
+                            Today</span></p>
+                    <a href="" class="btn btn-info mb-3"
+                        style="background-color:#394293;font-weight:500;font-size:20px">Join</a>
+                </span>
+            </div>
+        @endforeach
+        {{-- 
         <div class="hero-cat-venue">
             <img src="{{ asset('../assets/images/hero-images/group-1.png') }}" alt="">
             <span class="hero-expert-text">
@@ -54,7 +58,7 @@
                 <a href="" class="btn btn-info mb-3"
                     style="background-color:#394293;font-weight:500;font-size:20px">Join</a>
             </span>
-        </div>
+        </div> --}}
 
     </div>
 </div>

@@ -45,7 +45,7 @@
                                     </a>
 
                                     <a href="#" title="Add Member" data-bs-toggle="modal"
-                                        data-bs-target="#addMember{{ $group->id }}"
+                                        data-bs-target="#addMemberModal{{ $group->id }}"
                                         class="btn btn-primary btn-md d-inline-flex align-items-center mx-1">
                                         <i class="fa fa-plus"></i>
                                     </a>

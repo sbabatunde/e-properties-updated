@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Admin\Blacklist;
+use App\Models\Site\GroupMember;
 use App\Models\Site\ServiceType;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -117,6 +118,11 @@ class User extends Authenticatable
        public function serviceTypes()
        {
            return $this->hasManyThrough(ServiceType::class, ServiceProvider::class, 'user_id', 'id', 'id', 'service_type_id');
+       }
+
+       public function groupMembers()
+       {
+           return $this->hasMany(GroupMember::class);
        }
 }
     

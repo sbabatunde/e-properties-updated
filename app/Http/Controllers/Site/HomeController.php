@@ -17,6 +17,7 @@ use App\Models\Site\ServiceType;
 use App\Models\Site\PropertyType;
 use App\Services\CurrencyService;
 use App\Http\Controllers\Controller;
+use App\Models\Site\Group;
 use App\Models\Site\PropertyCategory;
 
 class HomeController extends Controller
@@ -69,6 +70,7 @@ class HomeController extends Controller
         $data['type'] = PropertyType::with(['property','propertyCategory'])->get();
         $data['trending'] = Property::has('trending')->with(['payment','agent','trending'])->get();
         $data['media'] = PostMedia::with('user')->where('file_type','video')->get();
+        $data['groups'] = Group::withCount(['members', 'posts'])->get();
         $sliders = $data['sliders'];
         $proffessionals = ServiceType::withCount(['providers'])
         ->with('serviceCategory')
