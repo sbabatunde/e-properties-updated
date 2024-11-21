@@ -6,6 +6,7 @@
         $type = BuildingCategoryType::where('slug', $material->type)->first();
     @endphp
     {{-- @dd($material) --}}
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6 agent-details bm">
@@ -42,8 +43,10 @@
                     </a>
                 </span><br>
                 <div class="agent-action">
-                    <span class="agent-connect"> <a href="">Buy</a></span>
-                    <span class="agent-message"><a href="">Send a Message</a></span>
+                    <span class="agent-connect"> <a href="#"
+                            onclick="showMessageModal(event);checkAuthMessage();">Buy</a></span>
+                    <span class="agent-message"><a href="#" onclick="showMessageModal(event);checkAuthMessage();">Send
+                            a Message</a></span>
                 </div>
             </div>
         </div>
@@ -52,6 +55,7 @@
     <div class="container mb-5">
         <h5 class="ml-5 pl-2 mb-4 mt-5" style="font-weight:600">Reviews</h5>
         @if ($reviews !== null)
+            {{-- @dd($reviews) --}}
             <div class="row mb-5">
                 @foreach ($reviews->take(4) as $item)
                     <div class="col-lg-3 col-md-3 col-sm-6">
@@ -71,7 +75,7 @@
             <div class="hero-meet-expert">
 
                 <h5 style="color: black;font-weight:600">Other {{ $type->type }} Option</h5>
-                <a href="" style="text-decoration: none">
+                <a href="{{ route('user.buiding-materials.index') }}" style="text-decoration: none">
                     <h5 style="color: red">See more</h5>
                 </a>
             </div>
@@ -100,4 +104,46 @@
 
     <!-- Review Modal -->
     @include('front.users.building-material.modal.review')
+    @include('front.users.building-material.modal.message')
+
+
+    <script>
+        function showMessageModal(event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+
+            var isAuthenticated = {{ Auth::check() ? 'true' : 'false' }};
+
+            if (isAuthenticated) {
+                // If the user is authenticated, show the modal
+                document.getElementById('messageModal').style.display = 'block';
+            } else {
+                // If the user is not authenticated, show a Toastr error\
+
+                toastr.error('You must be logged in to send a message.', 'Authentication Required', {
+                    closeButton: true,
+                    progressBar: true,
+                    timeOut: 5000, // Auto-dismiss after 5 seconds
+                });
+            }
+        }
+
+        // Toastr settings (optional customization)
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    </script>
 @endsection

@@ -9,11 +9,10 @@
                     <span style="color: #394293;font-size:25px;"
                         class="d-flex justify-content-center">Maintenance</span><br>
                     <span style="font-size:15px; ">
-                        <b>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            iditate quia soluta.
+                        <b> E-Properties connects you with reliable, skilled, and certified professionals...
                         </b>
                     </span>
-                    <a href="" class="btn btn-tenant-service">Click Here</a>
+                    <a href="{{ route('tenant.maintenance') }}" class="btn btn-tenant-service">Click Here</a>
                 </span>
             </p>
 
@@ -27,11 +26,11 @@
                 <span class="tenant-service-text2">
                     <span style="color: #394293;font-size:25px;" class="d-flex justify-content-center">Repair</span><br>
                     <span style="font-size:15px; ">
-                        <b>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            iditate quia soluta.
+                        <b>
+                            Professional solutions for every property repair need.
                         </b>
                     </span>
-                    <a href="" class="btn btn-tenant-service">Click Here</a>
+                    <a href="{{ route('tenant.repairs') }}" class="btn btn-tenant-service">Click Here</a>
                 </span>
             </p>
             <img src="{{ asset('../assets/images/hero-images/service-2.png') }}" alt="">
@@ -57,11 +56,10 @@
                     <span style="color: #394293;font-size:25px;" class="d-flex justify-content-center">Property
                         Valuation</span><br>
                     <span style="font-size:15px; ">
-                        <b>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            iditate quia soluta.
+                        <b>Know the worth of your rental property with expert insights.
                         </b>
                     </span>
-                    <a href="" class="btn btn-tenant-service">Click Here</a>
+                    <a href="{{ route('tenant.property-valuation') }}" class="btn btn-tenant-service">Click Here</a>
                 </span>
             </p>
 
@@ -76,11 +74,11 @@
                     <span style="color: #394293;font-size:25px;"
                         class="d-flex justify-content-center">Security</span><br>
                     <span style="font-size:15px; ">
-                        <b>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            iditate quia soluta.
+                        <b>
+                            Comprehensive solutions to ensure the safety of your property.
                         </b>
                     </span>
-                    <a href="" class="btn btn-tenant-service">Click Here</a>
+                    <a href="{{ route('tenant.security') }}" class="btn btn-tenant-service">Click Here</a>
                 </span>
             </p>
             <img src="{{ asset('../assets/images/hero-images/service-1.png') }}" alt="">

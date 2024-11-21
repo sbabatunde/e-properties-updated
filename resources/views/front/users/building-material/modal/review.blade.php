@@ -2,11 +2,11 @@
 <div id="reviewModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeReviewModal()">&times;</span>
-        <h2>Post a Review on <span style="color: #394293">{{ $material->user->firstname }}
-                {{ $material->user->lastname }}</span></h2>
+        <h2>Post a Review on <span style="color: #394293">{{ $material->title }}
+            </span></h2>
         <div class="modal-form">
             <form class="d-inline" method="POST" enctype="multipart/form-data"
-                action="{{ route('professional.review', $material->user->id) }}">
+                action="{{ route('user.buiding-materials.review', $material->id) }}">
                 @csrf
                 <div class="row col-lg-12">
                     <!-- Star Rating -->

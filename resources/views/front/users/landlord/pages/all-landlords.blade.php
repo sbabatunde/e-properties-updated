@@ -1,7 +1,7 @@
 @extends('layouts.front.login-site')
 @section('content')
     {{-- Page Banner Begins --}}
-    <div class="page-hero bg-image " style="background-image: url(../assets/images/services/banner.png);">
+    <div class="page-hero bg-image " style="background-image: url({{ asset('../assets/images/services/banner.png') }});">
         <div class="hero-section ">
             <div class="search-form col-8" style="position: relative;top:50%">
                 <form class="form" action="" method="POST" enctype="multipart/form-data">

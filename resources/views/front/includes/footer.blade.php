@@ -6,11 +6,14 @@
                 <div class="footer-item clearfix">
                     <h4>About</h4>
                     <div class="Subscribe-box">
-                        <p>Lorem ipsum dolor sit amet consectetur. Ullamcorper bibendum diam sapien faucibus.
-                            Dolor in nibh malesuada pharetra aenean eu rhoncus. Non tortor sagittis metus vitae nunc.
-                            Varius congue fauc-ibus lacus pharetra nisl risus. Bibendum integer fringilla
-                            id ante fusce varius eget.</p>
-                        <a href="#" name="submitNewsletter" class="btn btn-block btn-color">
+                        <p>
+                            E-Properties is a comprehensive platform dedicated to connecting agents, landlords, and
+                            tenants. Our mission is to simplify property interactions by providing an easy-to-use space
+                            for listing, discovering, and managing properties. Whether you're seeking your next home,
+                            uploading property listings, or interacting with stakeholders, E-Properties bridges the gap
+                            for a seamless real estate experience.
+                        </p>
+                        <a href="{{ route('about-us') }}" name="submitNewsletter" class="btn btn-block btn-color">
                             Learn More
                         </a>
                     </div>
@@ -21,31 +24,31 @@
                     <h4 class="pl-4">Service</h4>
                     <ul class="contact-info">
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Buy</a>
+                            <a href="{{ route('all.properties.listing') }}">Buy</a>
                         </li>
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Rent</a>
+                            <a href="{{ route('all.properties.listing') }}">Rent</a>
                         </li>
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Let</a>
+                            <a href="{{ route('all.properties.listing') }}">Let</a>
                         </li>
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Lease</a>
+                            <a href="{{ route('all.properties.listing') }}">Lease</a>
                         </li>
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Landlords</a>
+                            <a href="{{ route('landlord.index') }}">Landlords</a>
                         </li>
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Tenants</a>
+                            <a href="{{ route('tenant.index') }}">Tenants</a>
                         </li>
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Property Management</a>
+                            <a href="{{ route('services.find') }}">Property Management</a>
                         </li>
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Building Materials</a>
+                            <a href="{{ route('user.buiding-materials.index') }}">Building Materials</a>
                         </li>
                         <li>
-                            <a href="mailto:sales@hotelempire.com">Short lets</a>
+                            <a href="{{ route('all.properties.listing') }}">Short lets</a>
                         </li>
                     </ul>
                 </div>
@@ -57,23 +60,26 @@
                     </h4> --}}
                     <ul class="links">
                         <li>
-                            <a href="#">Privacy Policy</a>
+                            <a href="{{ route('land-verification') }}">Land Verification Procedure</a>
                         </li>
                         <li>
-                            <a href="#">Terms and conditions</a>
+                            <a href="{{ route('policy') }}">Privacy Policy</a>
                         </li>
                         <li>
-                            <a href="#">FAQs</a>
+                            <a href="{{ route('terms') }}">Terms and conditions</a>
                         </li>
                         <li>
-                            <a href="#">Contact Us</a>
+                            <a href="{{ route('FAQs') }}">FAQs</a>
                         </li>
                         <li>
-                            <a href="#">Blogs</a>
+                            <a href="{{ route('contact-us') }}">Contact Us</a>
                         </li>
                         <li>
+                            <a href="{{ route('blog.post.all') }}">Blogs</a>
+                        </li>
+                        {{-- <li>
                             <a href="#">Trends</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
@@ -146,7 +152,7 @@
                     Find Your Dream Properties
                 </h5>
                 <p>
-                    <i class="flaticon-facebook-placeholder-for-locate-places-on-maps"></i> 123 Kathal St. Tampa City,
+                    <i class="flaticon-facebook-placeholder-for-locate-places-on-maps"></i> E-Properties.
                 </p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

@@ -4765,6 +4765,7 @@ a{
  box-shadow: 0 0 20px rgba(43, 42, 42, 0.1);
  margin: 10px;
 }
+
 @media (max-width:760px) {
   .grp-members{
   padding: 1%;
@@ -4889,6 +4890,7 @@ a{
   width: 50%;
   height: 40px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .grp-anonymous .comment-view{

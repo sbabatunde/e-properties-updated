@@ -1,6 +1,6 @@
 @extends('layouts.front.login-site')
 @section('content')
-    <div class="page-hero bg-image " style="background-image: url(../assets/images/services/banner.png);">
+    <div class="page-hero bg-image " style="background-image: url({{ asset('../assets/images/services/banner.png') }});">
 
     </div>
 

@@ -5,14 +5,13 @@
         style="background: url({{ asset('assets/images/services/banner.png') }});
     background-size:cover;">
         <div class="container">
-            <div class="breadcrumb-area text-left col-md-5">
+            <div class="breadcrumb-area text-left col-md-6">
                 <h1 class="fs-bold" style="colo">About Group</h1>
                 <ul class="breadcrumbs">
                     <li class="text-white">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Non, repellat! Repudiandae, iste impedit labore eos voluptatum fugit
-                        smagnam laudantium dolore unde facere eum, et harum
-                        consectetur excepturi perferendis qui. Labore?
+                        Join our vibrant community where real estate, tech, health, and more come together. Whether you're
+                        looking for the latest industry insights or tips on technology and well-being, our groups offer a
+                        space for learning, sharing, and connecting with like-minded individuals.
                     </li>
                 </ul>
 
@@ -21,7 +20,7 @@
     </div>
 
     <div class="group-btn">
-        <a href="" class="btn">Join</a>
+        <a href="#join-group" class="btn">Join</a>
     </div>
 
     <div class="all-group">
@@ -53,14 +52,17 @@
             <div class="about-grp">
                 <h3 class="mb-3"><b>About Group</b></h3>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere fuga rem quos excepturi!
-                    Repellendus facere placeat error numquam beatae maiores nemo.
-                    Velit dolorem vel accusamus veniam dolor voluptas, enim accusantium.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam eaque
-                    a dolores aliquam voluptatibus sunt et repudiandae! Molestiae aperiam quibusdam,
-                    iusto laboriosam neque magni voluptate odio nisi dolor illum obcaecati!
+                    Our community groups are designed to bring together individuals with shared interests in real estate,
+                    technology, health, and more. Whether you're a real estate professional looking to stay updated on
+                    industry trends, a tech enthusiast eager to explore the latest innovations, or someone focused on
+                    maintaining a healthy lifestyle, this is the place for you. We aim to foster engaging discussions, share
+                    valuable insights, and provide a supportive space where members can learn from each other and grow. Join
+                    us to stay informed, connect with like-minded individuals, and explore a diverse range of topics that
+                    matter to you.
                 </p>
-                <a href="" class="btn share-grp"> Share Group</a>
+
+                <a href="#" onclick="showShareModal(event);" class="btn share-grp"> Share Group</a>
+                @include('front.users.groups.share-group')
             </div>
             <div class="about-grp">
                 <h3 class="mb-3"><b>Other Groups</b></h3>
@@ -69,3 +71,9 @@
         </div>
     </div>
 @endsection
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>

@@ -31,6 +31,7 @@ use App\Http\Controllers\Site\Admin\PropertyMessage;
 use App\Http\Controllers\Site\Admin\BuildingMaterial;
 use App\Http\Controllers\Site\Admin\ListingController;
 use App\Http\Controllers\Site\Admin\PostMediaController;
+use App\Http\Controllers\Site\YieldCalculatorController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Http\Controllers\Site\BuildingMaterialController;
 use App\Http\Controllers\Site\PropertyProfessionalController;
@@ -82,11 +83,52 @@ Route::controller(ReportController::class)->group(function () {
 Route::controller(LandlordController::class)->group(function () {
     Route::get('landlord', 'landlordPage')->name('landlord.index');
     Route::get('all-landlords', 'allLanlords')->name('all.landlords');
+    Route::get('/yield-calculator', [YieldCalculatorController::class, 'showForm'])->name('yield.calculator');
+Route::post('/yield-calculator', [YieldCalculatorController::class, 'calculateYield'])->name('yield.calculate');
+    Route::get('/eproperties/apartment-clean', function () {
+        return view('front.users.landlord.pages.apartment-clean');
+    })->name('apartment-clean');
+    Route::get('/landlord/commercial/service', function () {
+        return view('front.users.landlord.pages.commercial');
+    })->name('commercial');
+    Route::get('/landlord/online-valuation/service', function () {
+        return view('front.users.landlord.pages.online-valuation');
+    })->name('online-valuation');
+    Route::get('/landlord/buy-to-let/service', function () {
+        return view('front.users.landlord.pages.buy-to-let');
+    })->name('buy-to-let');
+    Route::get('/landlord/landlord/guide/service', function () {
+        return view('front.users.landlord.pages.landlord-guide');
+    })->name('landlord-guide');
+    Route::get('/landlord/yield-calculator/service', function () {
+        return view('front.users.landlord.pages.yield');
+    })->name('yield');
+    Route::get('/landlord/landlord/frequently_asked_questions&ansers/service', function () {
+        return view('front.users.landlord.pages.faq');
+    })->name('landlord.faq');
 });
 
 //Tenant Routes
 Route::controller(TenantController::class)->group(function () {
     Route::get('/tenant', 'tenantIndex')->name('tenant.index');
+    Route::get('/tenant/content/insurance/service', function () {
+        return view('front.users.tenant.pages.content-insurance');
+    })->name('tenant.content-insurance');
+    Route::get('/tenant/income/protection/service', function () {
+        return view('front.users.tenant.pages.income-protection');
+    })->name('tenant.income-protection');
+    Route::get('/tenant/why/us//maintenance/service', function () {
+        return view('front.users.tenant.pages.maintenance');
+    })->name('tenant.maintenance');
+    Route::get('/tenant/why/us/repairs/service', function () {
+        return view('front.users.tenant.pages.repairs');
+    })->name('tenant.repairs');
+    Route::get('/tenant/why/us/security/service', function () {
+        return view('front.users.tenant.pages.security');
+    })->name('tenant.security');
+    Route::get('/tenant/why/us/property-valuation/service', function () {
+        return view('front.users.tenant.pages.property-valuation');
+    })->name('tenant.property-valuation');
 });
 
 //Land Routes
@@ -104,10 +146,12 @@ Route::controller(AgentController::class)->group(function () {
 Route::controller(PropertyProfessionalController::class)->group(function () {
     Route::get('/view/property/professional/{id}', 'viewPropertyProfessionals')->name('property.professionals.view');
     Route::get('/all/property/professionals', 'allPropertyProfessionals')->name('property.professionals.all');
+    Route::get('/view/more/reviews', 'viewMoreReviews')->name('professional.review.more');
     Route::get('/property/professional/connect', 'allPropertyProfessionals')->name('property.professionals.connect');
     Route::post('/message/professional/{profID}', 'messagePropertyProfessional')->name('user.professional.message');
     Route::post('/review/professional/{profID}', 'propertyProfessionalReview')->name('professional.review');
     Route::get('/property/professional/checkAuth', 'checkAuthMessage')->name('property.professionals.authcheck');
+   
 });
 
 
@@ -119,6 +163,8 @@ Route::controller(BuildingMaterialController::class)->group(function () {
     // Route for search functionality
     Route::get('/materials/fetch', 'fetchMaterialsByCategory')->name('materials.fetch');
     Route::get('/search/checkbox','checkboxSearch')->name('search.radio');
+    Route::post('/building/material/review/{id}','materialReview')->name('user.buiding-materials.review');
+    
 });
 
 
@@ -131,6 +177,10 @@ Route::controller(BlogController::class)->group(function () {
 //Groups Routes
 Route::controller(GroupController::class)->group(function () {
     Route::get('/group', 'index')->name('group.index');
+    Route::post('/group/join','join')->name('group.join');
+    Route::post('/group/post','post')->name('group.post');
+    Route::post('/group/comment/{groupPostId}','comment')->name('group.comment');
+    
 });
 
 //Blacklist Routes
@@ -275,3 +325,26 @@ Route::controller(BuildingMaterial::class)->group(function () {
 
 //newaletter
 Route::post('/newsletter/subscribe', [SubscriberController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::post('/contact/us/form', [SubscriberController::class, 'contactUsForm'])->name('contact.submit');
+
+//Policy,terms and condition and the likes
+Route::get('/eproperties/land/verification/procedure', function () {
+    return view('front.users.policies.land-verification');
+})->name('land-verification');
+Route::get('/eproperties/privacy/policy', function () {
+    return view('front.users.policies.privacy');
+})->name('policy');
+Route::get('/eproperties/contact-us', function () {
+    return view('front.users.policies.contact-us');
+})->name('contact-us');
+Route::get('/eproperties/terms&conditions', function () {
+    return view('front.users.policies.terms');
+})->name('terms');
+Route::get('/eproperties/frequently/asked/questions&answers', function () {
+    return view('front.users.policies.FAQs');
+})->name('FAQs');
+Route::get('/eproperties/about-us', function () {
+    return view('front.users.policies.about');
+})->name('about-us');
+
+//Policy,terms and condition and the likes

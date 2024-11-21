@@ -18,7 +18,7 @@ class GroupController extends Controller
     public function index()
     {
         // Fetch all groups from the database
-        $groups = Group::all();
+        $groups = Group::withCount(['members'])->get();
 
         // Return the view with the groups data
         return view('admin.user.groups.index', compact('groups'));   

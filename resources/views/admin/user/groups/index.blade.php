@@ -20,6 +20,7 @@
                             <th>#</th>
                             <th>Group Name</th>
                             <th>Photo</th>
+                            <th>Members</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -36,6 +37,7 @@
                                         <span>No photo</span>
                                     @endif
                                 </td>
+                                <td>{{ $group->members_count }}</td>
                                 <td>
                                     <!-- Edit Button -->
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#editGroup{{ $group->id }}"

@@ -17,6 +17,7 @@ use App\Models\PropertyPayment;
 use App\Models\PropertyAmenities;
 use App\Models\Site\PropertyType;
 use Illuminate\Support\Facades\DB;
+use Yoeunes\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use App\Models\Image as SliderImage;
 use Illuminate\Support\Facades\Auth;
@@ -37,10 +38,10 @@ class ListingController extends Controller
             $category = PropertyCategory::get();
             return view('admin.properties.create',compact('category'));
         } else if (Auth::id() && Auth::user()->user_type == "tenant") {
-            Alert::error('Unauthorized Access!!', 'You need to upgrade to your account to be able to go further');
+            Toastr::error('Unauthorized Access!!', 'You need to upgrade to your account to be able to go further');
             return back();
         } else {
-            Alert::error('Access Denied!!!', 'You need to login in first');
+            Toastr::error('Access Denied!!!', 'You need to login in first');
             return redirect()->route('user.login');
         }
     }

@@ -6,11 +6,15 @@ use App\Models\User;
 use Jorenvh\Share\Share;
 use Illuminate\Http\Request;
 use App\Models\Site\ServiceType;
+use Yoeunes\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\BuildingCategory;
 use App\Models\Admin\BuildingMaterial;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Review\ProfessionalReview;
 use App\Models\Admin\BuildingCategoryType;
+use App\Models\Site\BuildingMaterialComment;
 
 class BuildingMaterialController extends Controller
 {
@@ -29,8 +33,8 @@ class BuildingMaterialController extends Controller
         // dd($material);
         // Generate the material URL
         $materialUrl = route('user.materials.get', ['id' => $id]);
-        $reviews =  ProfessionalReview::where('professional_id',$id)->orderBy('id','desc')->get();
-        
+        $reviews =  BuildingMaterialComment::where('material_id',$id)->orderBy('id','desc')->get();
+        // dd($reviews);
         // Create share links
         $share = new Share;
         $shareLinks = $share->page($materialUrl, $material->title)
@@ -130,6 +134,27 @@ class BuildingMaterialController extends Controller
         $materials = BuildingMaterial::where('type', $slugs)->get();
         // Return JSON response
         return response()->json($materials);
+    }
+
+    public function materialReview(Request $request, $id)
+    {
+        if(auth::id())
+        {
+            $user_id = auth::id();
+        }
+        else{
+            $user_id = null;
+        }
+        
+        $review = BuildingMaterialComment::create([
+            'user_id'=> $user_id,
+            'material_id'=> $id,
+            'review'=>$request->input('review'),
+        ]);
+
+        Toastr::success('Review uploaded successfullly.','Success!');
+        
+        return back();
     }
     
 }

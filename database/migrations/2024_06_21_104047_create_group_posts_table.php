@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('group_posts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable();
-            $table->string('post');
+            $table->longText('post');
             $table->integer('likes')->nullable();
             $table->integer('dislikes')->nullable();
             $table->string('total_comments')->nullable();

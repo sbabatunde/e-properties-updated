@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use DB;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class UserController extends Controller
 {
@@ -94,7 +95,7 @@ class UserController extends Controller
                 ]);
             });
         }
-        Alert::success('Registration Successful', 'Kindly login to proceed.Thank you');
+        Toastr::success('Registration Successful', 'Kindly login to proceed.Thank you');
         return redirect()->route('user.login');
     }
 
@@ -112,10 +113,10 @@ class UserController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            Alert::success('You have successfully logged in');
-            return redirect()->route('home')->withSuccess('You have successfully logged in');
+            Toastr::success('You have successfully logged in');
+            return redirect()->route('home');
         } else {
-            Alert::error('Error', 'Your provided credentials do not match in our record.');
+            Toastr::error('Error', 'Your provided credentials do not match in our record.');
             return back()->withErrors([
                 'email' => 'Your provided credentials do not match in our record.'
             ])->onlyInput('email');

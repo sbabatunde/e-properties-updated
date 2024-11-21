@@ -110,7 +110,7 @@
                     <p class="pb-3">We ensure your apartment is clean and ready for tenants, providing detailed
                         evaluations
                         and support.</p>
-                    <a href="services.html" class="read-more"><b>Free Rental Valuation</b></a>
+                    <a href="{{ route('apartment-clean') }}" class="read-more"><b>Free Rental Valuation</b></a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp delay-04s">
@@ -119,7 +119,7 @@
                     <h5>Houses</h5>
                     <p class="pb-3">Our services ensure your house is in top shape and market-ready, offering convenient
                         online valuations.</p>
-                    <a href="services.html" class="read-more"><b>Online Rental Valuation</b></a>
+                    <a href="{{ route('online-valuation') }}" class="read-more"><b>Online Rental Valuation</b></a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInRight delay-04s">
@@ -128,7 +128,7 @@
                     <h5>Commercial</h5>
                     <p class="pb-3">We offer expert advice and comprehensive services to keep your commercial properties
                         running smoothly.</p>
-                    <a href="services.html" class="read-more"><b>Landlord Services</b></a>
+                    <a href="{{ route('commercial') }}" class="read-more"><b>Landlord Services</b></a>
                 </div>
             </div>
             <div class="col-lg-12 text-center">
@@ -210,12 +210,12 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
                 <div class="lanlord-services">
-                    <i class="fa fa-building"></i>
+                    <i class="fa fa-directions"></i>
                     <h5>First time landlord guide</h5>
                     <p class="pb-4">A guide for those considering becoming
                         a landlord and those who already have previous experience.
                     </p>
-                    <a href="services.html" class="read-more"><b>Learn More</b></a>
+                    <a href="{{ route('landlord-guide') }}" class="read-more"><b>Learn More</b></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
@@ -226,7 +226,7 @@
                         Looking to invest A buy to let property could be very
                         rewarding and is something we can help you get the most out of
                     </p>
-                    <a href="services.html" class="read-more"><b>Learn More</b></a>
+                    <a href="{{ route('buy-to-let') }}" class="read-more"><b>Learn More</b></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
@@ -237,7 +237,7 @@
                         Work out the potential rental yield of a buy to let property,
                         ensuring your mental income is sufficient for you investment
                     </p>
-                    <a href="services.html" class="read-more"><b>Learn More</b></a>
+                    <a href="{{ route('yield') }}" class="read-more"><b>Learn More</b></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
@@ -249,7 +249,7 @@
                         regarding letting a property and the landlord services
                         we provide.
                     </p>
-                    <a href="services.html" class="read-more"><b>Learn More</b></a>
+                    <a href="{{ route('landlord.faq') }}" class="read-more"><b>Learn More</b></a>
                 </div>
             </div>
         </div>

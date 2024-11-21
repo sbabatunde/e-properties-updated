@@ -9,6 +9,7 @@ use Jorenvh\Share\Share;
 use App\Models\ProfMessages;
 use Illuminate\Http\Request;
 use App\Models\Site\ServiceType;
+use Yoeunes\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use App\Mail\Properties\ProfMessage;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,14 @@ class PropertyProfessionalController extends Controller
         ]);
     }
 
+    public function viewMoreReviews()
+    {
+        $reviews = ProfessionalReview::with(['professional','reviewer'])->whereHas('professional', function ($query) {
+            // $query->where('user_type', 'landlord');
+        })->paginate(10);
+        
+        return view('front.users.reviews.professional-view',compact('reviews'));
+    }
 
     public function viewPropertyProfessionals(Request $request, $id)
     {
@@ -143,14 +152,14 @@ class PropertyProfessionalController extends Controller
                     // ->bcc($bcc)
                     ->send(new ProfMessage($details));
     
-                Alert::success('Success', 'Your message has been sent successfully');
+                Toastr::success('Your message has been sent successfully','Success');
             }
             else{
-                Alert::error('Ooops', 'Please kindly Login to get access to this');
+                Toastr::error('Please kindly Login to get access to this','Ooops!!!');
             }
         }
         catch(Exception $e){
-            Alert::error('Error', $e->getMessage());
+            Toastr::error( $e->getMessage(),'Error');
         }
 
         return back();

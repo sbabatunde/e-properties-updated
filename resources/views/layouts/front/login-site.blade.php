@@ -56,7 +56,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     {{-- For Toaster Message Display --}}
-    <script>
+    {{-- <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"
             switch (type) {
@@ -77,7 +77,7 @@
                     break;
             }
         @endif
-    </script>
+    </script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
