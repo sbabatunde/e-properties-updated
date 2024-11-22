@@ -84,7 +84,7 @@ Route::controller(LandlordController::class)->group(function () {
     Route::get('landlord', 'landlordPage')->name('landlord.index');
     Route::get('all-landlords', 'allLanlords')->name('all.landlords');
     Route::get('/yield-calculator', [YieldCalculatorController::class, 'showForm'])->name('yield.calculator');
-Route::post('/yield-calculator', [YieldCalculatorController::class, 'calculateYield'])->name('yield.calculate');
+    Route::post('/yield-calculator', [YieldCalculatorController::class, 'calculateYield'])->name('yield.calculate');
     Route::get('/eproperties/apartment-clean', function () {
         return view('front.users.landlord.pages.apartment-clean');
     })->name('apartment-clean');

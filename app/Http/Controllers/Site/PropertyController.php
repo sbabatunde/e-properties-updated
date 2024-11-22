@@ -142,9 +142,20 @@ class PropertyController extends Controller
         ->whereDate('end_date','>=',Carbon::today())->get();
 
         $similarProperties  = Property::with(['type','payment'])->take('3')->get();
+
+        $share = new Share;
+        $profileUrl = route('all.properties.category', ['category_slug' => $category_slug]);
+        $shareLinks = $share->page($profileUrl, 'share-property')
+                            ->facebook()
+                            ->twitter()
+                            ->linkedin()
+                            ->telegram()
+                            ->whatsapp()        
+                            ->reddit()
+                            ->getRawLinks();
         // dd($similarProperties);
         return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
-        ,'rentProperties','liveAuction','similarProperties'))->withViewName('vendor.pagination.custom');
+        ,'rentProperties','liveAuction','similarProperties','shareLinks'))->withViewName('vendor.pagination.custom');
     }
 
     public function commercialProperty($category_slug)
@@ -168,73 +179,21 @@ class PropertyController extends Controller
         $rentProperties = Property::with(['type','payment'])->where('status','Rent')->paginate(6);
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
         ->whereDate('end_date','>=',Carbon::today())->get();
+
+        $share = new Share;
+        $profileUrl = route('all.properties.category', ['category_slug' => $category_slug]);
+        $shareLinks = $share->page($profileUrl, 'share-property')
+                            ->facebook()
+                            ->twitter()
+                            ->linkedin()
+                            ->telegram()
+                            ->whatsapp()        
+                            ->reddit()
+                            ->getRawLinks();
         // dd($liveAuction);
         return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
-        ,'rentProperties','liveAuction','data'))->withViewName('vendor.pagination.custom');
+        ,'rentProperties','liveAuction','data','shareLinks'))->withViewName('vendor.pagination.custom');
     }
-
-    // public function propertySearch(Request $request)
-    // {
-    //     // Retrieve search parameters from the request
-    //     $keyword = $request->input('keyword');
-    //     $area = $request->input('area');
-    //     $minPrice = $request->input('min_price');
-    //     $maxPrice = $request->input('max_price');
-    //     $minBedroom = $request->input('min_bedroom');
-    //     $maxBedroom = $request->input('max_bedroom');
-    //     $furnished = $request->input('furnished');
-    //     $propertyType = $request->input('p_type');
-    //     $searchType = $request->input('type');
-
-    //     // Build the query
-    //     $query = Property::query()
-    //         ->select('properties.*')
-    //         ->leftJoin('property_payments as prices', 'properties.id', '=', 'prices.property_id');
-    //         // ->groupBy('properties.id'); // Group by property to avoid duplicate results
-
-    //     // Apply filters if they are provided
-    //     if (!empty($keyword)) {
-    //         $query->where('properties.title', 'like', '%' . $keyword . '%');
-    //     }
-    //     // dd($query->get());
-
-    //     if (!empty($area)) {
-    //         $query->where('properties.localty', $area);
-
-    //     }
-    //     if (!empty($minPrice)) {
-    //         $query->where('prices.initial_pay', '>=', $minPrice);
-
-    //     }
-    //     if (!empty($maxPrice)) {
-    //         $query->where('prices.initial_pay', '<=', $maxPrice);
-
-    //     }
-    //     if (!empty($minBedroom)) {
-    //         $query->where('properties.bedrooms', '>=', $minBedroom);
-
-    //     }
-    //     if (!empty($maxBedroom)) {
-    //         $query->where('properties.bedrooms', '<=', $maxBedroom);
-    //     }
-    //     if (!empty($furnished)) {
-    //         $query->where('properties.furnishing', $furnished);
-    //     }
-    //     if (!empty($propertyType)) {
-    //         $query->where('properties.type_id', $propertyType);
-    //     }
-    //     if (!empty($searchType)) {
-    //         $query->where('properties.status', $searchType);
-    //     }
-
-    //     // Execute the query and get the results
-    //     $data = $properties = $query->paginate();
-    //     // Return the view with the results
-    //     // dd($properties);
-       
-
-    //     return view('front.users.properties.search',compact('properties'))->withViewName('vendor.pagination.custom');
-    // }
 
     public function propertySearch(Request $request)
     {

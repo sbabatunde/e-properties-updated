@@ -26,7 +26,8 @@
                             <i class="fa fa-heart ml-2" style="color: rgb(131, 131, 131);font-size:25px"></i>
                         </a>
 
-                        <a href="#" id="shareLink" data-id="{{ $item->id }}">
+                        <a href="#" id="shareLink" onclick="showShareModal(event);checkAuthMessage();"
+                            data-id="{{ $item->id }}">
                             <i class="fa fa-share-alt" style="color: rgb(131, 131, 131);font-size:25px"></i>
                         </a>
                     </span>

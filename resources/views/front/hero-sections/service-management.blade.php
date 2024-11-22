@@ -12,8 +12,7 @@
                     <span style="color: #394293;font-size:25px;" class="d-flex justify-content-center">Property
                         Valuation</span><br>
                     <span style="font-size:15px; ">
-                        <b>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            iditate quia soluta.
+                        <b>Know the worth of your rental property with expert insights.
                         </b>
                     </span>
                 </span>
@@ -47,8 +46,8 @@
                     <span style="color: #394293;font-size:25px;"
                         class="d-flex justify-content-center">Security</span><br>
                     <span style="font-size:15px; ">
-                        <b>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            iditate quia soluta.
+                        <b>
+                            Comprehensive solutions to ensure the safety of your property.
                         </b>
                     </span>
                 </span>

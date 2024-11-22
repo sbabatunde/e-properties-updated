@@ -93,6 +93,7 @@
 
     {{-- Similar Properties List --}}
     @include('front.users.properties.commercial.similar')
+    {{-- @include('front.users.properties.commercial.share-modal') --}}
 
     {{-- Compare property Script --}}
     <script>
@@ -166,4 +167,46 @@
             });
         }
     </script>
+
+    {{-- For Checking whether user can share or not --}}
+
+    {{-- <script>
+        function showMessageModal(event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+
+            var isAuthenticated = {{ Auth::check() ? 'true' : 'false' }};
+
+            if (isAuthenticated) {
+                // If the user is authenticated, show the modal
+                document.getElementById('messageModal').style.display = 'block';
+            } else {
+                // If the user is not authenticated, show a Toastr error\
+
+                toastr.error('You must be logged in to send a message.', 'Authentication Required', {
+                    closeButton: true,
+                    progressBar: true,
+                    timeOut: 5000, // Auto-dismiss after 5 seconds
+                });
+            }
+        }
+
+        // Toastr settings (optional customization)
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    </script> --}}
 @endsection
