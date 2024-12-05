@@ -93,6 +93,7 @@
 
     {{-- Similar Properties List --}}
     @include('front.users.properties.commercial.similar')
+    @include('front.users.properties.commercial.share-modal')
     {{-- @include('front.users.properties.commercial.share-modal') --}}
 
     {{-- Compare property Script --}}

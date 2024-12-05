@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Auction;
 use App\Models\Property;
+use App\Models\Site\Group;
 use Illuminate\Http\Request;
 use App\Models\Site\AuctionBid;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Review\PropertyReview;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AuctionController extends Controller
@@ -41,8 +43,12 @@ class AuctionController extends Controller
         ->whereDate('end_date','>=',Carbon::today())->count();
         $data['sold'] = Property::where('status','Sold')->count();
         $data['rented'] = Property::where('status','Rented')->count();
+        $data['groups'] = Group::withCount(['members', 'posts'])->get();
+        $reviews = PropertyReview::with(['user','property'])->whereHas('user', function ($query) {
+            $query->where('user_type', 'tenant');
+        })->get();
         // dd(Auction::all());
-        return view('front.users.liveAuction.main-page', compact('liveAuction','upcomingAuctions','data'));
+        return view('front.users.liveAuction.main-page', compact('liveAuction','upcomingAuctions','data','reviews'));
     }
 
     public function placeAuctionBid($id)

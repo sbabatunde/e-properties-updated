@@ -54,7 +54,9 @@
             </div>
         </div>
     </div>
-    <div class="container mt-5">
+
+
+    <div class="container mt-1">
         <div class="text-center auct-testimonial-head">
             <div>
                 <i class="fa fa-arrow-left fa-2x"></i>
@@ -64,12 +66,12 @@
                 <i class="fa fa-arrow-right fa-2x"></i>
             </div>
         </div>
-
-        <div class="container all-auction-card display-area">
+        <div class="display-area">
             <div class="tenant-comment-cards">
-                @include('front.users.liveAuction.testimonials')
+                @include('front.users.tenant.comment')
             </div>
         </div>
+
         <div class="tenant-dots-wrapper">
             <button class="tenant-dots active"></button>
             <button class="tenant-dots"></button>
@@ -77,9 +79,8 @@
             <button class="tenant-dots"></button>
         </div>
         <div class="col-lg-12 text-center">
-            <a href="#" class="btn btn-tenant-review">View more reviews</a>
+            <a href="{{ route('professional.review.more') }}" class="btn btn-tenant-review">View more reviews</a>
         </div>
-
     </div>
 
     {{-- Upcoming Auction Properties Begins --}}

@@ -3,7 +3,7 @@
         @foreach ($salesProperties as $item)
             <div class="res-prop-items mt-4">
                 <img src="{{ $item->thumbnail ?? asset($item->thumbnail) }}" alt="">
-                <p style="color: black">
+                <p style="color: black;font-size;4vmin">
                     <span style="font-weight:550;">{{ $item->title }}</span><br>
                     {{ $item->area }}
                 </p>
@@ -26,10 +26,15 @@
                             <i class="fa fa-heart ml-2" style="color: rgb(131, 131, 131);font-size:25px"></i>
                         </a>
 
-                        <a href="#" onclick="showShareModal(event);checkAuthMessage();" id="shareLink"
+                        {{-- <a href="#" onclick="showShareModal(event);checkAuthMessage();" id="shareLink"
                             data-id="{{ $item->id }}">
                             <i class="fa fa-share-alt" style="color: rgb(131, 131, 131);font-size:25px"></i>
+                        </a> --}}
+                        <a href="#"
+                            onclick="showShareModal({{ $item->id }}); return false;checkAuthMessage();">
+                            <i class="fa fa-share-alt" style="color: rgb(131, 131, 131); font-size: 25px;"></i>
                         </a>
+
                     </span>
                 </div>
             </div>
@@ -43,3 +48,47 @@
     @endif
 
 </div>
+
+
+<script>
+    function showShareModal(propertyId) {
+        event.preventDefault();
+
+        // Fetch the modal
+        const modal = document.getElementById('shareModal');
+
+        // Dynamically generate share links
+        const baseUrl = "{{ url('/') }}";
+        const propertyUrl = `${baseUrl}/property/${propertyId}`;
+
+        const platforms = {
+            facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(propertyUrl)}`,
+            twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(propertyUrl)}`,
+            linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(propertyUrl)}`,
+            telegram: `https://telegram.me/share/url?url=${encodeURIComponent(propertyUrl)}`,
+            whatsapp: `https://api.whatsapp.com/send?text=${encodeURIComponent(propertyUrl)}`,
+            reddit: `https://www.reddit.com/submit?url=${encodeURIComponent(propertyUrl)}`
+        };
+
+        // Update modal content
+        const socialLinksContainer = modal.querySelector('.social-links');
+        socialLinksContainer.innerHTML = ''; // Clear existing links
+
+        for (const [platform, link] of Object.entries(platforms)) {
+            const anchor = document.createElement('a');
+            anchor.href = link;
+            anchor.target = '_blank';
+            anchor.className = `social-icon ${platform}`;
+            anchor.title = platform.charAt(0).toUpperCase() + platform.slice(1);
+            anchor.innerHTML = `<i class="fa-brands fa-${platform}"></i>`;
+            socialLinksContainer.appendChild(anchor);
+        }
+
+        // Show the modal
+        modal.style.display = 'block';
+    }
+
+    function closeShareModal() {
+        document.getElementById('shareModal').style.display = 'none';
+    }
+</script>

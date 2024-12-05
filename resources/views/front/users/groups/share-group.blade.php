@@ -121,6 +121,19 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         /* Stronger shadow on hover */
     }
+
+    /* Add padding to the social links section */
+    .social-links {
+        padding: 10px 0;
+    }
+
+    /* Add hover effects for social icons */
+    .social-icon:hover {
+        background-color: #555;
+        color: #fff;
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+    }
 </style>
 
 <script>

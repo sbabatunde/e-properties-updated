@@ -26,15 +26,13 @@
                         <a href="#" onclick="addToFav({{ $item->id }}); return false;">
                             <i class="fa fa-heart ml-2" style="color: rgb(131, 131, 131);font-size:25px"></i>
                         </a>
-
-                        <a href="#" id="shareLink" data-id="{{ $item->id }}">
-                            <i class="fa fa-share-alt" style="color: rgb(131, 131, 131);font-size:25px"></i>
+                        <a href="#"
+                            onclick="showShareModal({{ $item->id }}); return false;checkAuthMessage();">
+                            <i class="fa fa-share-alt" style="color: rgb(131, 131, 131); font-size: 25px;"></i>
                         </a>
                     </span>
                 </div>
             </div>
         @endforeach
-
-
     </div>
 </div>

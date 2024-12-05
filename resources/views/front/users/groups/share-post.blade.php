@@ -1,32 +1,13 @@
 <!-- Share Modal -->
-{{-- <div id="shareModal" class="modal">
+<div id="shareCommentModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeShareModal()">&times;</span>
-        <h2>Share this Profile</h2>
+        <h2>Share this Post</h2>
         <div class="social-links">
-            @forelse ($shareLinks as $platform => $link)
-                <a href="{{ $link }}" target="_blank" class="social-icon {{ $platform }}"
-                    title="{{ ucfirst($platform) }}">
-                    <i class="fa-brands fa-{{ $platform }}"></i>
-                </a>
-            @empty
-                <p>No sharing links available.</p>
-            @endforelse
-        </div>
-    </div>
-</div> --}}
-
-<!-- Share Modal -->
-<div id="shareModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeShareModal()">&times;</span>
-        <h2>Share this Property</h2>
-        <div class="social-links">
-            <!-- Dynamic social links will be inserted here -->
+            <!-- Social share icons will be dynamically added here -->
         </div>
     </div>
 </div>
-
 
 
 <style>
@@ -149,49 +130,12 @@
 </style>
 
 <script>
-    function showShareModal(propertyId) {
+    function showShareModal(event) {
         event.preventDefault();
-
-        const modal = document.getElementById('shareModal');
-        const socialLinksContainer = modal.querySelector('.social-links');
-        socialLinksContainer.innerHTML = '<p>Loading links...</p>'; // Temporary loading state
-
-        // Make an AJAX request to fetch share links
-        fetch("{{ route('property.shareLinks') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                body: JSON.stringify({
-                    property_id: propertyId
-                })
-            })
-            .then(response => response.json())
-            .then(links => {
-                socialLinksContainer.innerHTML = ''; // Clear loading state
-
-                // Add social link buttons dynamically
-                for (const [platform, link] of Object.entries(links)) {
-                    const anchor = document.createElement('a');
-                    anchor.href = link;
-                    anchor.target = '_blank';
-                    anchor.className = `social-icon ${platform}`;
-                    anchor.title = platform.charAt(0).toUpperCase() + platform.slice(1);
-                    anchor.innerHTML = `<i class="fa-brands fa-${platform}"></i>`;
-                    socialLinksContainer.appendChild(anchor);
-                }
-
-                // Show the modal
-                modal.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Error fetching share links:', error);
-                socialLinksContainer.innerHTML = '<p>Failed to load share links.</p>';
-            });
+        document.getElementById('shareCommentModal').style.display = 'block';
     }
 
     function closeShareModal() {
-        document.getElementById('shareModal').style.display = 'none';
+        document.getElementById('shareCommentModal').style.display = 'none';
     }
 </script>

@@ -78,7 +78,17 @@ class Property extends Model
         return $this->belongsTo(Auction::class,'id','property_id');
     }
 
+    public function auctionDetails()
+    {
+        return $this->belongsTo(Auction::class,'id','property_id');
+    }
+
     public function deals()
+    {
+        return $this->belongsTo(PropertyDeals::class,'id','property_id');
+    }
+
+    public function dealsDetails()
     {
         return $this->belongsTo(PropertyDeals::class,'id','property_id');
     }

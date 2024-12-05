@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\Landlord;
 use Illuminate\Http\Request;
+use App\Models\Site\ServiceType;
 use App\Http\Controllers\Controller;
-use App\Models\Review\ProfessionalReview;
 use App\Models\Review\PropertyReview;
+use App\Models\Review\ProfessionalReview;
 
 class LandlordController extends Controller
 {
@@ -21,7 +22,13 @@ class LandlordController extends Controller
 
     public function allLanlords()
     {
+        $proffessionals = ServiceType::withCount(['providers'])
+        ->with('serviceCategory')
+        ->whereDoesntHave('serviceCategory', function ($query) {
+            $query->where('category', 'Maintenance');
+        })->inRandomOrder()->get();
+
         $allAgents = Landlord::with(['user','property'])->paginate(8);
-        return view('front.users.landlord.pages.all-landlords',compact('allAgents'));
+        return view('front.users.landlord.pages.all-landlords',compact('allAgents','proffessionals'));
     }
 }

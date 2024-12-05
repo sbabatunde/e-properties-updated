@@ -10,7 +10,7 @@
         @foreach ($data['properties'] as $key => $item)
             {{-- @dd($item) --}}
             <div class="pic">
-                <img src="{{ asset($item->thumbnail) }}" alt="{{ $item->title }}">
+                <img src="{{ asset($item->thumbnail) ?? $item->thumbnail }}" alt="{{ $item->title }}">
                 <span class="listing-text">
                     <h5 class="mt-3" style="font-weight:700;width:inherit">{{ $item->title }}</h5>
                     <p>

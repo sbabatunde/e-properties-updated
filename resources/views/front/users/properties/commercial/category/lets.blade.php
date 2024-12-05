@@ -3,8 +3,8 @@
         @foreach ($letProperties as $item)
             <div class="res-prop-items mt-4">
                 <img src="{{ $item->thumbnail ?? asset($item->thumbnail) }}" alt="">
-                <p style="color: black">
-                    <span style="font-weight:550;font-size:4vmin">{{ $item->title }}</span><br>
+                <p style="color: black;">
+                    <span style="font-weight:550;">{{ $item->title }}</span><br>
                     {{ $item->area }}
                 </p>
                 <a href="{{ route('property.details', $item->id) }}" class="btn res-prop-view"> View</a><br>
@@ -26,9 +26,9 @@
                             <i class="fa fa-heart ml-2" style="color: rgb(131, 131, 131);font-size:25px"></i>
                         </a>
 
-                        <a href="#" id="shareLink" onclick="showShareModal(event);checkAuthMessage();"
-                            data-id="{{ $item->id }}">
-                            <i class="fa fa-share-alt" style="color: rgb(131, 131, 131);font-size:25px"></i>
+                        <a href="#"
+                            onclick="showShareModal({{ $item->id }}); return false;checkAuthMessage();">
+                            <i class="fa fa-share-alt" style="color: rgb(131, 131, 131); font-size: 25px;"></i>
                         </a>
                     </span>
                 </div>

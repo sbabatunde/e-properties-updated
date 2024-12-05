@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Auction;
 use App\Models\Category;
 use App\Models\Property;
-use App\Models\site\Slider;
+use App\Models\Site\Slider;
 use Illuminate\Http\Request;
 use App\Models\Site\Blacklist;
 use App\Models\Admin\PostMedia;

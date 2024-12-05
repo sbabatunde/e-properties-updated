@@ -1,5 +1,3 @@
-<!-- resources/views/materials/index.blade.php -->
-
 @extends('layouts.front.login-site')
 
 @section('content')
@@ -17,14 +15,14 @@
             padding: 20px;
             background-color: #394293;
             /* Dark blue background */
+            position: relative;
+            /* Position relative for absolute positioning of child elements */
         }
 
         /* Hero Auction Banner Styles */
         .hero-auction-banner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* Centering content */
+            position: relative;
+            /* Position relative for absolute positioning of text */
             width: 100%;
             max-width: 1200px;
             /* Maximum width of the banner */
@@ -37,28 +35,36 @@
 
         /* Text Area Styles */
         .hero-auction-banner p {
-            flex: 3;
-            /* Text area takes 60% of the width */
-            max-width: 60%;
-            font-size: 1rem;
-            /* Adjust font size as needed */
-            line-height: 1.5;
-            /* Improve readability */
-            margin-right: 20px;
-            /* Space between text and image */
+            position: absolute;
+            /* Absolute positioning for overlapping text */
+            top: 50%;
+            /* Center vertically */
+            left: 50%;
+            /* Center horizontally */
+            transform: translate(-50%, -50%);
+            /* Adjust to center properly */
+            z-index: 1;
+            max-width: 100%;
+            font-size: 1.2rem;
             text-align: center;
-            /* Center text */
+            line-height: 1.8;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+            border-radius: 10px;
+            /* Ensure text is above image */
         }
+
+
 
         /* Image Area Styles */
         .hero-auction-banner img {
-            flex: 2;
-            /* Image area takes 40% of the width */
-            max-width: 40%;
             width: 100%;
             /* Make the image responsive */
             height: auto;
             /* Maintain aspect ratio */
+            display: block;
+            /* Remove inline spacing from images */
         }
 
         /* New Material List Styles */
@@ -96,8 +102,6 @@
             /* Uppercase text for emphasis */
             padding: 10px 20px;
             /* Padding around the header */
-            display: inline-block;
-            /* Makes the header width only as wide as the text */
         }
 
         .new-material-items {
@@ -110,7 +114,6 @@
             /* Space out items evenly */
             flex-wrap: wrap;
             /* Wrap items to the next line */
-            width: 100%;
         }
 
         .new-material-items .pic {
@@ -123,11 +126,8 @@
             /* Added padding for better spacing */
             transition: transform 0.2s;
             /* Smooth hover effect */
-            flex: 1 1 calc(25% - 20px);
-            /* 4 items per row, adjusting for gap */
-            /* 25% for four items per row, with space for the gap */
-            max-width: calc(25% - 20px);
-            /* Maximum width of each item */
+            flex-basis: calc(25% - 20px);
+            /* Responsive item width for four items per row, adjusting for gap */
         }
 
         .new-material-items .pic:hover {
@@ -136,17 +136,67 @@
         }
 
         .new-material-items .pic img {
-            min-width: 259px;
-            min-height: 164px;
-            max-width: 100%;
-            /* Ensure the image is responsive */
+            width: 100%;
             height: auto;
-            /* Maintain aspect ratio */
         }
 
         /* Pagination Styles */
         .pagination {
+            display: flex;
             justify-content: center;
+            /* Centers the pagination */
+            align-items: center;
+            /* Vertically aligns items */
+            margin-top: 30px;
+            gap: 5px;
+            /* Optional: Adds spacing between pagination links */
+        }
+
+        .pagination a,
+        .pagination span {
+            margin: 0;
+            padding: 10px 15px;
+            text-decoration: none;
+            background: #394293;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .pagination a:hover {
+            background: #2c3679;
+        }
+
+
+        @media (max-width: 768px) {
+            .new-material-items .pic {
+                flex-basis: calc(50% - 20px);
+            }
+
+            .hero-auction-banner img {
+                width: 100%;
+                height: 100%
+            }
+
+            .hero-auction-banner p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .new-material-items .pic {
+                flex-basis: calc(100% - 20px);
+            }
+
+            .hero-auction-banner img {
+                width: 100%;
+                height: 100%
+            }
+
+            .hero-auction-banner p {
+                font-size: 0.8rem;
+            }
         }
     </style>
 
@@ -154,7 +204,7 @@
     <div class="page-hero bg-image">
         <div class="hero-section">
             <div class="hero-auction-banner">
-                <p style="color: #FFFFFF; text-align: center;">
+                <p class="text-white">
                     Explore our extensive collection of building materials! From roofing to flooring, find premium materials
                     suitable for all your construction needs. Don't miss the opportunity to enhance your projects with the
                     best quality materials available. Browse now to discover the perfect fit for your next build!
@@ -175,18 +225,19 @@
                 <div class="pic">
                     <img src="{{ $item->thumbnail }}" alt="{{ $item->title }}">
                     <i class="fa fa-heart"></i>
-                    <span class="listing-text mat-cost" style="background: #d6daf3">
-                        <h5 class="mt-3" style="font-weight: 700;">{{ $item->title }}</h5>
+                    <span class="listing-text mat-cost" style="background:#d6daf3;">
+                        <h5 class="mt-3" style="font-weight:bold;">{{ $item->title }}</h5>
                         <p>
                             <span>{{ $item->denomination ?? '₦' }} {{ number_format($item->price) }}</span><br>
                             <span>{{ $item->quantity }}</span><br>
-                            <span style="font-weight: 550;">{{ $item->state ?? 'Lagos' }}</span>
+                            <span style="font-weight:bold;">{{ $item->state ?? 'Lagos' }}</span>
                         </p>
                         <a href="{{ route('user.materials.get', $item->id) }}" class="btn btn-info listing-anchor">View</a>
                     </span>
                 </div>
             @endforeach
         </div>
+
         {{-- Pagination links --}}
         @if (count($materials) > 0)
             <div class="pagination mt-5">

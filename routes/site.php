@@ -105,7 +105,7 @@ Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], fu
     Route::get('/all/trending/properties', [Admin\propertiesController::class, 'trendingProperties'])->name('admin.trending.all');
     Route::get('/admin/all/deals/properties', [Admin\propertiesController::class, 'allDealsProperties'])->name('admin.deals.all');
     Route::post('store', [Admin\propertiesController::class, 'store'])->name('admin.properties.general.store');
-    Route::get('edit/{id}', [Admin\propertiesController::class, 'edit'])->name('admin.properties.edit');
+    // Route::get('edit/{id}', [Admin\propertiesController::class, 'edit'])->name('admin.properties.edit');
     Route::get('update/{id}', [Admin\propertiesController::class, 'update'])->name('admin.properties.update');
     Route::get('delete/{id}', [Admin\propertiesController::class, 'delete'])->name('admin.properties.delete');
   });

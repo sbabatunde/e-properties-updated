@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('post');
             $table->integer('likes')->nullable();
             $table->integer('dislikes')->nullable();
+            $table->integer('views')->default(0);
             $table->string('total_comments')->nullable();
             $table->timestamps();
         });

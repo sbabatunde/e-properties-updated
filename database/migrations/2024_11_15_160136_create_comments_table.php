@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('group_post_id')->constrained()->onDelete('cascade'); // Foreign key to group_posts table
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
             $table->text('content'); // Content of the comment
+            $table->integer('views')->default(0);
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
             $table->timestamps();
         });
     }

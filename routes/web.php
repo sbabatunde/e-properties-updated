@@ -177,11 +177,16 @@ Route::controller(BlogController::class)->group(function () {
 //Groups Routes
 Route::controller(GroupController::class)->group(function () {
     Route::get('/group', 'index')->name('group.index');
+    Route::get('/group/post/{id}', 'postShow')->name('post.show');
     Route::post('/group/join','join')->name('group.join');
     Route::post('/group/post','post')->name('group.post');
     Route::post('/group/comment/{groupPostId}','comment')->name('group.comment');
+    Route::post('/comment/{comment}/reply', 'replyToComment')->name('comment.reply');
+    Route::post('/anonymous-like/{type}/{id}', [GroupController::class, 'toggleAnonymousLike'])->name('anonymous.like');
     
+
 });
+Route::post('/likes/{type}/{id}',[GroupController::class,'toggleLike'])->name('group.post-comment.like');
 
 //Blacklist Routes
 Route::controller(UserBlacklist::class)->group(function () {
@@ -209,7 +214,8 @@ Route::controller(PropertyController::class)->group(function () {
     //Properti Review Routes Begins
     Route::post('property/review/{id}', 'propertyReview')->name('property.review');
 
-    
+    Route::post('/share-links', [PropertyController::class, 'generateShareLinks'])->name('property.shareLinks');
+
     
 });
 Route::group(['prefix' => 'properties/'], function () {
@@ -296,6 +302,9 @@ Route::controller(Profile::class)->group(function () {
 Route::controller(ListingController::class)->group(function () {
     Route::get('/get/listing/category/type/{slug}','getListingCategoryType')->name('get.listing.type');
     Route::post('store/property',  'storePropertyListing')->name('admin.properties.store');
+    Route::get('edit/property/{id}',  'editPropertyListing')->name('admin.properties.edit');
+    Route::get('update/property',  'updatePropertyListing')->name('admin.properties.update');
+    Route::delete('delete/property/{id}',  'deletePropertyListing')->name('admin.properties.delete');
     Route::get('add/listing',  'adminAddPropertyListing')->name('admin.add.listing');
     Route::get('my/listings',  'adminPropertyListing')->name('admin.listings.all');
 });

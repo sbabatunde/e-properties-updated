@@ -63,7 +63,6 @@ class User extends Authenticatable
         return $this->hasMany(Agent::class);
     }
 
-   
 
     public function property()
     {

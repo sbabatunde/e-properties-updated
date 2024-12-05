@@ -16,7 +16,6 @@
             </div>
         </div>
     </div>
-    </div>
     {{-- Page Banner Ends  --}}
 
     {{-- Search Materials Begins --}}

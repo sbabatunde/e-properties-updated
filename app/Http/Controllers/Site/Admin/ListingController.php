@@ -319,6 +319,220 @@ class ListingController extends Controller
         }
     }
 
+    public function editPropertyListing($id)
+    {
+        $category = PropertyCategory::get();
+        $property = Property::with(['payment','agent','trending','auctionDetails','dealsDetails'])->where('id',$id)->first();
+        // Manually create an alias for the 'auction' relationship
+      return view('admin.properties.edit', compact('property','category'));
+    }
+
+    public function updatePropertyListing(Request $request, $id)
+    {
+        if (Auth::id() && Auth::user()->user_type !== "tenant") {
+            // Fetch the property from the database
+            $property = Property::findOrFail($id);
+
+            // Define validation rules (same as before)
+            $rules = [
+                // your validation rules here...
+            ];
+
+            // Create a validator instance
+            $validator = Validator::make($request->all(), $rules);
+
+            // Check if validation fails
+            if ($validator->fails()) {
+                // Handle validation failure as before...
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            // Handle checkbox defaults (same as before)
+            $auction = $request->auction === "Yes" ? "Yes" : "No";
+            $deal = $request->deal === "Yes" ? "Yes" : "No";
+            $installment = $request->installment === "Yes" ? "Yes" : "No";
+            $C_of_O = $request->C_of_O === "Yes" ? "Yes" : "No";
+            $survey_plan = $request->survey_plan === "Yes" ? "Yes" : "No";
+            $deed_ass = $request->deed_ass === "Yes" ? "Yes" : "No";
+            $grant_prob = $request->grant_prob === "Yes" ? "Yes" : "No";
+            $deed_mortgage = $request->deed_mortgage === "Yes" ? "Yes" : "No";
+            $deed_gift = $request->deed_gift === "Yes" ? "Yes" : "No";
+            $land_receipt = $request->land_receipt === "Yes" ? "Yes" : "No";
+            $property_doc = $request->property_doc === "Yes" ? "Yes" : "No";
+
+            DB::transaction(function () use (
+                $request,
+                $auction,
+                $deal,
+                $installment,
+                $C_of_O,
+                $survey_plan,
+                $deed_ass,
+                $grant_prob,
+                $deed_mortgage,
+                $deed_gift,
+                $property_doc,
+                $land_receipt,
+                $property
+            ) {
+                // Handle thumbnail upload (same as before)
+
+                // Update property details (same as before)
+
+                // Handle amenities upload (same as before)
+
+                // Handle Auction Details
+                if ($auction === 'Yes') {
+                    // Check if auction already exists
+                    $auctionDetails = Auction::where('property_id', $property->id)->first();
+
+                    if ($auctionDetails) {
+                        // Update existing auction details
+                        $auctionDetails->update([
+                            'start_date' => $request->start_date,
+                            'start_time' => $request->start_time,
+                            'end_time' => $request->end_time,
+                            'end_date' => $request->end_date,
+                            'starting_price' => $request->starting_price,
+                            'denomination' => $request->auction_denomination,
+                            'append' => $request->auction_append_to,
+                        ]);
+                    } else {
+                        // Create a new auction entry
+                        Auction::create([
+                            'property_id' => $property->id,
+                            'start_date' => $request->start_date,
+                            'start_time' => $request->start_time,
+                            'end_time' => $request->end_time,
+                            'end_date' => $request->end_date,
+                            'starting_price' => $request->starting_price,
+                            'denomination' => $request->auction_denomination,
+                            'append' => $request->auction_append_to,
+                        ]);
+                    }
+                } else {
+                    // If auction is set to 'No', remove any auction details
+                    Auction::where('property_id', $property->id)->delete();
+                }
+
+                // Handle Installment Payment Details
+                if ($installment === 'Yes') {
+                    // Check if installment payment details already exist
+                    $paymentDetails = PropertyPayment::where('property_id', $property->id)->first();
+
+                    if ($paymentDetails) {
+                        // Update existing payment details
+                        $paymentDetails->update([
+                            'sequence' => $request->payment_mthd,
+                            'initial_pay' => $request->init_pay,
+                            'subsequent_pay' => $request->subs_pay,
+                            'initial_denomination' => $request->init_denomination,
+                            'subsequent_denomination' => $request->subs_denomination,
+                            'initial_append' => $request->init_append,
+                            'subsequent_append' => $request->subs_append,
+                        ]);
+                    } else {
+                        // Create new installment payment details
+                        PropertyPayment::create([
+                            'property_id' => $property->id,
+                            'sequence' => $request->payment_mthd,
+                            'initial_pay' => $request->init_pay,
+                            'subsequent_pay' => $request->subs_pay,
+                            'initial_denomination' => $request->init_denomination,
+                            'subsequent_denomination' => $request->subs_denomination,
+                            'initial_append' => $request->init_append,
+                            'subsequent_append' => $request->subs_append,
+                        ]);
+                    }
+                } else {
+                    // If installment is set to 'No', remove any payment details
+                    PropertyPayment::where('property_id', $property->id)->delete();
+                }
+
+                // Handle Deal Details
+                if ($deal === 'Yes') {
+                    // Check if deal details already exist
+                    $dealDetails = PropertyDeals::where('property_id', $property->id)->first();
+
+                    if ($dealDetails) {
+                        // Update existing deal details
+                        $dealDetails->update([
+                            'start_date' => $request->deal_start_date,
+                            'start_time' => $request->deal_start_time,
+                            'end_time' => $request->deal_end_time,
+                            'end_date' => $request->deal_end_date,
+                            'deal_price' => $request->deal_price,
+                            'denomination' => $request->deal_denomination,
+                            'append' => $request->deal_append_to,
+                        ]);
+                    } else {
+                        // Create a new deal entry
+                        PropertyDeals::create([
+                            'property_id' => $property->id,
+                            'start_date' => $request->deal_start_date,
+                            'start_time' => $request->deal_start_time,
+                            'end_time' => $request->deal_end_time,
+                            'end_date' => $request->deal_end_date,
+                            'deal_price' => $request->deal_price,
+                            'denomination' => $request->deal_denomination,
+                            'append' => $request->deal_append_to,
+                        ]);
+                    }
+                } else {
+                    // If deal is set to 'No', remove any deal details
+                    PropertyDeals::where('property_id', $property->id)->delete();
+                }
+
+                // Send email or perform any other necessary actions...
+            });
+
+            Alert::success('Success!', 'Your Property has been updated successfully');
+            return back();
+        } else {
+            Alert::error('Access Denied!!!', 'You need to log in first.');
+            return redirect()->route('user.login');
+        }
+    }
+
+    public function deletePropertyListing($id)
+    {
+        if (Auth::id() && Auth::user()->user_type !== "tenant") {
+            // Fetch the property from the database
+            $property = Property::findOrFail($id);
+    
+            DB::transaction(function () use ($property) {
+                // Delete related amenities
+                PropertyAmenities::where('property_id', $property->id)->delete();
+    
+                // Delete auction details if any
+                Auction::where('property_id', $property->id)->delete();
+    
+                // Delete installment payment details if any
+                PropertyPayment::where('property_id', $property->id)->delete();
+    
+                // Delete deal details if any
+                PropertyDeals::where('property_id', $property->id)->delete();
+    
+                // Optionally, you can delete the property thumbnail from Cloudinary as well
+                if ($property->thumbnail) {
+                    // Assuming Cloudinary is set up
+                    $cloudinary = new Cloudinary();
+                    $cloudinary->uploadApi()->destroy($property->thumbnail);
+                }
+    
+                // Finally, delete the property
+                $property->delete();
+            });
+    
+            // Use the with() method for session flash success message
+            return redirect()->back()->with('success', 'Your property has been deleted successfully.');
+        } else {
+            // If the user is unauthorized
+            return redirect()->route('user.login')->with('Access Denied!!!', 'You need to log in first.');
+        }
+    }
+    
+
     public function adminPropertyListing()
     {
        $myListings = Property::with(['amenities','agent', 'payment', 'auction','likes','shares','views'])

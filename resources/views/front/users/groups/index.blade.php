@@ -63,6 +63,7 @@
 
                 <a href="#" onclick="showShareModal(event);" class="btn share-grp"> Share Group</a>
                 @include('front.users.groups.share-group')
+                @include('front.users.groups.share-post')
             </div>
             <div class="about-grp">
                 <h3 class="mb-3"><b>Other Groups</b></h3>
@@ -70,10 +71,46 @@
             </div>
         </div>
     </div>
-@endsection
+    <style>
+        .post-anonymous {
+            display: flex;
+            flex-wrap: nowrap;
+            width: 89%;
+            margin-bottom: 10px;
+            align-items: center;
+            /* Ensures both elements are vertically centered */
+        }
 
-<style>
-    html {
-        scroll-behavior: smooth;
-    }
-</style>
+        .post-anonymous div {
+            border: 1px solid #cfd2f8;
+            border-radius: 7px 0 0 7px;
+            height: 40px;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            /* Ensures the content inside the div is centered vertically */
+            width: 50%;
+            background: #cfd2f8;
+        }
+
+        .post-anonymous .post-submit {
+            color: #fff;
+            background: #394293;
+            border-radius: 0 7px 7px 0;
+            width: 50%;
+            height: 40px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            /* Centers the button text horizontally */
+            align-items: center;
+            /* Centers the button text vertically */
+            margin: 0;
+            /* Ensures no extra margin is added */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+@endsection

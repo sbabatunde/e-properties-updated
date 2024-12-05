@@ -1,6 +1,5 @@
-
 /* Dashboard styles Begins*/
-.card-wrapper{
+.card-wrapper {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -8,13 +7,13 @@
     margin: 2% 0;
 }
 
-.left-card{
+.left-card {
     width: 50%;
     display: block;
     margin-left: 2rem;
 }
 
-.left-card .row{
+.left-card .row {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -22,14 +21,14 @@
 }
 
 @media (max-width: 992px) {
-    .left-card{
-        width:0%;
+    .left-card {
+        width: 0%;
         display: block;
         margin-left: 2rem;
     }
 }
 
-.dashboard-card{
+.dashboard-card {
     background: hsl(236, 62%, 85%);
     border: 1px solid hsl(236, 62%, 85%);
     border-radius: 15px;
@@ -39,7 +38,7 @@
     min-width: 250px;
 }
 
-.dashboard-card .fa-star{
+.dashboard-card .fa-star {
     color: #fff;
     border: 1px solid rgba(218, 20, 20, 0.774);
     background-color: rgba(218, 20, 20, 0.774);
@@ -49,16 +48,16 @@
     border-radius: 50%;
 }
 
-.dashboard-card .alt-star{
+.dashboard-card .alt-star {
     background: rgb(68, 204, 68);
-    border:1px solid rgb(68, 204, 68)
+    border: 1px solid rgb(68, 204, 68);
 }
 
-.dashboard-card p{
+.dashboard-card p {
     font-size: 12px;
 }
 
-.chart_div .card{
+.chart_div .card {
     border: 1px solid #fff;
     border-radius: 15px;
     min-height: 350px;
@@ -69,23 +68,23 @@
     margin-right: 3%;
 }
 
-.right-card .chart_div_2{
+.right-card .chart_div_2 {
     width: 100%;
     margin: auto;
     height: 100%;
 }
-#donutchart{
+#donutchart {
     width: 100%;
     height: 500px;
     color: #5368df;
 }
 
-.audience-card{
+.audience-card {
     width: 95%;
     margin-left: 3%;
 }
 
-.audience-card .row span{
+.audience-card .row span {
     display: flex;
     gap: 20px;
     width: 75%;
@@ -93,43 +92,43 @@
 }
 
 .audience-card .row span .chart_div_3 .card,
-.audience-card .row span .chart_div_4 .card{
+.audience-card .row span .chart_div_4 .card {
     background: red;
-    min-width:8rem;
+    min-width: 8rem;
 }
 
-/* Bashboard styles Ends */
+/* Dashboard styles Ends */
 
 /* Post Property Form styles Begins */
 
-.post-prop-header{
+.post-prop-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
 }
 
-.prop-form-header{
+.prop-form-header {
     width: 90%;
     margin: auto;
-    display: flex; 
-    flex-wrap:wrap ;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.user-details{
+.user-details {
     display: flex;
     flex-wrap: wrap;
-    gap:15px;
+    gap: 15px;
 }
 
-.user-pic{
+.user-pic {
     width: 4rem;
     height: 4rem;
     clip-path: circle();
 }
 
-.user-details h6{
+.user-details h6 {
     color: black;
     font-size: 16px;
     font-weight: 200;
@@ -144,7 +143,7 @@
 
 /* All Properties Style Begins*/
 
-.property-mini-image{
+.property-mini-image {
     width: 3rem;
     height: 3rem;
     clip-path: circle();
@@ -183,3 +182,172 @@
     opacity: 1;
 }
 /* new Icon tooltip Begins*/
+
+/* Table Styling Begins */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #d0d1d4;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 800px;
+    /* Ensures the table retains a minimum width */
+}
+
+/* Table Header Styling */
+thead {
+    background-color: #394293;
+    /* Dark blue header */
+    color: #fff;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    /* Increased padding */
+    text-align: left;
+    font-size: 16px;
+    /* Increased font size */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    /* Increased font size for header */
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Thumbnail Image Styling */
+.property-mini-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Action Button Styling */
+.table-btn button,
+.table-btn a {
+    display: inline-block;
+    font-size: 14px;
+    /* Increased font size */
+    padding: 8px 12px;
+    /* Increased padding */
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.table-btn .btn-outline-primary {
+    background-color: #394293;
+    border: none;
+}
+
+.table-btn .btn-outline-danger {
+    background-color: #d9534f;
+    border: none;
+}
+
+/* Pagination Styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Scrollable Table Container */
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* Tooltip Styling */
+.icon-container {
+    position: relative;
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 110%;
+    font-size: 14px;
+    /* Increased font size for tooltip */
+}
+
+.icon-container:hover .tooltip {
+    visibility: visible;
+}
+
+/* Styling for Empty State in Table */
+.table-responsive.empty-state {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    padding: 20px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    table {
+        min-width: 600px;
+        /* Ensure the table shrinks appropriately */
+    }
+
+    th,
+    td {
+        padding: 10px 12px;
+        /* Adjusted padding */
+        font-size: 14px;
+        /* Increased font size */
+    }
+
+    .pagination {
+        font-size: 14px;
+    }
+
+    .property-mini-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .table-btn button,
+    .table-btn a {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .icon-container .tooltip {
+        left: 100%;
+        top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    table {
+        min-width: 400px;
+        /* Further shrink on very small devices */
+    }
+
+    .table-btn button,
+    .table-btn a {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+}
+
+/* Table styles ends  */

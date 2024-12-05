@@ -22,16 +22,17 @@
                             <br />
                             <div class="row justify-content-md-center">
                                 <div class="col-md-11">
-                                    <div class="form-body">
+                                    <!-- HTML Table Section -->
+                                    <div class="table-responsive">
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th># </th>
-                                                    <th>Image </th>
-                                                    <th>Title </th>
-                                                    <th>Code </th>
-                                                    <th>Status </th>
-                                                    <th>Price </th>
+                                                    <th>#</th>
+                                                    <th>Image</th>
+                                                    <th>Title</th>
+                                                    <th>Code</th>
+                                                    <th>Status</th>
+                                                    <th>Price</th>
                                                     <th>Agent</th>
                                                     <th>Trending</th>
                                                     <th>Edit</th>
@@ -39,75 +40,70 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    @isset($properties)
-                                                        @foreach ($properties as $index => $property)
-                                                    <tr>
-
-                                                        <td>
-                                                            {{ ($properties->currentPage() - 1) * $properties->perPage() + $index + 1 }}
-                                                        </td>
-                                                        <td>
-                                                            <img src="{{ asset($property->thumbnail) }}"
-                                                                alt="{{ $property->title }}" class="property-mini-image">
-                                                        </td>
-                                                        <td>{{ $property->title }}</td>
-                                                        <td>{{ $property->property_code }}</td>
-                                                        <td>{{ $property->status }}</td>
-                                                        <td>
-                                                            {{ $property->payment->initial_denomination ?? '' }}
-                                                            {{ number_format($property->payment->initial_pay) ?? '' }}
-
-                                                        </td>
-                                                        <td>
-                                                            {{ $property->agent->firstname ?? '' }}
-                                                            {{ $property->agent->lastname ?? '' }}
-                                                        </td>
-                                                        <td class="table-btn">
-                                                            @if ($property->trending == null)
-                                                                <form id="addToTrend_{{ $property->id }}" class="addForm"
-                                                                    action="{{ route('admin.trending.add', $property->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button onclick="addToTrending(event,{{ $property->id }})"
-                                                                        class="btn removeForm btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        <i class="bx bx-trending-up"></i>
-                                                                    </button>
-                                                                </form>
-                                                            @else
-                                                                <form id="removeTrending{{ $property->id }}"
-                                                                    {{-- style="display: none" --}}
-                                                                    action="{{ route('admin.trending.remove', $property->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <button onclick="removeTrending(event,{{ $property->id }})"
-                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        <i class="bx bx-trending-down"></i>
-                                                                    </button>
-                                                                </form>
-                                                            @endif
-                                                        </td>
-                                                        <td class="table-btn">
-                                                            <a href="{{ route('admin.categories.edit', $property->id) }}"
-                                                                class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                <i class="fa fa-edit"></i>
-                                                            </a>
-                                                        </td>
-                                                        <td class="table-btn">
-                                                            <a class="icon-container"
-                                                                href="{{ route('admin.categories.delete', $property->id) }}"
-                                                                class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                <i class="fa fa-trash "></i>
-                                                                <span class="tooltip">Home</span>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                @isset($properties)
+                                                    @foreach ($properties as $index => $property)
+                                                        <tr>
+                                                            <td>
+                                                                {{ ($properties->currentPage() - 1) * $properties->perPage() + $index + 1 }}
+                                                            </td>
+                                                            <td>
+                                                                <img src="{{ asset($property->thumbnail) }}"
+                                                                    alt="{{ $property->title }}" class="property-mini-image">
+                                                            </td>
+                                                            <td>{{ $property->title }}</td>
+                                                            <td>{{ $property->property_code }}</td>
+                                                            <td>{{ $property->status }}</td>
+                                                            <td>
+                                                                {{ $property->payment->initial_denomination ?? '' }}
+                                                                {{ number_format($property->payment->initial_pay) ?? '' }}
+                                                            </td>
+                                                            <td>
+                                                                {{ $property->agent->firstname ?? '' }}
+                                                                {{ $property->agent->lastname ?? '' }}
+                                                            </td>
+                                                            <td class="table-btn">
+                                                                @if ($property->trending == null)
+                                                                    <form id="addToTrend_{{ $property->id }}"
+                                                                        action="{{ route('admin.trending.add', $property->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        <button
+                                                                            onclick="addToTrending(event,{{ $property->id }})"
+                                                                            class="btn btn-outline-primary">
+                                                                            <i class="bx bx-trending-up"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                @else
+                                                                    <form id="removeTrending{{ $property->id }}"
+                                                                        action="{{ route('admin.trending.remove', $property->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        <button
+                                                                            onclick="removeTrending(event,{{ $property->id }})"
+                                                                            class="btn btn-outline-danger">
+                                                                            <i class="bx bx-trending-down"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
+                                                            <td class="table-btn">
+                                                                <a href="{{ route('admin.properties.edit', $property->id) }}"
+                                                                    class="btn btn-outline-primary">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </a>
+                                                            </td>
+                                                            <td class="table-btn">
+                                                                <a href="{{ route('admin.properties.delete', $property->id) }}"
+                                                                    class="btn btn-outline-danger">
+                                                                    <i class="fa fa-trash"></i>
+                                                                    <span class="tooltip">Delete</span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
                                                     @endforeach
                                                 @endisset
-                                                </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
                             </div>
@@ -118,9 +114,6 @@
                                     </div>
                                 @endif
                             </div>
-
-
-                            </form>
                         </div>
                     </div>
                 </div>

@@ -190,7 +190,6 @@ class PropertyController extends Controller
                             ->whatsapp()        
                             ->reddit()
                             ->getRawLinks();
-        // dd($liveAuction);
         return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
         ,'rentProperties','liveAuction','data','shareLinks'))->withViewName('vendor.pagination.custom');
     }
@@ -339,12 +338,42 @@ class PropertyController extends Controller
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
         ->whereDate('end_date','>=',Carbon::today())->get();
 
+        // $share = new Share;
+        // $profileUrl = route('all.properties.category', ['propertyID' => $propertyID]);
+        // $shareLinks = $share->page($profileUrl, 'share-property')
+        //                     ->facebook()
+        //                     ->twitter()
+        //                     ->linkedin()
+        //                     ->telegram()
+        //                     ->whatsapp()        
+        //                     ->reddit()
+        //                     ->getRawLinks();
+
         $similarProperties  = Property::with(['type','payment'])->orderBy('created_at','desc')->take('3')->get();
 
         return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
         ,'rentProperties','liveAuction','similarProperties','data'))->withViewName('vendor.pagination.custom');
     }
 
+
+    public function generateShareLinks(Request $request)
+    {
+        $propertyId = $request->property_id;
+        $property = Property::findOrFail($propertyId);
+
+        $propertyUrl = route('property.details', ['id' => $property->id]);
+        $shareLinks = [
+            'facebook' => "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($propertyUrl),
+            'twitter' => "https://twitter.com/intent/tweet?url=" . urlencode($propertyUrl),
+            'linkedin' => "https://www.linkedin.com/sharing/share-offsite/?url=" . urlencode($propertyUrl),
+            'telegram' => "https://telegram.me/share/url?url=" . urlencode($propertyUrl),
+            'whatsapp' => "https://api.whatsapp.com/send?text=" . urlencode($propertyUrl),
+            'reddit' => "https://www.reddit.com/submit?url=" . urlencode($propertyUrl),
+        ];
+
+        return response()->json($shareLinks);
+    }
+    
     public function propertyLikes(Request $request,$id)
     {
         if(Auth::check())

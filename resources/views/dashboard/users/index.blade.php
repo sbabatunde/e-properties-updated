@@ -130,7 +130,8 @@
                                                             @endif
                                                         </td>
                                                         <td class="table-btn">
-                                                            <a class="icon-container"
+
+                                                            <a class="btn btn-outline-danger"
                                                                 href="{{ route('admin.categories.delete', $user->id) }}"
                                                                 class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
                                                                 <i class="fa fa-trash "></i>
