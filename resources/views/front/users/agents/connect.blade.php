@@ -8,7 +8,8 @@
                     src="{{ !empty($propertyProfessional->photo) ? url(asset($propertyProfessional->photo)) : url('/assets/admin/images/no_image.jpg') }}"
                     alt="{{ $propertyProfessional->firstname }}">
                 <div class="agent-action">
-                    <span class="agent-connect"> <a href="#">Connect</a></span>
+                    <span class="agent-connect"> <a href="#" class="connect-button"
+                            data-member-id="{{ $propertyProfessional->id }}">Connect</a></span>
                     <span class="agent-message"><a href="#" onclick="showMessageModal(event);checkAuthMessage();">Send
                             a Message</a></span>
                     <span class="agent-message">
@@ -161,5 +162,64 @@
         };
     </script>
 
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+
+            $('.connect-button').click(function(event) {
+                event.preventDefault(); // Prevent default anchor click behavior
+                var memberId = $(this).data('member-id'); // Get member ID from data attribute
+                console.log(memberId);
+
+                $.ajax({
+                    url: '{{ route('connect.member', ':id') }}'.replace(':id', memberId),
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}' // CSRF token for security
+                    },
+
+                    success: function(response) {
+                        if (response.success) {
+                            // Increment the follower count in the UI
+                            var followerCountElement = $(this).closest('.agent-action').find(
+                                '.follower-count');
+                            var currentCount = parseInt(followerCountElement.text());
+                            followerCountElement.text((currentCount + 1) + " Followers");
+
+                            // Display success message using Toastr
+                            toastr.success("You are now following this user!");
+                        } else {
+                            // Display warning message using Toastr
+                            toastr.warning(response
+                                .message); // Show message if already following
+                        }
+                    }.bind(this), // Bind 'this' context to access the button element
+                    error: function(xhr) {
+                        // Display detailed error message using Toastr
+                        var errorMessage = xhr.responseJSON && xhr.responseJSON.message ? xhr
+                            .responseJSON.message :
+                            'An error occurred while trying to follow the user.';
+                        toastr.error(errorMessage);
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

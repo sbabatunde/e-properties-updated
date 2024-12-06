@@ -40,7 +40,8 @@
             <img src="{{ !empty($selectedProvider->photo) ? url(asset($selectedProvider->photo)) : url('/assets/admin/images/no_image.jpg') }}"
                 alt="">
             <span class="provider-btn">
-                <a href="" class="provider-connect-link">Connect</a>
+                <a href="#" class="provider-connect-link" onclick="connectMember(event, this)"
+                    data-member-id="{{ $selectedProvider->id }}">Connect</a>
                 <a href="#" onclick="showMessageModal(event);checkAuthMessage();" class="provider-message-link">Send a
                     Message</a>
                 <a href="#" onclick="showShareModal(event);" class="provider-share-link"> <i
@@ -261,7 +262,6 @@
     };
 </script>
 
-
 <style>
     .provider-open-content {
         display: flex;
@@ -291,3 +291,52 @@
         font-size: 14px;
     }
 </style>
+
+<script>
+    // Toastr configuration
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
+    function connectMember(event, element) {
+        event.preventDefault(); // Prevent default anchor click behavior
+        var memberId = $(element).data('member-id'); // Get member ID from data attribute
+        console.log("Clicked member ID:", memberId); // Debugging line
+
+        $.ajax({
+            url: '{{ route('connect.member', ':id') }}'.replace(':id', memberId),
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}' // CSRF token for security
+            },
+
+            success: function(response) {
+                console.log("Response:", response); // Debugging line
+                if (response.success) {
+                    toastr.success("You are now following this user!");
+                } else {
+                    toastr.warning(response.message);
+                }
+            },
+            error: function(xhr) {
+                var errorMessage = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message :
+                    'An error occurred while trying to follow the user.';
+                toastr.error(errorMessage);
+            }
+        });
+    }
+</script>

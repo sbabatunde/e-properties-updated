@@ -135,8 +135,7 @@
                 </i>
 
                 <!-- Share button -->
-                <i class="fa fa-share-alt" style="cursor: pointer"
-                    onclick="showShareCommentModal(event,{{ $item->id }},'{{ $item->post }}', '{{ route('post.show', $item->id) }}');">
+                <i class="fa fa-share-alt" style="cursor: pointer" onclick="showSharePostModal(event)">
                     <span class="ml-2" style="color: rgb(184, 182, 182); font-size: 17px">Share</span>
                 </i>
 

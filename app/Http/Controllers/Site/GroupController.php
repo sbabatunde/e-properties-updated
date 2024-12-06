@@ -7,8 +7,11 @@ use App\Models\User;
 use App\Models\Comment;
 use Jorenvh\Share\Share;
 use App\Models\Site\Group;
+use App\Models\Site\Follow;
 use Illuminate\Http\Request;
 use App\Models\Site\GroupPost;
+use App\Models\Site\GroupMember;
+use Illuminate\Support\Facades\DB;
 use Yoeunes\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -21,7 +24,7 @@ class GroupController extends Controller
         $knownPosts = GroupPost::whereNotNull('user_id')->with(['user','likes','comments','user.serviceTypes'])->orderBy('created_at','desc')->paginate(2);
         $anonymousPosts = GroupPost::whereNull('user_id')->with(['user','likes','comments','comments.user','user.serviceTypes'])->orderBy('created_at','desc')->paginate(2);
         //Retrieve all group members and paginate
-        $members = Group::with('members')->get();
+        $members = GroupMember::with('user')->paginate(6);
         //For Sharing group
              // Generate the profile URL
         $profileUrl = route('group.index');
@@ -35,9 +38,17 @@ class GroupController extends Controller
                             ->whatsapp()        
                             ->reddit()
                             ->getRawLinks();
+        $sharePosts = $share->page($profileUrl,'check-out post')
+                            ->facebook()
+                            ->twitter()
+                            ->linkedin()
+                            ->telegram()
+                            ->whatsapp()        
+                            ->reddit()
+                            ->getRawLinks();
         
         // End of Share Group 
-        return view('front.users.groups.index',compact('groups','knownPosts','anonymousPosts','shareLinks','members'));
+        return view('front.users.groups.index',compact('groups','knownPosts','anonymousPosts','shareLinks','members','sharePosts'));
     }
 
     public function join(Request $request)
@@ -193,46 +204,92 @@ class GroupController extends Controller
     
     public function toggleLike($type, $id)
     {
-        try {
-            $user = auth()->user();
-            $liked = false;
+        if(!auth()->check())
+        {
+            try {
+                $ipAddress = request()->ip(); // Use IP address to identify anonymous user
+                $liked = false;
     
-            // Determine the type of entity
-            $entity = null;
-            if ($type == 'post') {
-                $entity = GroupPost::findOrFail($id);
-                $entity->increment('views');
-            } elseif ($type == 'comment') {
-                $entity = Comment::findOrFail($id);
-                $entity->increment('views');
-                $post = GroupPost::findOrFail($entity->group_post_id);
-                $post->increment('views');
-            } else {
-                return response()->json(['error' => 'Invalid type'], 400);
+                // Determine the type of entity
+                $entity = null;
+                if ($type == 'post') {
+                    $entity = GroupPost::findOrFail($id);
+                    $entity->increment('views');
+                } elseif ($type == 'comment') {
+                    $entity = Comment::findOrFail($id);
+                    $entity->increment('views');
+                    $post = GroupPost::findOrFail($entity->group_post_id);
+                    $post->increment('views');
+                } else {
+                    return response()->json(['error' => 'Invalid type'], 400);
+                }
+    
+                // Check if the anonymous user has already liked this entity
+                $like = $entity->likes()->where('ip_address', $ipAddress)->first();
+    
+                if ($like) {
+                    // If already liked, unlike it
+                    $like->delete();
+                } else {
+                    // Create a new like
+                    $entity->likes()->create(['ip_address' => $ipAddress]);
+                    $liked = true;
+                }
+    
+                // Return response with updated like count and liked status
+                return response()->json([
+                    'likesCount' => $entity->likes()->count(),
+                    'liked' => $liked,
+                ]);
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                return response()->json(['error' => 'Entity not found'], 404);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Server error'], 500);
             }
-    
-            // Check if the user already liked the entity
-            $like = $entity->likes()->where('user_id', $user->id)->first();
-    
-            if ($like) {
-                // If already liked, unlike it
-                $like->delete();
-            } else {
-                // Create a new like
-                $entity->likes()->create(['user_id' => $user->id]);
-                $liked = true;
-            }
-    
-            // Return response with updated like count and liked status
-            return response()->json([
-                'likesCount' => $entity->likes()->count(),
-                'liked' => $liked,
-            ]);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['error' => 'Entity not found'], 404);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Server error'], 500);
         }
+        else{
+            try {
+                $user = auth()->user() ?? null;
+                $liked = false;
+        
+                // Determine the type of entity
+                $entity = null;
+                if ($type == 'post') {
+                    $entity = GroupPost::findOrFail($id);
+                    $entity->increment('views');
+                } elseif ($type == 'comment') {
+                    $entity = Comment::findOrFail($id);
+                    $entity->increment('views');
+                    $post = GroupPost::findOrFail($entity->group_post_id);
+                    $post->increment('views');
+                } else {
+                    return response()->json(['error' => 'Invalid type'], 400);
+                }
+        
+                // Check if the user already liked the entity
+                $like = $entity->likes()->where('user_id', $user->id)->first();
+        
+                if ($like) {
+                    // If already liked, unlike it
+                    $like->delete();
+                } else {
+                    // Create a new like
+                    $entity->likes()->create(['user_id' => $user->id]);
+                    $liked = true;
+                }
+        
+                // Return response with updated like count and liked status
+                return response()->json([
+                    'likesCount' => $entity->likes()->count(),
+                    'liked' => $liked,
+                ]);
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                return response()->json(['error' => 'Entity not found'], 404);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Server error'], 500);
+            }
+        }
+        
     }
     
     // for anonnymous toggle
@@ -280,33 +337,34 @@ class GroupController extends Controller
         }
     }
 
-    public function postShow($postId)
+    public function connectMember($id)
     {
-        $post = GroupPost::findOrFail($postId);
+        // Get the currently authenticated user
 
-        $groups = Group::withCount(['members','posts'])->with(['members','posts'])->orderBy('created_at','desc')->get();
-        $knownPosts = GroupPost::whereNotNull('user_id')->with(['user','likes','comments','user.serviceTypes'])->orderBy('created_at','desc')->paginate(2);
-        $anonymousPosts = GroupPost::whereNull('user_id')->with(['user','likes','comments','comments.user','user.serviceTypes'])->orderBy('created_at','desc')->paginate(2);
-        //Retrieve all group members and paginate
-        $members = Group::with('members')->get();
-        //For Sharing group
-             // Generate the profile URL
-        $profileUrl = route('group.index');
-        // Create share links
-        $share = new Share;
-        $shareLinks = $share->page($profileUrl,'join-groups')
-                            ->facebook()
-                            ->twitter()
-                            ->linkedin()
-                            ->telegram()
-                            ->whatsapp()        
-                            ->reddit()
-                            ->getRawLinks();
-        
-        // End of Share Group 
-        return view('front.users.groups.index',compact('groups','knownPosts','anonymousPosts','shareLinks','members'));
+        // Check if the user is authenticated
+        if (!auth()->check()) {
+            return response()->json(['success' => false, 'message' => 'Unauthorized. Login to connect to user'], 401);
+        }
+        else{
+            $user = auth()->user()->id;
+            // Find the user to follow
+            $alreadyfollow = Follow::where('following_id',$id)->where('follower_id',$user)->first();
+            $userToFollow = User::findOrFail($id);
+            // Check if already following
+            if (!$alreadyfollow) {
+                Follow::create([
+                    'follower_id'=>$user,
+                    'following_id'=>$id,
+                    'created_at'=>now(),
+                    'updated_at'=>now(),
+                ]);
+                $userToFollow->increment('followers_count');
 
-        return redirect()->back();
+                return response()->json(['success' => true, 'message' => 'You are now following'
+                .' ' .auth()->user()->firstname.' '.  auth()->user()->lastname]);
+            }
+
+            return response()->json(['success' => false, 'message' => 'You are already following this user.']);
+        }
     }
-    
 }

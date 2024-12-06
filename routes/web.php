@@ -183,6 +183,7 @@ Route::controller(GroupController::class)->group(function () {
     Route::post('/group/comment/{groupPostId}','comment')->name('group.comment');
     Route::post('/comment/{comment}/reply', 'replyToComment')->name('comment.reply');
     Route::post('/anonymous-like/{type}/{id}', [GroupController::class, 'toggleAnonymousLike'])->name('anonymous.like');
+    Route::post('/connect/{id}', 'connectMember')->name('connect.member');
     
 
 });

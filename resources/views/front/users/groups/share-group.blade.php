@@ -2,7 +2,7 @@
 <div id="shareModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeShareModal()">&times;</span>
-        <h2>Share this Profile</h2>
+        <h2>Share Group</h2>
         <div class="social-links">
             @forelse ($shareLinks as $platform => $link)
                 <a href="{{ $link }}" target="_blank" class="social-icon {{ $platform }}"

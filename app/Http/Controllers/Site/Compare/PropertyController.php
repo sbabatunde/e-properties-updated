@@ -17,7 +17,7 @@ class PropertyController extends Controller
             $compareList = CompareProperty::with(['property','payment'])->where('user_id', Auth::id())->latest()->get();
             return view('front.users.compare.main-page', compact('compareList'));
         } else {
-            Alert::error('Unauthorized Access!!!', 'You need to login first');
+            Toastr::error('Unauthorized Access!!!', 'You need to login first');
             return back();
         }
     }
@@ -64,7 +64,7 @@ class PropertyController extends Controller
     public function removePropertyCompare($id)
     {
         CompareProperty::where('user_id', Auth::id())->where('id', $id)->delete();
-        Alert::success('Success!', 'Property removed from Compare List');
+        Toastr::success('Success!', 'Property removed from Compare List');
         return back();
     }
 

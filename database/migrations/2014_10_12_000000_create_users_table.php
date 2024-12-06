@@ -42,7 +42,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female'])->nullable();
             // $table->enum('user_type',['agent','admin','tenant','user'])->default ('user');
             $table->enum('status', ['verified', 'unverified'])->default('unverified');
-
+            $table->unsignedInteger('followers_count')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

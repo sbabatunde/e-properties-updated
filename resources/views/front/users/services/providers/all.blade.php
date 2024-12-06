@@ -35,11 +35,11 @@
                     <span class="hero-expert-text">
                         <h4 class="mb-0">{{ $item->firstname ?? '' }} {{ $item->lastname ?? '' }}</h4>
                         <p>
-                            5 Followers
+                            {{ $item->followers_count }}
                             {{-- {{ count($agent->property) > 1 ? count($agent->property) . ' Properties' : count($agent->property) . ' Property' }} --}}
                         </p>
                         <a href="{{ route('service.provider.view', $item->id) }}" class="btn btn-info mb-3"
-                            style="background-color:#394293;font-weight:500;font-size:20px">Connect</a>
+                            style="background-color:#394293;font-weight:500;font-size:20px;cursor: pointer;">Connect</a>
                     </span>
                 </div>
             @endforeach

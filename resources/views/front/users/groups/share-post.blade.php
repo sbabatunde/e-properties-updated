@@ -1,10 +1,17 @@
 <!-- Share Modal -->
-<div id="shareCommentModal" class="modal">
+<div id="sharePostModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeShareModal()">&times;</span>
-        <h2>Share this Post</h2>
+        <h2>Share Post</h2>
         <div class="social-links">
-            <!-- Social share icons will be dynamically added here -->
+            @forelse ($sharePosts as $platform => $link)
+                <a href="{{ $link }}" target="_blank" class="social-icon {{ $platform }}"
+                    title="{{ ucfirst($platform) }}">
+                    <i class="fa-brands fa-{{ $platform }}"></i>
+                </a>
+            @empty
+                <p>No sharing links available.</p>
+            @endforelse
         </div>
     </div>
 </div>
@@ -130,12 +137,12 @@
 </style>
 
 <script>
-    function showShareModal(event) {
+    function showSharePostModal(event) {
         event.preventDefault();
-        document.getElementById('shareCommentModal').style.display = 'block';
+        document.getElementById('sharePostModal').style.display = 'block';
     }
 
     function closeShareModal() {
-        document.getElementById('shareCommentModal').style.display = 'none';
+        document.getElementById('sharePostModal').style.display = 'none';
     }
 </script>

@@ -27,7 +27,9 @@
             </div>
             <div class="select-group">
                 <div class="level2-group">
-                    <select id="level2-1" name="min_price">
+                    <input type="text" id="level2-1" placeholder="minimum price" name="min_price">
+
+                    {{-- <select id="level2-1" name="min_price">
                         <option value=""> Minimum Price </option>
                         @foreach ($data['minPrice'] as $item)
                             <option value="{{ $item->initial_pay }}">
@@ -35,8 +37,9 @@
                                 {{ $item->initial_pay }}
                             </option>
                         @endforeach
-                    </select>
-                    <select id="level2-2" name="max_price">
+                    </select> --}}
+                    <input type="text" id="level2-2" placeholder="maximum price" name="max_price">
+                    {{-- <select id="level2-2" name="max_price">
                         <option value="">Maximum Price</option>
                         @foreach ($data['maxPrice'] as $item)
                             <option value="{{ $item->initial_pay }}">
@@ -44,7 +47,7 @@
                                 {{ $item->initial_pay }}
                             </option>
                         @endforeach
-                    </select>
+                    </select> --}}
                 </div>
             </div>
             <input type="text" hidden id="searchType" name="type" value="sale">
