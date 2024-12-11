@@ -2,7 +2,7 @@
 @section('content')
     {{-- Page Banner Begins --}}
     <div class="page-hero bg-image ">
-        <div class="hero-section" style="background-image: url(../assets/images/Blog/blog-main.png);">
+        <div class="hero-section" style="background-image: url(../assets/images/blog/blog-main.png);">
             <div class="search-form col-8" style="position: relative;top:50%">
                 <form class="form" action="" method="POST" enctype="multipart/form-data">
                     <div class="blog-search">

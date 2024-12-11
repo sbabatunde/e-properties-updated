@@ -107,7 +107,7 @@
         <div class="hero-land-verf">
             <span>
                 <p>Land Verification, Regularization on E-property</p>
-                <a href="" class="btn-hero-verf">Read More</a>
+                <a href="{{ route('land-verification') }}" class="btn-hero-verf">Read More</a>
             </span>
             <img src="{{ asset('../assets/images/hero-images/hero4.png') }}" alt="phone" class=>
         </div>

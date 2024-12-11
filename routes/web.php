@@ -187,6 +187,7 @@ Route::controller(GroupController::class)->group(function () {
     
 
 });
+
 Route::post('/likes/{type}/{id}',[GroupController::class,'toggleLike'])->name('group.post-comment.like');
 
 //Blacklist Routes
