@@ -6,6 +6,7 @@ use App\Models\Admin\Trending;
 use App\Models\Interactions\PropertyLikes;
 use App\Models\Interactions\PropertyShares;
 use App\Models\Interactions\PropertyViews;
+use App\Models\Review\PropertyReview;
 use App\Models\Site\PropertyCategory;
 use App\Models\Site\PropertyType;
 use Astrotomic\Translatable\Translatable;
@@ -116,5 +117,11 @@ class Property extends Model
     public function likes()
     {
         return $this->hasMany(PropertyLikes::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(PropertyReview::class);
+
     }
 }

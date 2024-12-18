@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Site\Compare;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Yoeunes\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Compare\Property as CompareProperty;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Compare\Property as CompareProperty;
 
 class PropertyController extends Controller
 {

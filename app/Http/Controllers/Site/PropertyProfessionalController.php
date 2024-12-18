@@ -37,20 +37,22 @@ class PropertyProfessionalController extends Controller
             ->whereDoesntHave('serviceCategory', function ($query) {
                 $query->where('category', 'Maintenance');
             })->get();
-
+        
         // Get the selected service type ID from the request
         $selectedServiceTypeId = $request->input('service_type');
 
         // Fetch property professionals based on selected service type
         // If no service type is selected, retrieve all professionals
-        $propertyProfessionals = User::with('providers')
+        $propertyProfessionals = User::with('providers')->where(function($q){
+            $q->where('user_type','service_provider')->orwhere('user_type','agent')
+            ->orwhere('user_type','landlord');
+        })
         ->when($selectedServiceTypeId, function ($query) use ($selectedServiceTypeId) {
             return $query->whereHas('providers', function ($query) use ($selectedServiceTypeId) {
                 $query->where('service_type_id', $selectedServiceTypeId);
             });
         })
         ->paginate(6);
-    
 
         return view('front.users.property-professionals.all', [
             'propertyProfessionals' => $propertyProfessionals,
@@ -93,13 +95,13 @@ class PropertyProfessionalController extends Controller
                 $user_id = null;
             }
         // $exist = ProfessionalViews::where('professional_id',$id)->where('user_id',Auth::id())->first();
-        // if(!$exist)
-        // {
+        if($user_id !== (int)$id) 
+        {
             $updateViews = ProfessionalViews::create([
                 'user_id'=>$user_id,
                 'professional_id'=>$id,
             ]);
-        // }
+        }
 
         $reviews =  ProfessionalReview::where('professional_id',$id)->orderBy('id','desc')->get();
 

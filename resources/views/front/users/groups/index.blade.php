@@ -1,7 +1,72 @@
 @extends('layouts.front.login-site')
 @section('content')
+    <style>
+        .sub-banner {
+            position: relative;
+            color: #fff;
+            padding: 50px 0;
+        }
+
+        .sub-banner .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .sub-banner .breadcrumb-area h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .sub-banner .breadcrumb-area ul.breadcrumbs {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sub-banner .breadcrumb-area ul.breadcrumbs li {
+            font-size: 16px;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .sub-banner .breadcrumb-area {
+                text-align: center;
+                padding: 20px;
+            }
+
+            .sub-banner .breadcrumb-area h1 {
+                font-size: 28px;
+            }
+
+            .sub-banner .breadcrumb-area ul.breadcrumbs li {
+                font-size: 14px;
+            }
+
+            .sub-banner {
+                background-position: center center;
+                padding: 30px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sub-banner .breadcrumb-area h1 {
+                font-size: 24px;
+            }
+
+            .sub-banner .breadcrumb-area ul.breadcrumbs li {
+                font-size: 12px;
+            }
+
+            .sub-banner {
+                background-position: center center;
+                padding: 20px 0;
+            }
+        }
+    </style>
     <!-- Sub banner start -->
-    <div class="sub-banner"
+    <div class="sub-banner mt-5"
         style="background: url({{ asset('assets/images/services/banner.png') }});
     background-size:cover;">
         <div class="container">

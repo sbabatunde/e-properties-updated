@@ -10,9 +10,15 @@
                     <div class="col-md-4">
                         <div class="card overview-card shadow">
                             <h6>Total Request</h6>
-                            <h1>10,680</h1>
-                            <p><i class="fa fa-star text-danger"></i>
-                                <span style="color:rgba(218, 20, 20, 0.774);font-weight:550">-12.76%</span>
+                            <h1>{{ number_format($reqStats['totalRequests']) }}</h1>
+                            <p>
+                                <i
+                                    class="fa fa-star {{ $reqStats['percentageChange'] >= 0 ? 'text-success' : 'text-danger' }}"></i>
+
+                                <span
+                                    style="color: {{ $reqStats['percentageChange'] >= 0 ? 'rgb(41, 141, 41)' : 'rgba(218, 20, 20, 0.774)' }}; font-weight: 550;">
+                                    {{ $reqStats['percentageChange'] }}
+                                </span>
                                 <span style="color:#232ca8;font-weight:550">than last month</span>
                             </p>
                         </div>
@@ -20,9 +26,13 @@
                     <div class="col-md-4">
                         <div class="card overview-card shadow">
                             <h6>Total Listings</h6>
-                            <h1>40,100</h1>
-                            <p><i class="fa fa-star text-success"></i>
-                                <span style="color: rgb(41, 141, 41);font-weight:550"> +34.3%</span>
+                            <h1>{{ number_format($stats['totalListings']) }}</h1>
+                            <p><i
+                                    class="fa fa-star {{ $stats['percentageChange'] >= 0 ? 'text-success' : 'text-danger' }}"></i>
+                                <span
+                                    style="color: {{ $stats['percentageChange'] >= 0 ? 'rgb(41, 141, 41)' : 'rgba(218, 20, 20, 0.774)' }}; font-weight: 550;">
+                                    {{ $stats['percentageChange'] }}
+                                </span>
                                 <span style="color:#232ca8;font-weight:550">than last month</span>
                             </p>
                         </div>
@@ -30,9 +40,13 @@
                     <div class="col-md-4">
                         <div class="card overview-card shadow">
                             <h6>Done Deals</h6>
-                            <h1>10,680</h1>
-                            <p><i class="fa fa-star text-danger"></i>
-                                <span style="color:rgba(218, 20, 20, 0.774);font-weight:550">-12.76%</span>
+                            <h1>{{ $dealsStats['totalDoneDeals'] }}</h1>
+                            <p><i
+                                    class="fa fa-star {{ $dealsStats['percentageChange'] >= 0 ? 'text-success' : 'text-danger' }}"></i>
+                                <span
+                                    style="color: {{ $dealsStats['percentageChange'] >= 0 ? 'rgb(41, 141, 41)' : 'rgba(218, 20, 20, 0.774)' }}; font-weight: 550;">
+                                    {{ $dealsStats['percentageChange'] }}
+                                </span>
                                 <span style="color:#232ca8;font-weight:550">than last month</span>
                             </p>
                         </div>
@@ -108,6 +122,9 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Parse the profile visits data passed from the controller
+        const profileVisitsData = @json($profileVisits);
+
         // Profile Visits Bar Chart
         const ctxProfileVisits = document.getElementById('profileVisitsChart').getContext('2d');
         new Chart(ctxProfileVisits, {
@@ -116,7 +133,7 @@
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'Visits',
-                    data: [80, 50, 70, 40, 90, 60, 100, 80, 50, 70, 30, 60],
+                    data: profileVisitsData, // Use dynamic data here
                     backgroundColor: 'rgba(83, 104, 223, 0.5)',
                     borderColor: '#5368df',
                     borderWidth: 1
@@ -134,13 +151,18 @@
         });
 
         // Reached Audience Doughnut Chart
+        // Use the performance data passed from the controller
+        const targetAudience = {{ $reachedAudience['targetAudience'] }};
+        const regularAudience = {{ $reachedAudience['totalViews'] }};
+
+        // Reached Audience Doughnut Chart
         const ctxReachedAudience = document.getElementById('reachedAudienceChart').getContext('2d');
         new Chart(ctxReachedAudience, {
             type: 'doughnut',
             data: {
                 labels: ['Target Audience', 'Regular Audience'],
                 datasets: [{
-                    data: [70, 30],
+                    data: [targetAudience, regularAudience],
                     backgroundColor: ['#394293', '#d3d7f6']
                 }]
             },
@@ -158,13 +180,14 @@
 
         // Target Line Chart
         const ctxTarget = document.getElementById('targetChart').getContext('2d');
+        const target = @json($target);
         new Chart(ctxTarget, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'Target Progress',
-                    data: [20, 40, 50, 60, 70, 80, 85, 90, 95, 100, 110, 120],
+                    data: target,
                     borderColor: '#394293',
                     backgroundColor: 'rgba(83, 104, 223, 0.2)',
                     fill: true,
@@ -184,13 +207,15 @@
         });
 
         // Engagement Doughnut Chart
+        const others = {{ $interactions['totalEngagements'] }};
+        const interactions = {{ $reachedAudience['targetAudience'] }};
         const ctxEngagement = document.getElementById('engagementChart').getContext('2d');
         new Chart(ctxEngagement, {
             type: 'doughnut',
             data: {
                 labels: ['Interactions', 'Others'],
                 datasets: [{
-                    data: [70, 30],
+                    data: [interactions, others],
                     backgroundColor: ['#394293', '#d3d7f6']
                 }]
             },
@@ -206,6 +231,13 @@
             }
         });
 
+
+        // Use the performance data passed from the controller
+        const likes = {{ $interactions['totalLikes'] }};
+        const views = {{ $interactions['totalViews'] }};
+        const shares = {{ $interactions['totalShares'] }};
+        const reviews = {{ $interactions['totalReviews'] }};
+
         // Previous Month Performance Doughnut Chart
         const ctxPerformance = document.getElementById('performanceChart').getContext('2d');
         new Chart(ctxPerformance, {
@@ -213,7 +245,7 @@
             data: {
                 labels: ['Likes', 'Views', 'Shares', 'Reviews'],
                 datasets: [{
-                    data: [20, 45, 10, 25],
+                    data: [likes, views, shares, reviews],
                     backgroundColor: ['#28a745', '#007bff', '#ffc107', '#dc3545']
                 }]
             },
@@ -381,7 +413,7 @@
         .col-md-4 .chart-card {
             width: 100%;
             /* Ensures equal width for all charts */
-            height: 300px;
+            height: 450px;
         }
 
         @media(max-width:992px) {
