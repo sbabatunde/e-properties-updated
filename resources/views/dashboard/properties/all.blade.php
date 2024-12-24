@@ -35,8 +35,7 @@
                                                     <th>Price</th>
                                                     <th>Agent</th>
                                                     <th>Trending</th>
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -52,7 +51,71 @@
                                                             </td>
                                                             <td>{{ $property->title }}</td>
                                                             <td>{{ $property->property_code }}</td>
-                                                            <td>{{ $property->status }}</td>
+                                                            <td class="status-column">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-sm btn-primary dropdown-toggle"
+                                                                        type="button" id="statusDropdown_{{ $property->id }}"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        {{ ucfirst($property->status) }}
+                                                                    </button>
+                                                                    <ul class="dropdown-menu"
+                                                                        aria-labelledby="statusDropdown_{{ $property->id }}">
+                                                                        @if ($property->status === 'rented' || $property->status === 'sold')
+                                                                            <li>
+                                                                                <a class="dropdown-item change-status"
+                                                                                    href="#"
+                                                                                    data-property-id="{{ $property->id }}"
+                                                                                    data-status="Sale">
+                                                                                    <i
+                                                                                        class="fa fa-arrow-circle-left text-warning"></i>
+                                                                                    Mark as Sale
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a class="dropdown-item change-status"
+                                                                                    href="#"
+                                                                                    data-property-id="{{ $property->id }}"
+                                                                                    data-status="Rent">
+                                                                                    <i
+                                                                                        class="fa fa-arrow-circle-left text-warning"></i>
+                                                                                    Mark as Rent
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a class="dropdown-item change-status"
+                                                                                    href="#"
+                                                                                    data-property-id="{{ $property->id }}"
+                                                                                    data-status="Let">
+                                                                                    <i
+                                                                                        class="fa fa-arrow-circle-left text-warning"></i>
+                                                                                    Mark as Let
+                                                                                </a>
+                                                                            </li>
+                                                                        @else
+                                                                            <li>
+                                                                                <a class="dropdown-item change-status"
+                                                                                    href="#"
+                                                                                    data-property-id="{{ $property->id }}"
+                                                                                    data-status="Sold">
+                                                                                    <i
+                                                                                        class="fa fa-check-circle text-success"></i>
+                                                                                    Mark as Sold
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a class="dropdown-item change-status"
+                                                                                    href="#"
+                                                                                    data-property-id="{{ $property->id }}"
+                                                                                    data-status="Rented">
+                                                                                    <i class="fa fa-home text-info"></i> Mark as
+                                                                                    Rented
+                                                                                </a>
+                                                                            </li>
+                                                                        @endif
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+
                                                             <td>
                                                                 {{ $property->payment->initial_denomination ?? '' }}
                                                                 {{ number_format($property->payment->initial_pay) ?? '' }}
@@ -86,17 +149,18 @@
                                                                     </form>
                                                                 @endif
                                                             </td>
-                                                            <td class="table-btn">
+                                                            <td class="table-btn row">
                                                                 <a href="{{ route('admin.properties.edit', $property->id) }}"
                                                                     class="btn btn-outline-primary">
-                                                                    <i class="fa fa-edit"></i>
+                                                                    <i class="fa fa-edit" data-title ="Edit"></i>
                                                                 </a>
-                                                            </td>
-                                                            <td class="table-btn">
+                                                                <a href="{{ route('admin.properties.edit', $property->id) }}"
+                                                                    class="btn btn-outline-primary mr-2">
+                                                                    <i class="fa fa-eye" data-title ="View"></i>
+                                                                </a>
                                                                 <a href="{{ route('admin.properties.delete', $property->id) }}"
                                                                     class="btn btn-outline-danger">
-                                                                    <i class="fa fa-trash"></i>
-                                                                    <span class="tooltip">Delete</span>
+                                                                    <i class="fa fa-trash" data-title ="Delete"></i>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -199,3 +263,141 @@
             });
     }
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Event listener for status change
+        document.querySelectorAll('.change-status').forEach(item => {
+            item.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                const propertyId = this.dataset.propertyId;
+                const newStatus = this.dataset.status;
+                const statusButton = document.querySelector(`#statusDropdown_${propertyId}`);
+
+                // Send AJAX request
+                fetch(`properties/admin/listing/status/update/${propertyId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            status: newStatus
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Toastr success message
+                            toastr.success('Status updated successfully!');
+                            // Update the status in the table dynamically
+                            statusButton.textContent = newStatus.charAt(0).toUpperCase() +
+                                newStatus.slice(1);
+
+                            // Update dropdown menu options
+                            const dropdownMenu = statusButton.nextElementSibling;
+                            dropdownMenu.innerHTML = ''; // Clear existing options
+
+                            if (newStatus === 'Rented' || newStatus === 'Sold') {
+                                dropdownMenu.innerHTML = `
+                                <li>
+                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Sale">
+                                        <i class="fa fa-arrow-circle-left text-warning"></i> Mark as Sale
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Rent">
+                                        <i class="fa fa-arrow-circle-left text-warning"></i> Mark as Rent
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Let">
+                                        <i class="fa fa-arrow-circle-left text-warning"></i> Mark as Let
+                                    </a>
+                                </li>`;
+                            } else {
+                                dropdownMenu.innerHTML = `
+                                <li>
+                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Sold">
+                                        <i class="fa fa-check-circle text-success"></i> Mark as Sold
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Rented">
+                                        <i class="fa fa-home text-info"></i> Mark as Rented
+                                    </a>
+                                </li>`;
+                            }
+                            // Re-bind event listeners to the new dropdown items
+                            document.querySelectorAll('.change-status').forEach(newItem => {
+                                newItem.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                    this.click();
+                                });
+                            });
+                        } else {
+                            // Toastr error message
+                            toastr.error(data.message || 'Failed to update status.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error updating status:', error);
+                        // Toastr error message for unexpected errors
+                        toastr.error('Something went wrong. Please try again.');
+                    });
+            });
+        });
+    });
+</script>
+
+
+<style>
+    .status-column .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .status-column .dropdown button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .status-column .dropdown button:hover {
+        background-color: #0056b3;
+    }
+
+    .status-column .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        min-width: 150px;
+        padding: 10px 0;
+    }
+
+    .status-column .dropdown-menu a {
+        display: block;
+        padding: 8px 15px;
+        font-size: 14px;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .status-column .dropdown-menu a:hover {
+        background-color: #f8f9fa;
+        color: #007bff;
+    }
+</style>

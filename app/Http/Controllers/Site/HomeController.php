@@ -52,7 +52,9 @@ class HomeController extends Controller
         //All required data
 
         // $data['cities'] = City::geProperty::leftjoin('property_payments as pp', 'pp.property_id', '=', 'properties.id')->get();t();
-        $data['properties'] = Property::with(['payment'])->take(6)->get();
+        $data['salesProperties'] = Property::with(['payment'])->where('status','Sale')->orderBy('id','desc')->take(8)->get();
+        $data['rentProperties'] = Property::with(['payment'])->where('status','Rent')->orderBy('id','desc')->take(8)->get();
+        $data['letPerties'] = Property::with(['payment'])->where('status','Let')->orderBy('id','desc')->take(8)->get();
         $data['minPrice'] = PropertyPayment::orderBy('initial_pay','asc')->get(['initial_pay','initial_denomination'])
             ->unique('initial_pay')->take(4);
         $data['maxPrice'] = PropertyPayment::orderBy('initial_pay','desc')->get(['initial_pay','initial_denomination'])
@@ -62,7 +64,7 @@ class HomeController extends Controller
         $data['maxBedroom'] = Property::orderBy('bedrooms','desc')->get(['bedrooms'])
             ->unique('bedrooms')->take(4);
         $data['localty'] = Property::orderBy('localty','desc')->get(['localty'])->unique('localty');
-        $data['propertyDeals'] = Property::has('deals')->with(['deals'])->take(6)->get();
+        $data['propertyDeals'] = Property::has('deals')->where('deal','Yes')->with(['deals'])->take(8)->get();
         $data['propertyCategories'] = PropertyCategory::get();
         // dd($data['propertyDeals']);
         $data['category'] = PropertyType::with(['property','propertyCategory'])->whereHas('propertyCategory',function($q){

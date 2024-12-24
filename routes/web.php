@@ -309,6 +309,8 @@ Route::controller(ListingController::class)->group(function () {
     Route::delete('delete/property/{id}',  'deletePropertyListing')->name('admin.properties.delete');
     Route::get('add/listing',  'adminAddPropertyListing')->name('admin.add.listing');
     Route::get('my/listings',  'adminPropertyListing')->name('admin.listings.all');
+    Route::post('properties/admin/listing/status/update/{id}', 'updateListingStatus')->name('admin.properties.updateStatus');
+
 });
 
 //Post Media Route

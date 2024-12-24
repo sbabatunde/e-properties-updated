@@ -31,13 +31,13 @@ class PropertyDealsController extends Controller
         $data['localty'] = Property::orderBy('localty','desc')->get(['localty'])->unique('localty');
         // /end form data
 
-        $salesProperties = Property::has('deals')->with(['type','payment'])->where('status','Sale')->orderBy('created_at','desc')->paginate(6);
-        $rentProperties = Property::has('deals')->with(['type','payment'])->where('status','Rent')->orderBy('created_at','desc')->paginate(6);
-        $letProperties = Property::has('deals')->with(['type','payment'])->where('status','Let')->orderBy('created_at','desc')->paginate(6);
+        $salesProperties = Property::has('deals')->where('deal','Yes')->with(['type','payment'])->where('status','Sale')->orderBy('created_at','desc')->paginate(6);
+        $rentProperties = Property::has('deals')->where('deal','Yes')->with(['type','payment'])->where('status','Rent')->orderBy('created_at','desc')->paginate(6);
+        $letProperties = Property::has('deals')->where('deal','Yes')->with(['type','payment'])->where('status','Let')->orderBy('created_at','desc')->paginate(6);
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
         ->whereDate('end_date','>=',Carbon::today())->get();
 
-        $similarProperties  = Property::has('deals')->with(['type','payment'])->orderBy('created_at','desc')->take('3')->get();
+        $similarProperties  = Property::has('deals')->where('deal','Yes')->with(['type','payment'])->orderBy('created_at','desc')->take('3')->get();
 
         return view('front.users.properties.commercial.main-page',compact('salesProperties','letProperties'
         ,'rentProperties','liveAuction','similarProperties','data'))->withViewName('vendor.pagination.custom');

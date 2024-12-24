@@ -494,6 +494,23 @@ class ListingController extends Controller
         }
     }
 
+    public function updateListingStatus(Request $request, $id)
+    {
+        $property = Property::findOrFail($id);
+
+        // Validate the input
+        $request->validate([
+            'status' => 'required|in:Sold,Rented,Sale,Rent,Let',
+        ]);
+
+        // Update the status
+        $property->status = $request->status;
+        $property->save();
+
+        return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
+    }
+
+
     public function deletePropertyListing($id)
     {
         if (Auth::id() && Auth::user()->user_type !== "tenant") {

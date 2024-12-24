@@ -2,7 +2,7 @@
     <div class="container res-properties">
         @foreach ($salesProperties as $item)
             <div class="res-prop-items mt-4">
-                <img src="{{ $item->thumbnail ?? asset($item->thumbnail) }}" alt="">
+                <img src="{{ asset($item->thumbnail) ?? $item->thumbnail }}" alt="">
                 <p style="color: black;font-size;4vmin">
                     <span style="font-weight:550;">{{ $item->title }}</span><br>
                     {{ $item->area }}
@@ -10,10 +10,21 @@
                 <a href="{{ route('property.details', $item->id) }}" class="btn res-prop-view"> View</a><br>
                 <div class="res-price">
                     <span style="color: black">Price:
-                        <b>
-                            {{ $item->payment->initial_denomination }}
-                            {{ number_format($item->payment->initial_pay) }}
-                        </b>
+                        @if (Route::is('properties.deals.all'))
+                            <span class="old-price" style="text-decoration: line-through; color: grey;">
+                                {{ $item->payment->initial_denomination }}
+                                {{ number_format($item->payment->initial_pay, 2) }}
+                            </span>
+                            <br>
+                            <b
+                                class="ml-5">{{ $item->deals->denomination }}{{ number_format($item->deals->deal_price, 2) }}</b>
+                        @else
+                            <b>
+                                {{ $item->payment->initial_denomination }}
+                                {{ number_format($item->payment->initial_pay) }}
+                            </b>
+                        @endif
+
                     </span>
                     <span style="color: #394293" class="mr-2">{{ $item->payment->sequence }}</span>
                 </div>

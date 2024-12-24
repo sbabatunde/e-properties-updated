@@ -108,6 +108,7 @@ Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], fu
     // Route::get('edit/{id}', [Admin\propertiesController::class, 'edit'])->name('admin.properties.edit');
     Route::get('update/{id}', [Admin\propertiesController::class, 'update'])->name('admin.properties.update');
     Route::get('delete/{id}', [Admin\propertiesController::class, 'delete'])->name('admin.properties.delete');
+
   });
 
 

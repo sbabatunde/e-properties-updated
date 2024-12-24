@@ -15,8 +15,13 @@
                     <h5 class="mt-3 truncate" style="font-weight:600">{{ $item->title }}</h5>
                     <p>
                         <span style="font-size:15px">{{ $item->area }}</span><br>
+                        <span class="old-price" style="text-decoration: line-through; color: grey;">
+                            {{ $item->payment->initial_denomination }}
+                            {{ number_format($item->payment->initial_pay, 2) }}
+                        </span>
+                        <br>
                         <span style="font-size:20px;font-weight:bold">{{ $item->deals->denomination }}
-                            {{ number_format($item->deals->deal_price) }}</span>
+                            {{ number_format($item->deals->deal_price, 2) }}</span>
                     </p>
                     <a href="{{ route('property.details', $item->id) }}" class="btn btn-info listing-anchor">View</a>
                 </span>

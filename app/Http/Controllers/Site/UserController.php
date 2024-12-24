@@ -114,7 +114,15 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             Toastr::success('You have successfully logged in');
-            return redirect()->route('home');
+            if(Auth::user()->user_type === 'service_provider' || Auth::user()->user_type === 'agent' ||
+             Auth::user()->user_type === 'landlord' || Auth::user()->user_type === 'admin')
+            {
+                return redirect()->route('admin.dashboard');
+            }
+            else
+            {
+                return redirect()->route('home');
+            }
         } else {
             Toastr::error('Error', 'Your provided credentials do not match in our record.');
             return back()->withErrors([

@@ -2,7 +2,7 @@
     <h3 style="color: black;font-weight:600">Similar Properties</h3>
     <div class="res-similar-properties">
         @isset($similarProperties)
-            @foreach ($similarProperties as $property)
+            @foreach ($similarProperties->take(3) as $property)
                 <div class="res-similar-prop-items mt-4">
                     <img src="{{ asset($property->thumbnail) }}" alt="">
                     <p style="color: black">
@@ -11,8 +11,9 @@
                     </p>
                     <a href="{{ route('property.details', $property->id) }}" class="btn res-prop-view"> View</a><br>
                     <div class="res-price">
-                        <span style="color: black">Price: <b>₦ {{ number_format($property->initial_pay) }}</b></span>
-                        <span style="color: #394293" class="mr-2">{{ $property->sequence }}</span>
+                        <span style="color: black">Price: <b>₦
+                                {{ number_format($property->payment->initial_pay) }}</b></span>
+                        <span style="color: #394293" class="mr-2">{{ $property->payment->sequence }}</span>
                     </div>
                     <div class="comp-like-share">
                         <span style="font-weight:550">

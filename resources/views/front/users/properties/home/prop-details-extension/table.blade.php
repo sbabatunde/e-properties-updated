@@ -85,7 +85,7 @@
                 <div class="row col-md-10 col-md-12">
                     <div class="col-md-4">
                         <strong>
-                            Subsequent Payment
+                            Initial Payment
                         </strong>
                     </div>
                     <div class="col-md-6">
@@ -98,6 +98,51 @@
                     </div>
                 </div>
             </div>
+            <div class="p-table-elements">
+                <div class="row col-md-10 col-md-12">
+                    <div class="col-md-4">
+                        <strong>
+                            Subsequent Payment
+                        </strong>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="mr-3">
+                            ₦ {{ number_format($property->payment->subsequent_pay) }}
+                        </span>
+                        <span>
+                            {{-- {{$property->subsequent_pay}} --}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-table-elements">
+                <div class="row col-md-10 col-md-12">
+                    <div class="col-md-4">
+                        <strong>
+                            Property Deal?
+                        </strong>
+                    </div>
+                    <div class="col-md-6">
+                        {{ $property->deal }}
+                    </div>
+                </div>
+            </div>
+            @if ($property->deal === 'Yes')
+                <div class="p-table-elements">
+                    <div class="row col-md-10 col-md-12">
+                        <div class="col-md-4">
+                            <strong>
+                                Deal Price
+                            </strong>
+                        </div>
+                        <div class="col-md-6">
+                            {{ $property->deals->denomination }}
+                            {{ number_format($property->deals->deal_price, 2) }}
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <div class="p-table-elements">
                 <div class="row col-md-10 col-md-12">
                     <div class="col-md-4">
