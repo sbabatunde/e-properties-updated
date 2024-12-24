@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2024 at 08:53 AM
+-- Generation Time: Dec 24, 2024 at 07:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -82,6 +82,7 @@ CREATE TABLE `auctions` (
   `starting_price` decimal(15,2) NOT NULL,
   `denomination` text NOT NULL,
   `append` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'Ongoing',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -90,24 +91,32 @@ CREATE TABLE `auctions` (
 -- Dumping data for table `auctions`
 --
 
-INSERT INTO `auctions` (`id`, `property_id`, `start_date`, `start_time`, `end_date`, `end_time`, `starting_price`, `denomination`, `append`, `created_at`, `updated_at`) VALUES
-(1, 1, '2024-09-25', '22:08', '2024-10-29', '22:08', 2000000.00, '₦', 'Monthly', '2024-05-29 19:25:51', '2024-05-29 19:25:51'),
-(2, 3, '2024-05-02', '23:08', '2024-05-18', '10:09', 25900000.00, '₦', 'Monthly', '2024-05-29 20:11:20', '2024-05-29 20:11:20'),
-(4, 5, '2024-08-01', '13:35', '2024-12-26', '17:35', 12000000.00, '₦', 'Annually', '2024-06-22 10:40:27', '2024-06-22 10:40:27'),
-(75, 2, '2024-05-24', '08:46:38', '2024-07-28', '18:29:13', 354233797.08, '₦', 'Annually', '2024-08-10 06:29:22', '2024-07-15 03:36:58'),
-(76, 27, '2024-06-21', '00:26:28', '2024-07-09', '11:05:11', 6510203.23, '$', 'Monthly', '2024-08-14 16:51:43', '2024-07-22 17:25:32'),
-(77, 35, '2024-07-12', '17:13:50', '2024-07-19', '06:45:36', 5000000.00, '$', 'Annually', '2024-07-07 12:02:42', '2024-06-30 10:41:16'),
-(78, 26, '2024-06-27', '16:48:51', '2024-08-26', '10:49:18', 5000000.00, '₦', 'Monthly', '2024-08-23 04:22:41', '2024-09-23 19:38:38'),
-(79, 34, '2024-06-12', '16:56:54', '2024-07-05', '13:26:56', 5000000.00, '$', 'Monthly', '2024-09-22 12:51:15', '2024-08-23 08:22:48'),
-(80, 29, '2024-05-26', '09:15:06', '2024-07-05', '22:51:23', 50466633.57, '$', 'Monthly', '2024-07-23 05:38:29', '2024-07-29 07:26:22'),
-(81, 31, '2024-06-20', '15:49:45', '2024-08-30', '14:17:48', 5000000.00, '$', 'Annually', '2024-08-05 23:48:16', '2024-07-19 00:27:09'),
-(82, 30, '2024-05-28', '00:10:52', '2024-09-22', '23:37:19', 74829226.58, '$', 'Monthly', '2024-08-06 21:16:38', '2024-07-10 13:13:06'),
-(83, 32, '2024-09-31', '04:44:40', '2024-12-02', '09:42:48', 5000000.00, '$', 'Annually', '2024-09-22 00:44:30', '2024-09-18 11:16:26'),
-(84, 28, '2024-12-18', '05:49:55', '2024-12-31', '03:29:08', 5000000.00, '₦', 'Monthly', '2024-09-02 12:03:37', '2024-08-24 11:11:37'),
-(85, 38, '2024-11-22', '22:40', '2024-12-21', '00:00', 5000000.00, '₦', 'Monthly', '2024-08-22 19:45:25', '2024-08-22 19:45:25'),
-(86, 33, '', '', '', '', 0.00, '', '', NULL, NULL),
-(87, 33, '2024-08-22', ' 20:31:44', '2024-10-22', ' 20:31:44', 4000000.00, '₦', 'Monthly', NULL, NULL),
-(88, 40, '2024-08-06', '16:35', '2024-10-16', '13:58', 4000000.00, '₦', 'Monthly', '2024-08-27 14:42:16', '2024-08-27 14:42:16');
+INSERT INTO `auctions` (`id`, `property_id`, `start_date`, `start_time`, `end_date`, `end_time`, `starting_price`, `denomination`, `append`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, '2024-09-25', '22:08', '2024-10-29', '22:08', 2000000.00, '₦', 'Monthly', 'Ongoing', '2024-05-29 19:25:51', '2024-05-29 19:25:51'),
+(2, 3, '2024-05-02', '23:08', '2024-05-18', '10:09', 25900000.00, '₦', 'Monthly', 'Ongoing', '2024-05-29 20:11:20', '2024-05-29 20:11:20'),
+(4, 5, '2024-08-01', '13:35', '2024-12-26', '17:35', 12000000.00, '₦', 'Annually', 'Ongoing', '2024-06-22 10:40:27', '2024-12-24 11:15:27'),
+(75, 2, '2024-05-24', '08:46:38', '2024-07-28', '18:29:13', 354233797.08, '₦', 'Annually', 'Ongoing', '2024-08-10 06:29:22', '2024-07-15 03:36:58'),
+(76, 27, '2024-06-21', '00:26:28', '2024-07-09', '11:05:11', 6510203.23, '$', 'Monthly', 'Ongoing', '2024-08-14 16:51:43', '2024-07-22 17:25:32'),
+(77, 35, '2024-07-12', '17:13:50', '2024-07-19', '06:45:36', 5000000.00, '$', 'Annually', 'Ongoing', '2024-07-07 12:02:42', '2024-06-30 10:41:16'),
+(78, 26, '2024-06-27', '16:48:51', '2024-08-26', '10:49:18', 5000000.00, '₦', 'Monthly', 'Ongoing', '2024-08-23 04:22:41', '2024-09-23 19:38:38'),
+(79, 34, '2024-06-12', '16:56:54', '2024-07-05', '13:26:56', 5000000.00, '$', 'Monthly', 'Ongoing', '2024-09-22 12:51:15', '2024-08-23 08:22:48'),
+(80, 29, '2024-05-26', '09:15:06', '2024-07-05', '22:51:23', 50466633.57, '$', 'Monthly', 'Ongoing', '2024-07-23 05:38:29', '2024-07-29 07:26:22'),
+(81, 31, '2024-06-20', '15:49:45', '2024-08-30', '14:17:48', 5000000.00, '$', 'Annually', 'Ongoing', '2024-08-05 23:48:16', '2024-07-19 00:27:09'),
+(82, 30, '2024-05-28', '00:10:52', '2024-09-22', '23:37:19', 74829226.58, '$', 'Monthly', 'Ongoing', '2024-08-06 21:16:38', '2024-07-10 13:13:06'),
+(83, 32, '2024-09-31', '04:44:40', '2024-12-02', '09:42:48', 5000000.00, '$', 'Annually', 'Ongoing', '2024-09-22 00:44:30', '2024-09-18 11:16:26'),
+(84, 28, '2024-12-18', '05:49:55', '2024-12-31', '03:29:08', 5000000.00, '₦', 'Monthly', 'Ended', '2024-09-02 12:03:37', '2024-12-24 11:14:17'),
+(85, 38, '2024-11-22', '22:40', '2024-12-21', '00:00', 5000000.00, '₦', 'Monthly', 'Ongoing', '2024-08-22 19:45:25', '2024-08-22 19:45:25'),
+(86, 33, '', '', '', '', 0.00, '', '', 'Ongoing', NULL, NULL),
+(87, 33, '2024-08-22', ' 20:31:44', '2024-10-22', ' 20:31:44', 4000000.00, '₦', 'Monthly', 'Ongoing', NULL, NULL),
+(88, 40, '2024-08-06', '16:35', '2024-10-16', '13:58', 4000000.00, '₦', 'Monthly', 'Ongoing', '2024-08-27 14:42:16', '2024-08-27 14:42:16'),
+(89, 41, '2008-06-02', '23:35:13', '2021-05-22', '08:01:29', 899931.00, '₦', 'Annually', 'Ongoing', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(90, 42, '1991-05-04', '09:31:03', '1975-12-17', '20:50:18', 204825.00, '₦', 'Annually', 'Ongoing', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(91, 43, '2000-02-13', '01:24:08', '2009-09-17', '16:56:16', 646973.00, '₦', 'Monthly', 'Ongoing', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(92, 44, '1996-03-27', '00:09:36', '1997-04-13', '15:00:52', 193457.00, '₦', 'Annually', 'Ongoing', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(93, 61, '1991-09-13', '08:27:29', '2006-10-18', '10:59:19', 602699.00, '₦', 'Monthly', 'Ongoing', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(94, 62, '1998-10-05', '05:42:29', '2003-12-02', '02:31:06', 390779.00, '₦', 'Annually', 'Ongoing', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(95, 63, '1974-09-12', '20:38:37', '2016-10-02', '17:29:06', 934191.00, '₦', 'Monthly', 'Ongoing', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(96, 64, '2023-06-16', '08:57:12', '1994-01-18', '12:46:13', 243704.00, '₦', 'Annually', 'Ongoing', '2024-12-23 09:22:31', '2024-12-23 09:22:31');
 
 -- --------------------------------------------------------
 
@@ -129,11 +138,11 @@ CREATE TABLE `auction_bids` (
 --
 
 INSERT INTO `auction_bids` (`id`, `auction_id`, `user_id`, `bid_amount`, `created_at`, `updated_at`) VALUES
-(1, 79, 3, 90000000.00, '2024-07-01 12:16:13', '2024-07-01 12:51:31'),
-(2, 79, 2, 70000000.00, '2024-07-01 12:17:57', '2024-07-01 12:17:57'),
-(3, 79, 4, 0.00, '2024-07-01 12:18:07', '2024-07-01 12:18:07'),
-(4, 79, 15, 130000000.00, '2024-07-01 12:52:34', '2024-07-01 12:52:34'),
-(6, 80, 15, 70000000.00, '2024-07-04 23:42:23', '2024-07-04 23:42:23');
+(1, 84, 23, 90000000.00, '2024-07-01 12:16:13', '2024-07-01 12:51:31'),
+(2, 84, 43, 70000000.00, '2024-07-01 12:17:57', '2024-07-01 12:17:57'),
+(3, 4, 21, 8500000.00, '2024-07-01 12:18:07', '2024-07-01 12:18:07'),
+(4, 4, 15, 130000000.00, '2024-07-01 12:52:34', '2024-07-01 12:52:34'),
+(6, 84, 15, 70000000.00, '2024-07-04 23:42:23', '2024-07-04 23:42:23');
 
 -- --------------------------------------------------------
 
@@ -161,7 +170,9 @@ CREATE TABLE `blacklists` (
 --
 
 INSERT INTO `blacklists` (`id`, `reporter_id`, `reported_id`, `blacklisted_by`, `business_name`, `category`, `org_description`, `reason`, `reported_on`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 23, 15, 21, 'BeeDeeBee Ventures', 'landlord', 'Deals on property Sales and all', 'A complaint was raised concerning fraudulent activities which is yet to be clarified by the accused.', '2024-09-08', 2, '2024-09-08 16:00:12', '2024-09-08 16:00:12');
+(1, 23, 15, 21, 'BeeDeeBee Ventures', 'landlord', 'Deals on property Sales and all', 'A complaint was raised concerning fraudulent activities which is yet to be clarified by the accused.', '2024-09-08', 2, '2024-09-08 16:00:12', '2024-09-08 16:00:12'),
+(2, 21, 1, 21, '3 Bedroom Apartment', 'property', 'The house is very appealing and well furnished for your convenience', 'blacklisted', '2024-12-24 13:56:08', 1, '2024-12-24 12:56:08', '2024-12-24 12:56:08'),
+(3, 21, 1, 21, '3 Bedroom Apartment', 'property', 'The house is very appealing and well furnished for your convenience', 'blacklisted', '2024-12-24 13:56:32', 1, '2024-12-24 12:56:32', '2024-12-24 12:56:32');
 
 -- --------------------------------------------------------
 
@@ -372,7 +383,8 @@ INSERT INTO `building_material_comments` (`id`, `user_id`, `material_id`, `revie
 (1, NULL, 41, '<p>This material is a really good one and very good for taking measurement due to its high level of sensitivity.</p>', '2024-11-19 11:24:03', '2024-11-19 11:24:03'),
 (3, NULL, 41, '<p>I think it&#39;s a very effectctive material even for home usage</p>\r\n\r\n<p>&nbsp;</p>', '2024-11-20 16:59:44', '2024-11-20 16:59:44'),
 (7, NULL, 41, '<p>This tape measure is noted for its excellent visibility due to its unique blade color, which is beneficial for those with vision challenges</p>', '2024-11-20 17:06:17', '2024-11-20 17:06:17'),
-(8, NULL, 41, '<p>&nbsp;I love this tape so&nbsp; much, it&#39;s efficiency is top notch.</p>', '2024-11-20 17:07:30', '2024-11-20 17:07:30');
+(8, NULL, 41, '<p>&nbsp;I love this tape so&nbsp; much, it&#39;s efficiency is top notch.</p>', '2024-11-20 17:07:30', '2024-11-20 17:07:30'),
+(9, 15, 31, '<p>I love this roofing knife.</p>', '2024-12-04 21:23:16', '2024-12-04 21:23:16');
 
 -- --------------------------------------------------------
 
@@ -398,8 +410,10 @@ CREATE TABLE `categories` (
 CREATE TABLE `comments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `group_post_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `content` text NOT NULL,
+  `views` int(11) NOT NULL DEFAULT 0,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -408,11 +422,25 @@ CREATE TABLE `comments` (
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`id`, `group_post_id`, `user_id`, `content`, `created_at`, `updated_at`) VALUES
-(1, 1, 21, '\"Great advice! It\'s amazing how small, everyday habits like eating the right foods, staying active, and managing stress can have such a big impact on our immune health. I’ve personally noticed a huge difference since I started prioritizing sleep and hydration. Definitely going to add Vitamin D to my routine too! Thanks for sharing these simple but powerful tips!\"', '2024-11-15 16:10:33', '2024-11-15 16:10:33'),
-(2, 1, 21, '\"Great advice! It\'s amazing how small, everyday habits like eating the right foods, staying active, and managing stress can have such a big impact on our immune health. I’ve personally noticed a huge difference since I started prioritizing sleep and hydration. Definitely going to add Vitamin D to my routine too! Thanks for sharing these simple but powerful tips!\"', '2024-11-15 16:11:36', '2024-11-15 16:11:36'),
-(3, 1, 21, 'I\'m not sure I quite agree to this though', '2024-11-15 16:25:01', '2024-11-15 16:25:01'),
-(4, 1, 21, 'I\'m not sure I quite agree to this though', '2024-11-15 16:25:02', '2024-11-15 16:25:02');
+INSERT INTO `comments` (`id`, `group_post_id`, `user_id`, `content`, `views`, `parent_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 15, 'I\'m not sure I quite agree to this though', 4, NULL, '2024-12-04 17:02:31', '2024-12-04 23:07:54'),
+(2, 1, 15, '\"Great advice! It\'s amazing how small, everyday habits like eating the right foods, staying active, and managing stress can have such a big impact on our immune health. I’ve personally noticed a huge difference since I started prioritizing sleep and hydration. Definitely going to add Vitamin D to my routine too! Thanks for sharing these simple but powerful tips!\"', 3, NULL, '2024-12-04 17:02:44', '2024-12-06 13:09:10'),
+(3, 1, 15, 'All these things are they real?', 0, NULL, '2024-12-04 17:03:35', '2024-12-04 17:03:35'),
+(4, 1, 15, 'I think it\'s true', 0, 1, '2024-12-04 17:47:55', '2024-12-04 17:47:55'),
+(7, 1, 15, 'Have you done your own research?', 0, 1, '2024-12-04 17:59:33', '2024-12-04 17:59:33'),
+(8, 1, 15, 'Yes, I have done my research', 0, 1, '2024-12-04 18:18:49', '2024-12-04 18:18:49'),
+(9, 1, 15, 'Why are you guys arguing on this?', 0, 1, '2024-12-04 18:19:57', '2024-12-04 18:19:57'),
+(10, 1, 15, 'Have you done your own research?', 0, 1, '2024-12-04 18:22:32', '2024-12-04 18:22:32'),
+(11, 1, 15, 'Yeah, I quite agree with your point', 0, 2, '2024-12-04 18:26:11', '2024-12-04 18:26:11'),
+(12, 1, 15, 'Yeah, I quite agree with your point.', 0, 2, '2024-12-04 18:28:22', '2024-12-04 18:28:22'),
+(13, 1, 15, 'I\'m not sure I quite agree to this though', 1, 2, '2024-12-04 18:29:17', '2024-12-04 18:33:34'),
+(14, 1, 15, 'Yes they are, I can attest to that.', 1, 3, '2024-12-04 18:30:22', '2024-12-04 18:33:31'),
+(15, 1, 15, 'I totally enjoyed your post. Thanks a lot.', 0, NULL, '2024-12-04 19:34:38', '2024-12-04 19:34:38'),
+(16, 2, 15, 'Loving the layout! The like and comment features make it easy for users to engage with posts. Great job!', 8, NULL, '2024-12-04 19:42:51', '2024-12-06 12:35:59'),
+(17, 2, 15, 'How can you tell if that\'s reealistic?', 6, 16, '2024-12-04 19:44:05', '2024-12-06 12:36:05'),
+(18, 5, 15, 'This is such an inspiring story! It’s amazing how small changes can lead to big improvements in our health. Thank you for sharing your journey!', 10, NULL, '2024-12-04 21:30:02', '2024-12-06 13:08:56'),
+(19, 5, NULL, 'I can completely relate to feeling overwhelmed and fatigued. Your story motivates me to start making small changes in my own life', 3, NULL, '2024-12-04 21:32:44', '2024-12-04 22:46:30'),
+(20, 5, 15, 'I also concur with you', 4, 18, '2024-12-04 21:43:43', '2024-12-04 23:20:53');
 
 -- --------------------------------------------------------
 
@@ -451,8 +479,6 @@ INSERT INTO `compare_property` (`id`, `user_id`, `property_id`, `created_at`, `u
 (36, 15, 1, '2024-07-03 20:37:29', '2024-07-03 20:37:29'),
 (39, 24, 5, '2024-08-22 19:51:32', '2024-08-22 19:51:32'),
 (40, 24, 32, '2024-08-22 21:53:11', '2024-08-22 21:53:11'),
-(45, 21, 1, '2024-08-23 08:36:15', '2024-08-23 08:36:15'),
-(46, 21, 26, '2024-08-23 08:37:14', '2024-08-23 08:37:14'),
 (47, 9, 29, '2024-11-15 13:09:35', '2024-11-15 13:09:35');
 
 -- --------------------------------------------------------
@@ -470,6 +496,30 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `follows`
+--
+
+CREATE TABLE `follows` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `follower_id` int(10) UNSIGNED NOT NULL,
+  `following_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `follows`
+--
+
+INSERT INTO `follows` (`id`, `follower_id`, `following_id`, `created_at`, `updated_at`) VALUES
+(1, 21, 18, '2024-12-06 13:49:57', '2024-12-06 13:49:57'),
+(2, 21, 15, '2024-12-06 13:51:27', '2024-12-06 13:51:27'),
+(3, 21, 60, '2024-12-06 14:21:38', '2024-12-06 14:21:38'),
+(4, 21, 24, '2024-12-18 19:10:19', '2024-12-18 19:10:19');
 
 -- --------------------------------------------------------
 
@@ -532,6 +582,7 @@ CREATE TABLE `group_posts` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `post` longtext NOT NULL,
+  `views` int(11) NOT NULL DEFAULT 0,
   `likes` int(11) DEFAULT NULL,
   `dislikes` int(11) DEFAULT NULL,
   `total_comments` varchar(255) DEFAULT NULL,
@@ -543,8 +594,10 @@ CREATE TABLE `group_posts` (
 -- Dumping data for table `group_posts`
 --
 
-INSERT INTO `group_posts` (`id`, `user_id`, `post`, `likes`, `dislikes`, `total_comments`, `created_at`, `updated_at`) VALUES
-(1, 21, 'Maintaining a healthy immune system is key for overall well-being. Eating a balanced diet, exercising, getting enough sleep, staying hydrated, and managing stress can help. Consider supplements like Vitamin C and D to support your body’s defenses.', NULL, NULL, NULL, '2024-11-15 14:59:12', '2024-11-15 14:59:12');
+INSERT INTO `group_posts` (`id`, `user_id`, `post`, `views`, `likes`, `dislikes`, `total_comments`, `created_at`, `updated_at`) VALUES
+(1, 21, 'Maintaining a healthy immune system is key for overall well-being. Eating a balanced diet, exercising, getting enough sleep, staying hydrated, and managing stress can help. Consider supplements like Vitamin C and D to support your body’s defenses.', 47, NULL, NULL, NULL, '2024-11-15 14:59:12', '2024-12-06 13:09:10'),
+(2, 15, 'Hey everyone! 🌟 As technology continues to evolve, artificial intelligence (AI) is becoming an integral part of our daily lives. From smart assistants like Siri and Alexa to advanced algorithms that enhance our online experiences, AI is reshaping how we interact with the world. What are your thoughts on the impact of AI on our future? Do you think it will lead to more convenience or potential challenges? Let’s discuss! Looking forward to hearing your insights! 💬 Feel free to adjust any part of the post to better fit your group\'s tone or specific interests!', 42, NULL, NULL, NULL, '2024-12-04 19:35:47', '2024-12-06 12:36:06'),
+(5, NULL, 'Last year, I found myself feeling constantly fatigued and unmotivated. Simple tasks felt overwhelming, and I knew something had to change. After a visit to my doctor, I learned that my lifestyle choices were taking a toll on my health. Determined to turn things around, I started small. I replaced sugary snacks with fruits, began taking daily walks, and prioritized sleep. Each step felt challenging at first, but gradually, I noticed improvements in my energy levels and mood. One day, while out for a walk, I met an elderly woman who shared her own journey of overcoming health struggles. Her story inspired me to keep pushing forward. Today, I feel more vibrant and alive than ever before. It’s incredible how small changes can lead to significant transformations. Remember, it’s never too late to start your journey towards better health! Feel free to adjust any part of the story to better fit your style or the audience of the group!', 54, NULL, NULL, NULL, '2024-12-04 20:08:07', '2024-12-06 13:08:56');
 
 -- --------------------------------------------------------
 
@@ -706,8 +759,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (389, '2024_07_26_130939_create_blacklists_table', 15),
 (390, '2024_10_28_141954_create_subscribers_table', 16),
 (391, '2024_11_05_130948_create_group_members_table', 17),
-(392, '2024_11_15_160136_create_comments_table', 18),
-(393, '2024_11_19_120546_create_building_material_comments_table', 19);
+(393, '2024_11_19_120546_create_building_material_comments_table', 19),
+(396, '2024_11_27_234856_create_post_likes_table', 20),
+(397, '2024_11_15_160136_create_comments_table', 21);
 
 -- --------------------------------------------------------
 
@@ -751,6 +805,40 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_likes`
+--
+
+CREATE TABLE `post_likes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(255) DEFAULT NULL,
+  `group_post_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `comment_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `post_likes`
+--
+
+INSERT INTO `post_likes` (`id`, `user_id`, `ip_address`, `group_post_id`, `comment_id`, `created_at`, `updated_at`) VALUES
+(77, 15, NULL, NULL, 2, '2024-12-04 18:11:02', '2024-12-04 18:11:02'),
+(82, 15, NULL, NULL, 14, '2024-12-04 18:33:31', '2024-12-04 18:33:31'),
+(83, 15, NULL, NULL, 13, '2024-12-04 18:33:34', '2024-12-04 18:33:34'),
+(102, NULL, '127.0.0.1', NULL, 19, '2024-12-04 22:46:30', '2024-12-04 22:46:30'),
+(121, 15, NULL, 1, NULL, '2024-12-04 23:10:19', '2024-12-04 23:10:19'),
+(127, 15, NULL, NULL, 16, '2024-12-04 23:20:32', '2024-12-04 23:20:32'),
+(129, 15, NULL, NULL, 17, '2024-12-04 23:20:43', '2024-12-04 23:20:43'),
+(132, 15, NULL, 2, NULL, '2024-12-04 23:21:32', '2024-12-04 23:21:32'),
+(135, NULL, '127.0.0.1', 2, NULL, '2024-12-06 12:35:40', '2024-12-06 12:35:40'),
+(137, NULL, '127.0.0.1', NULL, 16, '2024-12-06 12:35:59', '2024-12-06 12:35:59'),
+(138, NULL, '127.0.0.1', NULL, 17, '2024-12-06 12:36:06', '2024-12-06 12:36:06'),
+(139, NULL, '127.0.0.1', NULL, 18, '2024-12-06 13:08:56', '2024-12-06 13:08:56');
 
 -- --------------------------------------------------------
 
@@ -942,14 +1030,14 @@ INSERT INTO `professional_views` (`id`, `user_id`, `professional_id`, `created_a
 (127, NULL, 97, '2024-10-28 14:41:09', '2024-10-28 14:41:09'),
 (128, NULL, 97, '2024-10-28 14:44:13', '2024-10-28 14:44:13'),
 (129, NULL, 69, '2024-10-28 14:46:43', '2024-10-28 14:46:43'),
-(130, NULL, 69, '2024-10-28 14:47:06', '2024-10-28 14:47:06'),
+(130, NULL, 21, '2024-10-28 14:47:06', '2024-10-28 14:47:06'),
 (131, NULL, 69, '2024-10-28 14:59:04', '2024-10-28 14:59:04'),
-(132, NULL, 69, '2024-10-28 15:01:11', '2024-10-28 15:01:11'),
+(132, NULL, 21, '2024-10-28 15:01:11', '2024-10-28 15:01:11'),
 (133, NULL, 94, '2024-10-28 15:01:30', '2024-10-28 15:01:30'),
-(134, NULL, 94, '2024-10-28 15:01:48', '2024-10-28 15:01:48'),
+(134, NULL, 21, '2024-10-28 15:01:48', '2024-10-28 15:01:48'),
 (135, NULL, 81, '2024-10-28 15:02:36', '2024-10-28 15:02:36'),
 (136, NULL, 94, '2024-10-28 15:02:47', '2024-10-28 15:02:47'),
-(137, NULL, 81, '2024-10-28 15:03:08', '2024-10-28 15:03:08'),
+(137, NULL, 21, '2024-10-28 15:03:08', '2024-10-28 15:03:08'),
 (138, NULL, 81, '2024-10-28 15:05:09', '2024-10-28 15:05:09'),
 (139, NULL, 81, '2024-10-28 15:05:51', '2024-10-28 15:05:51'),
 (140, NULL, 69, '2024-10-28 15:15:22', '2024-10-28 15:15:22'),
@@ -965,31 +1053,47 @@ INSERT INTO `professional_views` (`id`, `user_id`, `professional_id`, `created_a
 (150, NULL, 94, '2024-10-29 15:00:54', '2024-10-29 15:00:54'),
 (151, NULL, 98, '2024-10-29 15:01:30', '2024-10-29 15:01:30'),
 (152, NULL, 68, '2024-10-30 17:13:16', '2024-10-30 17:13:16'),
-(153, NULL, 73, '2024-10-30 17:13:54', '2024-10-30 17:13:54'),
+(153, NULL, 21, '2024-01-10 17:13:54', '2024-10-30 17:13:54'),
 (154, NULL, 66, '2024-10-30 17:36:00', '2024-10-30 17:36:00'),
 (155, NULL, 66, '2024-10-30 17:36:32', '2024-10-30 17:36:32'),
-(156, NULL, 66, '2024-10-30 17:41:07', '2024-10-30 17:41:07'),
+(156, NULL, 21, '2024-03-05 17:41:07', '2024-10-30 17:41:07'),
 (157, NULL, 66, '2024-10-30 17:41:40', '2024-10-30 17:41:40'),
 (158, NULL, 66, '2024-10-30 17:42:04', '2024-10-30 17:42:04'),
 (159, NULL, 66, '2024-10-30 17:52:15', '2024-10-30 17:52:15'),
 (160, NULL, 66, '2024-10-30 17:54:32', '2024-10-30 17:54:32'),
-(161, NULL, 66, '2024-10-30 17:55:23', '2024-10-30 17:55:23'),
+(161, NULL, 21, '2024-07-24 17:55:23', '2024-10-30 17:55:23'),
 (162, NULL, 66, '2024-10-30 17:55:58', '2024-10-30 17:55:58'),
-(163, NULL, 66, '2024-10-30 17:56:23', '2024-10-30 17:56:23'),
+(163, NULL, 21, '2024-07-16 17:56:23', '2024-10-30 17:56:23'),
 (164, NULL, 66, '2024-10-30 17:56:45', '2024-10-30 17:56:45'),
 (165, NULL, 66, '2024-10-30 17:57:02', '2024-10-30 17:57:02'),
 (166, NULL, 66, '2024-10-30 17:57:18', '2024-10-30 17:57:18'),
-(167, NULL, 66, '2024-10-30 17:57:33', '2024-10-30 17:57:33'),
-(168, NULL, 66, '2024-10-30 17:57:52', '2024-10-30 17:57:52'),
-(169, NULL, 66, '2024-10-30 17:58:15', '2024-10-30 17:58:15'),
+(167, NULL, 21, '2024-10-30 17:57:33', '2024-10-30 17:57:33'),
+(168, NULL, 21, '2024-10-30 17:57:52', '2024-10-30 17:57:52'),
+(169, NULL, 21, '2024-04-10 17:58:15', '2024-10-30 17:58:15'),
 (170, NULL, 66, '2024-10-30 17:59:23', '2024-10-30 17:59:23'),
-(171, NULL, 66, '2024-10-30 17:59:53', '2024-10-30 17:59:53'),
+(171, NULL, 21, '2024-10-30 17:59:53', '2024-10-30 17:59:53'),
 (172, NULL, 66, '2024-10-30 18:03:22', '2024-10-30 18:03:22'),
 (173, NULL, 66, '2024-10-30 18:03:44', '2024-10-30 18:03:44'),
 (174, NULL, 66, '2024-10-30 18:03:59', '2024-10-30 18:03:59'),
-(175, NULL, 58, '2024-10-30 19:07:44', '2024-10-30 19:07:44'),
+(175, NULL, 21, '2024-10-30 19:07:44', '2024-10-30 19:07:44'),
 (176, NULL, 98, '2024-10-30 19:11:22', '2024-10-30 19:11:22'),
-(177, NULL, 86, '2024-11-19 10:47:50', '2024-11-19 10:47:50');
+(177, NULL, 21, '2024-11-19 10:47:50', '2024-11-19 10:47:50'),
+(178, 21, 60, '2024-12-06 14:01:55', '2024-12-06 14:01:55'),
+(179, 21, 21, '2024-12-06 14:02:04', '2024-12-06 14:02:04'),
+(180, 21, 60, '2024-12-06 14:02:32', '2024-12-06 14:02:32'),
+(181, 21, 60, '2024-12-06 14:02:36', '2024-12-06 14:02:36'),
+(182, 21, 60, '2024-12-06 14:04:23', '2024-12-06 14:04:23'),
+(183, 21, 60, '2024-12-06 14:06:52', '2024-12-06 14:06:52'),
+(184, 21, 21, '2024-12-06 14:09:44', '2024-12-06 14:09:44'),
+(185, 21, 21, '2024-12-06 14:15:14', '2024-12-06 14:15:14'),
+(186, 21, 60, '2024-12-06 14:16:48', '2024-12-06 14:16:48'),
+(187, 21, 60, '2024-12-06 14:17:59', '2024-12-06 14:17:59'),
+(188, 21, 21, '2024-12-06 14:21:08', '2024-12-06 14:21:08'),
+(189, 21, 24, '2024-12-18 19:09:39', '2024-12-18 19:09:39'),
+(190, 21, 23, '2024-12-18 19:22:44', '2024-12-18 19:22:44'),
+(192, 21, 57, '2024-12-18 19:27:38', '2024-12-18 19:27:38'),
+(193, 21, 54, '2024-12-18 19:35:50', '2024-12-18 19:35:50'),
+(194, 21, 77, '2024-12-18 19:36:20', '2024-12-18 19:36:20');
 
 -- --------------------------------------------------------
 
@@ -1078,6 +1182,7 @@ CREATE TABLE `properties` (
   `deed_of_gift` enum('Yes','No') NOT NULL DEFAULT 'No',
   `property_doc` enum('Yes','No') NOT NULL DEFAULT 'No',
   `land_receipt` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `featured` enum('Yes','No') NOT NULL DEFAULT 'No',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1086,23 +1191,63 @@ CREATE TABLE `properties` (
 -- Dumping data for table `properties`
 --
 
-INSERT INTO `properties` (`id`, `agent_id`, `property_code`, `title`, `thumbnail`, `landlord`, `furnishing`, `type_id`, `status`, `bedrooms`, `bathrooms`, `toilets`, `auction`, `deal`, `description`, `state`, `localty`, `area`, `street`, `C_of_O`, `installment`, `survey_plan`, `deed_of_ass`, `grant_of_prob`, `deed_of_mort`, `deed_of_gift`, `property_doc`, `land_receipt`, `created_at`, `updated_at`) VALUES
-(1, 15, 'EP6', '3 Bedroom Apartment', 'assets/frontend/property/thumbnail/1800420039830852.jpg', 'No', 'Yes', 2, 'Rent', 2, 3, 3, 'Yes', 'No', 'The house is very appealing and well furnished for your convenience', 'Lagos', 'Mainland, Lagos', 'Ikeja', '19,Toyin Street, Ikeja, Lagos', 'Yes', 'Yes', 'No', 'No', 'No', 'No', 'Yes', 'Yes', 'No', '2024-05-29 19:25:50', '2024-05-29 19:25:50'),
-(2, 23, 'EP7', 'Multi Tenant Mall at Ajah', 'assets/frontend/property/thumbnail/1800422273928130.jpg', 'No', 'Yes', 8, 'Sale', 5, 4, 4, 'No', 'No', 'A very good mall for multi tenant.  It also has provision for quality water supply, reliable and constant power supply and maximum security is guaranteed.', 'Lagos', 'Island, Lagos', 'Ajah', '25, Anikulapo crescent, Lekki-Ajah,Lagos', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'No', 'No', 'No', '2024-05-29 20:01:21', '2024-05-29 20:01:21'),
-(3, 24, 'EP3', '4 Bedroom Apartment', 'assets/frontend/property/thumbnail/1800422901276785.jpeg', 'No', 'No', 3, 'Rent', 7, 3, 3, 'Yes', 'No', 'Very good apartment with an affordable price and comfortable also.', 'Lagos', 'Island, Lagos', 'Ajah', '25, Anikulapo crescent, Lekki-Ajah,Lagos', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', '2024-05-29 20:11:19', '2024-05-29 20:11:19'),
-(5, 24, 'EP9', '2 Bedroom Duplex at Green Land Estate', 'assets/frontend/property/thumbnail/1802561311014421.jpg', 'Yes', 'No', 4, 'Sale', 2, 3, 2, 'Yes', 'Yes', 'This property is in a very good condition and legally purchased from the Federal Ministry of Land and Housing. The proper documents are readily available upon payment completion', 'Lagos', 'Abule-Odu,Alimosho.', 'Alimosho.', '25, Anikulapo crescent, Lekki-Ajah,Lagos', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'Yes', '2024-06-22 10:40:26', '2024-06-22 10:40:26'),
-(26, 18, 'EP9359', 'Veritatis aut eum cupiditate quae.', 'https://picsum.photos/800/600?random=772', 'Yes', 'No', 1, 'Sale', 8, 1, 2, 'No', 'No', 'Recusandae provident aut sit qui.', 'Lagos', 'West Dan', 'Secretariat', '967 Graham Mews', 'No', 'Yes', 'Yes', 'No', 'No', 'Yes', 'Yes', 'Yes', 'Yes', '2024-09-14 16:04:24', '2024-06-23 20:05:22'),
-(27, 21, 'EP9921', 'Alias non nihil delectus atque eius delectus nulla cupiditate.', 'https://picsum.photos/800/600?random=320', 'Yes', 'Yes', 18, 'Let', 4, 2, 6, 'No', 'No', 'Debitis ea voluptatum libero voluptatum est dicta.', 'Lagos', 'Ornchester', 'Alloy Plaza', '40300 Ritchie Locks', 'No', 'Yes', 'No', 'No', 'Yes', 'No', 'No', 'No', 'No', '2024-07-30 21:01:37', '2024-06-23 20:05:22'),
-(28, 21, 'EP9400', 'Sunt aspernatur animi veniam.', 'https://picsum.photos/800/600?random=458', 'Yes', 'No', 15, 'Let', 8, 8, 8, 'No', 'No', 'Iusto consequuntur delectus et eos beatae quos cum at.', 'Kaduna', 'New Trevor', 'Alloy Plaza', '360 Heller Branch Apt. 890', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'No', 'No', 'Yes', '2024-09-05 20:07:29', '2024-06-23 20:05:22'),
-(29, 15, 'EP9969', 'Voluptatem impedit totam vel.', 'https://picsum.photos/800/600?random=401', 'Yes', 'Yes', 18, 'Sale', 1, 2, 8, 'No', 'No', 'Sit saepe quis blanditiis.', 'Lagos', 'West Giovanni', 'Mr Biggs Eatery', '109 Jeremie Springs', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No', '2024-08-12 05:43:56', '2024-06-23 20:05:22'),
-(30, 21, 'EP9184', 'Et voluptas tenetur consequatur pariatur dolor vero sed.', 'https://picsum.photos/800/600?random=376', 'Yes', 'Yes', 6, 'Sale', 3, 3, 2, 'No', 'No', 'Quas rerum eos reprehenderit unde et.', 'Kaduna', 'Freidaside', 'Shopping Mall', '76429 Amir Station', 'No', 'No', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes', '2024-09-07 15:36:43', '2024-06-23 20:05:22'),
-(31, 15, 'EP9641', 'Et impedit magnam laborum et et veniam.', 'https://picsum.photos/800/600?random=410', 'Yes', 'No', 10, 'Let', 8, 5, 9, 'No', 'No', 'Odit est sit sit natus deleniti nesciunt.', 'Lagos', 'Rippinfort', 'Alloy Plaza', '12845 Adelia Ways', 'No', 'Yes', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', '2024-09-05 20:01:33', '2024-06-23 20:05:22'),
-(32, 18, 'EP9922', 'Sit aut est debitis dolorum voluptatem.', 'https://picsum.photos/800/600?random=722', 'Yes', 'No', 3, 'Let', 4, 1, 2, 'No', 'No', 'Dolor suscipit eaque praesentium.', 'Kaduna', 'Port Coopertown', 'Mr Biggs Eatery', '1347 Willie Throughway', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', '2024-09-21 04:55:19', '2024-06-23 20:05:22'),
-(33, 23, 'EP9301', 'Deleniti voluptas fugiat et animi sed repellendus.', 'https://picsum.photos/800/600?random=558', 'Yes', 'Yes', 11, 'Let', 5, 5, 2, 'No', 'No', 'Et ab veniam error minus.', 'Enugu', 'Ewaldhaven', 'Mr Biggs Eatery', '955 Giles Radial Suite 730', 'Yes', 'No', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'Yes', '2024-07-10 10:33:00', '2024-06-23 20:05:22'),
-(34, 15, 'EP9775', 'Atque quia fugiat delealiquam hic.', 'https://picsum.photos/800/600?random=225', 'Yes', 'Yes', 6, 'Let', 2, 5, 2, 'No', 'No', 'Quis explicabo quod quo voluptas.', 'Lagos', 'Lake Consuelo', 'Alloy Plaza', '7629 Wilbert Ferry Suite 159', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'No', '2024-08-13 07:31:37', '2024-06-23 20:05:22'),
-(35, 23, 'EP9574', 'Sunt et qui vitae id et qui.', 'https://picsum.photos/800/600?random=534', 'Yes', 'No', 4, 'Let', 2, 9, 9, 'No', 'No', 'Placeat neque quis fugiat voluptatem est vel enim.', 'Oyo', 'Lake Devanteview', 'Mr Biggs Eatery', '81613 Martin Mountains Apt. 288', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', '2024-07-13 17:43:25', '2024-06-23 20:05:22'),
-(38, 24, 'EP9', '4 Bedroom Flat at Ajanikoko Estate, Isolo.', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724358703/e-properties/properties/thumbnail/v9qtcghumxqlqqospq0l.jpg', 'No', 'No', 1, 'Rent', 4, 3, 2, 'No', 'No', 'This is a house that is comfortable and situated in a very good environment. It has a lot of benefit just staying there.', 'Lagos', 'Mainland, Lagos', 'Isolo', 'Aruna Ikukoyi Road, Isolo Lagos.', 'No', 'Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No', '2024-08-22 19:31:44', '2024-08-22 19:31:44'),
-(40, 21, 'EP9', 'Mini Flat at Gateway Garden, Ewekoro', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773322/e-properties/properties/thumbnail/hfqblzlc0rbvprf2ykm5.jpg', 'No', 'No', 4, 'Sale', 2, 2, 2, 'Yes', 'No', 'It\'s a nice apartment in the neighbourhood. The coompound is also very neat and with constant power.', 'Ogun', 'Ewekoro', 'Ajagba', '23, Adejobi Ogog close, Ajagba,Ewekoro.', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', 'No', 'Yes', '2024-08-27 14:42:06', '2024-08-27 14:42:06');
+INSERT INTO `properties` (`id`, `agent_id`, `property_code`, `title`, `thumbnail`, `landlord`, `furnishing`, `type_id`, `status`, `bedrooms`, `bathrooms`, `toilets`, `auction`, `deal`, `description`, `state`, `localty`, `area`, `street`, `C_of_O`, `installment`, `survey_plan`, `deed_of_ass`, `grant_of_prob`, `deed_of_mort`, `deed_of_gift`, `property_doc`, `land_receipt`, `featured`, `created_at`, `updated_at`) VALUES
+(1, 15, 'EP6', '3 Bedroom Apartment', 'assets/frontend/property/thumbnail/1800420039830852.jpg', 'No', 'Yes', 2, 'Rent', 2, 3, 3, 'Yes', 'No', 'The house is very appealing and well furnished for your convenience', 'Lagos', 'Mainland, Lagos', 'Ikeja', '19,Toyin Street, Ikeja, Lagos', 'Yes', 'Yes', 'No', 'No', 'No', 'No', 'Yes', 'Yes', 'No', 'Yes', '2024-05-29 19:25:50', '2024-12-24 16:28:40'),
+(2, 23, 'EP7', 'Multi Tenant Mall at Ajah', 'assets/frontend/property/thumbnail/1800422273928130.jpg', 'No', 'Yes', 8, 'Sold', 5, 4, 4, 'No', 'No', 'A very good mall for multi tenant.  It also has provision for quality water supply, reliable and constant power supply and maximum security is guaranteed.', 'Lagos', 'Island, Lagos', 'Ajah', '25, Anikulapo crescent, Lekki-Ajah,Lagos', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'No', 'No', 'No', 'Yes', '2024-05-29 20:01:21', '2024-12-24 16:30:21'),
+(3, 24, 'EP3', '4 Bedroom Apartment', 'assets/frontend/property/thumbnail/1800422901276785.jpeg', 'No', 'No', 3, 'Rent', 7, 3, 3, 'Yes', 'No', 'Very good apartment with an affordable price and comfortable also.', 'Lagos', 'Island, Lagos', 'Ajah', '25, Anikulapo crescent, Lekki-Ajah,Lagos', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', '2024-05-29 20:11:19', '2024-05-29 20:11:19'),
+(5, 24, 'EP9', '2 Bedroom Duplex at Green Land Estate', 'assets/frontend/property/thumbnail/1802561311014421.jpg', 'Yes', 'No', 4, 'Sale', 2, 3, 2, 'Yes', 'Yes', 'This property is in a very good condition and legally purchased from the Federal Ministry of Land and Housing. The proper documents are readily available upon payment completion', 'Lagos', 'Abule-Odu,Alimosho.', 'Alimosho.', '25, Anikulapo crescent, Lekki-Ajah,Lagos', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', '2024-06-22 10:40:26', '2024-12-24 16:30:53'),
+(26, 18, 'EP9359', 'Veritatis aut eum cupiditate quae.', 'https://picsum.photos/800/600?random=772', 'Yes', 'No', 1, 'Sale', 8, 1, 2, 'No', 'No', 'Recusandae provident aut sit qui.', 'Lagos', 'West Dan', 'Secretariat', '967 Graham Mews', 'No', 'Yes', 'Yes', 'No', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'No', '2024-09-14 16:04:24', '2024-12-24 17:01:50'),
+(27, 21, 'EP9921', 'Alias non nihil delectus atque eius delectus nulla cupiditate.', 'https://picsum.photos/800/600?random=320', 'Yes', 'Yes', 18, 'Let', 4, 2, 6, 'No', 'No', 'Debitis ea voluptatum libero voluptatum est dicta.', 'Lagos', 'Ornchester', 'Alloy Plaza', '40300 Ritchie Locks', 'No', 'Yes', 'No', 'No', 'Yes', 'No', 'No', 'No', 'No', 'No', '2024-12-30 21:01:37', '2024-06-23 20:05:22'),
+(28, 21, 'EP9400', 'Sunt aspernatur animi veniam.', 'https://picsum.photos/800/600?random=458', 'Yes', 'No', 15, 'Let', 8, 8, 8, 'No', 'No', 'Iusto consequuntur delectus et eos beatae quos cum at.', 'Kaduna', 'New Trevor', 'Alloy Plaza', '360 Heller Branch Apt. 890', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'No', 'No', 'Yes', 'No', '2024-11-05 20:07:29', '2024-12-24 17:01:46'),
+(29, 15, 'EP9969', 'Voluptatem impedit totam vel.', 'https://picsum.photos/800/600?random=401', 'Yes', 'Yes', 18, 'Sale', 1, 2, 8, 'No', 'No', 'Sit saepe quis blanditiis.', 'Lagos', 'West Giovanni', 'Mr Biggs Eatery', '109 Jeremie Springs', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'No', '2024-08-12 05:43:56', '2024-06-23 20:05:22'),
+(30, 21, 'EP9184', 'Et voluptas tenetur consequatur pariatur dolor vero sed.', 'https://picsum.photos/800/600?random=376', 'Yes', 'Yes', 6, 'Sale', 3, 3, 2, 'No', 'No', 'Quas rerum eos reprehenderit unde et.', 'Kaduna', 'Freidaside', 'Shopping Mall', '76429 Amir Station', 'No', 'No', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', '2024-11-07 15:36:43', '2024-12-24 17:02:10'),
+(31, 15, 'EP9641', 'Et impedit magnam laborum et et veniam.', 'https://picsum.photos/800/600?random=410', 'Yes', 'No', 10, 'Let', 8, 5, 9, 'No', 'No', 'Odit est sit sit natus deleniti nesciunt.', 'Lagos', 'Rippinfort', 'Alloy Plaza', '12845 Adelia Ways', 'No', 'Yes', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', 'No', '2024-09-05 20:01:33', '2024-06-23 20:05:22'),
+(32, 21, 'EP9922', 'Sit aut est debitis dolorum voluptatem.', 'https://picsum.photos/800/600?random=722', 'Yes', 'No', 3, 'Let', 4, 1, 2, 'No', 'No', 'Dolor suscipit eaque praesentium.', 'Kaduna', 'Port Coopertown', 'Mr Biggs Eatery', '1347 Willie Throughway', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', '2024-11-21 04:55:19', '2024-06-23 20:05:22'),
+(33, 23, 'EP9301', 'Deleniti voluptas fugiat et animi sed repellendus.', 'https://picsum.photos/800/600?random=558', 'Yes', 'Yes', 11, 'Let', 5, 5, 2, 'No', 'No', 'Et ab veniam error minus.', 'Enugu', 'Ewaldhaven', 'Mr Biggs Eatery', '955 Giles Radial Suite 730', 'Yes', 'No', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', '2024-07-10 10:33:00', '2024-06-23 20:05:22'),
+(34, 15, 'EP9775', 'Atque quia fugiat delealiquam hic.', 'https://picsum.photos/800/600?random=225', 'Yes', 'Yes', 6, 'Let', 2, 5, 2, 'No', 'No', 'Quis explicabo quod quo voluptas.', 'Lagos', 'Lake Consuelo', 'Alloy Plaza', '7629 Wilbert Ferry Suite 159', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'No', 'No', '2024-08-13 07:31:37', '2024-06-23 20:05:22'),
+(35, 23, 'EP9574', 'Sunt et qui vitae id et qui.', 'https://picsum.photos/800/600?random=534', 'Yes', 'No', 4, 'Let', 2, 9, 9, 'No', 'No', 'Placeat neque quis fugiat voluptatem est vel enim.', 'Oyo', 'Lake Devanteview', 'Mr Biggs Eatery', '81613 Martin Mountains Apt. 288', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', '2024-07-13 17:43:25', '2024-06-23 20:05:22'),
+(38, 24, 'EP9', '4 Bedroom Flat at Ajanikoko Estate, Isolo.', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724358703/e-properties/properties/thumbnail/v9qtcghumxqlqqospq0l.jpg', 'No', 'No', 1, 'Rent', 4, 3, 2, 'No', 'No', 'This is a house that is comfortable and situated in a very good environment. It has a lot of benefit just staying there.', 'Lagos', 'Mainland, Lagos', 'Isolo', 'Aruna Ikukoyi Road, Isolo Lagos.', 'No', 'Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'No', '2024-08-22 19:31:44', '2024-08-22 19:31:44'),
+(40, 21, 'EP9', 'Mini Flat at Gateway Garden, Ewekoro', 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773322/e-properties/properties/thumbnail/hfqblzlc0rbvprf2ykm5.jpg', 'No', 'No', 4, 'Sale', 2, 2, 2, 'Yes', 'No', 'It\'s a nice apartment in the neighbourhood. The coompound is also very neat and with constant power.', 'Ogun', 'Ewekoro', 'Ajagba', '23, Adejobi Ogog close, Ajagba,Ewekoro.', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'No', '2024-08-27 14:42:06', '2024-08-27 14:42:06'),
+(41, 1, 'EP6', 'Officia explicabo rerum mollitia.', 'assets/images/houses/residential/house2.jpg', 'Mr. Jonathan Johnson', 'No', 3, 'Let', 4, 3, 3, 'Yes', 'No', 'Molestiae error laudantium sunt ut. Aliquam adipisci illum nihil odio et reprehenderit. Adipisci commodi quod ut eos provident aspernatur ut. Animi consequatur aut aut voluptates ipsa.', 'Idaho', 'West Vivienne', 'town', '51923 Nona Ridge', 'Yes', 'Yes', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', '2024-12-23 09:22:28', '2024-12-23 09:22:28'),
+(42, 1, 'EP0', 'Autem ad qui.', 'assets/images/houses/residential/house3.jpg', 'Vickie Ruecker', 'Yes', 2, 'Sold', 4, 1, 3, 'Yes', 'No', 'Nihil aut saepe ex est alias inventore omnis. Sequi expedita qui quisquam officia. Et quas quia similique.', 'Arkansas', 'Port Faymouth', 'bury', '208 Antonetta Ford Suite 299', 'No', 'Yes', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(43, 1, 'EP9223372036854775807', 'Molestiae possimus fuga.', 'assets/images/houses/residential/house4.jpg', 'Kayla Gulgowski', 'Yes', 2, 'Sold', 5, 2, 3, 'Yes', 'No', 'Accusamus itaque et quia cum facilis suscipit. Velit quisquam blanditiis voluptatem in veritatis aut. Minima corrupti magnam in assumenda unde qui accusantium.', 'Michigan', 'West Sheaville', 'town', '8708 Lowell Shore Apt. 737', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(44, 1, 'EP904837', 'Consequatur et sed omnis.', 'assets/images/houses/residential/house5.jpg', 'Carmela Schultz', 'Yes', 2, 'Sold', 4, 3, 4, 'Yes', 'No', 'Ipsum laborum perferendis voluptas repudiandae. Modi qui doloribus ea quam quae optio. Et cupiditate sit sit. Iusto cupiditate eligendi natus et distinctio expedita alias.', 'Oregon', 'New Kobeburgh', 'side', '3667 Pollich Ridge Suite 725', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(45, 1, 'EP33', 'Rerum ullam.', 'assets/images/houses/residential/house6.jpg', 'Mrs. Elenora Runte Sr.', 'Yes', 3, 'Let', 4, 3, 1, 'No', 'Yes', 'Qui nemo error odit dolore ut repellendus. Quaerat fuga odio sint magnam facilis consequatur. Et assumenda officiis reprehenderit et sunt qui.', 'Missouri', 'Port Linwood', 'mouth', '593 Mckayla Tunnel', 'No', 'No', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(46, 1, 'EP9', 'Quidem eos.', 'assets/images/houses/residential/house7.jpg', 'Noel Koch', 'No', 2, 'Rent', 1, 2, 4, 'No', 'Yes', 'Quisquam sequi quia dignissimos voluptatem eum error. Facilis corporis ut molestiae totam quos dolores itaque. Aut dolores laudantium sit quia nobis ullam omnis.', 'Missouri', 'Araceliborough', 'burgh', '8436 Bergstrom Junctions Suite 616', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'No', 'No', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(47, 1, 'EP0', 'Tempora est quis.', 'assets/images/houses/residential/house8.jpg', 'Lenore Considine', 'No', 3, 'Rent', 1, 3, 2, 'No', 'Yes', 'Possimus voluptatibus nesciunt voluptatem. Voluptatem et nisi qui vel. Debitis deleniti et delectus numquam exercitationem. Enim beatae ullam blanditiis excepturi sint natus nihil.', 'Delaware', 'North Merritt', 'mouth', '941 Emmanuel Island', 'No', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(48, 1, 'EP8', 'Nihil sed accusamus sapiente.', 'assets/images/houses/residential/house9.jpg', 'Hosea Johns DDS', 'Yes', 5, 'Sale', 2, 3, 1, 'No', 'No', 'Minima adipisci qui et magni odit adipisci quaerat. Explicabo voluptatem voluptatum est sed aut ab qui. Dolorum occaecati doloribus eaque non occaecati.', 'Virginia', 'Walkerberg', 'port', '8138 Bailey Grove Suite 255', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(49, 1, 'EP1513', 'Esse possimus reiciendis veniam.', 'assets/images/houses/residential/house10.jpg', 'Tre Kiehn', 'No', 4, 'Rent', 5, 4, 2, 'No', 'No', 'Sapiente rem quo omnis aut et occaecati minus. Voluptas asperiores officia repellat et quas ea.', 'Minnesota', 'Lake Dwight', 'bury', '71271 Eryn Throughway', 'Yes', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(50, 1, 'EP0', 'Sit perspiciatis earum.', 'assets/images/houses/residential/house11.jpg', 'Tyshawn Borer MD', 'No', 3, 'Rent', 5, 2, 1, 'No', 'No', 'Consequatur exercitationem non ea nulla. Quas iste nihil minus illo est est autem. Non deserunt reiciendis deleniti quasi soluta. Commodi blanditiis ratione et qui ipsum at qui eligendi. Velit distinctio officiis sunt saepe.', 'North Carolina', 'East Jimmiechester', 'furt', '77748 Renner Plaza Apt. 082', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(51, 1, 'EP517', 'Culpa nulla et.', 'assets/images/houses/residential/house12.jpg', 'Prof. Howell Balistreri Jr.', 'Yes', 3, 'Sold', 2, 3, 4, 'No', 'No', 'In porro officia omnis quisquam aliquid. Reiciendis soluta praesentium temporibus incidunt est. Aliquam soluta velit provident qui voluptatibus voluptates.', 'Indiana', 'Ambrosemouth', 'view', '493 Hollis Skyway', 'No', 'No', 'Yes', 'No', 'No', 'No', 'No', 'Yes', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(52, 1, 'EP32', 'In aliquam architecto quo.', 'assets/images/houses/residential/house13.jpg', 'Mr. Sigmund Walsh IV', 'No', 3, 'Sale', 3, 1, 4, 'No', 'No', 'Soluta distinctio nihil rerum voluptas harum occaecati magnam. Sit qui aliquid porro ut. Est totam odit rerum quasi. Molestiae beatae inventore ducimus suscipit expedita quis.', 'Rhode Island', 'New Francohaven', 'borough', '8937 Ebert Glens Suite 073', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(53, 1, 'EP9223372036854775807', 'Ut illum non.', 'assets/images/houses/residential/house14.jpg', 'Rae Luettgen', 'No', 4, 'Sold', 3, 4, 2, 'No', 'No', 'Aliquid commodi odit corporis. Et ut est rem quam vitae officia fuga. Aperiam soluta commodi sint deserunt.', 'West Virginia', 'West Noemie', 'port', '31522 Bernita Course', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(54, 1, 'EP6', 'Nostrum quos rerum ipsa laborum.', 'assets/images/houses/residential/house15.jpg', 'Prof. Dexter Robel II', 'Yes', 5, 'Sold', 5, 1, 4, 'No', 'No', 'Provident laborum eos odio. Ratione exercitationem atque harum aspernatur. Nemo ipsa non voluptatem est.', 'Hawaii', 'East Alibury', 'shire', '43210 Wunsch Keys', 'Yes', 'No', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(55, 1, 'EP3', 'Est quia molestiae dolor.', 'assets/images/houses/residential/house16.jpg', 'Shea Keeling', 'No', 1, 'Rent', 3, 3, 3, 'No', 'No', 'Dolorum quidem rerum et. Atque rerum animi ut nihil rerum. Molestias ut non quia odit. Minus sed voluptatem nihil autem veritatis velit est.', 'New York', 'Edisontown', 'furt', '2225 Schmeler Throughway', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(56, 1, 'EP5', 'Delectus praesentium debitis natus.', 'assets/images/houses/residential/house1.jpg', 'Miss Herta Glover I', 'Yes', 5, 'Rent', 5, 4, 4, 'No', 'No', 'Qui provident laborum consequatur pariatur fugit quam eligendi. Dolor quas sequi laborum est aut cupiditate. Et porro cum vel voluptate.', 'Louisiana', 'West Delaneyborough', 'mouth', '96501 Vandervort Pines Suite 295', 'Yes', 'Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'Yes', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(57, 1, 'EP0', 'Eveniet molestias voluptas.', 'assets/images/houses/residential/house2.jpg', 'Lawson Konopelski', 'Yes', 4, 'Sale', 1, 1, 3, 'No', 'No', 'Nisi numquam vitae consequuntur labore quisquam. Quod quos illo ut nostrum est eum ea aut. Fugit quis architecto qui rerum.', 'Arizona', 'Brockland', 'ville', '88371 Lew Divide', 'No', 'No', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(58, 1, 'EP0', 'Quam provident illo voluptatem.', 'assets/images/houses/residential/house3.jpg', 'Dr. Rico Terry Jr.', 'No', 2, 'Rent', 2, 1, 4, 'No', 'No', 'Ratione incidunt placeat eligendi assumenda quisquam. Eos fuga sit corporis dolor. Temporibus reiciendis aut cum modi praesentium nobis.', 'Indiana', 'Pollichmouth', 'bury', '6810 Braun View Suite 192', 'Yes', 'No', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(59, 1, 'EP0', 'Culpa quae.', 'assets/images/houses/residential/house4.jpg', 'Grayce Denesik', 'No', 5, 'Sale', 5, 4, 2, 'No', 'No', 'Accusamus dolor magni pariatur itaque ut. Repellat assumenda enim voluptas velit. Occaecati consequatur corporis eos et id cum aut voluptatibus. Et ipsam iure vero consequuntur blanditiis unde distinctio voluptas.', 'Maryland', 'Howeport', 'shire', '359 Roy Center Apt. 867', 'No', 'No', 'Yes', 'Yes', 'No', 'No', 'Yes', 'No', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(60, 1, 'EP700000', 'Aut sed voluptatem provident.', 'assets/images/houses/residential/house5.jpg', 'Prof. Lacey Hermiston', 'No', 3, 'Sale', 1, 3, 1, 'No', 'No', 'Velit eos et voluptatem. Sed sed eaque dolor quam quas recusandae est enim. Deleniti sed reiciendis ullam.', 'Maine', 'Wisokyburgh', 'stad', '208 Nienow Courts Suite 977', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', 'No', 'No', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(61, 1, 'EP577144', 'Ullam non ipsum.', 'assets/images/houses/residential/house2.jpg', 'Enola Wisoky', 'No', 3, 'Rent', 5, 1, 3, 'Yes', 'No', 'Et officia expedita quibusdam et voluptates modi. Quis explicabo itaque consequuntur quis illo. Sapiente eaque vero incidunt corporis earum quae. Est et temporibus quos. Aliquid suscipit voluptate sed eveniet.', 'Idaho', 'McLaughlintown', 'ville', '743 Dallin Hollow', 'No', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(62, 1, 'EP0', 'Quam unde dolore cum.', 'assets/images/houses/residential/house3.jpg', 'Skyla Mills', 'No', 4, 'Rent', 4, 3, 2, 'Yes', 'No', 'Corrupti maxime et ut quia veniam voluptas minus. Atque illum facilis hic. Molestiae velit et possimus consequuntur hic amet rerum.', 'Kansas', 'East Cornellport', 'land', '687 Oswaldo Loop', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(63, 1, 'EP9', 'Soluta aut molestiae.', 'assets/images/houses/residential/house4.jpg', 'Princess Fahey', 'Yes', 4, 'Rent', 3, 3, 2, 'Yes', 'No', 'Eius qui non tempore quae. Maiores minima non excepturi ullam aut aliquam et. Illum aspernatur id et sint provident dolore dolorum. Labore ut sit molestiae tenetur.', 'Hawaii', 'Garryfort', 'view', '887 Dibbert Meadows Apt. 348', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(64, 1, 'EP2', 'Molestias qui sed.', 'assets/images/houses/residential/house5.jpg', 'Prof. Ike Tromp Jr.', 'Yes', 1, 'Sale', 1, 4, 4, 'Yes', 'No', 'Dolore odit ut commodi velit ab non. Vero totam sunt et placeat. Perspiciatis sit voluptate veniam fugit. Incidunt voluptatem et sit consequatur laborum.', 'Oklahoma', 'South Imeldashire', 'berg', '25514 Blick Road', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(65, 1, 'EP0', 'Magnam qui voluptas.', 'assets/images/houses/residential/house6.jpg', 'Favian Schmidt', 'Yes', 1, 'Sale', 3, 1, 3, 'No', 'Yes', 'Aspernatur quisquam natus occaecati voluptatem placeat. Ipsum ipsa omnis dolorum minus maiores. Fugiat est voluptatem voluptatum eius et. Itaque esse suscipit ipsam alias.', 'Minnesota', 'Lake Anastacioton', 'ton', '93870 Kassulke Stravenue', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', 'No', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(66, 1, 'EP0', 'Illo repudiandae rerum labore.', 'assets/images/houses/residential/house7.jpg', 'Fredy Roob', 'No', 4, 'Rent', 3, 4, 4, 'No', 'Yes', 'Veritatis et laudantium sed ex. Iure aut tempore ut voluptatem at et. Unde magnam dicta omnis sunt in vel sed. Dolor esse earum maxime.', 'Oregon', 'North Vidaland', 'borough', '26529 Dion Village Apt. 064', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(67, 1, 'EP6', 'Consequatur et veritatis eos.', 'assets/images/houses/residential/house8.jpg', 'Ms. Natalia Bayer MD', 'Yes', 2, 'Rent', 5, 4, 3, 'No', 'Yes', 'Fuga voluptatem impedit itaque laudantium et. Autem quae maxime reprehenderit placeat molestiae. Voluptate est eum omnis non illum.', 'Massachusetts', 'New Piper', 'land', '94528 Koch Pine Apt. 968', 'No', 'No', 'No', 'No', 'No', 'No', 'Yes', 'Yes', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(68, 1, 'EP919', 'In qui consequatur.', 'assets/images/houses/residential/house9.jpg', 'Mohammed Turcotte', 'Yes', 2, 'Sale', 3, 3, 3, 'No', 'No', 'Porro quasi qui et vero ut rerum consequatur. Sint voluptas rerum nihil consequatur laudantium odio ut voluptatibus. Suscipit aliquid eum temporibus id illum enim. Possimus doloribus dolore enim assumenda necessitatibus deleniti ab.', 'Michigan', 'West Denaville', 'land', '4795 Damien Pass', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(69, 1, 'EP974', 'Eaque placeat modi delectus.', 'assets/images/houses/residential/house10.jpg', 'Prof. Anita Emmerich I', 'No', 1, 'Rent', 2, 2, 2, 'No', 'No', 'Natus possimus ut dolorem modi. Aspernatur ut architecto eligendi et ex nihil beatae. Et praesentium molestiae corrupti perspiciatis.', 'New Hampshire', 'Pearlville', 'bury', '672 Wilderman Squares Suite 212', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', 'No', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(70, 1, 'EP452103', 'Veniam expedita itaque.', 'assets/images/houses/residential/house11.jpg', 'Prof. Timmy Johns II', 'Yes', 2, 'Sale', 4, 3, 4, 'No', 'No', 'Saepe aut eum iure ea fugit at blanditiis iste. Cupiditate tempore officiis cumque in sequi. Error velit eum accusamus quia. Sint ducimus cum maiores quia labore. Aut et distinctio et et.', 'Idaho', 'New Verdaburgh', 'borough', '6914 Jenkins Land', 'Yes', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(71, 1, 'EP37', 'Aliquid laudantium necessitatibus.', 'assets/images/houses/residential/house12.jpg', 'Melissa Mohr', 'Yes', 4, 'Sale', 1, 4, 4, 'No', 'No', 'Officiis quis et ipsa voluptatem natus in. Omnis minima consequuntur et nam dicta quam.', 'Hawaii', 'Nikohaven', 'side', '43801 Ardith Point', 'No', 'Yes', 'No', 'No', 'No', 'Yes', 'Yes', 'No', 'No', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(72, 1, 'EP1473', 'Hic temporibus et.', 'assets/images/houses/residential/house13.jpg', 'Mrs. Lyla Kautzer DVM', 'No', 3, 'Let', 3, 1, 4, 'No', 'No', 'Enim modi sed nesciunt consequatur commodi ducimus voluptates aliquam. Blanditiis quasi nam molestiae nesciunt voluptates ut non. Consequatur dolorem quo tempore.', 'Ohio', 'Isaistad', 'borough', '1409 Kilback Viaduct Suite 268', 'Yes', 'No', 'No', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(73, 1, 'EP1', 'Cumque modi recusandae consequatur ut.', 'assets/images/houses/residential/house14.jpg', 'Lydia Murazik', 'No', 4, 'Rent', 4, 1, 3, 'No', 'No', 'Dignissimos provident animi in autem mollitia eveniet tenetur. Vel fugit voluptatum assumenda magni porro et quis. Quibusdam ipsa nihil aut. Vel libero minus odio esse nobis minus tenetur.', 'New York', 'Port Aglaebury', 'land', '236 Cathy Ridges', 'Yes', 'Yes', 'No', 'Yes', 'No', 'No', 'No', 'No', 'No', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(74, 1, 'EP6', 'Corporis laboriosam laboriosam suscipit.', 'assets/images/houses/residential/house15.jpg', 'Violet Willms', 'No', 4, 'Sale', 1, 2, 3, 'No', 'No', 'Rem inventore nesciunt qui quis est commodi vero. Quidem dolorem saepe culpa illo. Natus quasi dolore laudantium autem delectus optio. Iusto sit rerum nisi.', 'Alabama', 'East Granthaven', 'shire', '8651 Seth Common Apt. 091', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(75, 1, 'EP43', 'Maiores ea ut.', 'assets/images/houses/residential/house16.jpg', 'Eveline Lubowitz', 'No', 5, 'Sale', 4, 4, 4, 'No', 'No', 'Ut voluptatem impedit sed in quos. Occaecati magnam earum consequatur eos sed reiciendis est quo. Est dolores nisi quia ipsam est incidunt.', 'South Carolina', 'Lynchburgh', 'shire', '1497 Jana Mountain', 'No', 'No', 'No', 'No', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(76, 1, 'EP2109', 'Quas minus et aut.', 'assets/images/houses/residential/house1.jpg', 'German O\'Hara', 'No', 2, 'Rent', 3, 1, 2, 'No', 'No', 'Voluptatibus quisquam voluptas sit fugiat aut. Mollitia autem magnam omnis. Dolores impedit labore error aut dolore provident ipsum.', 'North Dakota', 'New Glennie', 'burgh', '9196 Goyette Prairie', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(77, 1, 'EP70', 'Molestiae et sunt blanditiis.', 'assets/images/houses/residential/house2.jpg', 'Prof. Mekhi Anderson PhD', 'Yes', 3, 'Rent', 5, 3, 3, 'No', 'No', 'Quis nobis laboriosam magni voluptatem minus. Sint ea debitis officia. Dolores mollitia nobis aspernatur corporis.', 'Maine', 'Daughertymouth', 'bury', '27823 Carlie Via', 'Yes', 'No', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(78, 1, 'EP87', 'Quis ut.', 'assets/images/houses/residential/house3.jpg', 'Elmo Sporer', 'Yes', 4, 'Let', 3, 2, 2, 'No', 'No', 'Exercitationem saepe quia unde ipsum ut sunt. Magnam exercitationem eos at voluptas voluptatibus iusto. Excepturi sed temporibus qui veritatis praesentium perspiciatis minima. Suscipit omnis minima maxime iusto.', 'Georgia', 'South Millie', 'berg', '4982 Fae Overpass Apt. 572', 'No', 'No', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(79, 1, 'EP0', 'Sit enim dolor tempora.', 'assets/images/houses/residential/house4.jpg', 'Prof. Wilhelm Conn PhD', 'Yes', 1, 'Let', 3, 3, 4, 'No', 'No', 'Dolores est omnis consequatur officia minus aliquid voluptates. Iusto natus modi animi perspiciatis. Ipsum natus consequatur ipsa rerum. Et et incidunt vel possimus.', 'Illinois', 'Lake Isadoremouth', 'side', '20501 Romaguera Shoals Suite 868', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', 'No', 'Yes', 'No', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(80, 1, 'EP75', 'Eum dignissimos vel et.', 'assets/images/houses/residential/house5.jpg', 'Jerrod Harris', 'Yes', 2, 'Sold', 2, 3, 1, 'No', 'No', 'Vero aliquid totam nihil ut voluptatem perspiciatis. Natus nihil voluptate sit non dolorem. Voluptate harum autem explicabo voluptatum eaque. Consequatur quos totam placeat magnam unde eius eum provident.', 'Wyoming', 'Elizashire', 'furt', '233 Henriette Terrace', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'No', 'Yes', 'No', '2024-12-23 09:22:31', '2024-12-23 09:22:31');
 
 -- --------------------------------------------------------
 
@@ -1150,7 +1295,167 @@ INSERT INTO `property_amenities` (`id`, `property_id`, `amenities`, `created_at`
 (33, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773328/e-properties/properties/amenities/mh3hqefrfsoskab3vrfx.png', '2024-08-27 14:42:09', '2024-08-27 14:42:09'),
 (34, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773331/e-properties/properties/amenities/zhjuteoc5tlh6na8clp7.png', '2024-08-27 14:42:11', '2024-08-27 14:42:11'),
 (35, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773333/e-properties/properties/amenities/dyugdksixiftlif3vy26.png', '2024-08-27 14:42:14', '2024-08-27 14:42:14'),
-(36, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773335/e-properties/properties/amenities/posxpkc2nfvxgpwd7du9.png', '2024-08-27 14:42:16', '2024-08-27 14:42:16');
+(36, 40, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724773335/e-properties/properties/amenities/posxpkc2nfvxgpwd7du9.png', '2024-08-27 14:42:16', '2024-08-27 14:42:16'),
+(37, 41, 'assets/images/houses/amenities/amenity14.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(38, 41, 'assets/images/houses/amenities/amenity9.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(39, 41, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(40, 41, 'assets/images/houses/amenities/amenity12.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(41, 42, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(42, 42, 'assets/images/houses/amenities/amenity13.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(43, 42, 'assets/images/houses/amenities/amenity4.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(44, 42, 'assets/images/houses/amenities/amenity19.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(45, 43, 'assets/images/houses/amenities/amenity15.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(46, 43, 'assets/images/houses/amenities/amenity22.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(47, 43, 'assets/images/houses/amenities/amenity19.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(48, 43, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(49, 44, 'assets/images/houses/amenities/amenity19.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(50, 44, 'assets/images/houses/amenities/amenity13.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(51, 44, 'assets/images/houses/amenities/amenity23.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(52, 44, 'assets/images/houses/amenities/amenity12.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(53, 45, 'assets/images/houses/amenities/amenity23.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(54, 45, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(55, 45, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(56, 45, 'assets/images/houses/amenities/amenity1.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(57, 46, 'assets/images/houses/amenities/amenity7.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(58, 46, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(59, 46, 'assets/images/houses/amenities/amenity14.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(60, 46, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(61, 47, 'assets/images/houses/amenities/amenity3.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(62, 47, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(63, 47, 'assets/images/houses/amenities/amenity17.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(64, 47, 'assets/images/houses/amenities/amenity22.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(65, 48, 'assets/images/houses/amenities/amenity8.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(66, 48, 'assets/images/houses/amenities/amenity5.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(67, 48, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(68, 48, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(69, 49, 'assets/images/houses/amenities/amenity19.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(70, 49, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(71, 49, 'assets/images/houses/amenities/amenity14.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(72, 49, 'assets/images/houses/amenities/amenity23.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(73, 50, 'assets/images/houses/amenities/amenity22.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(74, 50, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(75, 50, 'assets/images/houses/amenities/amenity15.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(76, 50, 'assets/images/houses/amenities/amenity12.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(77, 51, 'assets/images/houses/amenities/amenity7.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(78, 51, 'assets/images/houses/amenities/amenity23.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(79, 51, 'assets/images/houses/amenities/amenity12.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(80, 51, 'assets/images/houses/amenities/amenity11.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(81, 52, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(82, 52, 'assets/images/houses/amenities/amenity6.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(83, 52, 'assets/images/houses/amenities/amenity7.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(84, 52, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(85, 53, 'assets/images/houses/amenities/amenity3.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(86, 53, 'assets/images/houses/amenities/amenity13.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(87, 53, 'assets/images/houses/amenities/amenity8.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(88, 53, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(89, 54, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(90, 54, 'assets/images/houses/amenities/amenity4.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(91, 54, 'assets/images/houses/amenities/amenity12.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(92, 54, 'assets/images/houses/amenities/amenity17.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(93, 55, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(94, 55, 'assets/images/houses/amenities/amenity17.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(95, 55, 'assets/images/houses/amenities/amenity14.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(96, 55, 'assets/images/houses/amenities/amenity19.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(97, 56, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(98, 56, 'assets/images/houses/amenities/amenity6.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(99, 56, 'assets/images/houses/amenities/amenity22.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(100, 56, 'assets/images/houses/amenities/amenity4.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(101, 57, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(102, 57, 'assets/images/houses/amenities/amenity15.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(103, 57, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(104, 57, 'assets/images/houses/amenities/amenity5.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(105, 58, 'assets/images/houses/amenities/amenity14.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(106, 58, 'assets/images/houses/amenities/amenity16.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(107, 58, 'assets/images/houses/amenities/amenity3.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(108, 58, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(109, 59, 'assets/images/houses/amenities/amenity9.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(110, 59, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(111, 59, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(112, 59, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(113, 60, 'assets/images/houses/amenities/amenity16.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(114, 60, 'assets/images/houses/amenities/amenity19.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(115, 60, 'assets/images/houses/amenities/amenity13.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(116, 60, 'assets/images/houses/amenities/amenity14.jpg', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(117, 61, 'assets/images/houses/amenities/amenity17.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(118, 61, 'assets/images/houses/amenities/amenity3.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(119, 61, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(120, 61, 'assets/images/houses/amenities/amenity22.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(121, 62, 'assets/images/houses/amenities/amenity6.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(122, 62, 'assets/images/houses/amenities/amenity16.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(123, 62, 'assets/images/houses/amenities/amenity1.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(124, 62, 'assets/images/houses/amenities/amenity8.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(125, 63, 'assets/images/houses/amenities/amenity4.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(126, 63, 'assets/images/houses/amenities/amenity9.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(127, 63, 'assets/images/houses/amenities/amenity8.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(128, 63, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(129, 64, 'assets/images/houses/amenities/amenity5.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(130, 64, 'assets/images/houses/amenities/amenity9.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(131, 64, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(132, 64, 'assets/images/houses/amenities/amenity3.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(133, 65, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(134, 65, 'assets/images/houses/amenities/amenity16.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(135, 65, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(136, 65, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(137, 66, 'assets/images/houses/amenities/amenity5.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(138, 66, 'assets/images/houses/amenities/amenity12.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(139, 66, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(140, 66, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(141, 67, 'assets/images/houses/amenities/amenity7.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(142, 67, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(143, 67, 'assets/images/houses/amenities/amenity9.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(144, 67, 'assets/images/houses/amenities/amenity16.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(145, 68, 'assets/images/houses/amenities/amenity11.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(146, 68, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(147, 68, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(148, 68, 'assets/images/houses/amenities/amenity4.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(149, 69, 'assets/images/houses/amenities/amenity5.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(150, 69, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(151, 69, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(152, 69, 'assets/images/houses/amenities/amenity1.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(153, 70, 'assets/images/houses/amenities/amenity14.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(154, 70, 'assets/images/houses/amenities/amenity5.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(155, 70, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(156, 70, 'assets/images/houses/amenities/amenity9.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(157, 71, 'assets/images/houses/amenities/amenity16.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(158, 71, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(159, 71, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(160, 71, 'assets/images/houses/amenities/amenity1.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(161, 72, 'assets/images/houses/amenities/amenity23.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(162, 72, 'assets/images/houses/amenities/amenity5.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(163, 72, 'assets/images/houses/amenities/amenity7.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(164, 72, 'assets/images/houses/amenities/amenity6.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(165, 73, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(166, 73, 'assets/images/houses/amenities/amenity8.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(167, 73, 'assets/images/houses/amenities/amenity22.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(168, 73, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(169, 74, 'assets/images/houses/amenities/amenity15.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(170, 74, 'assets/images/houses/amenities/amenity5.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(171, 74, 'assets/images/houses/amenities/amenity16.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(172, 74, 'assets/images/houses/amenities/amenity7.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(173, 75, 'assets/images/houses/amenities/amenity17.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(174, 75, 'assets/images/houses/amenities/amenity18.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(175, 75, 'assets/images/houses/amenities/amenity22.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(176, 75, 'assets/images/houses/amenities/amenity3.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(177, 76, 'assets/images/houses/amenities/amenity14.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(178, 76, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(179, 76, 'assets/images/houses/amenities/amenity3.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(180, 76, 'assets/images/houses/amenities/amenity12.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(181, 77, 'assets/images/houses/amenities/amenity1.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(182, 77, 'assets/images/houses/amenities/amenity7.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(183, 77, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(184, 77, 'assets/images/houses/amenities/amenity12.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(185, 78, 'assets/images/houses/amenities/amenity15.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(186, 78, 'assets/images/houses/amenities/amenity2.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(187, 78, 'assets/images/houses/amenities/amenity22.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(188, 78, 'assets/images/houses/amenities/amenity10.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(189, 79, 'assets/images/houses/amenities/amenity7.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(190, 79, 'assets/images/houses/amenities/amenity20.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(191, 79, 'assets/images/houses/amenities/amenity13.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(192, 79, 'assets/images/houses/amenities/amenity21.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(193, 80, 'assets/images/houses/amenities/amenity15.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(194, 80, 'assets/images/houses/amenities/amenity8.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(195, 80, 'assets/images/houses/amenities/amenity13.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(196, 80, 'assets/images/houses/amenities/amenity23.jpg', '2024-12-23 09:22:31', '2024-12-23 09:22:31');
 
 -- --------------------------------------------------------
 
@@ -1208,7 +1513,13 @@ INSERT INTO `property_deals` (`id`, `property_id`, `start_date`, `start_time`, `
 (7, 28, '2024-05-29', '14:26:59', '2024-07-22', '11:44:48', 5000000.00, '₦', 'Annually', '2024-05-31 07:58:25', '2024-06-22 09:26:20'),
 (8, 3, '2024-05-29', '12:29:10', '2024-09-08', '21:38:13', 6361189.99, '₦', 'Annually', '2024-05-24 22:17:40', '2024-05-26 18:21:45'),
 (9, 34, '2024-07-03', '04:44:15', '2024-07-29', '04:34:22', 78635210.26, '$', 'Annually', '2024-06-19 18:20:08', '2024-05-26 12:58:50'),
-(10, 39, '2024-08-01', '22:41', '2024-09-22', '06:41', 3500000.00, '₦', 'Monthly', '2024-08-22 19:45:25', '2024-08-22 19:45:25');
+(10, 39, '2024-08-01', '22:41', '2024-09-22', '06:41', 3500000.00, '₦', 'Monthly', '2024-08-22 19:45:25', '2024-08-22 19:45:25'),
+(11, 45, '2016-02-07', '02:25:16', '1999-12-22', '02:28:18', 479283.00, '₦', 'Annually', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(12, 46, '1978-11-20', '20:28:46', '2024-07-05', '18:54:45', 723923.00, '₦', 'Annually', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(13, 47, '1990-01-03', '00:26:14', '1974-04-05', '14:16:45', 194165.00, '₦', 'Annually', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(14, 65, '2003-10-07', '04:48:39', '1975-05-09', '10:43:50', 739309.00, '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(15, 66, '1994-01-05', '23:21:20', '1999-08-31', '20:29:35', 962150.00, '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(16, 67, '2017-10-13', '01:50:08', '1990-09-12', '22:07:58', 358415.00, '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31');
 
 -- --------------------------------------------------------
 
@@ -1282,7 +1593,47 @@ INSERT INTO `property_payments` (`id`, `property_id`, `sequence`, `initial_pay`,
 (14, 35, 'Annually', 7443112.69, 5000000.00, '₦', 'Annually', '$', 'Monthly', '2024-06-23 19:20:39', '2024-06-12 04:57:51'),
 (15, 33, 'Annually', 5000000.00, 5000000.00, '₦', 'Monthly', '₦', 'Annually', '2024-06-17 04:40:49', '2024-05-27 02:15:19'),
 (16, 38, 'Monthly', 900000.00, 600000.00, '₦', 'Annually', '₦', 'Monthly', '2024-08-22 19:31:54', '2024-08-22 19:31:54'),
-(17, 40, 'Monthly', 2000000.00, 500000.00, '₦', 'Monthly', '₦', 'Monthly', '2024-08-27 14:42:16', '2024-08-27 14:42:16');
+(17, 40, 'Monthly', 2000000.00, 500000.00, '₦', 'Monthly', '₦', 'Monthly', '2024-08-27 14:42:16', '2024-08-27 14:42:16'),
+(18, 41, 'Single', 118450.00, 14715.00, '₦', 'Monthly', '₦', 'Annually', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(19, 42, 'Installments', 71656.00, 10717.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(20, 43, 'Installments', 75458.00, 49884.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(21, 44, 'Installments', 167337.00, 22596.00, '₦', 'Annually', '₦', 'Annually', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(22, 45, 'Single', 164194.00, 23336.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(23, 46, 'Single', 116566.00, 27020.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(24, 47, 'Single', 87748.00, 32208.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(25, 48, 'Installments', 64345.00, 48031.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(26, 49, 'Installments', 88255.00, 14146.00, '₦', 'Monthly', '₦', 'Annually', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(27, 50, 'Installments', 140094.00, 45823.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(28, 51, 'Single', 132421.00, 24670.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(29, 52, 'Installments', 71613.00, 38529.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(30, 53, 'Installments', 134216.00, 33860.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(31, 54, 'Installments', 168865.00, 10823.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(32, 55, 'Single', 53622.00, 13587.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(33, 56, 'Single', 113383.00, 21882.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(34, 57, 'Single', 75625.00, 26172.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(35, 58, 'Installments', 125342.00, 35841.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(36, 59, 'Installments', 183638.00, 32282.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(37, 60, 'Installments', 120225.00, 34252.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:29', '2024-12-23 09:22:29'),
+(38, 61, 'Installments', 128173.00, 33164.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(39, 62, 'Installments', 169450.00, 49554.00, '₦', 'Monthly', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(40, 63, 'Installments', 93818.00, 13110.00, '₦', 'Annually', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(41, 64, 'Installments', 115767.00, 44346.00, '₦', 'Monthly', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(42, 65, 'Single', 81560.00, 18364.00, '₦', 'Monthly', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(43, 66, 'Installments', 58040.00, 27564.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(44, 67, 'Single', 167065.00, 36364.00, '₦', 'Annually', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(45, 68, 'Single', 175966.00, 28579.00, '₦', 'Monthly', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(46, 69, 'Single', 62841.00, 32794.00, '₦', 'Monthly', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(47, 70, 'Installments', 186229.00, 14955.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(48, 71, 'Installments', 101112.00, 22444.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(49, 72, 'Single', 184268.00, 25795.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(50, 73, 'Installments', 169924.00, 44619.00, '₦', 'Monthly', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(51, 74, 'Installments', 65850.00, 38587.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(52, 75, 'Single', 100979.00, 33606.00, '₦', 'Monthly', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(53, 76, 'Installments', 87639.00, 47416.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(54, 77, 'Installments', 111870.00, 48380.00, '₦', 'Annually', '₦', 'Monthly', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(55, 78, 'Installments', 72037.00, 27721.00, '₦', 'Annually', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(56, 79, 'Installments', 143489.00, 49919.00, '₦', 'Annually', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31'),
+(57, 80, 'Single', 146905.00, 19723.00, '₦', 'Annually', '₦', 'Annually', '2024-12-23 09:22:31', '2024-12-23 09:22:31');
 
 -- --------------------------------------------------------
 
@@ -1412,7 +1763,28 @@ INSERT INTO `property_views` (`id`, `user_id`, `property_id`, `created_at`, `upd
 (27, NULL, 1, '2024-10-21 09:52:53', '2024-10-21 09:52:53'),
 (28, NULL, 1, '2024-10-25 15:24:35', '2024-10-25 15:24:35'),
 (29, NULL, 1, '2024-10-28 11:46:07', '2024-10-28 11:46:07'),
-(30, NULL, 27, '2024-11-19 10:20:09', '2024-11-19 10:20:09');
+(30, NULL, 27, '2024-11-19 10:20:09', '2024-11-19 10:20:09'),
+(31, NULL, 40, '2024-11-25 14:40:50', '2024-11-25 14:40:50'),
+(32, NULL, 75, '2024-12-23 10:29:19', '2024-12-23 10:29:19'),
+(33, NULL, 75, '2024-12-23 10:31:16', '2024-12-23 10:31:16'),
+(34, NULL, 75, '2024-12-23 10:32:16', '2024-12-23 10:32:16'),
+(35, NULL, 75, '2024-12-23 10:35:38', '2024-12-23 10:35:38'),
+(36, NULL, 75, '2024-12-23 10:36:19', '2024-12-23 10:36:19'),
+(37, NULL, 75, '2024-12-23 10:37:08', '2024-12-23 10:37:08'),
+(38, NULL, 75, '2024-12-23 10:37:55', '2024-12-23 10:37:55'),
+(39, NULL, 75, '2024-12-23 10:39:03', '2024-12-23 10:39:03'),
+(40, NULL, 79, '2024-12-23 10:42:01', '2024-12-23 10:42:01'),
+(41, NULL, 2, '2024-12-23 12:44:45', '2024-12-23 12:44:45'),
+(42, NULL, 65, '2024-12-23 13:04:09', '2024-12-23 13:04:09'),
+(43, NULL, 76, '2024-12-23 13:05:35', '2024-12-23 13:05:35'),
+(44, NULL, 76, '2024-12-23 13:06:50', '2024-12-23 13:06:50'),
+(45, NULL, 3, '2024-12-23 13:07:26', '2024-12-23 13:07:26'),
+(46, NULL, 2, '2024-12-23 13:08:39', '2024-12-23 13:08:39'),
+(47, NULL, 5, '2024-12-23 13:09:29', '2024-12-23 13:09:29'),
+(48, NULL, 5, '2024-12-23 13:10:55', '2024-12-23 13:10:55'),
+(49, NULL, 76, '2024-12-23 13:12:10', '2024-12-23 13:12:10'),
+(50, NULL, 76, '2024-12-23 13:12:31', '2024-12-23 13:12:31'),
+(51, NULL, 5, '2024-12-23 13:12:48', '2024-12-23 13:12:48');
 
 -- --------------------------------------------------------
 
@@ -1706,7 +2078,8 @@ INSERT INTO `trendings` (`id`, `property_id`, `status`, `created_at`, `updated_a
 (37, 33, 'trending', '2024-07-24 08:00:07', '2024-07-24 08:00:07'),
 (40, 27, 'trending', '2024-07-24 18:34:45', '2024-07-24 18:34:45'),
 (42, 35, 'trending', '2024-08-11 11:40:18', '2024-08-11 11:40:18'),
-(43, 1, 'trending', '2024-08-14 14:12:41', '2024-08-14 14:12:41');
+(43, 1, 'trending', '2024-08-14 14:12:41', '2024-08-14 14:12:41'),
+(45, 28, 'trending', '2024-11-27 20:42:38', '2024-11-27 20:42:38');
 
 -- --------------------------------------------------------
 
@@ -1743,6 +2116,7 @@ CREATE TABLE `users` (
   `instagram` varchar(255) DEFAULT NULL,
   `gender` enum('male','female') DEFAULT NULL,
   `status` enum('verified','unverified') NOT NULL DEFAULT 'unverified',
+  `followers_count` bigint(20) NOT NULL DEFAULT 0,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1752,67 +2126,67 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_type`, `email`, `email_verified_at`, `password`, `firstname`, `lastname`, `business_name`, `business_image`, `photo`, `country_code`, `phone`, `whatApp`, `state`, `axis`, `about_org`, `org_service`, `org_state`, `org_desc`, `org_axis`, `business_cat`, `experience`, `fb`, `twitter`, `linkedIn`, `instagram`, `gender`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(9, 'tenant', 'salawubabatunde69@gmail.com', NULL, '$2y$12$Jps5HdQzBiXXLGtdgQhDXOzkGjDtuDXCTuKNbCyEnL9HSNsvljjdu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-05-29 07:00:22', '2024-09-08 16:08:55'),
-(15, 'landlord', 'ajib@ng.com', NULL, '$2y$12$xXOBJ7pYsD/h6X640ZACeOo4L0.hMaNQ9ao3ugqymc.Z7eDDW5KCu', 'Ajibola', 'Adekunle', 'BeeDeeBee Ventures', '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', 234, '09034578622', '09034578622', 'OYO', '+234', NULL, 'Great', 'OYO', NULL, '+234', '+234', '8', 'stunde@fb.com', 'stunde@twitter.com', 'salawutunde-104b', NULL, NULL, 'verified', NULL, '2024-05-29 09:29:05', '2024-09-08 16:10:08'),
-(18, 'service_provider', 'stunde@gmail.com', NULL, '$2y$12$WVy1LmbqDqgzVbD1ItFbSO98bHUVLjA9R4iIAoHw4.vq1I3/FKAei', 'Adekunle', 'Gabriel', NULL, NULL, '/assets/admin/images/photo/service12.png', NULL, '08138504844', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-06-22 15:41:06', '2024-08-21 15:39:34'),
-(21, 'admin', 'admin@gmail.com', NULL, '$2y$12$ySdhBN2dG5RO5hW5726kXek99zSd9QrYQB.YXz7hfFsmVSNXTF3va', 'Essential', 'Admin', NULL, NULL, '/assets/admin/images/photo/service13.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-07-10 23:13:41', '2024-08-27 14:10:33'),
-(23, 'agent', 'jola@gmail.com', NULL, '$2y$12$wnQuGbZXWXD/8Er3ZcjcuuYp4xxjBj2l6Vcwq8/lNCqAMbQDNPiUi', 'Jolayemi', 'Olaiya', NULL, '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', NULL, '08077889832', '09087459822', 'Ibadan', 'Iwo road', 'At Jolayemi Global we take every part of property negotiation with full precaution and guarantee customer\'s satisfaction.', NULL, 'Ibadan', NULL, 'Bashorun', NULL, '7', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-01 06:48:59', '2024-08-01 06:48:59'),
-(24, 'agent', 'kalglo@gmail.com', NULL, '$2y$12$/JE7neoCHOQbzXB7yjIDPuendJt.BtXIvzH86AOIgSnKYXhxEY1xe', 'Kalu ', 'Uche', NULL, '/assets/images/RS1.jpg', '/assets/admin/images/photo/service12.png', NULL, '07067543213', NULL, NULL, NULL, 'We are very good at whatwe do rregardless of the circumstances\\', NULL, 'Lagos', NULL, 'Ikeja', NULL, '10', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-08-01 06:52:12', '2024-08-21 15:39:47'),
-(25, 'agent', 'ikekal@gmail.com', NULL, '$2y$12$MKkn1Ha2DD7nKzgkqv7OF./ira6aNNujxvDUS8NlLN4ZywurHcpv2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-20 20:00:52', '2024-08-20 20:00:52'),
-(34, 'tenant', 'lukasade@gmail.com', NULL, '$2y$12$pFkERtrsKNH5iXwOFBBQ2OG3/8K1w8XLvh6WceMlR.2wF57Y0m.eS', 'Adeyemi', 'Lukas', NULL, NULL, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724253590/e-properties/users/rk4hcqtu6bpkcgr8ebex.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL, NULL, NULL, 'verified', NULL, '2024-08-21 14:19:49', '2024-08-27 14:10:28'),
-(43, 'agent', 'ogbevo@gmail.com', NULL, '$2y$12$S6L9YHpx46S8QxdpRAimGu.XlLOpNHNZMirgbNCvPBT6AHPsFUFW.', 'Ogbeviro', 'Eunice', NULL, NULL, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724254343/e-properties/users/k4bjzqexfisabcqzvwg3.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '15', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-21 14:32:22', '2024-08-21 14:32:24'),
-(54, 'service_provider', 'ejiwil@yahoo.com', NULL, '$2y$12$WukESHc1qwM3OfsQ.nf9fuaxDvMJ/BhdFL0KRX6LUH7CBHEPx3.Um', 'Williams', 'Ejiroh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL, NULL, NULL, 'unverified', NULL, '2024-08-21 14:53:23', '2024-08-21 14:53:23'),
-(55, 'service_provider', 'xjohns@example.org', NULL, '$2y$12$Rm9u31EQwVKwY9UU0fGF9ukRrWL0oMER/xfj2gdWBGoqq0EHE9iQy', 'Janessa', 'Marquardt', 'Schaefer, Herzog and Gleichner', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 10, '734.309.0940', NULL, 'Florida', NULL, 'Quo cupiditate illo iusto ratione asperiores.', 'neque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'Xwq2gFziQK', '2024-10-09 21:35:40', '2024-10-09 21:35:40'),
-(56, 'service_provider', 'heller.delbert@example.net', NULL, '$2y$12$4/MKP.4BnbhqJO1zvPTZA.MpfBqFx/s8CUU.DXGpf82RgArLGAiCe', 'Leanna', 'Cormier', 'Okuneva-Emard', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 39, '680.886.3666', NULL, 'Wyoming', NULL, 'Ut libero magni excepturi placeat aut atque quisquam.', 'illo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'K0sDKbijp4', '2024-10-09 21:35:41', '2024-10-09 21:35:41'),
-(57, 'service_provider', 'carroll.amari@example.org', NULL, '$2y$12$.9BBeHtEuIjCHOWgOdPEJeT3dNp7706P6cTP.UAYNTWieqS.d2M4S', 'Carmel', 'Pacocha', 'Connelly, Rau and Grady', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 41, '478.436.8609', NULL, 'Tennessee', NULL, 'Quibusdam et repellendus sit rerum enim eos.', 'cupiditate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'xIFzHRsiOg', '2024-10-09 21:35:41', '2024-10-09 21:35:41'),
-(58, 'service_provider', 'gerlach.ashlynn@example.net', NULL, '$2y$12$z0cKF/IP86STANCtHW7sKe65q7PwKiGtz3iRMdc..5vxlLyDOeGKm', 'Gerson', 'Legros', 'Wiza-Zieme', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gifhttps://res.cloudinary.com/dnqmjzvy3/image/upload/v1724254343/e-properties/users/k4bjzqexfisabcqzvwg3.jpg', 35, '347.787.5087', NULL, 'New Mexico', NULL, 'Blanditiis ab laudantium laudantium necessitatibus ea et mollitia quia.', 'quibusdam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'vXI0er129M', '2024-10-09 21:35:42', '2024-10-09 21:35:42'),
-(59, 'service_provider', 'hill.ray@example.net', NULL, '$2y$12$LI3qi9g2eLdSmL0Rrxr26uEk6EWxEEOAeOeCG1xE2XmiLxL0cN9I2', 'Hal', 'Walter', 'Schimmel-Macejkovic', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 50, '1-772-616-4555', NULL, 'Alaska', NULL, 'At accusamus quia fugiat porro.', 'dolores', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'ZPSwSFYIZc', '2024-10-09 21:35:42', '2024-10-09 21:35:42'),
-(60, 'service_provider', 'simonis.baron@example.com', NULL, '$2y$12$qpbQne/K34onl05JOX5ApucdoHKBvUsza3QQIhgjeRxMxQHUhzOLi', 'Teagan', 'Johns', 'Bernier, Kihn and Wolff', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 29, '512.916.1034', NULL, 'Missouri', NULL, 'Aut et eum quasi ipsum.', 'labore', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'tpLR8ZN8oT', '2024-10-09 21:35:43', '2024-10-09 21:35:43'),
-(61, 'service_provider', 'tlangosh@example.org', NULL, '$2y$12$GSpZawtTJCWzjjyFRq1kCOKFZFgnIuCFQescNkhevqyXcK9JMgzsu', 'Carmel', 'Dickens', 'Lind-Hickle', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 94, '1-219-587-9493', NULL, 'New Jersey', NULL, 'Exercitationem consequuntur assumenda architecto et dolorum.', 'deleniti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'cYlJXnW6ei', '2024-10-09 21:35:43', '2024-10-09 21:35:43'),
-(62, 'service_provider', 'justice22@example.org', NULL, '$2y$12$9/mGXP8FGvap2mIyw2TY.u/vU0QIha9v7KJz7jdlkWVXrfLyuoHNe', 'Efren', 'O\'Kon', 'Moen, Hayes and Harris', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 24, '480-675-4186', NULL, 'Maine', NULL, 'Quia nobis nobis at harum.', 'suscipit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'A8VP094lnj', '2024-10-09 21:35:44', '2024-10-09 21:35:44'),
-(63, 'service_provider', 'jan.ward@example.org', NULL, '$2y$12$mltzrmVDWWcKocONfxzCTe31peM0o19YqHJ6rDDAQkQnSIzKIUAKO', 'Elenora', 'Harber', 'Brekke LLC', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 17, '+17577378459', NULL, 'North Carolina', NULL, 'Nemo vero placeat ipsam maiores aut est voluptas repellendus.', 'vero', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'TJhbDZo4zA', '2024-10-09 21:35:44', '2024-10-09 21:35:44'),
-(64, 'service_provider', 'nemard@example.org', NULL, '$2y$12$XyN1BW2aYB7JjV0dkeyfFeA.zLAn6cZQQTUCTAGIQ8YZqOOCbR9K.', 'Elsie', 'Crist', 'Jenkins-Towne', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 16, '857-955-0021', NULL, 'Utah', NULL, 'Quis quia laudantium omnis.', 'amet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'CqyMzBGXmf', '2024-10-09 21:35:44', '2024-10-09 21:35:44'),
-(65, 'service_provider', 'ujones@example.net', NULL, '$2y$12$dulZFlqshXw2qobyOmkRVezFbGGTiyY9i3.J/dmz1HAERJ7jEWwd2', 'Brigitte', 'Kutch', 'Bartoletti, Walter and Jacobson', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 49, '1-938-912-6407', NULL, 'Louisiana', NULL, 'Quia mollitia in explicabo iusto qui.', 'in', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', '7x0cvGYA9A', '2024-10-09 21:35:45', '2024-10-09 21:35:45'),
-(66, 'service_provider', 'mraz.nick@example.com', NULL, '$2y$12$k7jWAGHnmaOJpk68pkVSRe13aXCaDx4/lmRwx9dVgAAuqks3tQ5Wq', 'Deanna', 'Cormier', 'Aufderhar-Moore', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 91, '949.646.9871', NULL, 'Massachusetts', NULL, 'Dolores sed expedita quia et et et repellat.', 'quos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'Dg94NYEx82', '2024-10-09 21:35:45', '2024-10-09 21:35:45'),
-(67, 'service_provider', 'ilene44@example.net', NULL, '$2y$12$4QiOPKqeld3d7UA7Buu00eGs.GOMI/iCjHjQYBz.ju0dKzwxqEN4C', 'Alyce', 'Larkin', 'Hauck-Wolff', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 28, '+19412912850', NULL, 'Maine', NULL, 'Aut et impedit facilis sequi officia animi ducimus.', 'soluta', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'W9jYa03BkK', '2024-10-09 21:35:46', '2024-10-09 21:35:46'),
-(68, 'service_provider', 'hudson.destin@example.net', NULL, '$2y$12$O2SSI1nqbl1exE5xjFxe9.PqFRWQ.Plv6wGFvGOZ2MUAEOSsUwTri', 'Lupe', 'Wiza', 'Rice, Konopelski and Walter', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 96, '1-724-297-9455', NULL, 'Iowa', NULL, 'Ut dicta molestias exercitationem voluptatem.', 'exercitationem', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', '34gl5cbFMV', '2024-10-09 21:35:46', '2024-10-09 21:35:46'),
-(69, 'service_provider', 'skyla.abshire@example.net', NULL, '$2y$12$MRjms/gPfR5xQq5EJxXXGuv/XeiYAhoaepfdjmje1VZcM./.bBvKC', 'Oma', 'Leannon', 'Dibbert, Mann and McGlynn', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 66, '+1-534-616-7605', NULL, 'Louisiana', NULL, 'Earum aliquid illo placeat.', 'veritatis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'L8xjQPTqmu', '2024-10-09 21:35:47', '2024-10-09 21:35:47'),
-(70, 'service_provider', 'erica52@example.net', NULL, '$2y$12$ALfizAYtWPwDneqaeevFGu6KtA0Hp6a4Y6mqmYFw2wqtzh0djm8pa', 'Saul', 'Franecki', 'Zboncak Ltd', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 48, '+1 (980) 364-7240', NULL, 'Mississippi', NULL, 'Molestiae sit officia exercitationem ut et nostrum.', 'qui', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'xZQhch7UeE', '2024-10-09 21:35:47', '2024-10-09 21:35:47'),
-(71, 'service_provider', 'koch.modesto@example.net', NULL, '$2y$12$xmhQAcn2UG0jjYNFwJWMJeDllyQoaBBGqkpQaOferHfRaPfRjsle.', 'Dakota', 'Considine', 'Cruickshank, Mills and Jaskolski', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 56, '1-272-781-1059', NULL, 'Wyoming', NULL, 'Sit veritatis natus quia vero sit qui dignissimos.', 'cumque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'FlWP0SQmZw', '2024-10-09 21:35:48', '2024-10-09 21:35:48'),
-(72, 'service_provider', 'juston.okon@example.net', NULL, '$2y$12$xMDPIxMxcqGSQsh0nZKFpu0oARIV2ScoyM9LtEZeaV/sD3DLxweom', 'Dorcas', 'Kihn', 'Rutherford, Maggio and Boyle', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 5, '+1 (401) 745-0501', NULL, 'Michigan', NULL, 'Facilis nihil sit eligendi quas voluptas illo quis.', 'aut', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'iLjdlZXMIb', '2024-10-09 21:35:48', '2024-10-09 21:35:48'),
-(73, 'service_provider', 'thad58@example.org', NULL, '$2y$12$KRG8K9vkYUFssAdDq1I7rO8XurywdPYVY8gb8l53zVL7eT8JdROIS', 'Jesus', 'Doyle', 'Gutmann Group', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 51, '458.272.6680', NULL, 'Maryland', NULL, 'Assumenda et sint optio ut temporibus voluptas saepe sed.', 'excepturi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'KvcH0Mf7k3', '2024-10-09 21:35:48', '2024-10-09 21:35:48'),
-(74, 'service_provider', 'barrows.michel@example.org', NULL, '$2y$12$ByUxByqw0Lmn7UraSZMOu.4junpQa2HEhh.GKbDnP9YrFvKITkVXy', 'Lourdes', 'Lockman', 'Keebler Ltd', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 39, '+1 (912) 363-2014', NULL, 'Utah', NULL, 'Vel rerum numquam ea occaecati.', 'maiores', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'e4wK3zehuy', '2024-10-09 21:35:49', '2024-10-09 21:35:49'),
-(75, 'service_provider', 'domenico.jacobi@example.org', NULL, '$2y$12$xlPeucUlJQ6xLEgRU7K6iecj5f9Tev3s3fvm1xSI.7tQGtR5/cn.W', 'Geovanni', 'Stehr', 'Doyle-Murphy', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 24, '567.646.8894', NULL, 'Tennessee', NULL, 'Fugit consequatur molestiae optio quas.', 'commodi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'DJYKN5AppS', '2024-10-09 21:35:50', '2024-10-09 21:35:50'),
-(76, 'service_provider', 'baby61@example.org', NULL, '$2y$12$ySZqlKUmkNDck4NOAtjDbOs94okGlabDKOv.4OtewI4a9TPLAusFC', 'Brannon', 'Heathcote', 'Crist-Schmitt', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 60, '940-348-8145', NULL, 'Idaho', NULL, 'Minima perspiciatis aliquid commodi omnis id amet.', 'corporis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'R2gGiCn8OX', '2024-10-09 21:35:50', '2024-10-09 21:35:50'),
-(77, 'service_provider', 'hegmann.earline@example.com', NULL, '$2y$12$wQWYf6nKjPuv0CLtpiPYsecMEQ76U6lUg/MSH6jpZwKNVp2.ct5Aq', 'Felicita', 'Feil', 'Larkin, Howell and Schaefer', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 11, '+17543928425', NULL, 'North Carolina', NULL, 'Sequi officiis enim praesentium impedit magnam aperiam est nostrum.', 'inventore', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'VViUKTAdmL', '2024-10-09 21:35:51', '2024-10-09 21:35:51'),
-(78, 'service_provider', 'adan10@example.com', NULL, '$2y$12$PTgLgU5HbnblqfiVxp38WuiNEb99SnheyMUwUgAUceqTFnhPBLNau', 'Otha', 'Armstrong', 'Sawayn, Zulauf and Gusikowski', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 6, '1-856-697-2287', NULL, 'Florida', NULL, 'Fugiat vel ipsam iure sunt quia ut.', 'nesciunt', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'AukGc9OFZE', '2024-10-09 21:35:51', '2024-10-09 21:35:51'),
-(79, 'service_provider', 'walton82@example.org', NULL, '$2y$12$H1.3fF7Ty79GPrJNYH4sHeaul/LqTdthgRE5eUMPJ9kqDOojb588u', 'Lue', 'Donnelly', 'Brakus and Sons', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 33, '937-978-0008', NULL, 'Kentucky', NULL, 'Veritatis ea dolores odio nesciunt omnis sed.', 'harum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', '5RI3FwQDN0', '2024-10-09 21:35:51', '2024-10-09 21:35:51'),
-(80, 'service_provider', 'berge.noelia@example.com', NULL, '$2y$12$j8rjIFuySIRMDBpYhLGy1OVqwbKTncA.aL2qA3WDxeaFOhj6aqJfW', 'Regan', 'Okuneva', 'Kutch, Romaguera and Sawayn', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 49, '820-306-6217', NULL, 'Vermont', NULL, 'Eos sed error officiis accusamus velit.', 'blanditiis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'yydNvqx12h', '2024-10-09 21:35:52', '2024-10-09 21:35:52'),
-(81, 'service_provider', 'wbatz@example.net', NULL, '$2y$12$odCxy.O86i5S0vUZjmD1yuH1urbVt0x4iPSpzLZxIbHnO4oDlKmHq', 'Aniyah', 'Greenholt', 'Murphy, Hettinger and Pouros', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 2, '+1 (854) 447-4511', NULL, 'North Carolina', NULL, 'Dignissimos quidem laudantium natus est ea ut quo velit.', 'at', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'Kdmbf7lEj9', '2024-10-09 21:35:52', '2024-10-09 21:35:52'),
-(82, 'service_provider', 'emmanuel17@example.net', NULL, '$2y$12$CQkPUtmTo6snDg.vEh0pNO.NtIyySAOQUmHc3IIoSXvzia5IdA8ry', 'Carrie', 'Kulas', 'Shanahan, Mills and Jacobs', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 55, '(701) 216-3742', NULL, 'Maine', NULL, 'Omnis laborum asperiores est laborum nisi aliquam dolore.', 'est', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'xRr6ZCaH59', '2024-10-09 21:35:53', '2024-10-09 21:35:53'),
-(83, 'service_provider', 'arvid15@example.org', NULL, '$2y$12$Iy5v0A.UWp5EOtGldws1KuvVuPcpFlbstSUG3q0BrvI0w0IP8b6qG', 'Dayana', 'Jacobs', 'Langosh PLC', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 62, '+16518440552', NULL, 'Rhode Island', NULL, 'Dolores dolorem culpa incidunt nihil.', 'ut', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'uBz7uewcc1', '2024-10-09 21:35:53', '2024-10-09 21:35:53'),
-(84, 'service_provider', 'magnus26@example.net', NULL, '$2y$12$kL/RxsbJdHMzDuXzOQefP.nd1hO9XzPZXgiGpZI2aPVaeLgsSjyOW', 'Loraine', 'Considine', 'Price Inc', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 29, '925.348.1941', NULL, 'Georgia', NULL, 'Aut ullam iure officia pariatur.', 'nemo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'C8MnGgwFnq', '2024-10-09 21:35:54', '2024-10-09 21:35:54'),
-(85, 'service_provider', 'dixie.toy@example.com', NULL, '$2y$12$6HASlpTdGDI65qLzQM776eN4sSnBLU0bWw0Xb7ztHHXN3Ayx9V1MW', 'Thelma', 'Runolfsson', 'Herman-Lowe', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 12, '+12832862402', NULL, 'Indiana', NULL, 'Neque numquam porro beatae est labore aliquam.', 'inventore', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'kyqGGiTZqC', '2024-10-09 21:35:55', '2024-10-09 21:35:55'),
-(86, 'service_provider', 'rocio.king@example.net', NULL, '$2y$12$6IrgH1ZAVfW4N857AnM.puVg8rRLZv8//YvHpshi6t17QKy.UjAka', 'Gabriella', 'Jakubowski', 'Torp-Weber', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 62, '478-747-5472', NULL, 'Alabama', NULL, 'Dolor omnis sed quia nobis.', 'quis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'kgv4POmn1z', '2024-10-09 21:35:55', '2024-10-09 21:35:55'),
-(87, 'service_provider', 'tianna.koelpin@example.org', NULL, '$2y$12$MjDx8MlteSUaFS2032LIs.bfAC8apKd/d9LuY7QaWzlhkdqAJGUgu', 'Dejah', 'Moore', 'O\'Kon-Greenholt', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 72, '512.481.8098', NULL, 'Connecticut', NULL, 'Mollitia harum esse eaque dolores illum voluptatem beatae rerum.', 'ut', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'bF9J6GCkcw', '2024-10-09 21:35:56', '2024-10-09 21:35:56'),
-(88, 'service_provider', 'bernard.schoen@example.com', NULL, '$2y$12$oEY2AN6FtnlFabk28bVHUu5ooVdytKc2sa7ONrPR1zUX6yYpw/l/m', 'Audie', 'Ryan', 'Oberbrunner Ltd', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 5, '+1-360-990-6018', NULL, 'Rhode Island', NULL, 'Labore veritatis quod doloremque dolor molestiae.', 'non', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'UInPnnPTzU', '2024-10-09 21:35:56', '2024-10-09 21:35:56'),
-(89, 'service_provider', 'luisa12@example.com', NULL, '$2y$12$CvQHF3p03M5AnwyHIrHI9uI51oRPvEdVYbGy8cli1ua4T0HtSUoHq', 'Bailee', 'Armstrong', 'Fritsch Ltd', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 70, '551.969.9563', NULL, 'Hawaii', NULL, 'Et suscipit dolores ipsa et.', 'consectetur', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'oM98Nh9L82', '2024-10-09 21:35:57', '2024-10-09 21:35:57'),
-(90, 'service_provider', 'ayla15@example.org', NULL, '$2y$12$hCU6hwd0kGyyl5xXpnvJEebgCIURZIQfbeXr//DJHg4P5P2iSO62W', 'Allene', 'Sporer', 'Hodkiewicz-Fisher', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 44, '1-779-340-1623', NULL, 'Louisiana', NULL, 'Expedita voluptates vel qui voluptate.', 'saepe', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'n1xlpn9hto', '2024-10-09 21:35:57', '2024-10-09 21:35:57'),
-(91, 'service_provider', 'christy.tromp@example.com', NULL, '$2y$12$lPmpZAvTwQB6cGPjS6V0UuSC7Pu4XV.tekeixXE5cdl3G9Mf.l53y', 'Lempi', 'Abshire', 'Grimes and Sons', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 43, '(503) 333-3208', NULL, 'Nevada', NULL, 'Ut laboriosam ipsam praesentium sint tempora.', 'quia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'VmBctgjBOO', '2024-10-09 21:35:58', '2024-10-09 21:35:58'),
-(92, 'service_provider', 'spencer.kelsie@example.org', NULL, '$2y$12$fgI/MVkxjZ2Vu7Y2qoYOOufeGhW8AIIEA2f3B1pevn74qICGXvaFK', 'Weldon', 'Willms', 'Morar, Lubowitz and McKenzie', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 41, '208-956-1953', NULL, 'Vermont', NULL, 'Ab accusamus assumenda modi consequuntur.', 'ducimus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'UwFGvG8PLy', '2024-10-09 21:35:58', '2024-10-09 21:35:58'),
-(93, 'service_provider', 'sister12@example.net', NULL, '$2y$12$KHVB7LVVAo0ofTGbiZtgY.36DJLMAKFp8qtGQv.V96JXIRv/UwCJq', 'Darlene', 'Hessel', 'Graham Inc', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 95, '732-751-0258', NULL, 'South Dakota', NULL, 'Suscipit distinctio itaque qui harum doloremque consequatur.', 'veniam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'GJKwR5tHFg', '2024-10-09 21:35:59', '2024-10-09 21:35:59'),
-(94, 'service_provider', 'jade.trantow@example.net', NULL, '$2y$12$EqkM.nwewpRO2ojx.A2HtOzocTrlHKO2ZQCbgwpz1frcHMmV43yDi', 'Jovanny', 'Kemmer', 'Huels-Bernhard', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 57, '+1 (352) 898-4173', NULL, 'Arkansas', NULL, 'Officiis aut necessitatibus qui placeat.', 'pariatur', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'k9NzG9n9yO', '2024-10-09 21:35:59', '2024-10-09 21:35:59'),
-(95, 'service_provider', 'vivienne.kuhn@example.com', NULL, '$2y$12$ikao3sodBD.9JsW4IzH1COh7.PsyqKOAN0.ps4QJH6aqTxcj2v7fS', 'Hermina', 'Frami', 'Heaney Ltd', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 39, '972.347.9693', NULL, 'Alaska', NULL, 'Officia in ex eos quo veritatis.', 'iusto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'tONFZS5Mlg', '2024-10-09 21:35:59', '2024-10-09 21:35:59'),
-(96, 'service_provider', 'satterfield.garry@example.org', NULL, '$2y$12$UCldIf6MBcMpgUzgsTZGc.qAKKnLH4DNMuOQX76Y/Z.qKmBJJeUDG', 'Daphne', 'Osinski', 'Ondricka Group', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 18, '(470) 657-2942', NULL, 'Washington', NULL, 'Omnis voluptas nostrum illum impedit.', 'maiores', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'FIFq6KX7hO', '2024-10-09 21:36:00', '2024-10-09 21:36:00'),
-(97, 'service_provider', 'shane.pagac@example.com', NULL, '$2y$12$ib7PpU0e3QEhzb4oTahz2OQ3kg07T.jJ1fIt3IGKBkIW7LegMFkG2', 'Jarret', 'Quitzon', 'Abernathy, Okuneva and Hane', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 5, '+1-678-631-8790', NULL, 'Rhode Island', NULL, 'Nihil recusandae cum expedita explicabo rerum dolorem explicabo inventore.', 'nihil', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'FqqwDhRYIf', '2024-10-09 21:36:00', '2024-10-09 21:36:00'),
-(98, 'service_provider', 'malcolm.berge@example.com', NULL, '$2y$12$9VUbLRusBvkKToBK5yxfK.1CvHycRRuXW8jor1wkg2PtHDYtz6b7a', 'Lavinia', 'Reynolds', 'Kuvalis-Keebler', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 35, '+1-216-860-7117', NULL, 'Nebraska', NULL, 'Maxime laboriosam dolor adipisci vitae.', 'totam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'WNtdiTBAxD', '2024-10-09 21:36:01', '2024-10-09 21:36:01'),
-(99, 'service_provider', 'west.leone@example.org', NULL, '$2y$12$lDWBx0egMv6SA8GcyZn1u.Giiupnam5gG8rIWPKtfToeA4Kdys4dq', 'Alexa', 'Macejkovic', 'Schoen and Sons', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 87, '1-231-401-8838', NULL, 'New Mexico', NULL, 'Non ipsam eum autem doloribus quos reiciendis.', 'rerum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'yeoPpIntex', '2024-10-09 21:36:01', '2024-10-09 21:36:01'),
-(100, 'service_provider', 'hipolito.spinka@example.org', NULL, '$2y$12$9o9A35DNdbaCr8hUgv/uqOr/F.OZUEhIWkddM8lOgT6CYtK3V0Aha', 'Dylan', 'Hauck', 'Dibbert-Kling', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 27, '650-267-4852', NULL, 'Missouri', NULL, 'Doloremque impedit nobis corporis sit incidunt.', 'totam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 's9lMTrI06s', '2024-10-09 21:36:02', '2024-10-09 21:36:02'),
-(101, 'service_provider', 'royal42@example.org', NULL, '$2y$12$WVXpAkS/3kVxvn3DSZiyuuVrrLxxZBZkdRVivy9AB7W6Y80EWj4L2', 'Sylvester', 'Zemlak', 'Ledner Group', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 45, '708-592-0309', NULL, 'Kansas', NULL, 'Nulla quae soluta et ipsa consequuntur alias.', 'eos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'TGpSJbyvCW', '2024-10-09 21:36:02', '2024-10-09 21:36:02'),
-(102, 'service_provider', 'parker.giovanna@example.net', NULL, '$2y$12$r4NXjWRmi.9JYs5/uRVaO.eM3nUb529EQN77KADOySWcTTdXe62rO', 'Constantin', 'Conroy', 'Kerluke Ltd', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 39, '(501) 658-5149', NULL, 'Florida', NULL, 'Illo autem magni aut quia quo non sapiente.', 'veritatis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 'wq1OTjhA8L', '2024-10-09 21:36:02', '2024-10-09 21:36:02'),
-(103, 'service_provider', 'alena.bahringer@example.net', NULL, '$2y$12$16uV0bIiTVjnIlHhJGctxOk4yk/dbfyzXzt3HD6NsGptR/UWcchQW', 'Colleen', 'Renner', 'Sauer and Sons', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 79, '+1 (828) 600-2162', NULL, 'Washington', NULL, 'Exercitationem laudantium nobis dignissimos id amet dolor qui.', 'eveniet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', '72RLDBaTeN', '2024-10-09 21:36:03', '2024-10-09 21:36:03'),
-(104, 'service_provider', 'nico.ankunding@example.com', NULL, '$2y$12$awG9AGCuLufCZg/LhIVDwe9F7.LdCSRDCmKgsJRWW3QEV7PDfqjKu', 'Christophe', 'Thiel', 'Zemlak, Veum and Reichel', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 70, '(747) 546-9298', NULL, 'Massachusetts', NULL, 'Voluptas ab in ea enim repellat debitis quos explicabo.', 'sunt', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 'rxrZSTidO7', '2024-10-09 21:36:03', '2024-10-09 21:36:03');
+INSERT INTO `users` (`id`, `user_type`, `email`, `email_verified_at`, `password`, `firstname`, `lastname`, `business_name`, `business_image`, `photo`, `country_code`, `phone`, `whatApp`, `state`, `axis`, `about_org`, `org_service`, `org_state`, `org_desc`, `org_axis`, `business_cat`, `experience`, `fb`, `twitter`, `linkedIn`, `instagram`, `gender`, `status`, `followers_count`, `remember_token`, `created_at`, `updated_at`) VALUES
+(9, 'tenant', 'salawubabatunde69@gmail.com', NULL, '$2y$12$Jps5HdQzBiXXLGtdgQhDXOzkGjDtuDXCTuKNbCyEnL9HSNsvljjdu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, 'verified', 0, NULL, '2024-05-29 07:00:22', '2024-09-08 16:08:55'),
+(15, 'landlord', 'ajib@ng.com', NULL, '$2y$12$xXOBJ7pYsD/h6X640ZACeOo4L0.hMaNQ9ao3ugqymc.Z7eDDW5KCu', 'Ajibola', 'Adekunle', 'BeeDeeBee Ventures', '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', 234, '09034578622', '09034578622', 'OYO', '+234', NULL, 'Great', 'OYO', NULL, '+234', '+234', '8', 'stunde@fb.com', 'stunde@twitter.com', 'salawutunde-104b', NULL, NULL, 'verified', 1, NULL, '2024-05-29 09:29:05', '2024-12-06 13:51:27'),
+(18, 'service_provider', 'stunde@gmail.com', NULL, '$2y$12$WVy1LmbqDqgzVbD1ItFbSO98bHUVLjA9R4iIAoHw4.vq1I3/FKAei', 'Adekunle', 'Gabriel', NULL, NULL, '/assets/admin/images/photo/service12.png', NULL, '08138504844', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9', NULL, NULL, NULL, NULL, NULL, 'verified', 1, NULL, '2024-06-22 15:41:06', '2024-12-06 13:49:57'),
+(21, 'admin', 'admin@gmail.com', NULL, '$2y$12$ySdhBN2dG5RO5hW5726kXek99zSd9QrYQB.YXz7hfFsmVSNXTF3va', 'Essential', 'Admin', NULL, NULL, '/assets/admin/images/photo/service13.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'We are very good at whatwe do rregardless of the circumstances\\', NULL, NULL, '10', NULL, NULL, NULL, NULL, NULL, 'verified', 0, NULL, '2024-07-10 23:13:41', '2024-08-27 14:10:33'),
+(23, 'agent', 'jola@gmail.com', NULL, '$2y$12$wnQuGbZXWXD/8Er3ZcjcuuYp4xxjBj2l6Vcwq8/lNCqAMbQDNPiUi', 'Jolayemi', 'Olaiya', NULL, '/assets/images/properties-1.png', '/assets/admin/images/photo/service11.png', NULL, '08077889832', '09087459822', 'Ibadan', 'Iwo road', 'At Jolayemi Global we take every part of property negotiation with full precaution and guarantee customer\'s satisfaction.', NULL, 'Ibadan', NULL, 'Bashorun', NULL, '7', NULL, NULL, NULL, NULL, NULL, 'unverified', 0, NULL, '2024-08-01 06:48:59', '2024-08-01 06:48:59'),
+(24, 'agent', 'kalglo@gmail.com', NULL, '$2y$12$/JE7neoCHOQbzXB7yjIDPuendJt.BtXIvzH86AOIgSnKYXhxEY1xe', 'Kalu ', 'Uche', NULL, '/assets/images/RS1.jpg', '/assets/admin/images/photo/service12.png', NULL, '07067543213', NULL, NULL, NULL, 'We are very good at whatwe do rregardless of the circumstances\\', NULL, 'Lagos', NULL, 'Ikeja', NULL, '10', NULL, NULL, NULL, NULL, NULL, 'verified', 1, NULL, '2024-08-01 06:52:12', '2024-12-18 19:10:19'),
+(25, 'agent', 'ikekal@gmail.com', NULL, '$2y$12$MKkn1Ha2DD7nKzgkqv7OF./ira6aNNujxvDUS8NlLN4ZywurHcpv2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL, NULL, NULL, NULL, NULL, 'unverified', 0, NULL, '2024-08-20 20:00:52', '2024-08-20 20:00:52'),
+(34, 'tenant', 'lukasade@gmail.com', NULL, '$2y$12$pFkERtrsKNH5iXwOFBBQ2OG3/8K1w8XLvh6WceMlR.2wF57Y0m.eS', 'Adeyemi', 'Lukas', NULL, NULL, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724253590/e-properties/users/rk4hcqtu6bpkcgr8ebex.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '6', NULL, NULL, NULL, NULL, NULL, 'verified', 0, NULL, '2024-08-21 14:19:49', '2024-08-27 14:10:28'),
+(43, 'agent', 'ogbevo@gmail.com', NULL, '$2y$12$S6L9YHpx46S8QxdpRAimGu.XlLOpNHNZMirgbNCvPBT6AHPsFUFW.', 'Ogbeviro', 'Eunice', NULL, NULL, 'https://res.cloudinary.com/dnqmjzvy3/image/upload/v1724254343/e-properties/users/k4bjzqexfisabcqzvwg3.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '15', NULL, NULL, NULL, NULL, NULL, 'unverified', 0, NULL, '2024-08-21 14:32:22', '2024-08-21 14:32:24'),
+(54, 'service_provider', 'ejiwil@yahoo.com', NULL, '$2y$12$WukESHc1qwM3OfsQ.nf9fuaxDvMJ/BhdFL0KRX6LUH7CBHEPx3.Um', 'Williams', 'Ejiroh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '11', NULL, NULL, NULL, NULL, NULL, 'unverified', 0, NULL, '2024-08-21 14:53:23', '2024-08-21 14:53:23'),
+(55, 'service_provider', 'xjohns@example.org', NULL, '$2y$12$Rm9u31EQwVKwY9UU0fGF9ukRrWL0oMER/xfj2gdWBGoqq0EHE9iQy', 'Janessa', 'Marquardt', 'Schaefer, Herzog and Gleichner', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 10, '734.309.0940', NULL, 'Florida', NULL, 'Quo cupiditate illo iusto ratione asperiores.', 'neque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'Xwq2gFziQK', '2024-10-09 21:35:40', '2024-10-09 21:35:40'),
+(56, 'service_provider', 'heller.delbert@example.net', NULL, '$2y$12$4/MKP.4BnbhqJO1zvPTZA.MpfBqFx/s8CUU.DXGpf82RgArLGAiCe', 'Leanna', 'Cormier', 'Okuneva-Emard', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 39, '680.886.3666', NULL, 'Wyoming', NULL, 'Ut libero magni excepturi placeat aut atque quisquam.', 'illo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'K0sDKbijp4', '2024-10-09 21:35:41', '2024-10-09 21:35:41'),
+(57, 'service_provider', 'carroll.amari@example.org', NULL, '$2y$12$.9BBeHtEuIjCHOWgOdPEJeT3dNp7706P6cTP.UAYNTWieqS.d2M4S', 'Carmel', 'Pacocha', 'Connelly, Rau and Grady', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 41, '478.436.8609', NULL, 'Tennessee', NULL, 'Quibusdam et repellendus sit rerum enim eos.', 'cupiditate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'xIFzHRsiOg', '2024-10-09 21:35:41', '2024-10-09 21:35:41'),
+(58, 'service_provider', 'gerlach.ashlynn@example.net', NULL, '$2y$12$z0cKF/IP86STANCtHW7sKe65q7PwKiGtz3iRMdc..5vxlLyDOeGKm', 'Gerson', 'Legros', 'Wiza-Zieme', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gifhttps://res.cloudinary.com/dnqmjzvy3/image/upload/v1724254343/e-properties/users/k4bjzqexfisabcqzvwg3.jpg', 35, '347.787.5087', NULL, 'New Mexico', NULL, 'Blanditiis ab laudantium laudantium necessitatibus ea et mollitia quia.', 'quibusdam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'vXI0er129M', '2024-10-09 21:35:42', '2024-10-09 21:35:42'),
+(59, 'service_provider', 'hill.ray@example.net', NULL, '$2y$12$LI3qi9g2eLdSmL0Rrxr26uEk6EWxEEOAeOeCG1xE2XmiLxL0cN9I2', 'Hal', 'Walter', 'Schimmel-Macejkovic', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 50, '1-772-616-4555', NULL, 'Alaska', NULL, 'At accusamus quia fugiat porro.', 'dolores', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'ZPSwSFYIZc', '2024-10-09 21:35:42', '2024-10-09 21:35:42'),
+(60, 'service_provider', 'simonis.baron@example.com', NULL, '$2y$12$qpbQne/K34onl05JOX5ApucdoHKBvUsza3QQIhgjeRxMxQHUhzOLi', 'Teagan', 'Johns', 'Bernier, Kihn and Wolff', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 29, '512.916.1034', NULL, 'Missouri', NULL, 'Aut et eum quasi ipsum.', 'labore', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 1, 'tpLR8ZN8oT', '2024-10-09 21:35:43', '2024-12-06 14:21:38'),
+(61, 'service_provider', 'tlangosh@example.org', NULL, '$2y$12$GSpZawtTJCWzjjyFRq1kCOKFZFgnIuCFQescNkhevqyXcK9JMgzsu', 'Carmel', 'Dickens', 'Lind-Hickle', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 94, '1-219-587-9493', NULL, 'New Jersey', NULL, 'Exercitationem consequuntur assumenda architecto et dolorum.', 'deleniti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'cYlJXnW6ei', '2024-10-09 21:35:43', '2024-10-09 21:35:43'),
+(62, 'service_provider', 'justice22@example.org', NULL, '$2y$12$9/mGXP8FGvap2mIyw2TY.u/vU0QIha9v7KJz7jdlkWVXrfLyuoHNe', 'Efren', 'O\'Kon', 'Moen, Hayes and Harris', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 24, '480-675-4186', NULL, 'Maine', NULL, 'Quia nobis nobis at harum.', 'suscipit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'A8VP094lnj', '2024-10-09 21:35:44', '2024-10-09 21:35:44'),
+(63, 'service_provider', 'jan.ward@example.org', NULL, '$2y$12$mltzrmVDWWcKocONfxzCTe31peM0o19YqHJ6rDDAQkQnSIzKIUAKO', 'Elenora', 'Harber', 'Brekke LLC', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 17, '+17577378459', NULL, 'North Carolina', NULL, 'Nemo vero placeat ipsam maiores aut est voluptas repellendus.', 'vero', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'TJhbDZo4zA', '2024-10-09 21:35:44', '2024-10-09 21:35:44'),
+(64, 'service_provider', 'nemard@example.org', NULL, '$2y$12$XyN1BW2aYB7JjV0dkeyfFeA.zLAn6cZQQTUCTAGIQ8YZqOOCbR9K.', 'Elsie', 'Crist', 'Jenkins-Towne', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 16, '857-955-0021', NULL, 'Utah', NULL, 'Quis quia laudantium omnis.', 'amet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'CqyMzBGXmf', '2024-10-09 21:35:44', '2024-10-09 21:35:44'),
+(65, 'service_provider', 'ujones@example.net', NULL, '$2y$12$dulZFlqshXw2qobyOmkRVezFbGGTiyY9i3.J/dmz1HAERJ7jEWwd2', 'Brigitte', 'Kutch', 'Bartoletti, Walter and Jacobson', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 49, '1-938-912-6407', NULL, 'Louisiana', NULL, 'Quia mollitia in explicabo iusto qui.', 'in', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, '7x0cvGYA9A', '2024-10-09 21:35:45', '2024-10-09 21:35:45'),
+(66, 'service_provider', 'mraz.nick@example.com', NULL, '$2y$12$k7jWAGHnmaOJpk68pkVSRe13aXCaDx4/lmRwx9dVgAAuqks3tQ5Wq', 'Deanna', 'Cormier', 'Aufderhar-Moore', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 91, '949.646.9871', NULL, 'Massachusetts', NULL, 'Dolores sed expedita quia et et et repellat.', 'quos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'Dg94NYEx82', '2024-10-09 21:35:45', '2024-10-09 21:35:45'),
+(67, 'service_provider', 'ilene44@example.net', NULL, '$2y$12$4QiOPKqeld3d7UA7Buu00eGs.GOMI/iCjHjQYBz.ju0dKzwxqEN4C', 'Alyce', 'Larkin', 'Hauck-Wolff', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 28, '+19412912850', NULL, 'Maine', NULL, 'Aut et impedit facilis sequi officia animi ducimus.', 'soluta', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'W9jYa03BkK', '2024-10-09 21:35:46', '2024-10-09 21:35:46'),
+(68, 'service_provider', 'hudson.destin@example.net', NULL, '$2y$12$O2SSI1nqbl1exE5xjFxe9.PqFRWQ.Plv6wGFvGOZ2MUAEOSsUwTri', 'Lupe', 'Wiza', 'Rice, Konopelski and Walter', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 96, '1-724-297-9455', NULL, 'Iowa', NULL, 'Ut dicta molestias exercitationem voluptatem.', 'exercitationem', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, '34gl5cbFMV', '2024-10-09 21:35:46', '2024-10-09 21:35:46'),
+(69, 'service_provider', 'skyla.abshire@example.net', NULL, '$2y$12$MRjms/gPfR5xQq5EJxXXGuv/XeiYAhoaepfdjmje1VZcM./.bBvKC', 'Oma', 'Leannon', 'Dibbert, Mann and McGlynn', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 66, '+1-534-616-7605', NULL, 'Louisiana', NULL, 'Earum aliquid illo placeat.', 'veritatis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'L8xjQPTqmu', '2024-10-09 21:35:47', '2024-10-09 21:35:47'),
+(70, 'service_provider', 'erica52@example.net', NULL, '$2y$12$ALfizAYtWPwDneqaeevFGu6KtA0Hp6a4Y6mqmYFw2wqtzh0djm8pa', 'Saul', 'Franecki', 'Zboncak Ltd', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 48, '+1 (980) 364-7240', NULL, 'Mississippi', NULL, 'Molestiae sit officia exercitationem ut et nostrum.', 'qui', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'xZQhch7UeE', '2024-10-09 21:35:47', '2024-10-09 21:35:47'),
+(71, 'service_provider', 'koch.modesto@example.net', NULL, '$2y$12$xmhQAcn2UG0jjYNFwJWMJeDllyQoaBBGqkpQaOferHfRaPfRjsle.', 'Dakota', 'Considine', 'Cruickshank, Mills and Jaskolski', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 56, '1-272-781-1059', NULL, 'Wyoming', NULL, 'Sit veritatis natus quia vero sit qui dignissimos.', 'cumque', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'FlWP0SQmZw', '2024-10-09 21:35:48', '2024-10-09 21:35:48'),
+(72, 'service_provider', 'juston.okon@example.net', NULL, '$2y$12$xMDPIxMxcqGSQsh0nZKFpu0oARIV2ScoyM9LtEZeaV/sD3DLxweom', 'Dorcas', 'Kihn', 'Rutherford, Maggio and Boyle', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 5, '+1 (401) 745-0501', NULL, 'Michigan', NULL, 'Facilis nihil sit eligendi quas voluptas illo quis.', 'aut', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'iLjdlZXMIb', '2024-10-09 21:35:48', '2024-10-09 21:35:48'),
+(73, 'service_provider', 'thad58@example.org', NULL, '$2y$12$KRG8K9vkYUFssAdDq1I7rO8XurywdPYVY8gb8l53zVL7eT8JdROIS', 'Jesus', 'Doyle', 'Gutmann Group', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 51, '458.272.6680', NULL, 'Maryland', NULL, 'Assumenda et sint optio ut temporibus voluptas saepe sed.', 'excepturi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'KvcH0Mf7k3', '2024-10-09 21:35:48', '2024-10-09 21:35:48'),
+(74, 'service_provider', 'barrows.michel@example.org', NULL, '$2y$12$ByUxByqw0Lmn7UraSZMOu.4junpQa2HEhh.GKbDnP9YrFvKITkVXy', 'Lourdes', 'Lockman', 'Keebler Ltd', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 39, '+1 (912) 363-2014', NULL, 'Utah', NULL, 'Vel rerum numquam ea occaecati.', 'maiores', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'e4wK3zehuy', '2024-10-09 21:35:49', '2024-10-09 21:35:49'),
+(75, 'service_provider', 'domenico.jacobi@example.org', NULL, '$2y$12$xlPeucUlJQ6xLEgRU7K6iecj5f9Tev3s3fvm1xSI.7tQGtR5/cn.W', 'Geovanni', 'Stehr', 'Doyle-Murphy', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 24, '567.646.8894', NULL, 'Tennessee', NULL, 'Fugit consequatur molestiae optio quas.', 'commodi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'DJYKN5AppS', '2024-10-09 21:35:50', '2024-10-09 21:35:50'),
+(76, 'service_provider', 'baby61@example.org', NULL, '$2y$12$ySZqlKUmkNDck4NOAtjDbOs94okGlabDKOv.4OtewI4a9TPLAusFC', 'Brannon', 'Heathcote', 'Crist-Schmitt', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 60, '940-348-8145', NULL, 'Idaho', NULL, 'Minima perspiciatis aliquid commodi omnis id amet.', 'corporis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'R2gGiCn8OX', '2024-10-09 21:35:50', '2024-10-09 21:35:50'),
+(77, 'service_provider', 'hegmann.earline@example.com', NULL, '$2y$12$wQWYf6nKjPuv0CLtpiPYsecMEQ76U6lUg/MSH6jpZwKNVp2.ct5Aq', 'Felicita', 'Feil', 'Larkin, Howell and Schaefer', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 11, '+17543928425', NULL, 'North Carolina', NULL, 'Sequi officiis enim praesentium impedit magnam aperiam est nostrum.', 'inventore', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'VViUKTAdmL', '2024-10-09 21:35:51', '2024-10-09 21:35:51'),
+(78, 'service_provider', 'adan10@example.com', NULL, '$2y$12$PTgLgU5HbnblqfiVxp38WuiNEb99SnheyMUwUgAUceqTFnhPBLNau', 'Otha', 'Armstrong', 'Sawayn, Zulauf and Gusikowski', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 6, '1-856-697-2287', NULL, 'Florida', NULL, 'Fugiat vel ipsam iure sunt quia ut.', 'nesciunt', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'AukGc9OFZE', '2024-10-09 21:35:51', '2024-10-09 21:35:51'),
+(79, 'service_provider', 'walton82@example.org', NULL, '$2y$12$H1.3fF7Ty79GPrJNYH4sHeaul/LqTdthgRE5eUMPJ9kqDOojb588u', 'Lue', 'Donnelly', 'Brakus and Sons', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 33, '937-978-0008', NULL, 'Kentucky', NULL, 'Veritatis ea dolores odio nesciunt omnis sed.', 'harum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, '5RI3FwQDN0', '2024-10-09 21:35:51', '2024-10-09 21:35:51'),
+(80, 'service_provider', 'berge.noelia@example.com', NULL, '$2y$12$j8rjIFuySIRMDBpYhLGy1OVqwbKTncA.aL2qA3WDxeaFOhj6aqJfW', 'Regan', 'Okuneva', 'Kutch, Romaguera and Sawayn', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 49, '820-306-6217', NULL, 'Vermont', NULL, 'Eos sed error officiis accusamus velit.', 'blanditiis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'yydNvqx12h', '2024-10-09 21:35:52', '2024-10-09 21:35:52'),
+(81, 'service_provider', 'wbatz@example.net', NULL, '$2y$12$odCxy.O86i5S0vUZjmD1yuH1urbVt0x4iPSpzLZxIbHnO4oDlKmHq', 'Aniyah', 'Greenholt', 'Murphy, Hettinger and Pouros', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 2, '+1 (854) 447-4511', NULL, 'North Carolina', NULL, 'Dignissimos quidem laudantium natus est ea ut quo velit.', 'at', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'Kdmbf7lEj9', '2024-10-09 21:35:52', '2024-10-09 21:35:52'),
+(82, 'service_provider', 'emmanuel17@example.net', NULL, '$2y$12$CQkPUtmTo6snDg.vEh0pNO.NtIyySAOQUmHc3IIoSXvzia5IdA8ry', 'Carrie', 'Kulas', 'Shanahan, Mills and Jacobs', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 55, '(701) 216-3742', NULL, 'Maine', NULL, 'Omnis laborum asperiores est laborum nisi aliquam dolore.', 'est', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'xRr6ZCaH59', '2024-10-09 21:35:53', '2024-10-09 21:35:53'),
+(83, 'service_provider', 'arvid15@example.org', NULL, '$2y$12$Iy5v0A.UWp5EOtGldws1KuvVuPcpFlbstSUG3q0BrvI0w0IP8b6qG', 'Dayana', 'Jacobs', 'Langosh PLC', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 62, '+16518440552', NULL, 'Rhode Island', NULL, 'Dolores dolorem culpa incidunt nihil.', 'ut', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'uBz7uewcc1', '2024-10-09 21:35:53', '2024-10-09 21:35:53'),
+(84, 'service_provider', 'magnus26@example.net', NULL, '$2y$12$kL/RxsbJdHMzDuXzOQefP.nd1hO9XzPZXgiGpZI2aPVaeLgsSjyOW', 'Loraine', 'Considine', 'Price Inc', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 29, '925.348.1941', NULL, 'Georgia', NULL, 'Aut ullam iure officia pariatur.', 'nemo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'C8MnGgwFnq', '2024-10-09 21:35:54', '2024-10-09 21:35:54'),
+(85, 'service_provider', 'dixie.toy@example.com', NULL, '$2y$12$6HASlpTdGDI65qLzQM776eN4sSnBLU0bWw0Xb7ztHHXN3Ayx9V1MW', 'Thelma', 'Runolfsson', 'Herman-Lowe', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 12, '+12832862402', NULL, 'Indiana', NULL, 'Neque numquam porro beatae est labore aliquam.', 'inventore', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'kyqGGiTZqC', '2024-10-09 21:35:55', '2024-10-09 21:35:55'),
+(86, 'service_provider', 'rocio.king@example.net', NULL, '$2y$12$6IrgH1ZAVfW4N857AnM.puVg8rRLZv8//YvHpshi6t17QKy.UjAka', 'Gabriella', 'Jakubowski', 'Torp-Weber', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 62, '478-747-5472', NULL, 'Alabama', NULL, 'Dolor omnis sed quia nobis.', 'quis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'kgv4POmn1z', '2024-10-09 21:35:55', '2024-10-09 21:35:55'),
+(87, 'service_provider', 'tianna.koelpin@example.org', NULL, '$2y$12$MjDx8MlteSUaFS2032LIs.bfAC8apKd/d9LuY7QaWzlhkdqAJGUgu', 'Dejah', 'Moore', 'O\'Kon-Greenholt', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 72, '512.481.8098', NULL, 'Connecticut', NULL, 'Mollitia harum esse eaque dolores illum voluptatem beatae rerum.', 'ut', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'bF9J6GCkcw', '2024-10-09 21:35:56', '2024-10-09 21:35:56'),
+(88, 'service_provider', 'bernard.schoen@example.com', NULL, '$2y$12$oEY2AN6FtnlFabk28bVHUu5ooVdytKc2sa7ONrPR1zUX6yYpw/l/m', 'Audie', 'Ryan', 'Oberbrunner Ltd', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 5, '+1-360-990-6018', NULL, 'Rhode Island', NULL, 'Labore veritatis quod doloremque dolor molestiae.', 'non', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'UInPnnPTzU', '2024-10-09 21:35:56', '2024-10-09 21:35:56'),
+(89, 'service_provider', 'luisa12@example.com', NULL, '$2y$12$CvQHF3p03M5AnwyHIrHI9uI51oRPvEdVYbGy8cli1ua4T0HtSUoHq', 'Bailee', 'Armstrong', 'Fritsch Ltd', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 70, '551.969.9563', NULL, 'Hawaii', NULL, 'Et suscipit dolores ipsa et.', 'consectetur', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'oM98Nh9L82', '2024-10-09 21:35:57', '2024-10-09 21:35:57'),
+(90, 'service_provider', 'ayla15@example.org', NULL, '$2y$12$hCU6hwd0kGyyl5xXpnvJEebgCIURZIQfbeXr//DJHg4P5P2iSO62W', 'Allene', 'Sporer', 'Hodkiewicz-Fisher', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 44, '1-779-340-1623', NULL, 'Louisiana', NULL, 'Expedita voluptates vel qui voluptate.', 'saepe', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'n1xlpn9hto', '2024-10-09 21:35:57', '2024-10-09 21:35:57'),
+(91, 'service_provider', 'christy.tromp@example.com', NULL, '$2y$12$lPmpZAvTwQB6cGPjS6V0UuSC7Pu4XV.tekeixXE5cdl3G9Mf.l53y', 'Lempi', 'Abshire', 'Grimes and Sons', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 43, '(503) 333-3208', NULL, 'Nevada', NULL, 'Ut laboriosam ipsam praesentium sint tempora.', 'quia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'VmBctgjBOO', '2024-10-09 21:35:58', '2024-10-09 21:35:58'),
+(92, 'service_provider', 'spencer.kelsie@example.org', NULL, '$2y$12$fgI/MVkxjZ2Vu7Y2qoYOOufeGhW8AIIEA2f3B1pevn74qICGXvaFK', 'Weldon', 'Willms', 'Morar, Lubowitz and McKenzie', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 41, '208-956-1953', NULL, 'Vermont', NULL, 'Ab accusamus assumenda modi consequuntur.', 'ducimus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'UwFGvG8PLy', '2024-10-09 21:35:58', '2024-10-09 21:35:58'),
+(93, 'service_provider', 'sister12@example.net', NULL, '$2y$12$KHVB7LVVAo0ofTGbiZtgY.36DJLMAKFp8qtGQv.V96JXIRv/UwCJq', 'Darlene', 'Hessel', 'Graham Inc', 'https://media.giphy.com/media/l1J9GvG1eX0vWXvH2/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 95, '732-751-0258', NULL, 'South Dakota', NULL, 'Suscipit distinctio itaque qui harum doloremque consequatur.', 'veniam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'GJKwR5tHFg', '2024-10-09 21:35:59', '2024-10-09 21:35:59'),
+(94, 'service_provider', 'jade.trantow@example.net', NULL, '$2y$12$EqkM.nwewpRO2ojx.A2HtOzocTrlHKO2ZQCbgwpz1frcHMmV43yDi', 'Jovanny', 'Kemmer', 'Huels-Bernhard', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 57, '+1 (352) 898-4173', NULL, 'Arkansas', NULL, 'Officiis aut necessitatibus qui placeat.', 'pariatur', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'k9NzG9n9yO', '2024-10-09 21:35:59', '2024-10-09 21:35:59'),
+(95, 'service_provider', 'vivienne.kuhn@example.com', NULL, '$2y$12$ikao3sodBD.9JsW4IzH1COh7.PsyqKOAN0.ps4QJH6aqTxcj2v7fS', 'Hermina', 'Frami', 'Heaney Ltd', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 39, '972.347.9693', NULL, 'Alaska', NULL, 'Officia in ex eos quo veritatis.', 'iusto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'tONFZS5Mlg', '2024-10-09 21:35:59', '2024-10-09 21:35:59'),
+(96, 'service_provider', 'satterfield.garry@example.org', NULL, '$2y$12$UCldIf6MBcMpgUzgsTZGc.qAKKnLH4DNMuOQX76Y/Z.qKmBJJeUDG', 'Daphne', 'Osinski', 'Ondricka Group', 'https://media.giphy.com/media/3o6ZsVv7BGrU1cLl0s/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 18, '(470) 657-2942', NULL, 'Washington', NULL, 'Omnis voluptas nostrum illum impedit.', 'maiores', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'FIFq6KX7hO', '2024-10-09 21:36:00', '2024-10-09 21:36:00'),
+(97, 'service_provider', 'shane.pagac@example.com', NULL, '$2y$12$ib7PpU0e3QEhzb4oTahz2OQ3kg07T.jJ1fIt3IGKBkIW7LegMFkG2', 'Jarret', 'Quitzon', 'Abernathy, Okuneva and Hane', 'https://media.giphy.com/media/26xBME2M0C1qf3A2k/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 5, '+1-678-631-8790', NULL, 'Rhode Island', NULL, 'Nihil recusandae cum expedita explicabo rerum dolorem explicabo inventore.', 'nihil', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'FqqwDhRYIf', '2024-10-09 21:36:00', '2024-10-09 21:36:00'),
+(98, 'service_provider', 'malcolm.berge@example.com', NULL, '$2y$12$9VUbLRusBvkKToBK5yxfK.1CvHycRRuXW8jor1wkg2PtHDYtz6b7a', 'Lavinia', 'Reynolds', 'Kuvalis-Keebler', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 35, '+1-216-860-7117', NULL, 'Nebraska', NULL, 'Maxime laboriosam dolor adipisci vitae.', 'totam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'WNtdiTBAxD', '2024-10-09 21:36:01', '2024-10-09 21:36:01'),
+(99, 'service_provider', 'west.leone@example.org', NULL, '$2y$12$lDWBx0egMv6SA8GcyZn1u.Giiupnam5gG8rIWPKtfToeA4Kdys4dq', 'Alexa', 'Macejkovic', 'Schoen and Sons', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 87, '1-231-401-8838', NULL, 'New Mexico', NULL, 'Non ipsam eum autem doloribus quos reiciendis.', 'rerum', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'yeoPpIntex', '2024-10-09 21:36:01', '2024-10-09 21:36:01'),
+(100, 'service_provider', 'hipolito.spinka@example.org', NULL, '$2y$12$9o9A35DNdbaCr8hUgv/uqOr/F.OZUEhIWkddM8lOgT6CYtK3V0Aha', 'Dylan', 'Hauck', 'Dibbert-Kling', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 'https://media.giphy.com/media/3o6nV4b7GR5u0uTgS4/giphy.gif', 27, '650-267-4852', NULL, 'Missouri', NULL, 'Doloremque impedit nobis corporis sit incidunt.', 'totam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 's9lMTrI06s', '2024-10-09 21:36:02', '2024-10-09 21:36:02'),
+(101, 'service_provider', 'royal42@example.org', NULL, '$2y$12$WVXpAkS/3kVxvn3DSZiyuuVrrLxxZBZkdRVivy9AB7W6Y80EWj4L2', 'Sylvester', 'Zemlak', 'Ledner Group', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 'https://media.giphy.com/media/xUPGcBae8aRbdlYg8Y/giphy.gif', 45, '708-592-0309', NULL, 'Kansas', NULL, 'Nulla quae soluta et ipsa consequuntur alias.', 'eos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'TGpSJbyvCW', '2024-10-09 21:36:02', '2024-10-09 21:36:02'),
+(102, 'service_provider', 'parker.giovanna@example.net', NULL, '$2y$12$r4NXjWRmi.9JYs5/uRVaO.eM3nUb529EQN77KADOySWcTTdXe62rO', 'Constantin', 'Conroy', 'Kerluke Ltd', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 39, '(501) 658-5149', NULL, 'Florida', NULL, 'Illo autem magni aut quia quo non sapiente.', 'veritatis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'verified', 0, 'wq1OTjhA8L', '2024-10-09 21:36:02', '2024-10-09 21:36:02'),
+(103, 'service_provider', 'alena.bahringer@example.net', NULL, '$2y$12$16uV0bIiTVjnIlHhJGctxOk4yk/dbfyzXzt3HD6NsGptR/UWcchQW', 'Colleen', 'Renner', 'Sauer and Sons', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 'https://media.giphy.com/media/2yUqjGnSMKmN9ZgDTK/giphy.gif', 79, '+1 (828) 600-2162', NULL, 'Washington', NULL, 'Exercitationem laudantium nobis dignissimos id amet dolor qui.', 'eveniet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, '72RLDBaTeN', '2024-10-09 21:36:03', '2024-10-09 21:36:03'),
+(104, 'service_provider', 'nico.ankunding@example.com', NULL, '$2y$12$awG9AGCuLufCZg/LhIVDwe9F7.LdCSRDCmKgsJRWW3QEV7PDfqjKu', 'Christophe', 'Thiel', 'Zemlak, Veum and Reichel', 'https://media.giphy.com/media/1xZr5DzY7ob2c/giphy.gif', 'https://media.giphy.com/media/l4FGpQcbk7YO8UHzq/giphy.gif', 70, '(747) 546-9298', NULL, 'Massachusetts', NULL, 'Voluptas ab in ea enim repellat debitis quos explicabo.', 'sunt', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'unverified', 0, 'rxrZSTidO7', '2024-10-09 21:36:03', '2024-10-09 21:36:03');
 
 --
 -- Indexes for dumped tables
@@ -1892,7 +2266,8 @@ ALTER TABLE `categories`
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `comments_group_post_id_foreign` (`group_post_id`),
-  ADD KEY `comments_user_id_foreign` (`user_id`);
+  ADD KEY `comments_user_id_foreign` (`user_id`),
+  ADD KEY `comments_parent_id_foreign` (`parent_id`);
 
 --
 -- Indexes for table `compare_properties`
@@ -1912,6 +2287,12 @@ ALTER TABLE `compare_property`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `follows`
+--
+ALTER TABLE `follows`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `groups`
@@ -1982,6 +2363,15 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `post_likes`
+--
+ALTER TABLE `post_likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_likes_user_id_foreign` (`user_id`),
+  ADD KEY `post_likes_group_post_id_foreign` (`group_post_id`),
+  ADD KEY `post_likes_comment_id_foreign` (`comment_id`);
 
 --
 -- Indexes for table `post_media`
@@ -2156,7 +2546,7 @@ ALTER TABLE `agents`
 -- AUTO_INCREMENT for table `auctions`
 --
 ALTER TABLE `auctions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `auction_bids`
@@ -2168,7 +2558,7 @@ ALTER TABLE `auction_bids`
 -- AUTO_INCREMENT for table `blacklists`
 --
 ALTER TABLE `blacklists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -2198,7 +2588,7 @@ ALTER TABLE `building_materials`
 -- AUTO_INCREMENT for table `building_material_comments`
 --
 ALTER TABLE `building_material_comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -2210,7 +2600,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `compare_properties`
@@ -2231,6 +2621,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `follows`
+--
+ALTER TABLE `follows`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
@@ -2246,7 +2642,7 @@ ALTER TABLE `group_members`
 -- AUTO_INCREMENT for table `group_posts`
 --
 ALTER TABLE `group_posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -2276,13 +2672,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=394;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=398;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `post_likes`
+--
+ALTER TABLE `post_likes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `post_media`
@@ -2300,7 +2702,7 @@ ALTER TABLE `professional_reviews`
 -- AUTO_INCREMENT for table `professional_views`
 --
 ALTER TABLE `professional_views`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -2318,13 +2720,13 @@ ALTER TABLE `prof_messages`
 -- AUTO_INCREMENT for table `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `property_amenities`
 --
 ALTER TABLE `property_amenities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT for table `property_categories`
@@ -2336,7 +2738,7 @@ ALTER TABLE `property_categories`
 -- AUTO_INCREMENT for table `property_deals`
 --
 ALTER TABLE `property_deals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `property_likes`
@@ -2348,7 +2750,7 @@ ALTER TABLE `property_likes`
 -- AUTO_INCREMENT for table `property_payments`
 --
 ALTER TABLE `property_payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `property_reviews`
@@ -2372,7 +2774,7 @@ ALTER TABLE `property_types`
 -- AUTO_INCREMENT for table `property_views`
 --
 ALTER TABLE `property_views`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -2426,7 +2828,7 @@ ALTER TABLE `tenants`
 -- AUTO_INCREMENT for table `trendings`
 --
 ALTER TABLE `trendings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -2449,6 +2851,7 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_group_post_id_foreign` FOREIGN KEY (`group_post_id`) REFERENCES `group_posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
@@ -2457,6 +2860,14 @@ ALTER TABLE `comments`
 ALTER TABLE `group_members`
   ADD CONSTRAINT `group_members_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `group_members_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `post_likes`
+--
+ALTER TABLE `post_likes`
+  ADD CONSTRAINT `post_likes_comment_id_foreign` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_likes_group_post_id_foreign` FOREIGN KEY (`group_post_id`) REFERENCES `group_posts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_likes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
