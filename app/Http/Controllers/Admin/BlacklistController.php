@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\Admin\Blacklist;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class BlacklistController extends Controller
 {
@@ -58,9 +61,9 @@ class BlacklistController extends Controller
                 'rating' => $request->rating,
             ]);
 
-            Alert::success('Sucess','User has been added to blacklist');
+            Toastr::success('Sucess','User has been added to blacklist');
             
-            return redirect()->back();
+            return redirect()->back()->with('User has been added to blacklist','Success');
 
         }
     }
@@ -80,5 +83,28 @@ class BlacklistController extends Controller
        $existingTrending = Trending::where('property_id', $id)->delete();
           // Return a JSON response indicating success
           return response()->json(['success' => true]);
+    }
+
+
+    public function addToPropertyBlacklist(Request $request,$id)
+    {
+        $property = Property::findOrFail($id);
+        
+        $blacklist = Blacklist::create([
+            'reported_id' => $property->id,
+            'reporter_id' => Auth::id(),
+            'blacklisted_by' => Auth::id(),
+            'business_name' => $property->title,
+            'category' => 'property',
+            'org_description' => $property->description,
+            'reason' => 'blacklisted',
+            'reported_on' => Carbon::now(),
+            'rating' =>1,
+        ]);
+
+        Toastr::success('Sucess','User has been added to blacklist');
+        
+        return redirect()->back();
+
     }
 }

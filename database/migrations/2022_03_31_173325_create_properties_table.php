@@ -43,6 +43,7 @@ class CreatePropertiesTable extends Migration
             $table->enum('deed_of_gift', ['Yes', 'No'])->default('No');
             $table->enum('property_doc', ['Yes', 'No'])->default('No');
             $table->enum('land_receipt', ['Yes', 'No'])->default('No');
+            $table->enum('featured', ['Yes', 'No'])->default('No');
             $table->timestamps();
         });
     }

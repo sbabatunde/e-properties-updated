@@ -70,29 +70,24 @@ class HomeController extends Controller
         $data['category'] = PropertyType::with(['property','propertyCategory'])->whereHas('propertyCategory',function($q){
             $q->where('category_name','Commercial'); })->take(5)->get();
         $data['type'] = PropertyType::with(['property','propertyCategory'])->get();
-        $data['trending'] = Property::has('trending')->with(['payment','agent','trending'])->get();
+        $data['trending'] = Property::has('trending')->where(function($q){
+                            $q->where('status','Rent')->orwhere('status','Sale')->orwhere('status','Let');
+                        })->with(['payment','agent','trending'])->get();
+        $data['featured'] = Property::with(['payment','agent'])->where('featured','Yes')
+                            ->where(function($q){
+                                $q->where('status','Rent')->orwhere('status','Sale')->orwhere('status','Let');
+                            })->get();
         $data['media'] = PostMedia::with('user')->where('file_type','video')->get();
         $data['groups'] = Group::withCount(['members', 'posts'])->get();
         $sliders = $data['sliders'];
         $proffessionals = ServiceType::withCount(['providers'])
-        ->with('serviceCategory')
+        ->with('serviceCategory') 
+        ->with(['providers' => function($query) {
+            $query->withCount('followers'); // Eager load followers count for providers
+        }])
         ->whereDoesntHave('serviceCategory', function ($query) {
             $query->where('category', 'Maintenance');
         })->inRandomOrder()->get();
-        // dd($data['properties']);
-
-        // Display live exhange  rates Begins
-            // $rates = $this->currencyService->getExchangeRates();
-            // // Specify the currencies you want to display
-            // $currencies = ['USD', 'GBP', 'EUR', 'GHS', 'CAD', 'AUD', 'JPY'];
-            // $filteredRates = [];
-
-            // foreach ($currencies as $currency) {
-            //     if (isset($rates['rates'][$currency])) {
-            //         $filteredRates[$currency] = $rates['rates'][$currency];
-            //     }
-            // }
-        // Display live exhange rates Ends
 
         return view('front.site', compact('data', 'sliders','proffessionals'));
     }

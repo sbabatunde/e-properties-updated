@@ -65,4 +65,20 @@ class PropertiesController extends Controller
       return view('dashboard.properties.deals', compact('propertyDeals'));
    }
 
+   public function toggleFeatured(Request $request, $id)
+   {
+       $property = Property::findOrFail($id);
+       $newState = $request->input('featured');
+   
+       $property->featured = $newState; // Set to 'Yes' or 'No'
+       $property->save();
+   
+       $message = $newState === 'Yes' 
+           ? 'Property has been added to featured successfully.' 
+           : 'Property has been removed from featured successfully.';
+   
+       return response()->json(['success' => true, 'message' => $message, 'featured' => $property->featured]);
+   }
+   
+
 }

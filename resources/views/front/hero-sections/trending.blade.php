@@ -1,4 +1,4 @@
-<div class="trend-container mb-5">
+<div class="trend-container mb-3">
     <h1 class="mt-5 pt-3 text-black" style="font-weight: bold">Trending</h1>
     <div class="trend-card">
         <div class="swiper-container testimonial-slider-rtl" dir="rtl">

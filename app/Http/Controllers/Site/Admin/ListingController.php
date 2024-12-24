@@ -642,4 +642,5 @@ class ListingController extends Controller
         return response()->json(['success' => true, 'message' => 'Status updated successfully!','data'=>$auction]);
     }
 
+
 }

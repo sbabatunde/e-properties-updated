@@ -43,8 +43,8 @@
                                                     <th># </th>
                                                     <th>Photo </th>
                                                     <th>Name </th>
-                                                    <th>Email </th>
                                                     <th>Type </th>
+                                                    <th>Joined On </th>
                                                     <th>Edit</th>
                                                     <th>Verify</th>
                                                     <th>Blacklist</th>

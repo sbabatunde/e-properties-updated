@@ -13,7 +13,7 @@
                 <img src="{{ asset($item->image) ?? $item->image }}" alt="{{ $item->service }}">
                 <span class="">
                     <h4><b>{{ $item->service }}</b></h4>
-                    <p>5 Followers</p>
+                    <p>{{ $item->providers->sum('followers_count') }} Followers</p>
                     <a href="{{ route('services.type.all', $item->slug) }}" class="btn btn-info mb-3"
                         style="background-color:#394293;font-weight:500;font-size:20px;align:left">Connect</a>
                 </span>

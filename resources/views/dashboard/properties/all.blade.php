@@ -35,6 +35,7 @@
                                                     <th>Price</th>
                                                     <th>Agent</th>
                                                     <th>Trending</th>
+                                                    <th>Featured</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -130,7 +131,7 @@
                                                                         action="{{ route('admin.trending.add', $property->id) }}"
                                                                         method="POST">
                                                                         @csrf
-                                                                        <button
+                                                                        <button title="Add Property to Trending"
                                                                             onclick="addToTrending(event,{{ $property->id }})"
                                                                             class="btn btn-outline-primary">
                                                                             <i class="bx bx-trending-up"></i>
@@ -141,7 +142,7 @@
                                                                         action="{{ route('admin.trending.remove', $property->id) }}"
                                                                         method="POST">
                                                                         @csrf
-                                                                        <button
+                                                                        <button title="Remove Property from Trending"
                                                                             onclick="removeTrending(event,{{ $property->id }})"
                                                                             class="btn btn-outline-danger">
                                                                             <i class="bx bx-trending-down"></i>
@@ -149,17 +150,87 @@
                                                                     </form>
                                                                 @endif
                                                             </td>
+                                                            <td class="table-btn">
+
+                                                                <a href="#" class="feature-toggle btn btn-success"
+                                                                    data-property-id="{{ $property->id }}"
+                                                                    data-featured="{{ $property->featured === 'Yes' ? 'Yes' : 'No' }}"
+                                                                    title="{{ $property->featured === 'Yes' ? 'Remove from featured' : 'Add to featured' }}">
+                                                                    <i
+                                                                        class="{{ $property->featured === 'Yes' ? 'fa fa-star' : 'fa fa-star-o' }}"></i>
+                                                                    {{ $property->featured === 'Yes' ? 'Unfeature' : 'Feature' }}
+
+                                                                </a>
+
+                                                            </td>
                                                             <td class="table-btn row">
                                                                 <a href="{{ route('admin.properties.edit', $property->id) }}"
-                                                                    class="btn btn-outline-primary">
+                                                                    title="Edit Property" class="btn btn-outline-primary">
                                                                     <i class="fa fa-edit" data-title ="Edit"></i>
                                                                 </a>
+
                                                                 <a href="{{ route('admin.properties.edit', $property->id) }}"
                                                                     class="btn btn-outline-primary mr-2">
                                                                     <i class="fa fa-eye" data-title ="View"></i>
                                                                 </a>
+                                                                @if ($property->blacklist == null)
+                                                                    <a href="#"
+                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"
+                                                                        data-bs-toggle="modal" title="Add Property to Blacklist"
+                                                                        data-bs-target="#BlacklistModal{{ $property->id }}">
+                                                                        <i class="fa fa-ban" style="color: red"></i>
+                                                                    </a>
+
+                                                                    <!-- Modal for Adding to Blacklist -->
+                                                                    <div class="modal fade"
+                                                                        id="BlacklistModal{{ $property->id }}" tabindex="-1"
+                                                                        aria-labelledby="BlacklistModalLabel{{ $property->id }}"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="BlacklistModalLabel{{ $property->id }}">
+                                                                                        Confirm Blacklist</h5>
+                                                                                    <button type="button" class="btn-close"
+                                                                                        data-bs-dismiss="modal"
+                                                                                        aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    Are you sure you want to add this property
+                                                                                    to the blacklist?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary"
+                                                                                        data-bs-dismiss="modal">Cancel</button>
+                                                                                    <form
+                                                                                        action="{{ route('admin.property.blacklist.add', $property->id) }}"
+                                                                                        method="POST">
+                                                                                        @csrf
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-danger">Yes, Add to
+                                                                                            Blacklist</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @else
+                                                                    <strong>Blacklisted</strong>
+                                                                    <form id="removeFromBlacklist{{ $property->id }}"
+                                                                        action="{{ route('admin.property.blacklist.remove', $property->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                            class="btn btn-outline-info btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                            <i class="fa fa-unlock"></i> Remove from Blacklist
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
+
                                                                 <a href="{{ route('admin.properties.delete', $property->id) }}"
-                                                                    class="btn btn-outline-danger">
+                                                                    class="btn btn-outline-danger" title="Delete Property">
                                                                     <i class="fa fa-trash" data-title ="Delete"></i>
                                                                 </a>
                                                             </td>
@@ -185,173 +256,8 @@
         </div>
     </div>
     <!-- /page content -->
+    @include('dashboard.properties.scripts')
 @endsection
-
-<script>
-    function addToTrending(event, id) {
-        event.preventDefault(); // Prevent the default form submission
-        // Serialize the form data
-        var formData = new FormData(document.getElementById('addToTrend_' + id));
-        // const addForm = document.querySelector('.addForm');
-        // const removeForm = document.querySelector('.removeForm');
-        // Make an AJAX request to submit the form data
-        fetch(document.getElementById('addToTrend_' + id).action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest', // Indicate that this is an AJAX request
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value // CSRF token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server
-                if (data.success) {
-                    // Toastr success message
-                    toastr.success('Added to trending successfully!');
-                    // Add the desired class to the element
-                    // addForm.classList.add('hidden');
-                    // removeForm.classList.add('visible');
-
-                } else {
-                    // Toastr error message
-                    toastr.error(data.message);
-                }
-            })
-            .catch(error => {
-                // Handle and display error
-                toastr.error('An error occurred while adding to trending.');
-            });
-    }
-</script>
-
-
-<script>
-    function removeTrending(event, id) {
-        event.preventDefault(); // Prevent the default form submission
-        // Serialize the form data
-        var formData = new FormData(document.getElementById('removeTrending' + id));
-        // const addForm = document.querySelector('.addForm');
-        // const removeForm = document.querySelector('.removeForm');
-        // Make an AJAX request to submit the form data
-        fetch(document.getElementById('removeTrending' + id).action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest', // Indicate that this is an AJAX request
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value // CSRF token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server
-                if (data.success) {
-                    // Toastr success message
-                    toastr.success('Property Removed from trending successfully!');
-                    // Add the desired class to the element
-                    // addForm.classList.add('hidden');
-                    // removeForm.classList.add('visible');
-
-                } else {
-                    // Toastr error message
-                    toastr.error(data.message);
-                }
-            })
-            .catch(error => {
-                // Handle and display error
-                toastr.error('An error occurred while adding to trending.');
-            });
-    }
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Event listener for status change
-        document.querySelectorAll('.change-status').forEach(item => {
-            item.addEventListener('click', function(event) {
-                event.preventDefault();
-
-                const propertyId = this.dataset.propertyId;
-                const newStatus = this.dataset.status;
-                const statusButton = document.querySelector(`#statusDropdown_${propertyId}`);
-
-                // Send AJAX request
-                fetch(`properties/admin/listing/status/update/${propertyId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        },
-                        body: JSON.stringify({
-                            status: newStatus
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Toastr success message
-                            toastr.success('Status updated successfully!');
-                            // Update the status in the table dynamically
-                            statusButton.textContent = newStatus.charAt(0).toUpperCase() +
-                                newStatus.slice(1);
-
-                            // Update dropdown menu options
-                            const dropdownMenu = statusButton.nextElementSibling;
-                            dropdownMenu.innerHTML = ''; // Clear existing options
-
-                            if (newStatus === 'Rented' || newStatus === 'Sold') {
-                                dropdownMenu.innerHTML = `
-                                <li>
-                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Sale">
-                                        <i class="fa fa-arrow-circle-left text-warning"></i> Mark as Sale
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Rent">
-                                        <i class="fa fa-arrow-circle-left text-warning"></i> Mark as Rent
-                                    </a>
-                                </li>
-                                
-                                <li>
-                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Let">
-                                        <i class="fa fa-arrow-circle-left text-warning"></i> Mark as Let
-                                    </a>
-                                </li>`;
-                            } else {
-                                dropdownMenu.innerHTML = `
-                                <li>
-                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Sold">
-                                        <i class="fa fa-check-circle text-success"></i> Mark as Sold
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item change-status" href="#" data-property-id="${propertyId}" data-status="Rented">
-                                        <i class="fa fa-home text-info"></i> Mark as Rented
-                                    </a>
-                                </li>`;
-                            }
-                            // Re-bind event listeners to the new dropdown items
-                            document.querySelectorAll('.change-status').forEach(newItem => {
-                                newItem.addEventListener('click', function(event) {
-                                    event.preventDefault();
-                                    this.click();
-                                });
-                            });
-                        } else {
-                            // Toastr error message
-                            toastr.error(data.message || 'Failed to update status.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error updating status:', error);
-                        // Toastr error message for unexpected errors
-                        toastr.error('Something went wrong. Please try again.');
-                    });
-            });
-        });
-    });
-</script>
-
 
 <style>
     .status-column .dropdown {

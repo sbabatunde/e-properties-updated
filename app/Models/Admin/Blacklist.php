@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Property;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,11 @@ class Blacklist extends Model
     public function reported()
     {
         return $this->belongsTo(User::class,'reported_id','id');
+    }
+   
+    public function reportedProperty()
+    {
+        return $this->belongsTo(Property::class,'reported_id','id');
     }
 
     public function blacklister()

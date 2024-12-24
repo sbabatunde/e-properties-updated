@@ -105,18 +105,11 @@
                                     <span class="blacklist-review-dot">B</span>{{ $item->reported->firstname }}
                                     {{ $item->reported->lastname }}<br>
                                     <div class="row d-flex justify-content-between mt-2">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <span class="star {{ $i <= $item->rating ? 'filled' : '' }}">
-                                                ★
-                                            </span>
-                                        @endfor
-                                        {{-- <span class="blacklist-rating ml-3">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </span> --}}
+                                        <span class="blacklist-rating ml-3">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="fa fa-star {{ $i <= $item->rating ? 'filled' : '' }}"></i>
+                                            @endfor
+                                        </span>
                                         <span>{{ \Carbon\Carbon::parse($item->reported_on)->format('d/m/Y') }}</span>
                                     </div>
                                     <p>
@@ -142,29 +135,25 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
                         <div class="blacklist-card">
                             <div class="image">
-                                <img src="{{ $item->reported->photo ?? '../assets/images/blacklist/blacklist-4.png' }}"
-                                    alt="{{ $item->business_name }}" style="width:100%;" height="150" width="100">
+                                <img src="{{ asset($item->reportedProperty->thumbnail) ?? $item->reportedProperty->thumbnail }}"
+                                    alt="{{ $item->reportedProperty->title }}" style="width:100%;" height="150"
+                                    width="100">
                             </div>
                             <div class="blacklist-card-sub">
                                 <div class="card-text blacklist-text mb-0 mt-2">
-                                    <h6>{{ $item->axis }},{{ $item->state }}</h6>
-                                    <h3>{{ $item->firstname }} {{ $item->lastname }}</h3>
+                                    <h6>{{ $item->reportedProperty->localty }},{{ $item->reportedProperty->area }}</h6>
+                                    <h3>{{ $item->reportedProperty->agent->firstname }}
+                                        {{ $item->reportedProperty->agent->lastname }}</h3>
                                     <h6>{{ $item->org_description }}</h6>
-                                    <span class="blacklist-review-dot">B</span>{{ $item->reported->firstname }}
-                                    {{ $item->reported->lastname }}<br>
+                                    <span
+                                        class="blacklist-review-dot">B</span>{{ $item->reportedProperty->agent->firstname }}
+                                    {{ $item->reportedProperty->agent->lastname }}<br>
                                     <div class="row d-flex justify-content-between mt-2">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <span class="star {{ $i <= $item->rating ? 'filled' : '' }}">
-                                                ★
-                                            </span>
-                                        @endfor
-                                        {{-- <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span> --}}
+                                        <span class="blacklist-rating ml-3">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="fa fa-star {{ $i <= $item->rating ? 'filled' : '' }}"></i>
+                                            @endfor
+                                        </span>
                                         <span>{{ \Carbon\Carbon::parse($item->reported_on)->format('d/m/Y') }}</span>
                                     </div>
                                     <p>
@@ -178,267 +167,47 @@
             </div>
         </div>
     @endif
-    <div class="container blacklisted-landlords">
-        <h3 class="mt-5" style=""><b>Blacklisted Properties</b></h3>
-        <div class="row mt-5">
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="blacklist-card">
-                    <div class="image">
-                        <img src="../assets/images/blacklist/blacklist-3.png" alt="Avatar" style="width:100%;"
-                            height="150" width="100">
-                    </div>
-                    <div class="blacklist-card-sub">
-                        <div class="card-text blacklist-text mb-0 mt-2">
-                            <h6>Lagos, Nig.</h6>
-                            <h3>River Fast Food</h3>
-                            <h6>Deals on Local dishes</h6>
-                            <span class="blacklist-review-dot">B</span>Blessing Lainus <br>
-                            <div class="row d-flex justify-content-between mt-2">
-                                <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <span>10/10/2023</span>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ut
-                                quae culpa aut eveniet provident
-                                laudantium fugit modi!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="blacklist-card">
-                    <div class="image">
-                        <img src="../assets/images/blacklist/blacklist-4.png" alt="Avatar" style="width:100%;"
-                            height="150" width="100">
-                    </div>
-                    <div class="blacklist-card-sub">
-                        <div class="card-text blacklist-text mb-0 mt-2">
-                            <h6>Lagos, Nig.</h6>
-                            <h3>River Fast Food</h3>
-                            <h6>Deals on Local dishes</h6>
-                            <span class="blacklist-review-dot">B</span>Blessing Lainus <br>
-                            <div class="row d-flex justify-content-between mt-2">
-                                <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <span>10/10/2023</span>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ut
-                                quae culpa aut eveniet provident
-                                laudantium fugit modi!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="blacklist-card">
-                    <div class="image">
-                        <img src="../assets/images/blacklist/blacklist-5.png" alt="Avatar" style="width:100%;"
-                            height="150" width="100">
-                    </div>
-                    <div class="blacklist-card-sub">
-                        <div class="card-text blacklist-text mb-0 mt-2">
-                            <h6>Lagos, Nig.</h6>
-                            <h3>Oluchi Laundry</h3>
-                            <h6>Laundry && Drycleaning</h6>
-                            <span class="blacklist-review-dot">B</span>Blessing Lainus <br>
-                            <div class="row d-flex justify-content-between mt-2">
-                                <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <span>10/10/2023</span>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ut
-                                quae culpa aut eveniet provident
-                                laudantium fugit modi!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="blacklist-card">
-                    <div class="image">
-                        <img src="../assets/images/blacklist/blacklist-6.png" alt="Avatar" style="width:100%;"
-                            height="150" width="100">
-                    </div>
-                    <div class="blacklist-card-sub">
-                        <div class="card-text blacklist-text mb-0 mt-2">
-                            <h6>Lagos, Nig.</h6>
-                            <h3>River Fast Food</h3>
-                            <h6>Deals on Local dishes</h6>
-                            <span class="blacklist-review-dot">B</span>Blessing Lainus <br>
-                            <div class="row d-flex justify-content-between mt-2">
-                                <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <span>10/10/2023</span>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ut
-                                quae culpa aut eveniet provident
-                                laudantium fugit modi!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     {{-- All Blacklisted Properties Cards Ends --}}
 
     {{-- All Blacklisted Agents Cards Begins --}}
-    <div class="container blacklisted-landlords">
-        <h3 class="mt-5" style=""><b>Blacklisted Agents</b></h3>
-        <div class="row mt-5">
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="blacklist-card">
-                    <div class="image">
-                        <img src="../assets/images/blacklist/blacklist-7.png" alt="Avatar" style="width:100%;"
-                            height="150" width="100">
-                    </div>
-                    <div class="blacklist-card-sub">
-                        <div class="card-text blacklist-text mb-0 mt-2">
-                            <h6>Lagos, Nig.</h6>
-                            <h3>River Fast Food</h3>
-                            <h6>Deals on Local dishes</h6>
-                            <span class="blacklist-review-dot">B</span>Blessing Lainus <br>
-                            <div class="row d-flex justify-content-between mt-2">
-                                <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <span>10/10/2023</span>
+    @if (!$blacklisted['Agents']->isEmpty())
+        <div class="container blacklisted-landlords">
+            <h3 class="mt-5" style=""><b>Blacklisted Agents</b></h3>
+            <div class="row mt-5">
+                @foreach ($blacklisted['Tenants'] as $item)
+                    <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
+                        <div class="blacklist-card">
+                            <div class="image">
+                                <img src="{{ $item->reported->photo ?? $item->reported->photo }}"
+                                    alt="{{ $item->business_name }}" style="width:100%;" height="150" width="100">
                             </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ut
-                                quae culpa aut eveniet provident
-                                laudantium fugit modi!
-                            </p>
+                            <div class="blacklist-card-sub">
+                                <div class="card-text blacklist-text mb-0 mt-2">
+                                    <h6>{{ $item->axis }},{{ $item->state }}</h6>
+                                    <h3>{{ $item->firstname }} {{ $item->lastname }}</h3>
+                                    <h6>{{ $item->org_description }}</h6>
+                                    <span class="blacklist-review-dot">B</span>{{ $item->reported->firstname }}
+                                    {{ $item->reported->lastname }}<br>
+                                    <div class="row d-flex justify-content-between mt-2">
+                                        <span class="blacklist-rating ml-3">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="fa fa-star {{ $i <= $item->rating ? 'filled' : '' }}"></i>
+                                            @endfor
+                                        </span>
+                                        <span>{{ \Carbon\Carbon::parse($item->reported_on)->format('d/m/Y') }}</span>
+                                    </div>
+                                    <p>
+                                        {{ $item->reason }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="blacklist-card">
-                    <div class="image">
-                        <img src="../assets/images/blacklist/blacklist-7.png" alt="Avatar" style="width:100%;"
-                            height="150" width="100">
-                    </div>
-                    <div class="blacklist-card-sub">
-                        <div class="card-text blacklist-text mb-0 mt-2">
-                            <h6>Lagos, Nig.</h6>
-                            <h3>River Fast Food</h3>
-                            <h6>Deals on Local dishes</h6>
-                            <span class="blacklist-review-dot">B</span>Blessing Lainus <br>
-                            <div class="row d-flex justify-content-between mt-2">
-                                <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <span>10/10/2023</span>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ut
-                                quae culpa aut eveniet provident
-                                laudantium fugit modi!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="blacklist-card">
-                    <div class="image">
-                        <img src="../assets/images/blacklist/blacklist-2.png" alt="Avatar" style="width:100%;"
-                            height="150" width="100">
-                    </div>
-                    <div class="blacklist-card-sub">
-                        <div class="card-text blacklist-text mb-0 mt-2">
-                            <h6>Lagos, Nig.</h6>
-                            <h3>Oluchi Laundry</h3>
-                            <h6>Laundry && Drycleaning</h6>
-                            <span class="blacklist-review-dot">B</span>Blessing Lainus <br>
-                            <div class="row d-flex justify-content-between mt-2">
-                                <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <span>10/10/2023</span>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ut
-                                quae culpa aut eveniet provident
-                                laudantium fugit modi!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center wow fadeInLeft delay-04s">
-                <div class="blacklist-card">
-                    <div class="image">
-                        <img src="../assets/images/blacklist/blacklist-5.png" alt="Avatar" style="width:100%;"
-                            height="150" width="100">
-                    </div>
-                    <div class="blacklist-card-sub">
-                        <div class="card-text blacklist-text mb-0 mt-2">
-                            <h6>Lagos, Nig.</h6>
-                            <h3>River Fast Food</h3>
-                            <h6>Deals on Local dishes</h6>
-                            <span class="blacklist-review-dot">B</span>Blessing Lainus <br>
-                            <div class="row d-flex justify-content-between mt-2">
-                                <span class="blacklist-rating ml-3">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </span>
-                                <span>10/10/2023</span>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ut
-                                quae culpa aut eveniet provident
-                                laudantium fugit modi!
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
+    @endif
     {{-- All Blacklisted Agents Cards Ends --}}
     <!-- All Blacklisted -->
 

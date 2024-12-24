@@ -27,6 +27,10 @@ Route::group(['middleware'=>['auth','adminCheck']],function () {
 Route::group(['prefix' => 'staff/blacklist','middleware'=>['auth','adminCheck']], function () {
   Route::post('blacklist/user/remove', [Admin\BlacklistController::class, 'removeFromBlacklist'])->name('admin.blacklist.remove');
   Route::post('blacklist/user/add/{id}', [Admin\BlacklistController::class, 'addToBlacklist'])->name('admin.blacklist.add');
+  Route::post('admin/blacklist/property/add/{propertyId}',[Admin\BlacklistController::class, 'addToPropertyBlacklist'])->name('admin.property.blacklist.add');
+    Route::post('admin/blacklist/property/remove/{propertyId}',  [Admin\BlacklistController::class, 'removeFromPropertyBlacklist'])->name('admin.property.blacklist.remove');
+
+ 
   // Route to display all sliders
   Route::get('index',  [Admin\BlacklistController::class, 'index'])->name('admin.blacklist.index');
 });
@@ -103,6 +107,8 @@ Route::group(['namespace' => 'admin', 'middleware' => ['auth','adminCheck']], fu
     Route::POST('/add/to/trending/{id}', [Admin\propertiesController::class, 'addToTrending'])->name('admin.trending.add');
     Route::POST('/remove/from/trending/{id}', [Admin\propertiesController::class, 'removeFromTrending'])->name('admin.trending.remove');
     Route::get('/all/trending/properties', [Admin\propertiesController::class, 'trendingProperties'])->name('admin.trending.all');
+    Route::post('/admin/{id}/toggle-featured', [Admin\propertiesController::class, 'toggleFeatured'])->name('properties.toggleFeatured');
+
     Route::get('/admin/all/deals/properties', [Admin\propertiesController::class, 'allDealsProperties'])->name('admin.deals.all');
     Route::post('store', [Admin\propertiesController::class, 'store'])->name('admin.properties.general.store');
     // Route::get('edit/{id}', [Admin\propertiesController::class, 'edit'])->name('admin.properties.edit');

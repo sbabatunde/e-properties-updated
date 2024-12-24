@@ -32,6 +32,11 @@ class ServiceType extends Model
         return $this->belongsTo(ServiceCategory::class,'service_category_slug','slug');
     }
 
+    public function followersCount()
+    {
+        return $this->providers()->withCount('followers')->get()->sum('followers_count');
+    }
+
 
     public function sluggable(): array
     {

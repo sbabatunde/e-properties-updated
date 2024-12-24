@@ -18,7 +18,7 @@ class BlacklistController extends Controller
                                     ->where('category','tenant')->get();
         $blacklisted['Agents'] = Blacklist::with(['reporter','reported','blacklister'])
                                     ->where('category','agent')->get();
-        $blacklisted['Properties'] = Blacklist::with(['reporter','reported','blacklister'])
+        $blacklisted['Properties'] = Blacklist::with(['reporter','reportedProperty','reportedProperty.agent','blacklister'])
                                     ->where('category','property')->get();
 
         return view('front.users.blacklist.main-page',compact('blacklisted'));

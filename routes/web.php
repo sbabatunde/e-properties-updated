@@ -316,7 +316,7 @@ Route::controller(ListingController::class)->group(function () {
     ->name('admin.auction.updateStatus');
     Route::get('user/my/properties',  'myProperties')->name('admin.properties.mine');
     Route::get('user/my/deals/properties',  'myDealsProperties')->name('admin.properties-deals.mine');
-    
+   
     
 });
 

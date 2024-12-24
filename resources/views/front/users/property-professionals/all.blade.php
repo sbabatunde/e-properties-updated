@@ -93,7 +93,7 @@
                             alt="">
                         <span class="listing-text mat-cost" style="background: #d6daf3">
                             <h5 class="mt-3" style="font-weight: 700;">{{ $item->firstname }} {{ $item->lastname }}</h5>
-                            <p><span style="font-weight: 550">5 Followers</span></p>
+                            <p><span style="font-weight: 550">{{ $item->followers->count() }} Followers</span></p>
                             <a href="{{ route('property.professionals.view', $item->id) }}"
                                 class="btn btn-info listing-anchor">Connect</a>
                         </span>

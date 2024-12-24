@@ -122,6 +122,10 @@
     @include('front.hero-sections.experts')
     {{-- Esssential Circular-Properties Pictures Ends --}}
 
+    {{-- Featured Properties Begins --}}
+    @include('front.hero-sections.featured')
+    {{-- Featured Properties Ends --}}
+
     {{-- Trending Properties Begins --}}
     @include('front.hero-sections.trending')
     {{-- Trending Properties Ends --}}
