@@ -310,7 +310,14 @@ Route::controller(ListingController::class)->group(function () {
     Route::get('add/listing',  'adminAddPropertyListing')->name('admin.add.listing');
     Route::get('my/listings',  'adminPropertyListing')->name('admin.listings.all');
     Route::post('properties/admin/listing/status/update/{id}', 'updateListingStatus')->name('admin.properties.updateStatus');
-
+    Route::get('live/auction',  'liveAuctionControl')->name('admin.auction.live');
+    Route::get('admin/user/live/auction',  'myLiveAuctionControl')->name('admin-user.auction.live');
+    Route::post('/admin/liveauction/status/update/{id}', 'updateAuctionStatus')
+    ->name('admin.auction.updateStatus');
+    Route::get('user/my/properties',  'myProperties')->name('admin.properties.mine');
+    Route::get('user/my/deals/properties',  'myDealsProperties')->name('admin.properties-deals.mine');
+    
+    
 });
 
 //Post Media Route

@@ -42,6 +42,12 @@
                     </a>
                 </span>
                 <span class="menu">
+                    <a href="{{ route('admin.properties.mine') }}">
+                        Uploaded
+                    </a>
+                </span>
+
+                <span class="menu">
                     <a href="{{ route('admin.add.listing') }}">
                         Post
                     </a>
@@ -49,6 +55,21 @@
                 <span class="menu">
                     <a href="{{ route('admin.deals.all') }}">
                         Deals
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.properties-deals.mine') }}">
+                        My Deals
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin.auction.live') }}">
+                        Live Auction
+                    </a>
+                </span>
+                <span class="menu">
+                    <a href="{{ route('admin-user.auction.live') }}">
+                        Live Auction
                     </a>
                 </span>
                 <span class="menu">

@@ -19,18 +19,18 @@ class AuctionController extends Controller
     public function allAuctions()
     {
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
-        ->whereDate('end_date','>=',Carbon::today())->paginate(6);
+        ->whereDate('end_date','>=',Carbon::today())->where('status','Ongoing')->paginate(6);
         $upcomingAuctions = Auction::with(['property'])->whereDate('start_date','>=',Carbon::today())
         ->limit(6)->get();
          
         return view('front.users.liveAuction.all-auctions', compact('liveAuction','upcomingAuctions'))
-        ->withViewName('vendor.pagination.custom');;
+        ->withViewName('vendor.pagination.custom');
     }
 
     public function liveAuction()
     {
         $liveAuction = Auction::with(['property'])->whereDate('start_date','<=',Carbon::today())
-        ->whereDate('end_date','>=',Carbon::today())->limit(6)->orderBy('start_date','asc')->get();
+        ->whereDate('end_date','>=',Carbon::today())->where('status','Ongoing')->limit(6)->orderBy('start_date','asc')->get();
 
         $upcomingAuctions = Auction::with(['property'])->orderBy('start_date','asc')
         ->whereDate('start_date','>=',Carbon::today())->limit(6)->get();

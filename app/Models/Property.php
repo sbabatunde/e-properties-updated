@@ -79,6 +79,11 @@ class Property extends Model
         return $this->belongsTo(Auction::class,'id','property_id');
     }
 
+    public function auctions()
+    {
+        return $this->hasMany(Auction::class,'id','property_id');
+    }
+
     public function auctionDetails()
     {
         return $this->belongsTo(Auction::class,'id','property_id');

@@ -2,9 +2,10 @@
 
 namespace App\Models\Site;
 
+use App\Models\User;
 use App\Models\Auction;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AuctionBid extends Model
 {
@@ -14,5 +15,10 @@ class AuctionBid extends Model
     public function auction()
     {
         return $this->belongsTo(Auction::class, 'auction_id', 'id');
+    }
+
+    public function bidder()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
     }
 }

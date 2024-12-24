@@ -32,6 +32,20 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class ListingController extends Controller
 {
+    public function myProperties()
+    {
+        $properties = Property::with(['payment','agent','trending'])->where('agent_id',Auth::id())->paginate(10);
+
+        return view('dashboard.properties.my-properties', compact('properties'));
+    }
+
+    public function myDealsProperties()
+    {
+       $propertyDeals = Property::has('deals')->with(['payment','agent'])->where('agent_id',Auth::id())->paginate(10);
+
+       return view('dashboard.properties.my-deals', compact('propertyDeals'));
+    }
+
     public function adminAddPropertyListing()
     {
         if (Auth::id() && Auth::user()->user_type !== "tenant") {
@@ -510,7 +524,6 @@ class ListingController extends Controller
         return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
     }
 
-
     public function deletePropertyListing($id)
     {
         if (Auth::id() && Auth::user()->user_type !== "tenant") {
@@ -549,7 +562,6 @@ class ListingController extends Controller
         }
     }
     
-
     public function adminPropertyListing()
     {
        $myListings = Property::with(['amenities','agent', 'payment', 'auction','likes','shares','views'])
@@ -567,4 +579,67 @@ class ListingController extends Controller
      
         return view('admin.listings.main-page',compact('myListings','sales','rents','lets','lands','shortlets'));
     }
+
+    public function liveAuctionControl()
+    {
+        // Current timestamp
+        $now = Carbon::now();
+
+        // Fetch live auctions with related data
+        $liveAuction = Auction::with([
+            'property', 
+            'property.agent', 
+            'auctionBid.bidder',
+            'auctionBid' => function ($query) {
+                $query->orderBy('bid_amount', 'desc'); // Ensure highest bid comes first
+            }
+        ])
+        ->where('start_date', '<=', $now)  // Auction has started
+        ->where('end_date', '>=', $now)    // Auction is still ongoing
+        ->paginate(10); // Paginate results
+
+        return view('admin.listings.live-auction', compact('liveAuction'));
+    }
+
+    public function myLiveAuctionControl()
+    {
+        // Current timestamp
+        $now = Carbon::now();
+
+       // Fetch live auctions with related data where the agent_id in property matches the authenticated user
+        $liveAuction = Auction::with([
+            'property',
+            'property.agent',
+            'auctionBid.bidder',
+            'auctionBid' => function ($query) {
+                $query->orderBy('bid_amount', 'desc'); // Ensure highest bid comes first
+            }
+        ])
+        ->whereHas('property', function ($query) {
+            $query->where('agent_id', Auth::id()); // Filter properties where agent_id matches Auth user's ID
+        })
+        ->where('start_date', '<=', $now)  // Auction has started
+        ->where('end_date', '>=', $now)    // Auction is still ongoing
+        ->paginate(10); // Paginate results
+
+        return view('admin.listings.my-live-auction', compact('liveAuction'));
+    }
+
+    public function updateAuctionStatus(Request $request, $id)
+    {
+        $auction = Auction::where('property_id',$id);
+
+        // Validate the input
+        $request->validate([
+            'status' => 'required|in:Ongoing,Ended',
+        ]);
+
+        // // Update the status
+        $auction = Auction::where('property_id',$id)->update([
+            'status'=>$request->status
+        ]);
+        
+        return response()->json(['success' => true, 'message' => 'Status updated successfully!','data'=>$auction]);
+    }
+
 }

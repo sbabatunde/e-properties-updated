@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('starting_price', 15, 2);
             $table->text('denomination');
             $table->string('append');
+            $table->string('status')->default('On');
             $table->timestamps();
         });
     }

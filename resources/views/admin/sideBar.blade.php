@@ -22,20 +22,46 @@
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
-        <li>
-            <a href="{{ route('admin.add.listing') }}">
-                <i class="glyphicon glyphicon-home"></i>
+        @if (Auth::user()->user_type == 'agent' || Auth::user()->user_type == 'landlord')
+            <div class="menu">
+                <i class="fa fa-home"></i>
                 <span class="nav-item">Property</span>
-            </a>
-            <span class="tooltip">Post Property</span>
-        </li>
-        <li>
-            <a href="{{ route('admin.listings.all') }}">
-                <i class="fa fa-archive "></i>
-                <span class="nav-item">Listings</span>
-            </a>
-            <span class="tooltip">My Listing</span>
-        </li>
+                <i class="bx bx-chevron-down nav-item"></i>
+                <span class="tooltip">Property</span>
+            </div>
+            <div class="menu-dropdown">
+                <div class="sub-menu">
+                    <span class="menu">
+                        <a href="{{ route('admin.properties.mine') }}">
+                            Uploaded
+                        </a>
+                    </span>
+
+                    <span class="menu">
+                        <a href="{{ route('admin.add.listing') }}">
+                            Post
+                        </a>
+                    </span>
+                    <span class="menu">
+                        <a href="{{ route('admin.properties-deals.mine') }}">
+                            My Deals
+                        </a>
+                    </span>
+                    <span class="menu">
+                        <a href="{{ route('admin-user.auction.live') }}">
+                            Live Auction
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <li>
+                <a href="{{ route('admin.listings.all') }}">
+                    <i class="fa fa-archive "></i>
+                    <span class="nav-item">Listings</span>
+                </a>
+                <span class="tooltip">My Listing</span>
+            </li>
+        @endif
         <li>
             <a href="{{ route('admin.profile') }}">
                 <i class="glyphicon glyphicon-user"></i>
@@ -50,34 +76,29 @@
             </a>
             <span class="tooltip">Media</span>
         </li>
-        {{-- <li>
-            <a href="{{ route('admin.building.material.form') }}">
-                <i class="fa fa-building"></i>
+        @if (Auth::user()->user_type == 'service_provider')
+            <div class="menu">
+                <i class="bx bx-building-house"></i>
                 <span class="nav-item">Materials</span>
-            </a>
-            <span class="tooltip">Building Materials</span>
-        </li> --}}
-        {{-- Materials Link  --}}
-        <div class="menu">
-            <i class="bx bx-building-house"></i>
-            <span class="nav-item">Materials</span>
-            <i class="bx bx-chevron-down nav-item"></i>
-            <span class="tooltip">Building Materials</span>
-        </div>
-        <div class="menu-dropdown">
-            <div class="sub-menu">
-                <span class="menu">
-                    <a href="{{ route('admin.building.material.form') }}">
-                        New Material
-                    </a>
-                </span>
-                <span class="menu">
-                    <a href="{{ route('admin.materials.my') }}">
-                        My Materials
-                    </a>
-                </span>
+                <i class="bx bx-chevron-down nav-item"></i>
+                <span class="tooltip">Building Materials</span>
             </div>
-        </div>
+            <div class="menu-dropdown">
+                <div class="sub-menu">
+                    <span class="menu">
+                        <a href="{{ route('admin.building.material.form') }}">
+                            New Material
+                        </a>
+                    </span>
+                    <span class="menu">
+                        <a href="{{ route('admin.materials.my') }}">
+                            My Materials
+                        </a>
+                    </span>
+                </div>
+            </div>
+        @endif
+
         <li>
             <a href="{{ route('admin.property.messages') }}">
                 <i class="fa fa-envelope"></i>
