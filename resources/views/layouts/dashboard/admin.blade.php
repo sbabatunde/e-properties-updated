@@ -44,7 +44,7 @@
     <link rel="stylesheet" href="{{ asset('assets/backend/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/custom-style.css') }}">
 
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body>
